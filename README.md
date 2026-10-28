@@ -1,6 +1,6 @@
 # PS Remote Play 鍵盤手把（測試原型）
 
-> **專案狀態：測試受阻。** ViGEmBus 已能在 Windows 建立虛擬手把，但測試時官方 PS Remote Play 9.5 兩次發生當機。兩者的根本因果尚未釐清，請暫停使用此方法；按鍵與滑鼠控制 PS5 尚未驗證。後續方向見 [架構評估](docs/architecture.md)。
+> **專案狀態：尚無可用成品。** ViGEmBus 曾能在 Windows 建立虛擬手把，但測試時官方 PS Remote Play 9.5 發生當機；該驅動已移除。使用者確認實體 PS4 手把可在官方 Remote Play 操作 PS5，但鍵鼠模擬手把尚未實現。這次未找到能驗證完整需求的實作方式。詳見 [架構評估](docs/architecture.md)。
 
 這個 Windows 原型將鍵盤輸入轉成虛擬 DUALSHOCK 4，供 PS Remote Play 測試。它不是 Sony 官方軟體，也不是完整的 DualSense 模擬器。
 

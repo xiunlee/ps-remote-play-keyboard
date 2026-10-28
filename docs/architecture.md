@@ -39,6 +39,10 @@
 - 從磁碟只讀掃描 RemoteplayUI.dll 和 RemotePlayUIWrapper.dll 的受管類型與方法名稱，沒有找到可辨識為手把讀取路徑的方法；這並不排除程式使用原生碼、動態載入或其他名稱。
 - Windows 的 ReadFile 可能採用非同步 I/O；回傳待處理時緩衝區尚未完成，若將來研究攔截，必須正確處理完成、取消與緩衝區生命週期，不能在呼叫返回時假設資料已經就緒。參考 [Microsoft ReadFile](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)。
 
+## 目前結果
+
+本次未能交付「官方 Remote Play 9.5 + 實體 PS4 手把 + 鍵盤與滑鼠模擬手把」的可用成品。靜態檢查尚未定位官方程式實際讀取手把的路徑；離線資料測試不能驗證這條路可用。使用者確認官方 Remote Play 的鍵盤在系統及部分遊戲可用，問題集中在不接受鍵盤輸入的遊戲。現有程式仍是 ViGEmBus 舊原型，無法滿足目前需求。
+
 ## 參考
 
 - [Microsoft：Virtual HID Framework](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/virtual-hid-framework--vhf-)
