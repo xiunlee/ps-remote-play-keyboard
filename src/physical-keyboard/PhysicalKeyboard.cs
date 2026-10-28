@@ -22,7 +22,9 @@ namespace PSKeyboard
         private readonly string sonyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
             "Sony", "PS Remote Play", "RemotePlay.exe");
         private readonly uint ownPid = (uint)Process.GetCurrentProcess().Id;
+        private readonly OptionalStatusFile statusFile;
         private volatile UsbIpRelay relay;
+        private volatile string startupFailure;
         private volatile bool enabled, closing;
         private IntPtr hook;
         private HookCallback hookCallback;
@@ -69,13 +71,14 @@ namespace PSKeyboard
                 if (!created) { MessageBox.Show("實體手把中繼程式已開啟。", "PS 鍵盤"); return 1; }
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new PhysicalKeyboard(options.BusId, options.StartRelay));
+                Application.Run(new PhysicalKeyboard(options.BusId, options.StartRelay, options.StatusFile));
             }
             return 0;
         }
 
-        private PhysicalKeyboard(string busId, bool autoStartRelay)
+        private PhysicalKeyboard(string busId, bool autoStartRelay, string statusPath)
         {
+            statusFile = new OptionalStatusFile(statusPath, GetStatusSnapshot);
             Text = "PS 鍵盤 — 實體手把中繼測試版";
             ClientSize = new Size(700, 520);
             FormBorderStyle = FormBorderStyle.FixedDialog; MaximizeBox = false;
@@ -112,6 +115,7 @@ namespace PSKeyboard
                 epLabel, endpoint, configNote, start, toggle, stop, status, counts, keys, bottom });
             Shown += delegate {
                 InstallKeyboardHook();
+                statusFile.Start();
                 // Only an explicit CLI option starts the loopback proxy. This
                 // does not bind/import hardware or enable keyboard capture.
                 if (autoStartRelay && hotkeyRegistered)
@@ -128,6 +132,7 @@ namespace PSKeyboard
             if (!hotkeyRegistered)
             {
                 start.Enabled = false;
+                startupFailure = "Keyboard input setup failed";
                 status.Text = "無法設定鍵盤或 F8 暫停鍵，尚未接管輸入。";
                 if (hook != IntPtr.Zero) { UnhookWindowsHookEx(hook); hook = IntPtr.Zero; }
                 return;
@@ -194,10 +199,24 @@ namespace PSKeyboard
             return PhysicalReportMerge.Merge(physical, active ? input.Held : 0, active);
         }
 
+        private RelayStatusSnapshot GetStatusSnapshot()
+        {
+            UsbIpRelay current = relay;
+            return new RelayStatusSnapshot {
+                Pid = (int)ownPid, Enabled = enabled,
+                Attached = current != null && current.IsAttached,
+                EndpointVerified = current != null && current.EndpointVerified,
+                InputReports = current == null ? 0 : current.InputReports,
+                MergedReports = current == null ? 0 : current.MergedReports,
+                Failure = current == null ? startupFailure : current.Failure
+            };
+        }
+
         private void StartRelay()
         {
             if (closing || relay != null || !hotkeyRegistered) return;
             SetEnabled(false);
+            startupFailure = null;
             UsbIpRelay candidate = null;
             try
             {
@@ -217,6 +236,7 @@ namespace PSKeyboard
             }
             catch (Exception ex)
             {
+                startupFailure = "Relay startup failed";
                 if (candidate != null) candidate.Dispose();
                 status.Text = "無法啟動中繼：" + ex.Message;
             }
@@ -302,6 +322,7 @@ namespace PSKeyboard
             if (hotkeyRegistered) UnregisterHotKey(Handle, ToggleHotkey);
             if (hook != IntPtr.Zero) { UnhookWindowsHookEx(hook); hook = IntPtr.Zero; }
             StopRelay();
+            statusFile.Dispose();
             timer.Dispose();
             base.OnFormClosing(e);
         }

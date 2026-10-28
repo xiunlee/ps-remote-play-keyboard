@@ -18,16 +18,17 @@ $inputSource = Join-Path $repo 'src\keyboard-pad\KeyboardInputState.cs'
 $bindingSource = Join-Path $repo 'src\keyboard-pad\KeyboardMapping.cs'
 $mergeSource = Join-Path $PSScriptRoot 'PhysicalReportMerge.cs'
 $optionsSource = Join-Path $PSScriptRoot 'PhysicalKeyboardOptions.cs'
+$statusSource = Join-Path $PSScriptRoot 'OptionalStatusFile.cs'
 $relaySource = Join-Path $repo 'research\physical-usb-relay\UsbIpRelay.cs'
 & $csc /nologo /target:winexe /platform:x64 /optimize+ /warnaserror `
     /r:System.Windows.Forms.dll /r:System.Drawing.dll `
     ('/out:'+(Join-Path $out 'PSKeyboard-Physical.exe')) `
-    (Join-Path $PSScriptRoot 'PhysicalKeyboard.cs') $mergeSource $optionsSource $inputSource $bindingSource $relaySource
+    (Join-Path $PSScriptRoot 'PhysicalKeyboard.cs') $mergeSource $optionsSource $statusSource $inputSource $bindingSource $relaySource
 if ($LASTEXITCODE -ne 0) { throw 'Physical keyboard app build failed.' }
 if ($RunTests) {
     $test = Join-Path $out 'PhysicalMergeTests.exe'
-    & $csc /nologo /target:exe /platform:x64 /optimize+ /warnaserror ('/out:'+$test) `
-        (Join-Path $PSScriptRoot 'PhysicalMergeTests.cs') $mergeSource $optionsSource $inputSource $bindingSource
+    & $csc /nologo /target:exe /platform:x64 /optimize+ /warnaserror /r:System.Web.Extensions.dll ('/out:'+$test) `
+        (Join-Path $PSScriptRoot 'PhysicalMergeTests.cs') $mergeSource $optionsSource $statusSource $inputSource $bindingSource
     if ($LASTEXITCODE -ne 0) { throw 'Physical keyboard test build failed.' }
     & $test
     if ($LASTEXITCODE -ne 0) { throw 'Physical keyboard merge tests failed.' }

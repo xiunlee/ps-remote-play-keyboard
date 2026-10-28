@@ -1,6 +1,7 @@
-# Existing virtual DS4 read-only observer
+# Existing imported DS4 read-only observer
 
-This helper observes the already-created keyboard app controller without
+This helper observes an already-created keyboard app controller or the
+USBip-imported physical DS4 relay without
 creating a bus/device, sending input, detaching a device, or accessing Sony.
 It does not install a keyboard hook or record typed text. It prints only
 changes to controller buttons, D-pad, and left-stick state, plus read counts.
@@ -13,10 +14,15 @@ are adapted from this project's previously verified
 
 - Requires exactly one imported USBip device, at the explicitly supplied
   port and loopback URL. It rechecks that condition every five seconds.
-- Accepts exactly one HID interface with VID `054C`, PID `09CC`, a matching
-  USB ancestor, and controller hardware ID `ROOT\USBIP_WIN2\UDE`.
+- Accepts exactly one HID interface with VID `054C`, the mode's fixed PID,
+  a matching USB ancestor, and controller hardware ID `ROOT\USBIP_WIN2\UDE`.
+- Virtual mode requires PID `09CC` and loopback service `33241`. Physical
+  relay mode requires PID `05C4` and loopback service `33251`. These cannot
+  be combined or replaced with arbitrary hosts, ports, or product IDs.
 - Validates HID attributes and a 64-byte gamepad input collection before
-  reading. It never opens the physical `054C:05C4` controller.
+  reading. It never opens the locally attached physical controller: the
+  positive USBip ancestry check must pass before the read-only open. Relay
+  mode can read only the imported representation of that controller.
 - Opens the device with read access only and shared read/write access.
 - A read timeout cancels only its own operation, then drains completion.
   Unconfirmed pending storage is retained until this short-lived process
@@ -35,8 +41,30 @@ are adapted from this project's previously verified
 
 The example port and bus refer to one observed session and must be checked
 again before use. Start the observer only when coordinating a real keyboard
-test with the user. The `READY` line means the existing virtual HID collection
+test with the user. The `READY` line means the existing imported HID collection
 was validated and opened; it does not prove keyboard capture or PS5 response.
+
+For a physical relay already imported at the verified port and bus:
+
+```powershell
+& "$env:USERPROFILE\.pskeyboard-tools\windows-hid-observer\WindowsHidObserver.exe" `
+    --observe-existing-physical-relay 1 usbip://127.0.0.1:33251/6-1 120
+```
+
+The physical example is illustrative; no port or bus is created by the
+observer. Only input report state transitions are printed. Feature reports,
+authentication traffic, raw payloads, and keyboard text are never read or logged.
+
+Run offline scope checks without observing a device:
+
+```powershell
+.\research\windows-hid-observer\Test-Guards.ps1
+```
+
+These checks exercise mode/service separation, malformed inputs, ambiguous
+port listings, local physical ancestry rejection, exact imported controller
+identity, and virtual-mode compatibility. They invoke no Windows HID APIs
+or external processes. They do not prove live relay operation.
 
 ## Coordinated observation on 2026-10-28
 
