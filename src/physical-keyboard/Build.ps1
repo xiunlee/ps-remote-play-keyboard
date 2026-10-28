@@ -34,5 +34,10 @@ if ($RunTests) {
     if ($LASTEXITCODE -ne 0) { throw 'Physical keyboard merge tests failed.' }
 }
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'README.md') -Destination (Join-Path $out 'README.md') -Force
+foreach($launcher in @('Open-PhysicalRelay.ps1','Start-ExporterService.ps1')) {
+    $source=Join-Path $PSScriptRoot $launcher
+    # Windows PowerShell 5.1 needs a BOM for the Chinese launcher messages.
+    [IO.File]::WriteAllText((Join-Path $out $launcher),[IO.File]::ReadAllText($source,[Text.Encoding]::UTF8),(New-Object Text.UTF8Encoding($true)))
+}
 Write-Output ('Built physical relay preview: '+(Join-Path $out 'PSKeyboard-Physical.exe'))
 Write-Output 'No driver installed, no app launched, no device bound or imported.'
