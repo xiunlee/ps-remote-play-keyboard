@@ -49,8 +49,15 @@ internal static class ObserverGuardTests
             Reject(relayMode,"256",relayUrl,"120","port ceiling");
             Reject("--observe-local-physical","1",relayUrl,"120","no local physical mode");
 
-            string listing="Imported USB devices\r\nPort 01: <Port in Use>\r\n  Wireless Controller\r\n  -> "+relayUrl+"\r\n";
+            // usbip-win2 prints several arrow-prefixed metadata fields as well
+            // as the source URL. Their presence must not count as extra sources.
+            string listing="Imported USB devices\r\n====================\r\nPort 01: device in use at Full Speed(12Mbps)\r\n"+
+                "         Sony Corp. : DualShock 4 [CUH-ZCT1x] (054c:05c4)\r\n           -> "+relayUrl+"\r\n"+
+                "           -> remote bus/dev: 006/001\r\n           -> serial: \r\n           -> mode: zero-copy\r\n";
             Check(relay.MatchesPortOutput(listing),"one exact owned port and URL");
+            Check(relay.MatchesPortOutput("Port 01: device in use\n -> "+relayUrl+"\n"),"older listing without optional metadata");
+            Check(!relay.MatchesPortOutput(listing+" -> unknown source: usbip://127.0.0.1:33251/6-2\n"),"unknown arrow field rejected");
+            Check(!relay.MatchesPortOutput(listing+" -> http://127.0.0.1:33251/6-1\n"),"other source scheme rejected");
             Check(!virtualScope.MatchesPortOutput(listing),"port output cannot cross modes");
             Check(!relay.MatchesPortOutput(listing.Replace("Port 01:","Port 02:")),"wrong port");
             Check(!relay.MatchesPortOutput(listing.Replace("6-1","6-2")),"wrong bus");

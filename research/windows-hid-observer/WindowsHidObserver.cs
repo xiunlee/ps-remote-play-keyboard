@@ -61,9 +61,15 @@ internal sealed class ObserverScope
                 count++;
                 if(!Int32.TryParse(m.Groups[1].Value,NumberStyles.None,CultureInfo.InvariantCulture,out current))return false;
             }
-            if(line.TrimStart().StartsWith("->",StringComparison.Ordinal)) {
-                urls++;
-                if(current==Port && String.Equals(line.Trim(),"-> "+Url,StringComparison.Ordinal))exact=true;
+            string trimmed=line.Trim();
+            if(trimmed.StartsWith("->",StringComparison.Ordinal)) {
+                string value=trimmed.Substring(2).TrimStart();
+                if(value.StartsWith("usbip://",StringComparison.Ordinal)) {
+                    urls++;
+                    if(current==Port && String.Equals(trimmed,"-> "+Url,StringComparison.Ordinal))exact=true;
+                } else if(!value.StartsWith("remote bus/dev: ",StringComparison.Ordinal) &&
+                    !value.StartsWith("serial:",StringComparison.Ordinal) &&
+                    !value.StartsWith("mode: ",StringComparison.Ordinal))return false;
             }
         }
         return count==1 && urls==1 && exact;
