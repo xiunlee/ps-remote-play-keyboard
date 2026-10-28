@@ -16,7 +16,7 @@
 
 ## 2026-10-28 網路查證
 
-- [reWASD 的實體裝置模式](https://www.help.rewasd.com/basic-functions/how-to-apply-config-to-physical-device.html)：廠商文件描述可以把鍵盤、滑鼠和實體 DualSense 分組，並以實體手把作為輸出，也提及 PS Remote Play；文件同時指出部分搖桿映射仍需虛擬手把。目前沒有確認 Windows 官方 Remote Play 9.5 加上滑鼠視角實際可用，亦尚未安裝或測試該工具。
+- [reWASD 的實體裝置模式](https://help.rewasd.com/basic-functions/how-to-apply-config-to-physical-device.html)：廠商文件明確涵蓋鍵盤、滑鼠和實體 DUALSHOCK 4 群組，也提及 PS Remote Play。文件限制的 relative sticks 是組合動作中的搖桿偏移，不代表一般滑鼠轉右搖桿不支援。目前沒有確認本機官方 Remote Play 9.5 加上滑鼠視角實際可用，亦尚未安裝或測試該工具。
 - [mouseplay](https://github.com/ko1N/mouseplay)：保留官方程式的開源研究案例，需實體手把，尚無正式版；其文件以舊版 32-bit Remote Play 為目標，而本機 9.5 是 64-bit，不能直接視為相容。
 - [Sony 官方 Remote Play](https://www.playstation.com/en-us/remote-play/)：Windows 可以在支援實體鍵盤輸入的遊戲中傳送鍵盤輸入；這不等於把鍵鼠模擬成手把供所有遊戲使用。
 - [使用者的 9.5 閃退回報](https://www.reddit.com/r/remoteplay/comments/1w2h35b/i_finally_found_the_fix_for_ps_remote_play/)：部分使用者報告移除 ViGEmBus 後恢復；這與本機現象一致，但不是根因證明。
@@ -42,6 +42,23 @@
 ## 目前結果
 
 本次未能交付「官方 Remote Play 9.5 + 實體 PS4 手把 + 鍵盤與滑鼠模擬手把」的可用成品。靜態檢查尚未定位官方程式實際讀取手把的路徑；離線資料測試不能驗證這條路可用。使用者確認官方 Remote Play 的鍵盤在系統及部分遊戲可用，問題集中在不接受鍵盤輸入的遊戲。現有程式仍是 ViGEmBus 舊原型，無法滿足目前需求。
+
+## 重新評估：reWASD 實體輸出
+
+這是一條有廠商明確文件、但尚待本機驗證的路線，不能再把未定位 Sony 內部函式等同於所有軟體方案不可行。計畫保留 Sony 官方視窗與現有 USB DS4，先驗證單鍵轉成 ×，再加入 WASD 左搖桿及滑鼠右搖桿。必須明確選用實體 DS4 輸出，避免直接使用預設的虛擬 DS4 設定。
+
+官方 API 支援建立裝置群組、匯入配置、套用及停用。它沒有逐鍵編輯或原始手把輸入注入介面；因此需要一份現版、實體輸出已正確選定的完整配置，才可能整合進本專案前端。[API 研究](../research/rewasd-api/API-INTEGRATION-LIMITS.md)記錄了此限制。
+
+目前已下載並驗證安裝檔，另以唯讀方式提取內附配置，製作本機候選檔；未執行安裝、登入或套用映射：
+
+- 來源：reWASD 官網的公開下載端點 `https://www.rewasd.com/api/download?platform=win`。
+- 版本：9.5.0.11346；大小：81,272,296 bytes。
+- Authenticode：Valid，簽署者 SIA "AVB Disc Soft"。
+- SHA-256：`FE883671B41CD00AA100DD183B895BA681E0067263CEFC27F55A7F3762D02EAA`。
+
+候選配置使用內附現版範本中實際存在的 `applyToPhysicalPriority` 欄位，移除舊範本的虛擬輸出強制設定及四個不支援實體模式的 relative-stick 動作。靜態檢查無缺失的 mask／command 參照，但尚未匯入 reWASD，不能據此聲稱輸出已生效。完整候選及原廠範本保留本機，公開儲存庫只記錄差異。
+
+這個候選方案新增商用授權依賴。官方提供 7 天免費試用，首次需 reWASD 帳號，安裝驅動後需重啟；不涉及第三方 PSN 登入。已請使用者選擇是否接受此依賴，未假定同意。文件與 API 能力不等於 Remote Play 9.5 實機通過。
 
 ## 參考
 
