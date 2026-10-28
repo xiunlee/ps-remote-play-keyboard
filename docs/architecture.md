@@ -14,6 +14,13 @@
 2. **我們的程式直接連接 PS5**：將影像串流及控制功能整合到自己的 Remote Play 用戶端，鍵鼠直接轉成控制資料，不需要在 Windows 建立虛擬手把。這會取代 Sony 官方 Remote Play 視窗，不符合原先「開啟官方程式」的前提，需另行確認需求。採用現成程式碼時須核對授權條件。
 3. **介入官方程式的輸入流程**：可能避免系統層虛擬裝置，但依賴官方程式的內部行為，更新後容易失效，並且目前沒有證據顯示它支援本機的 9.5 版。不能當作已驗證方案。
 
+## 2026-10-28 網路查證
+
+- [reWASD 的實體裝置模式](https://www.help.rewasd.com/basic-functions/how-to-apply-config-to-physical-device.html)：廠商文件描述可以把鍵盤、滑鼠和實體 DualSense 分組，並以實體手把作為輸出，也提及 PS Remote Play；文件同時指出部分搖桿映射仍需虛擬手把。目前沒有確認 Windows 官方 Remote Play 9.5 加上滑鼠視角實際可用，亦尚未安裝或測試該工具。
+- [mouseplay](https://github.com/ko1N/mouseplay)：保留官方程式的開源研究案例，需實體手把，尚無正式版；其文件以舊版 32-bit Remote Play 為目標，而本機 9.5 是 64-bit，不能直接視為相容。
+- [Sony 官方 Remote Play](https://www.playstation.com/en-us/remote-play/)：Windows 可以在支援實體鍵盤輸入的遊戲中傳送鍵盤輸入；這不等於把鍵鼠模擬成手把供所有遊戲使用。
+- [使用者的 9.5 閃退回報](https://www.reddit.com/r/remoteplay/comments/1w2h35b/i_finally_found_the_fix_for_ps_remote_play/)：部分使用者報告移除 ViGEmBus 後恢復；這與本機現象一致，但不是根因證明。
+
 ## 驗收條件
 
 - 一套安裝與操作流程，使用者不需另外下載第三方手把工具。
