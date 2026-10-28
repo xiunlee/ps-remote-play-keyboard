@@ -1,8 +1,28 @@
-# PS Remote Play 鍵盤手把（測試原型）
+# PS Remote Play 鍵盤手把（開發中）
 
-> **專案狀態：尚無可用成品。** ViGEmBus 曾能在 Windows 建立虛擬手把，但測試時官方 PS Remote Play 9.5 發生當機；該驅動已移除。使用者確認實體 PS4 手把可在官方 Remote Play 操作 PS5，但鍵鼠模擬手把尚未實現。現正評估 reWASD 的實體手把輸出模式；廠商有文件支援，但尚未在此電腦實測。詳見 [架構評估](docs/architecture.md)。
+> **專案狀態：鍵盤專用測試版，Windows 手把資料驗證通過，官方 Remote Play 9.5 尚未驗收。** 目前目標是鍵盤按下、長按及放開，等同手把輸入；不依賴遊戲原生鍵盤支援。滑鼠暫不實作，維持自製、免費工具依賴與 Sony 官方用戶端。
 
-## 目前候選：透過已插上的實體 PS4 手把
+## 目前候選：鍵盤映射與 USB 手把輸出
+
+新程式在 [src/keyboard-pad](src/keyboard-pad/README.md)。我們的程式處理鍵盤與按鍵狀態，免費開源 VIIPER 提供 USB 手把模擬，usbip-win2 提供有數位簽章的 Windows 驅動。這條路不需要第三方帳號、不讀取 PSN 資料、不把程式載入 Sony 程序，也不重新安裝 ViGEmBus。
+
+此候選建立另一個 USB 手把，尚未把實體 PS4 手把合併為同一個裝置。它與先前實體手把攔截方案不同，官方 Remote Play 是否選用及接受它仍需實測。
+
+- [鍵盤映射核心](research/native-merge/README.md)：方向、複合按鈕、扳機及放開回中。
+- [按鍵生命週期](research/keyboard-input-tests/README.md)：暫停、失焦、快捷鍵及不完整按鍵事件的處理。
+- [本機傳輸](research/viiper-client-tests/README.md)：斷線、回中、限定只清除自己建立的裝置。
+- [USB/IP 回讀](research/viiper-usb-test/README.md)：實際映射程式送進 VIIPER 後，讀回 64-byte DS4 報告；這不等於 Windows 或 Sony 已驗收。
+- [Windows HID 實測](research/windows-hid-test/README.md)：實際建立 Windows USB DS4，透過 Windows 手把介面讀回按下、長按、放開及移動狀態；20 項檢查通過。尚未代表真實鍵盤擷取或 Sony 操作成功。
+
+安裝 USBip 會短暫重新連接 USB 裝置，且本次安裝要求稍後重開機。程式不會自行安裝驅動或重開機。建置、映射表及操作方式見 [測試版說明](src/keyboard-pad/README.md)。
+
+## 先前實體 PS4 手把研究
+
+已透過[只讀檢查](research/native-probe/README.md)找到官方程式開啟的實體 DS4。後續的[程序內觀測實驗](research/native-bridge/README.md)未能在 Sony 成功載入，使用者回報程式自行退出；未定位根因，未實現鍵盤控制。自製測試程序通過不代表 Sony 相容。
+
+## 已排除：reWASD 商用依賴
+
+使用者於 2026-10-28 明確選擇「不要依賴付費軟體，維持自製方案」。因此不安裝、不啟用 reWASD，不將它列為產品依賴。以下資料僅保留研究紀錄。
 
 [reWASD 官方文件](https://help.rewasd.com/basic-functions/how-to-apply-config-to-physical-device.html)明確支援將鍵盤、滑鼠和 DUALSHOCK 4 組成群組，選用實體手把輸出；這條路保留 Sony 官方 Remote Play。文件提及不支援的 relative sticks 是組合動作的搖桿偏移功能，不能據此推論一般滑鼠轉右搖桿不支援。
 

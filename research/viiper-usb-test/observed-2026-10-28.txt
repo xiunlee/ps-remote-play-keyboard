@@ -1,0 +1,16 @@
+Server version=0.9.0; no Windows USB driver used by this client
+PASS userspace USB/IP import: VID=054C PID=09CC
+PASS initial neutral
+PASS Cross pressed
+PASS Cross held
+PASS Cross released
+PASS W/up axis
+PASS A/left axis
+PASS S/down axis
+PASS D/right axis
+PASS diagonal normalized state
+PASS D-pad up bitfield
+PASS L2 full state
+PASS all released/right stick unchanged
+PASS removed test-owned bus
+RESULT passed=14 success=True windows_attached=false sony_tested=false keyboard_captured=false

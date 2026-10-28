@@ -1,0 +1,19 @@
+Server version=0.9.0; no Windows USB driver used by this client
+PASS userspace USB/IP import: VID=054C PID=09CC
+Mapping source=src/keyboard-pad/KeyboardMapping.cs; native=pskb-keyboard-merge.dll
+PASS mapped initial neutral
+PASS K -> Cross pressed
+PASS K -> Cross held
+PASS K released -> Cross released
+PASS W -> left stick up
+PASS W+D -> normalized diagonal
+PASS W+S -> opposite keys neutral
+PASS K+I -> Cross+Triangle
+PASS ArrowUp -> D-pad up
+PASS U -> L2 digital+analog pressed
+PASS U released -> L2 released
+PASS disabled held W+K+U -> neutral
+PASS unmapped G -> neutral
+PASS mapped final release/right stick unchanged
+PASS removed test-owned bus
+RESULT passed=16 success=True mapping_mode=True windows_attached=false sony_tested=false keyboard_captured=false

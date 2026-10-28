@@ -1,0 +1,6 @@
+Existing DS4 V2 HID collection count=0; excluded from reads
+PASS test-owned USBip attachment and port identity
+FAIL TimeoutException: No NEW USBIP DS4 HID collection appeared in 15 seconds
+PASS detached only test-owned Windows device
+PASS removed only test-owned VIIPER bus
+RESULT passed=3 success=False windows_hid_tested=true sony_tested=false keyboard_captured=false

@@ -4,7 +4,19 @@
 
 使用者希望保留 Sony 官方 PS Remote Play，並以我們的 Windows 程式將鍵盤與滑鼠轉換成手把操作；滑鼠移動控制右搖桿視角。因帳號安全顧慮，使用者不希望改用第三方 Remote Play 客戶端。
 
-## 目前原型的缺口
+使用者於 2026-10-28 明確排除付費軟體依賴，要求維持自製方案；reWASD 不再是候選實作依賴，不安裝或啟用試用。免費開源函式庫可用於自製程式，現行目標仍是官方 Remote Play 與實體 USB DS4。
+
+後續範圍收斂為**只做鍵盤**：按下、長按、放開與複合按鍵應等同手把輸入，不考慮個別遊戲是否原生支援鍵盤。滑鼠及右搖桿視角暫不實作。
+
+## 新的 USB 輸出候選
+
+[鍵盤專用程式](../src/keyboard-pad/README.md)把鍵盤轉成 DS4 狀態，透過獨立的 VIIPER 0.9.0 本機服務及 usbip-win2 0.9.8.1 提供另一個 USB DS4。它不是實體 PS4 手把的輸入過濾器；官方程式與實體／虛擬手把同時存在時的選擇行為尚待驗證。
+
+實際映射程式透過 VIIPER 回讀 USB/IP 報告的 16 項檢查已通過。後續[Windows HID 實測](../research/windows-hid-test/README.md)也通過 20 項檢查，證明真正的 Windows 手把介面能讀到合成狀態。這仍不能代替真實鍵盤事件及 Sony 實機驗收。上游也未找到可直接引用的 Remote Play 9.5 成功驗證；部分認證 feature report 未實作，是否為 Sony 必要條件仍未知。詳見 [候選評估](../research/static-analysis/VIIPER-ASSESSMENT.md)。
+
+使用者已明確同意安裝及實測。安裝前建立了系統還原點，官方安裝檔通過 SHA-256 與 Authenticode 核對；安裝回傳 3010，驅動目前已啟動，系統尚未重開機。沒有重新安裝 ViGEmBus、變更 PSN 登入、啟用測試簽章或關閉 Windows 保護。
+
+## 先前 ViGEm 原型的缺口
 
 目前程式透過第三方 ViGEmBus 建立虛擬 DUALSHOCK 4，必須另行安裝驅動；ViGEm 已停止維護，且有 Remote Play 6 以後不相容的回報。曾在本機確認 ViGEmBus 1.22.0 能建立 Windows 辨識的虛擬 DS4。測試期間 Remote Play 9.5 兩次當機；關閉測試程式及虛擬手把後，Remote Play 可再次啟動。這些觀察提示可能有相容性問題，但不足以確認當機的根本原因。依使用者要求已移除 ViGEmBus；PS5 操作仍未驗收。
 
@@ -39,11 +51,11 @@
 - 從磁碟只讀掃描 RemoteplayUI.dll 和 RemotePlayUIWrapper.dll 的受管類型與方法名稱，沒有找到可辨識為手把讀取路徑的方法；這並不排除程式使用原生碼、動態載入或其他名稱。
 - Windows 的 ReadFile 可能採用非同步 I/O；回傳待處理時緩衝區尚未完成，若將來研究攔截，必須正確處理完成、取消與緩衝區生命週期，不能在呼叫返回時假設資料已經就緒。參考 [Microsoft ReadFile](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)。
 
-## 目前結果
+## 先前實體手把方案的結果
 
 本次未能交付「官方 Remote Play 9.5 + 實體 PS4 手把 + 鍵盤與滑鼠模擬手把」的可用成品。靜態檢查尚未定位官方程式實際讀取手把的路徑；離線資料測試不能驗證這條路可用。使用者確認官方 Remote Play 的鍵盤在系統及部分遊戲可用，問題集中在不接受鍵盤輸入的遊戲。現有程式仍是 ViGEmBus 舊原型，無法滿足目前需求。
 
-## 重新評估：reWASD 實體輸出
+## 歷史研究：reWASD 實體輸出（已排除）
 
 這是一條有廠商明確文件、但尚待本機驗證的路線，不能再把未定位 Sony 內部函式等同於所有軟體方案不可行。計畫保留 Sony 官方視窗與現有 USB DS4，先驗證單鍵轉成 ×，再加入 WASD 左搖桿及滑鼠右搖桿。必須明確選用實體 DS4 輸出，避免直接使用預設的虛擬 DS4 設定。
 
@@ -58,7 +70,7 @@
 
 候選配置使用內附現版範本中實際存在的 `applyToPhysicalPriority` 欄位，移除舊範本的虛擬輸出強制設定及四個不支援實體模式的 relative-stick 動作。靜態檢查無缺失的 mask／command 參照，但尚未匯入 reWASD，不能據此聲稱輸出已生效。完整候選及原廠範本保留本機，公開儲存庫只記錄差異。
 
-這個候選方案新增商用授權依賴。官方提供 7 天免費試用，首次需 reWASD 帳號，安裝驅動後需重啟；不涉及第三方 PSN 登入。已請使用者選擇是否接受此依賴，未假定同意。文件與 API 能力不等於 Remote Play 9.5 實機通過。
+這個候選方案新增商用授權依賴。官方提供 7 天免費試用，首次需 reWASD 帳號，安裝驅動後需重啟；不涉及第三方 PSN 登入。使用者已拒絕此依賴，維持未安裝狀態。文件與 API 能力不等於 Remote Play 9.5 實機通過。
 
 ## 參考
 

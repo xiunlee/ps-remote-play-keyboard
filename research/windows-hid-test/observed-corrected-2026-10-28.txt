@@ -1,0 +1,27 @@
+Existing DS4 V2 HID collection count=0; excluded from reads
+PASS test-owned USBip attachment and port identity
+DIAGNOSTIC ancestor[0]=HID\VID_054C&PID_09CC
+DIAGNOSTIC ancestor[1]=USB\VID_054C&PID_09CC
+DIAGNOSTIC ancestor[2]=USB\ROOT_HUB30
+DIAGNOSTIC ancestor[3]=ROOT\USB
+DIAGNOSTIC ancestor hardware identity=ROOT\USBIP_WIN2\UDE
+PASS Windows HID identity + 64-byte gamepad capability
+PASS initial neutral
+PASS K -> Cross pressed
+PASS K -> Cross held
+PASS K released -> Cross released
+PASS W -> up
+PASS A -> left
+PASS S -> down
+PASS D -> right
+PASS W+D -> diagonal
+PASS W+S -> neutral
+PASS K+I -> Cross+Triangle
+PASS ArrowUp -> D-pad up
+PASS U -> L2 pressed
+PASS U released -> L2 released
+PASS disabled held W+K+U -> neutral
+PASS final all released/right stick centered
+PASS detached only test-owned Windows device
+PASS removed only test-owned VIIPER bus
+RESULT passed=20 success=True windows_hid_tested=true sony_tested=false keyboard_captured=false

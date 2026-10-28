@@ -1,0 +1,11 @@
+Existing DS4 V2 HID collection count=0; excluded from reads
+PASS test-owned USBip attachment and port identity
+DIAGNOSTIC ancestor[0]=HID\VID_054C&PID_09CC
+DIAGNOSTIC ancestor[1]=USB\VID_054C&PID_09CC
+DIAGNOSTIC ancestor[2]=USB\ROOT_HUB30
+DIAGNOSTIC ancestor[3]=ROOT\USB
+DIAGNOSTIC ancestor[4]=HTREE\ROOT
+FAIL TimeoutException: No validated NEW USBIP DS4 HID collection in 15 seconds; new VID/PID paths=1
+PASS detached only test-owned Windows device
+PASS removed only test-owned VIIPER bus
+RESULT passed=3 success=False windows_hid_tested=true sony_tested=false keyboard_captured=false

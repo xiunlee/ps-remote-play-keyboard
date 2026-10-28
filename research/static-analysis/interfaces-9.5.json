@@ -1,0 +1,883 @@
+[
+  {
+    "File": "RemotePlay.exe",
+    "SHA256": "D4E355C18BAB988BDC3DC69EF4746D5064983CC7CAC699CCDA8D46B834291616",
+    "Machine": "0x8664",
+    "EntryPoint": "0x744E68",
+    "Sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".pdata",
+      "_RDATA",
+      ".rsrc",
+      ".reloc",
+      ".grfn10",
+      ".grfn20",
+      ".grfn11",
+      ".grfn22"
+    ],
+    "Imports": [
+      {
+        "Dll": "preloader.dll",
+        "Functions": [
+          "#1"
+        ]
+      }
+    ],
+    "DelayImports": [],
+    "Exports": [],
+    "DelayParseError": "RVA has no disk data: 0xA1372913",
+    "DelayImportRva": "0x9AE488",
+    "ClrRva": "0x0"
+  },
+  {
+    "File": "runtime.dll",
+    "SHA256": "AE4AE997261FD9DA4DDDBBA0EDEA6244BCEFE2F24899221F793826B4DA497E87",
+    "Machine": "0x8664",
+    "EntryPoint": "0x260410",
+    "Sections": [
+      ".rdata",
+      ".rwx",
+      "packer0",
+      "packer1",
+      "packer2",
+      ".rsrc",
+      ".reloc",
+      "packer30",
+      "packer40",
+      "packer31",
+      "packer42"
+    ],
+    "Imports": [
+      {
+        "Dll": "WTSAPI32.dll",
+        "Functions": [
+          "WTSEnumerateSessionsW",
+          "WTSFreeMemory",
+          "WTSSendMessageW"
+        ]
+      },
+      {
+        "Dll": "ntdll.dll",
+        "Functions": [
+          "RtlPcToFileHeader"
+        ]
+      },
+      {
+        "Dll": "KERNEL32.dll",
+        "Functions": [
+          "CloseHandle"
+        ]
+      },
+      {
+        "Dll": "USER32.dll",
+        "Functions": [
+          "CloseWindow",
+          "GetProcessWindowStation",
+          "GetUserObjectInformationW"
+        ]
+      },
+      {
+        "Dll": "GDI32.dll",
+        "Functions": [
+          "CloseEnhMetaFile"
+        ]
+      }
+    ],
+    "DelayImports": [],
+    "Exports": [],
+    "DelayParseError": null,
+    "DelayImportRva": "0x0",
+    "ClrRva": "0x0"
+  },
+  {
+    "File": "preloader.dll",
+    "SHA256": "78F0F88ED59E6D8D26F3F149703D781CDF2B60EDC81DB59ECA310F3D1C3301C7",
+    "Machine": "0x8664",
+    "EntryPoint": "0xB030",
+    "Sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".entry",
+      ".rsrc",
+      ".reloc"
+    ],
+    "Imports": [
+      {
+        "Dll": "ntdll.dll",
+        "Functions": [
+          "LdrAccessResource",
+          "LdrFindEntryForAddress",
+          "LdrFindResource_U",
+          "LdrGetProcedureAddress",
+          "MD5Init",
+          "NtAllocateVirtualMemory",
+          "NtCreateSection",
+          "NtMapViewOfSection",
+          "NtOpenFile",
+          "NtProtectVirtualMemory",
+          "NtReadFile",
+          "NtTerminateProcess",
+          "NtYieldExecution",
+          "RtlAllocateHeap",
+          "RtlAppendUnicodeToString",
+          "RtlCopyUnicodeString",
+          "RtlCreateEnvironment",
+          "RtlCreateProcessParametersEx",
+          "RtlDosPathNameToNtPathName_U_WithStatus",
+          "RtlExpandEnvironmentStrings",
+          "RtlFindCharInUnicodeString",
+          "RtlFindMessage",
+          "RtlPcToFileHeader",
+          "RtlQueryEnvironmentVariable",
+          "RtlQueryEnvironmentVariable_U",
+          "ZwClose",
+          "ZwCreateFile",
+          "ZwCreateThreadEx",
+          "ZwCreateUserProcess",
+          "ZwDeleteFile",
+          "ZwQueryDirectoryFile",
+          "ZwQueryInformationFile",
+          "ZwQueryInformationProcess",
+          "ZwQuerySystemInformation",
+          "ZwSetInformationFile",
+          "ZwWaitForSingleObject",
+          "__C_specific_handler",
+          "__chkstk",
+          "_snwprintf_s",
+          "mbstowcs",
+          "memcmp",
+          "memset",
+          "wcsncat",
+          "wcstoul"
+        ]
+      },
+      {
+        "Dll": "USER32.dll",
+        "Functions": [
+          "CallNextHookEx",
+          "DefWindowProcW",
+          "GetProcessWindowStation",
+          "GetUserObjectInformationW",
+          "GetWindowLongPtrW",
+          "IsChild",
+          "MessageBoxW",
+          "SetWindowLongPtrW"
+        ]
+      },
+      {
+        "Dll": "GDI32.dll",
+        "Functions": [
+          "Pie"
+        ]
+      },
+      {
+        "Dll": "ADVAPI32.dll",
+        "Functions": [
+          "RegGetValueW"
+        ]
+      }
+    ],
+    "DelayImports": [],
+    "Exports": [
+      "/* 758006cd4e6979455628cd475a97f5b98258f9beb7243814801800b64ee5420c */",
+      "preloader_link_func"
+    ],
+    "DelayParseError": null,
+    "DelayImportRva": "0x0",
+    "ClrRva": "0x0"
+  },
+  {
+    "File": "RemotePlayUIWrapper.dll",
+    "SHA256": "5CEE025A26B1E7590DB148BE0F16A0267F407BC4EEA977F7AA8D8C830668F66E",
+    "Machine": "0x8664",
+    "EntryPoint": "0x38B9",
+    "Sections": [
+      ".text",
+      ".nep",
+      ".rdata",
+      ".data",
+      ".pdata",
+      ".rsrc",
+      ".reloc"
+    ],
+    "Imports": [
+      {
+        "Dll": "KERNEL32.dll",
+        "Functions": [
+          "QueryPerformanceCounter",
+          "GetCurrentProcessId",
+          "GetCurrentThreadId",
+          "GetSystemTimeAsFileTime",
+          "DisableThreadLibraryCalls",
+          "InitializeSListHead",
+          "RtlCaptureContext",
+          "RtlLookupFunctionEntry",
+          "RtlVirtualUnwind",
+          "IsDebuggerPresent",
+          "UnhandledExceptionFilter",
+          "SetUnhandledExceptionFilter",
+          "GetStartupInfoW",
+          "IsProcessorFeaturePresent",
+          "GetModuleHandleW",
+          "Sleep"
+        ]
+      },
+      {
+        "Dll": "VCRUNTIME140.dll",
+        "Functions": [
+          "__current_exception",
+          "__current_exception_context",
+          "memset",
+          "__FrameUnwindFilter",
+          "__std_type_info_destroy_list",
+          "__C_specific_handler",
+          "memcpy"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-runtime-l1-1-0.dll",
+        "Functions": [
+          "_configure_narrow_argv",
+          "_initialize_narrow_environment",
+          "_initialize_onexit_table",
+          "_register_onexit_function",
+          "_execute_onexit_table",
+          "_seh_filter_dll",
+          "_crt_at_quick_exit",
+          "_cexit",
+          "terminate",
+          "abort",
+          "_initterm",
+          "_crt_atexit",
+          "_initterm_e"
+        ]
+      },
+      {
+        "Dll": "mscoree.dll",
+        "Functions": [
+          "_CorDllMain"
+        ]
+      }
+    ],
+    "DelayImports": [],
+    "Exports": [
+      "?StartRemotePlayUI@@YAX_J@Z",
+      "?disposeLaunchInfo@@YAXXZ",
+      "?isEnabledLaunch@@YA_NXZ"
+    ],
+    "DelayParseError": null,
+    "DelayImportRva": "0x0",
+    "ClrRva": "0x5230"
+  },
+  {
+    "File": "scenp.dll",
+    "SHA256": "4263605FA880F4A49AF938B40550D728880D70F6EF203DB4E84A38062A0D18F2",
+    "Machine": "0x8664",
+    "EntryPoint": "0xB7F30",
+    "Sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".pdata",
+      ".rsrc",
+      ".reloc"
+    ],
+    "Imports": [
+      {
+        "Dll": "VCRUNTIME140.dll",
+        "Functions": [
+          "__std_type_info_destroy_list",
+          "__current_exception_context",
+          "__current_exception",
+          "__std_exception_destroy",
+          "__std_exception_copy",
+          "__std_terminate",
+          "_purecall",
+          "__std_type_info_compare",
+          "memchr",
+          "memcmp",
+          "memcpy",
+          "strchr",
+          "memmove",
+          "strstr",
+          "strrchr",
+          "wcsstr",
+          "_CxxThrowException",
+          "__C_specific_handler",
+          "memset",
+          "__RTDynamicCast"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-runtime-l1-1-0.dll",
+        "Functions": [
+          "_initterm_e",
+          "_seh_filter_dll",
+          "_initterm",
+          "_invalid_parameter_noinfo",
+          "_configure_narrow_argv",
+          "_initialize_narrow_environment",
+          "_initialize_onexit_table",
+          "_register_onexit_function",
+          "signal",
+          "_execute_onexit_table",
+          "_beginthreadex",
+          "_crt_atexit",
+          "abort",
+          "_errno",
+          "_invalid_parameter_noinfo_noreturn",
+          "terminate",
+          "_cexit",
+          "raise",
+          "_endthreadex",
+          "_exit",
+          "strerror_s"
+        ]
+      },
+      {
+        "Dll": "KERNEL32.dll",
+        "Functions": [
+          "GetModuleHandleW",
+          "SleepConditionVariableCS",
+          "WakeAllConditionVariable",
+          "WakeConditionVariable",
+          "InitializeConditionVariable",
+          "QueryUnbiasedInterruptTime",
+          "QueryPerformanceFrequency",
+          "ResetEvent",
+          "WaitForSingleObjectEx",
+          "InitOnceComplete",
+          "InitOnceBeginInitialize",
+          "CreateThread",
+          "ExpandEnvironmentStringsA",
+          "CreateEventA",
+          "RegisterWaitForSingleObject",
+          "UnregisterWait",
+          "GetQueuedCompletionStatusEx",
+          "SetFileCompletionNotificationModes",
+          "RtlCaptureContext",
+          "RtlLookupFunctionEntry",
+          "RtlVirtualUnwind",
+          "UnhandledExceptionFilter",
+          "SetUnhandledExceptionFilter",
+          "GetCurrentProcess",
+          "TerminateProcess",
+          "IsProcessorFeaturePresent",
+          "QueryPerformanceCounter",
+          "GetCurrentProcessId",
+          "GetCurrentThreadId",
+          "GetSystemTimeAsFileTime",
+          "InitializeSListHead",
+          "VerSetConditionMask",
+          "VerifyVersionInfoW",
+          "SetWaitableTimer",
+          "TlsSetValue",
+          "SetLastError",
+          "EnterCriticalSection",
+          "CreateWaitableTimerW",
+          "WaitForMultipleObjects",
+          "InitializeCriticalSectionAndSpinCount",
+          "LeaveCriticalSection",
+          "GetQueuedCompletionStatus",
+          "WaitForSingleObject",
+          "GetModuleHandleA",
+          "PostQueuedCompletionStatus",
+          "CreateEventW",
+          "Sleep",
+          "GetLastError",
+          "SetEvent",
+          "TerminateThread",
+          "TlsAlloc",
+          "CloseHandle",
+          "QueueUserAPC",
+          "GetProcAddress",
+          "LocalFree",
+          "DeleteCriticalSection",
+          "WideCharToMultiByte",
+          "SleepEx",
+          "TlsGetValue",
+          "TlsFree",
+          "FormatMessageA",
+          "CreateIoCompletionPort",
+          "MultiByteToWideChar",
+          "InitializeSRWLock",
+          "ReleaseSRWLockExclusive",
+          "ReleaseSRWLockShared",
+          "AcquireSRWLockExclusive",
+          "AcquireSRWLockShared",
+          "VirtualFree",
+          "SwitchToFiber",
+          "DeleteFiber",
+          "CreateFiberEx",
+          "GetSystemTime",
+          "SystemTimeToFileTime",
+          "FindClose",
+          "FindFirstFileW",
+          "FindNextFileW",
+          "GetFileType",
+          "GetModuleHandleExW",
+          "GetSystemDirectoryA",
+          "FreeLibrary",
+          "LoadLibraryA",
+          "InitializeCriticalSection",
+          "IsDebuggerPresent",
+          "ReleaseSemaphore",
+          "GetExitCodeThread",
+          "CreateSemaphoreA",
+          "GetEnvironmentVariableW",
+          "GetACP",
+          "GetStdHandle",
+          "WriteFile",
+          "ConvertFiberToThread",
+          "ConvertThreadToFiberEx",
+          "LoadLibraryW",
+          "GetConsoleMode",
+          "SetConsoleMode",
+          "ReadConsoleA",
+          "ReadConsoleW"
+        ]
+      },
+      {
+        "Dll": "WS2_32.dll",
+        "Functions": [
+          "#57",
+          "WSAPoll",
+          "inet_ntop",
+          "inet_pton",
+          "#22",
+          "#55",
+          "#56",
+          "#52",
+          "#51",
+          "#12",
+          "#11",
+          "#20",
+          "#17",
+          "WSASocketA",
+          "#19",
+          "#16",
+          "#23",
+          "#116",
+          "#151",
+          "#1",
+          "#2",
+          "WSAIoctl",
+          "#3",
+          "WSASend",
+          "#18",
+          "#14",
+          "#13",
+          "#112",
+          "WSASocketW",
+          "getaddrinfo",
+          "#115",
+          "#5",
+          "#6",
+          "#15",
+          "#4",
+          "WSAAddressToStringW",
+          "WSARecv",
+          "#7",
+          "#8",
+          "#9",
+          "freeaddrinfo",
+          "#10",
+          "#21",
+          "#111"
+        ]
+      },
+      {
+        "Dll": "USER32.dll",
+        "Functions": [
+          "MessageBoxW",
+          "GetUserObjectInformationW",
+          "GetProcessWindowStation"
+        ]
+      },
+      {
+        "Dll": "ADVAPI32.dll",
+        "Functions": [
+          "CryptEnumProvidersW",
+          "RegisterEventSourceW",
+          "ReportEventW",
+          "CryptAcquireContextW",
+          "CryptReleaseContext",
+          "CryptGenRandom",
+          "CryptDestroyKey",
+          "SystemFunction036",
+          "RegCloseKey",
+          "RegOpenKeyExA",
+          "RegQueryValueExA",
+          "RegNotifyChangeKeyValue",
+          "RegOpenKeyExW",
+          "RegEnumKeyExA",
+          "RegQueryValueExW",
+          "CryptSetHashParam",
+          "DeregisterEventSource",
+          "CryptSignHashW",
+          "CryptDestroyHash",
+          "CryptCreateHash",
+          "CryptDecrypt",
+          "CryptExportKey",
+          "CryptGetUserKey",
+          "CryptGetProvParam"
+        ]
+      },
+      {
+        "Dll": "VCRUNTIME140_1.dll",
+        "Functions": [
+          "__CxxFrameHandler4"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-convert-l1-1-0.dll",
+        "Functions": [
+          "strtod",
+          "atoi",
+          "strtoimax",
+          "strtoull",
+          "strtol",
+          "strtoll",
+          "strtoul"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-math-l1-1-0.dll",
+        "Functions": [
+          "modf",
+          "_finite",
+          "ceilf"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-stdio-l1-1-0.dll",
+        "Functions": [
+          "_write",
+          "__stdio_common_vswprintf",
+          "__stdio_common_vsprintf_s",
+          "_wfopen",
+          "_lseek",
+          "_read",
+          "fopen",
+          "_setmode",
+          "_get_osfhandle",
+          "fwrite",
+          "ftell",
+          "fseek",
+          "fread",
+          "_fileno",
+          "fgets",
+          "fflush",
+          "ferror",
+          "feof",
+          "fclose",
+          "__stdio_common_vsnprintf_s",
+          "__acrt_iob_func",
+          "__stdio_common_vfprintf",
+          "__stdio_common_vsscanf",
+          "fputs",
+          "__stdio_common_vsprintf",
+          "_close"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-locale-l1-1-0.dll",
+        "Functions": [
+          "localeconv"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-heap-l1-1-0.dll",
+        "Functions": [
+          "realloc",
+          "free",
+          "_callnewh",
+          "calloc",
+          "malloc"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-time-l1-1-0.dll",
+        "Functions": [
+          "_gmtime64_s",
+          "_localtime64_s",
+          "_time64"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-string-l1-1-0.dll",
+        "Functions": [
+          "strcmp",
+          "isspace",
+          "_strnicmp",
+          "isalnum",
+          "strnlen",
+          "strncmp",
+          "_stricmp",
+          "strncat",
+          "isalpha",
+          "tolower",
+          "isdigit",
+          "strpbrk",
+          "strcspn",
+          "strspn",
+          "strcpy_s",
+          "strcat_s",
+          "strncpy_s",
+          "strncpy"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "Functions": [
+          "_stat64i32"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-utility-l1-1-0.dll",
+        "Functions": [
+          "rand",
+          "qsort",
+          "srand"
+        ]
+      },
+      {
+        "Dll": "api-ms-win-crt-environment-l1-1-0.dll",
+        "Functions": [
+          "getenv"
+        ]
+      },
+      {
+        "Dll": "MSVCP140.dll",
+        "Functions": [
+          "??0?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA@PEAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z",
+          "??0?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@PEAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z",
+          "??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UEAA@XZ",
+          "?_Lock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UEAAXXZ",
+          "?_Unlock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UEAAXXZ",
+          "?showmanyc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA_JXZ",
+          "?uflow@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAAHXZ",
+          "?xsgetn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA_JPEAD_J@Z",
+          "?xsputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAA_JPEBD_J@Z",
+          "?setbuf@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAAPEAV12@PEAD_J@Z",
+          "?sync@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAAHXZ",
+          "?imbue@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MEAAXAEBVlocale@2@@Z",
+          "??1?$basic_ios@DU?$char_traits@D@std@@@std@@UEAA@XZ",
+          "?imbue@?$basic_ios@DU?$char_traits@D@std@@@std@@QEAA?AVlocale@2@AEBV32@@Z",
+          "??1?$basic_ostream@DU?$char_traits@D@std@@@std@@UEAA@XZ",
+          "?tolower@?$ctype@D@std@@QEBAPEBDPEADPEBD@Z",
+          "?tolower@?$ctype@D@std@@QEBADD@Z",
+          "??0?$basic_ios@DU?$char_traits@D@std@@@std@@IEAA@XZ",
+          "?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QEAAXH_N@Z",
+          "?_Pninc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IEAAPEADXZ",
+          "?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@XZ",
+          "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z",
+          "_Strcoll",
+          "?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAXXZ",
+          "?id@?$collate@D@std@@2V0locale@2@A",
+          "??0?$basic_streambuf@DU?$char_traits@D@std@@@std@@IEAA@XZ",
+          "?_Xregex_error@std@@YAXW4error_type@regex_constants@1@@Z",
+          "_Strxfrm",
+          "?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAAHD@Z",
+          "?put@?$time_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@QEBA?AV?$ostreambuf_iterator@DU?$char_traits@D@std@@@2@V32@AEAVios_base@2@DPEBUtm@@PEBD3@Z",
+          "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@_J@Z",
+          "?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAA_JPEBD_J@Z",
+          "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@P6AAEAVios_base@1@AEAV21@@Z@Z",
+          "?setw@std@@YA?AU?$_Smanip@_J@1@_J@Z",
+          "?_Getcat@?$time_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@SA_KPEAPEBVfacet@locale@2@PEBV42@@Z",
+          "?_Random_device@std@@YAIXZ",
+          "?id@?$ctype@D@std@@2V0locale@2@A",
+          "?_Winerror_map@std@@YAHH@Z",
+          "?_Xinvalid_argument@std@@YAXPEBD@Z",
+          "_Thrd_join",
+          "_Thrd_id",
+          "_Cnd_do_broadcast_at_thread_exit",
+          "?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A",
+          "??1facet@locale@std@@MEAA@XZ",
+          "??0facet@locale@std@@IEAA@_K@Z",
+          "?_Decref@facet@locale@std@@UEAAPEAV_Facet_base@3@XZ",
+          "?_Incref@facet@locale@std@@UEAAXXZ",
+          "?_Getcoll@_Locinfo@std@@QEBA?AU_Collvec@@XZ",
+          "??1_Locinfo@std@@QEAA@XZ",
+          "??0_Locinfo@std@@QEAA@PEBD@Z",
+          "_Thrd_detach",
+          "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@G@Z",
+          "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@H@Z",
+          "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@_K@Z",
+          "??1?$basic_istream@DU?$char_traits@D@std@@@std@@UEAA@XZ",
+          "??5?$basic_istream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@AEAH@Z",
+          "??5?$basic_istream@DU?$char_traits@D@std@@@std@@QEAAAEAV01@AEA_K@Z",
+          "?getline@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAAAEAV12@PEAD_J@Z",
+          "??1?$basic_iostream@DU?$char_traits@D@std@@@std@@UEAA@XZ",
+          "?getloc@ios_base@std@@QEBA?AVlocale@2@XZ",
+          "?_Xbad_alloc@std@@YAXXZ",
+          "?uncaught_exception@std@@YA_NXZ",
+          "?classic@locale@std@@SAAEBV12@XZ",
+          "?_Init@locale@std@@CAPEAV_Locimp@12@_N@Z",
+          "?_Getgloballocale@locale@std@@CAPEAV_Locimp@12@XZ",
+          "?_Getcat@?$ctype@D@std@@SA_KPEAPEBVfacet@locale@2@PEBV42@@Z",
+          "?toupper@?$ctype@D@std@@QEBADD@Z",
+          "??Bid@locale@std@@QEAA_KXZ",
+          "?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A",
+          "?id@?$time_put@DV?$ostreambuf_iterator@DU?$char_traits@D@std@@@std@@@std@@2V0locale@2@A",
+          "??0_Lockit@std@@QEAA@H@Z",
+          "?_Ipfx@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA_N_N@Z",
+          "?snextc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAAHXZ",
+          "??1_Lockit@std@@QEAA@XZ",
+          "?__ExceptionPtrCopyException@@YAXPEAXPEBX1@Z",
+          "??_D?$basic_istream@DU?$char_traits@D@std@@@std@@QEAAXXZ",
+          "?sbumpc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAAHXZ",
+          "_Thrd_sleep",
+          "?sgetc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QEAAHXZ",
+          "?_Xout_of_range@std@@YAXPEBD@Z",
+          "??0?$basic_iostream@DU?$char_traits@D@std@@@std@@QEAA@PEAV?$basic_streambuf@DU?$char_traits@D@std@@@1@@Z",
+          "_Cnd_broadcast",
+          "?_Xlength_error@std@@YAXPEBD@Z",
+          "?_Xbad_function_call@std@@YAXXZ",
+          "?_Throw_C_error@std@@YAXH@Z",
+          "_Mtx_destroy_in_situ",
+          "_Mtx_lock",
+          "_Mtx_init_in_situ",
+          "_Mtx_unlock",
+          "_Cnd_destroy_in_situ",
+          "?__ExceptionPtrAssign@@YAXPEAXPEBX@Z",
+          "?GetCurrentThreadId@platform@details@Concurrency@@YAJXZ",
+          "?_ReportUnobservedException@details@Concurrency@@YAXXZ",
+          "?_Schedule_chore@details@Concurrency@@YAHPEAU_Threadpool_chore@12@@Z",
+          "?_LogWorkItemCompleted@_TaskEventLogger@details@Concurrency@@QEAAXXZ",
+          "?_LogWorkItemStarted@_TaskEventLogger@details@Concurrency@@QEAAXXZ",
+          "?_LogTaskExecutionCompleted@_TaskEventLogger@details@Concurrency@@QEAAXXZ",
+          "?_LogTaskCompleted@_TaskEventLogger@details@Concurrency@@QEAAXXZ",
+          "?_LogCancelTask@_TaskEventLogger@details@Concurrency@@QEAAXXZ",
+          "?_LogScheduleTask@_TaskEventLogger@details@Concurrency@@QEAAX_N@Z",
+          "?_Release_chore@details@Concurrency@@YAXPEAU_Threadpool_chore@12@@Z",
+          "?ReportUnhandledError@_ExceptionHolder@details@Concurrency@@AEAAXXZ",
+          "?_Capture@_ContextCallback@details@Concurrency@@AEAAXXZ",
+          "?_Reset@_ContextCallback@details@Concurrency@@AEAAXXZ",
+          "?_CallInContext@_ContextCallback@details@Concurrency@@QEBAXV?$function@$$A6AXXZ@std@@_N@Z",
+          "??0task_continuation_context@Concurrency@@AEAA@XZ",
+          "_Mtx_current_owns",
+          "_Cnd_unregister_at_thread_exit",
+          "?__ExceptionPtrCreate@@YAXPEAX@Z",
+          "_Cnd_init_in_situ",
+          "?__ExceptionPtrCopy@@YAXPEAXPEBX@Z",
+          "_Query_perf_frequency",
+          "?_Throw_future_error@std@@YAXAEBVerror_code@1@@Z",
+          "?_Throw_Cpp_error@std@@YAXH@Z",
+          "?_Rethrow_future_exception@std@@YAXVexception_ptr@1@@Z",
+          "?_Syserror_map@std@@YAPEBDH@Z",
+          "_Cnd_timedwait",
+          "?__ExceptionPtrToBool@@YA_NPEBX@Z",
+          "?__ExceptionPtrDestroy@@YAXPEAX@Z",
+          "?__ExceptionPtrCurrentException@@YAXPEAX@Z",
+          "?__ExceptionPtrRethrow@@YAXPEBX@Z",
+          "_Cnd_register_at_thread_exit",
+          "_Cnd_wait",
+          "_Query_perf_counter",
+          "_Xtime_get_ticks"
+        ]
+      },
+      {
+        "Dll": "WINHTTP.dll",
+        "Functions": [
+          "WinHttpSetTimeouts",
+          "WinHttpSendRequest",
+          "WinHttpCrackUrl",
+          "WinHttpCloseHandle",
+          "WinHttpSetOption",
+          "WinHttpOpenRequest",
+          "WinHttpGetIEProxyConfigForCurrentUser",
+          "WinHttpConnect",
+          "WinHttpQueryHeaders",
+          "WinHttpReceiveResponse",
+          "WinHttpOpen",
+          "WinHttpQueryDataAvailable",
+          "WinHttpReadData"
+        ]
+      },
+      {
+        "Dll": "SHLWAPI.dll",
+        "Functions": [
+          "UrlEscapeW"
+        ]
+      },
+      {
+        "Dll": "CRYPT32.dll",
+        "Functions": [
+          "CertGetCertificateContextProperty",
+          "CertFreeCertificateContext",
+          "CertOpenStore",
+          "CertCloseStore",
+          "CertEnumCertificatesInStore",
+          "CertFindCertificateInStore",
+          "CertOpenSystemStoreW",
+          "CertDuplicateCertificateContext"
+        ]
+      },
+      {
+        "Dll": "IPHLPAPI.DLL",
+        "Functions": [
+          "if_nametoindex",
+          "GetUnicastIpAddressTable",
+          "GetAdaptersAddresses",
+          "NotifyIpInterfaceChange",
+          "CancelMibChangeNotify2",
+          "if_indextoname",
+          "FreeMibTable",
+          "GetBestRoute2"
+        ]
+      },
+      {
+        "Dll": "ole32.dll",
+        "Functions": [
+          "CoCreateGuid"
+        ]
+      }
+    ],
+    "DelayImports": [],
+    "Exports": [
+      "NpConfigSetAccessToken",
+      "NpConfigSetBaseURL",
+      "NpPushClientRegister",
+      "NpPushClientUnregister",
+      "sceNpCmpNpId",
+      "sceNpCmpNpIdInOrder",
+      "sceNpCmpOnlineId",
+      "sceNpGetNpId",
+      "sceNpGetOnlineId",
+      "sceNpGetPlatformType",
+      "sceNpManagerIntAbortRequest",
+      "sceNpManagerIntCreateRequest",
+      "sceNpManagerIntDeleteRequest",
+      "sceNpManagerIntFinalize",
+      "sceNpManagerIntInitialize",
+      "sceNpManagerIntSetAccessToken",
+      "sceNpManagerIntSetAccountId",
+      "sceNpManagerIntSetNpIdElements",
+      "sceNpManagerIntUnsetAccessToken",
+      "sceNpNatTypeAbortRequest",
+      "sceNpNatTypeCheck",
+      "sceNpNatTypeCreateRequest",
+      "sceNpNatTypeDeleteRequest",
+      "sceNpRemotePlaySessionSignalingAbortConnection",
+      "sceNpRemotePlaySessionSignalingCreateSocket",
+      "sceNpRemotePlaySessionSignalingEstablishConnection",
+      "sceNpRemotePlaySessionSignalingGetCustomProperty",
+      "sceNpRemotePlaySessionSignalingGetLocalNetInfo",
+      "sceNpRemotePlaySessionSignalingGetMemoryInfo",
+      "sceNpRemotePlaySessionSignalingInitialize",
+      "sceNpRemotePlaySessionSignalingLeaveSession",
+      "sceNpRemotePlaySessionSignalingManualUdpCreateJoinSession",
+      "sceNpRemotePlaySessionSignalingManualUdpJoinSession",
+      "sceNpRemotePlaySessionSignalingSetCustomProperty",
+      "sceNpRemotePlaySessionSignalingTerminate",
+      "sceNpSetPlatformType"
+    ],
+    "DelayParseError": null,
+    "DelayImportRva": "0x0",
+    "ClrRva": "0x0"
+  }
+]
