@@ -6,7 +6,7 @@
 
 ## 目前原型的缺口
 
-目前程式透過第三方 ViGEmBus 建立虛擬 DUALSHOCK 4，必須另行安裝驅動；ViGEm 已停止維護，且有 Remote Play 6 以後不相容的回報。已在本機確認 ViGEmBus 1.22.0 狀態正常，且能建立 Windows 辨識的虛擬 DS4；尚未確認 PS Remote Play 和 PS5 接受輸入，因此功能尚未驗收。
+目前程式透過第三方 ViGEmBus 建立虛擬 DUALSHOCK 4，必須另行安裝驅動；ViGEm 已停止維護，且有 Remote Play 6 以後不相容的回報。已在本機確認 ViGEmBus 1.22.0 狀態正常，且能建立 Windows 辨識的虛擬 DS4。測試期間 Remote Play 9.5 兩次當機；關閉測試程式及虛擬手把後，Remote Play 可再次啟動。這些觀察提示可能有相容性問題，但不足以確認當機的根本原因。PS5 操作仍未驗收。
 
 ## 候選方向
 
