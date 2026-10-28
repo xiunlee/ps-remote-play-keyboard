@@ -2,11 +2,11 @@
 
 ## 產品目標
 
-使用者開啟 Sony 官方 PS Remote Play，以我們的 Windows 程式將鍵盤與滑鼠轉換成手把操作；滑鼠移動控制右搖桿視角。長期希望整合安裝流程。現階段使用者同意先安裝 ViGEmBus，測試這條路是否能實際操作 PS5。
+使用者希望保留 Sony 官方 PS Remote Play，並以我們的 Windows 程式將鍵盤與滑鼠轉換成手把操作；滑鼠移動控制右搖桿視角。因帳號安全顧慮，使用者不希望改用第三方 Remote Play 客戶端。
 
 ## 目前原型的缺口
 
-目前程式透過第三方 ViGEmBus 建立虛擬 DUALSHOCK 4，必須另行安裝驅動；ViGEm 已停止維護，且有 Remote Play 6 以後不相容的回報。已在本機確認 ViGEmBus 1.22.0 狀態正常，且能建立 Windows 辨識的虛擬 DS4。測試期間 Remote Play 9.5 兩次當機；關閉測試程式及虛擬手把後，Remote Play 可再次啟動。這些觀察提示可能有相容性問題，但不足以確認當機的根本原因。PS5 操作仍未驗收。
+目前程式透過第三方 ViGEmBus 建立虛擬 DUALSHOCK 4，必須另行安裝驅動；ViGEm 已停止維護，且有 Remote Play 6 以後不相容的回報。曾在本機確認 ViGEmBus 1.22.0 能建立 Windows 辨識的虛擬 DS4。測試期間 Remote Play 9.5 兩次當機；關閉測試程式及虛擬手把後，Remote Play 可再次啟動。這些觀察提示可能有相容性問題，但不足以確認當機的根本原因。依使用者要求已移除 ViGEmBus；PS5 操作仍未驗收。
 
 ## 候選方向
 
