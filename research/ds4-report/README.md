@@ -16,3 +16,16 @@ $testExe = Join-Path $env:TEMP 'pskeyboard-ds4-offline-tests.exe'
 & $compiler /nologo /out:$testExe 'research\ds4-report\Ds4UsbReport.cs' 'research\ds4-report\Ds4UsbReportTests.cs'
 if ($LASTEXITCODE -eq 0) { & $testExe }
 ```
+
+## 只讀手把規格檢查
+
+`HidCapsProbe.cs` 僅尋找 USB 連接的 VID 054C / PID 05C4 HID 裝置，以零資料讀寫權限取得 HID collection 的能力資訊後立即關閉。它不讀取按鍵或感測資料，不傳送 input、output 或 feature report，也不存取 Remote Play 程序。若手把未連接或裝置無法查詢，程式會顯示錯誤。
+
+```powershell
+$compiler = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+$probeExe = Join-Path $env:TEMP 'pskeyboard-hidcaps-probe.exe'
+& $compiler /nologo /out:$probeExe 'research\ds4-report\HidCapsProbe.cs'
+if ($LASTEXITCODE -eq 0) { & $probeExe }
+```
+
+本機實測為 Game Pad，最大 input report 64 bytes、output 32 bytes、feature 64 bytes；這與離線模型的長度假設一致。最大長度不能證明每個實際報告的 ID、格式或官方 Remote Play 的讀取路徑。

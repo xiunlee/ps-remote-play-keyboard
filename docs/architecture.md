@@ -35,6 +35,9 @@
 - [mouseplay 的舊版原始碼](https://github.com/ko1N/mouseplay/blob/master/mouseplay/src/hooks.rs)曾在官方程式讀取手把資料時進行攔截；它的文件針對舊版 32-bit Remote Play，本機 9.5 是 x64 且模組結構不同，不能直接沿用。介入官方程式可能造成當機或接觸程序內資料，必須先研究必要性、安全性和相容性。
 - 另一種研究方向是系統層的實體裝置輸入過濾；[Microsoft HID filter 範例](https://github.com/microsoft/Windows-driver-samples/tree/main/hid/firefly)僅供理解驅動架構，並非現成的鍵盤映射解決方案。任何驅動都有安裝及簽章要求。
 - 目前以[離線的 USB DS4 報告合成實驗](../research/ds4-report/README.md)驗證資料格式，不注入、修改或控制正在運行的 Remote Play，也不存取 PSN 資料。離線格式測試成功不代表官方 Remote Play 會接收合成輸入。
+- 已以[只讀 HID 能力檢查](../research/ds4-report/HidCapsProbe.cs)確認本機實體 USB 手把的最大 input report 為 64 bytes；這不證明實際報告 ID 或 Remote Play 的讀取方式。本機 Remote Play 9.5 x64 已載入 HID.DLL 和 SETUPAPI.dll；靜態依賴檢查未能確定讀手把的函式或可用攔截點。
+- 從磁碟只讀掃描 RemoteplayUI.dll 和 RemotePlayUIWrapper.dll 的受管類型與方法名稱，沒有找到可辨識為手把讀取路徑的方法；這並不排除程式使用原生碼、動態載入或其他名稱。
+- Windows 的 ReadFile 可能採用非同步 I/O；回傳待處理時緩衝區尚未完成，若將來研究攔截，必須正確處理完成、取消與緩衝區生命週期，不能在呼叫返回時假設資料已經就緒。參考 [Microsoft ReadFile](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile)。
 
 ## 參考
 
