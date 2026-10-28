@@ -28,6 +28,14 @@
 - 驗證左搖桿、滑鼠視角、按鈕、扳機、觸控板按下與 PS 鍵；暫停或失焦時必須釋放輸入與游標。
 - 若改用自建串流客戶端，必須明示不再使用 Sony 官方視窗，並實測連線及操作。
 
+## 實體 PS4 手把研究
+
+- 本機的 USB DUALSHOCK 4（VID 054C / PID 05C4）已由 Windows 辨識，使用者確認官方 Remote Play 連上 PS5 後能以實體手把正常操作。
+- 一般應用程式讀取手把的 HID input report；寫入 HID output report 用於手把輸出功能，不能假設它會改變其他程式讀到的按鍵。詳見 Microsoft 的 [讀取 HID 報告](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/obtaining-hid-reports-by-user-mode-applications)及[傳送 HID 報告](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/sending-hid-reports)。
+- [mouseplay 的舊版原始碼](https://github.com/ko1N/mouseplay/blob/master/mouseplay/src/hooks.rs)曾在官方程式讀取手把資料時進行攔截；它的文件針對舊版 32-bit Remote Play，本機 9.5 是 x64 且模組結構不同，不能直接沿用。介入官方程式可能造成當機或接觸程序內資料，必須先研究必要性、安全性和相容性。
+- 另一種研究方向是系統層的實體裝置輸入過濾；[Microsoft HID filter 範例](https://github.com/microsoft/Windows-driver-samples/tree/main/hid/firefly)僅供理解驅動架構，並非現成的鍵盤映射解決方案。任何驅動都有安裝及簽章要求。
+- 目前以[離線的 USB DS4 報告合成實驗](../research/ds4-report/README.md)驗證資料格式，不注入、修改或控制正在運行的 Remote Play，也不存取 PSN 資料。離線格式測試成功不代表官方 Remote Play 會接收合成輸入。
+
 ## 參考
 
 - [Microsoft：Virtual HID Framework](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/virtual-hid-framework--vhf-)
