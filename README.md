@@ -1,18 +1,29 @@
 # PS Remote Play 鍵盤手把（開發中）
 
-> **專案狀態：鍵盤專用測試版，Windows 手把資料驗證通過，官方 Remote Play 9.5 尚未驗收。** 目前目標是鍵盤按下、長按及放開，等同手把輸入；不依賴遊戲原生鍵盤支援。滑鼠暫不實作，維持自製、免費工具依賴與 Sony 官方用戶端。
+> **專案狀態：尚無可用成品。獨立虛擬手把已確認能收到真實鍵盤輸入，但本機官方 Remote Play 9.5 實測沒有控制效果。現改研究實體 USB PS4 手把的輸入中繼。** 目標是鍵盤按下、長按及放開等同手把輸入，不依賴遊戲原生鍵盤支援。滑鼠暫不實作，維持自製、免費工具依賴與 Sony 官方用戶端。
 
-## 目前候選：鍵盤映射與 USB 手把輸出
+## 目前方向：合併實體手把的輸入
+
+實體手把把資料交給 Windows，官方 Remote Play 再讀取它。新方向是在這條通訊路徑中保留真手把的 USB 識別、控制與 feature report 往返，只把鍵盤狀態合併進已確認格式的按鍵報告。這需要實際轉接手把通訊，一般 HID 寫入不能直接變成其他程式讀到的按鍵。
+
+候選採用 usbipd-win 匯出實體裝置、自製本機 USB/IP 中繼和已安裝的 usbip-win2 接收端；仍會重新枚舉 USB 裝置，並非保持原來的 Windows 裝置路徑不變。尚未驗證實體 DS4 經此路徑能被 Sony 接受，也未安裝或綁定新的實體匯出驅動。實體手把通訊不會送到外部服務，不需第三方帳號。
+
+- [實體中繼程式](src/physical-keyboard/README.md)：鍵盤擷取、F8 暫停及實體報告合併；單獨啟動不會接管手把。
+- [USB/IP 中繼與驗證](research/physical-usb-relay/README.md)：限定本機、單一裝置，核對實際 HID 輸入通道後才合併按鍵。
+- [實機測試準備](research/physical-usb-relay/FEASIBILITY.md)：免費簽章驅動、單一實體裝置切換、網路限制及還原步驟；尚未執行。
+
+## 已測試但沒有 PS5 控制效果：獨立 USB 手把
 
 新程式在 [src/keyboard-pad](src/keyboard-pad/README.md)。我們的程式處理鍵盤與按鍵狀態，免費開源 VIIPER 提供 USB 手把模擬，usbip-win2 提供有數位簽章的 Windows 驅動。這條路不需要第三方帳號、不讀取 PSN 資料、不把程式載入 Sony 程序，也不重新安裝 ViGEmBus。
 
-此候選建立另一個 USB 手把，尚未把實體 PS4 手把合併為同一個裝置。它與先前實體手把攔截方案不同，官方 Remote Play 是否選用及接受它仍需實測。
+此候選建立另一個 USB 手把，沒有把實體 PS4 手把合併為同一個裝置。2026-10-28 使用者實測，Windows 可讀到真實鍵盤映射的按下、長按、放開；切回 Sony 後 PS5 選項不動，暫拔實體手把後仍無反應。依使用者指定方向停止擴充此候選，並移除當次建立的虛擬裝置與背景服務。這不能推論所有虛擬手把都不可行，也尚未定位 Sony 拒絕或未採用輸入的原因。
 
 - [鍵盤映射核心](research/native-merge/README.md)：方向、複合按鈕、扳機及放開回中。
 - [按鍵生命週期](research/keyboard-input-tests/README.md)：暫停、失焦、快捷鍵及不完整按鍵事件的處理。
 - [本機傳輸](research/viiper-client-tests/README.md)：斷線、回中、限定只清除自己建立的裝置。
 - [USB/IP 回讀](research/viiper-usb-test/README.md)：實際映射程式送進 VIIPER 後，讀回 64-byte DS4 報告；這不等於 Windows 或 Sony 已驗收。
-- [Windows HID 實測](research/windows-hid-test/README.md)：實際建立 Windows USB DS4，透過 Windows 手把介面讀回按下、長按、放開及移動狀態；20 項檢查通過。尚未代表真實鍵盤擷取或 Sony 操作成功。
+- [Windows HID 實測](research/windows-hid-test/README.md)：實際建立 Windows USB DS4，透過 Windows 手把介面讀回按下、長按、放開及移動狀態；20 項檢查通過。
+- [真實鍵盤觀測](research/windows-hid-observer/README.md)：唯讀觀測既有虛擬裝置，確認真實鍵盤輸入已進入 Windows；使用者同時回報 Sony 無操作效果。
 
 安裝 USBip 會短暫重新連接 USB 裝置，且本次安裝要求稍後重開機。程式不會自行安裝驅動或重開機。建置、映射表及操作方式見 [測試版說明](src/keyboard-pad/README.md)。
 
