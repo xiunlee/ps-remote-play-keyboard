@@ -98,6 +98,12 @@ namespace PSKeyboard
             Check(SupportLinks.IsAllowedLaunchUrl(feedback, version) &&
                 !SupportLinks.IsAllowedLaunchUrl(feedback + "&cc=another@example.com", version), "Only the exact feedback destination can launch.");
             Reject(delegate { SupportLinks.FeedbackUrl(version + "\r\nBcc:another@example.com"); });
+            foreach(string compatibleVersion in new string[] { "0.1.0", "0.1.1", "0.1.9", "0.2.0", "65534.65534.9", "0.1.0-alpha.11", "0.1.0-alpha.12" })
+                Check(Uri.UnescapeDataString(SupportLinks.FeedbackUrl(compatibleVersion)).Contains(compatibleVersion),
+                    "Feedback supports the release version and preserved public alpha versions.");
+            foreach(string invalidVersion in new string[] { "v0.1.0", "0.1.0.0", "0.1.10", "65535.0.0", "0.65535.0", "00.1.0", "0.1.0-alpha.10",
+                "0.1.0-alpha.65535", "0.1.0-beta.1", "0.1.0?cc=another@example.com", "0.1.0\n" })
+                Reject(delegate { SupportLinks.FeedbackUrl(invalidVersion); });
             Check(SupportLinks.IsAllowedSponsorUrl("https://www.paypal.com/ncp/payment/AAAAAAAAAAAAA"), "The precise PayPal HTTPS host, payment path and token format are supported.");
             foreach (string invalid in new string[] { null, "", "http://www.paypal.com/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com.evil.example/ncp/payment/HAW9YBJXNEMFW",
                 "https://user@www.paypal.com/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com:8443/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com:443/ncp/payment/HAW9YBJXNEMFW",

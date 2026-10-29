@@ -50,8 +50,8 @@ namespace PSKeyboard
                         Check(!String.IsNullOrEmpty(String.Format(CultureInfo.InvariantCulture, value, "sample-version", "sample-address", "sample-detail")),
                             "Resource format is valid: " + language + "/" + key);
                     }
-                    string feedback = PreviewText.F("FeedbackSubjectFmt", "0.1.0-alpha.12");
-                    Check(feedback.Contains("0.1.0-alpha.12") && feedback.Contains("上班不要玩"), "Feedback preserves the release identity: " + language);
+                    string feedback = PreviewText.F("FeedbackSubjectFmt", BuildInfo.Version);
+                    Check(feedback.Contains(BuildInfo.Version) && feedback.Contains("上班不要玩"), "Feedback preserves the release identity: " + language);
                     Check(PreviewText.T("SponsorButton").Contains("US$1"), "Donation currency and amount are unchanged: " + language);
                     Check(PreviewText.HasTranslation(language, "GameSuitability") && PreviewText.T("GameSuitability").Contains("2D") &&
                         PreviewText.T("GameSuitability").Contains("JRPG") && PreviewText.T("GameSuitability").Contains("3D"),

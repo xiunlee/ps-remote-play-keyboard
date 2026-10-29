@@ -10,13 +10,17 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 ## Download and status
 
-**0.1.0-alpha.11 is available as a free public alpha, not a stable release.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0-alpha.11/PSKeyboard-0.1.0-alpha.11-windows-x64.zip), or visit the [alpha.11 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11) for the corresponding source and SHA-256 checksums. All four public assets were downloaded and their hashes verified. User acceptance testing of this build on a real PS5 setup is still pending.
+**0.1.0, the first regular release, is being prepared and has not been published yet.** Future public version names will use `0.1.0` without an alpha suffix; existing test-release tags and assets remain available. The naming change does not establish hardware acceptance, long-term reliability or installation on a new PC. The current download is still alpha.12 below.
 
-The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/ALPHA11-TRIAL.md). A Mac version has not been developed; the [Mac handoff](docs/MAC-HANDOFF.md) describes the next research stage. Both records are in Traditional Chinese.
+**0.1.0-alpha.12 is available as a free public alpha, not a stable release.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0-alpha.12/PSKeyboard-0.1.0-alpha.12-windows-x64.zip), or visit the [alpha.12 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.12) for the corresponding source and SHA-256 checksums. All four public assets were downloaded anonymously and their hashes verified. Detailed user acceptance testing of this build on a real PS5 setup is still pending.
+
+The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/ALPHA12-TRIAL.md). A Mac version has not been developed; the [Mac handoff](docs/MAC-HANDOFF.md) describes the next research stage. Both records are in Traditional Chinese.
 
 For alpha.9, a user [reported successful PS5 control through the official Remote Play app](research/dualsense-preview/ALPHA9-TRIAL.md) with all four DualSense configurations. The current version uses their chosen second configuration: **standard DualSense, gamepad only**. Alpha.10 integrated key bindings and per-key repeat and was delivered locally; alpha.11 adds the free/open-source notice, feedback and public packaging. These results do not establish compatibility with every PC, game or later build.
 
-**Interface language:** the published alpha.11 main window is primarily in Traditional Chinese; its binding editor supports nine languages. **Alpha.12 is being prepared and has not been released.** It adds the main window, connection states, errors, sponsorship text and feedback subjects in English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. Translation and offline layout checks do not replace native-speaker review or testing on a real PS5 setup. The current download remains alpha.11; its assets will not be overwritten. Chinese button labels below refer to that published version.
+**Interface language:** alpha.12 supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese throughout the main window, connection states, errors, sponsorship text, feedback subjects and binding editor. Language follows the Windows UI language, with English as the fallback. All 18 offline images of the main window and editor were visually reviewed. Native-speaker review, real high-DPI behavior, multi-monitor use and this build's PS5 acceptance testing remain pending.
+
+**User game report:** On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The report did not identify the tool's build, so it does not establish alpha.12 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
 
 ## Requirements
 
@@ -30,10 +34,10 @@ No physical controller is needed for this mode, but **it is not driver-free or a
 
 1. Download and extract the entire application package. Keep its EXE, DLL, backend and accompanying files together; do not copy out just one executable.
 2. Connect Sony's official PS Remote Play app to your PS5 and leave it running. Exit any other version of this keyboard tool normally; two versions cannot share the F8 hotkey.
-3. Open `PSKeyboard-DualSensePreview.exe` and click **「連接手把」 — Connect controller**. Launching the tool does not attach a controller automatically, and keyboard control starts paused.
+3. Open `PSKeyboard-DualSensePreview.exe` and click **Connect controller**. Launching the tool does not attach a controller automatically, and keyboard control starts paused.
 4. Switch to the official Remote Play window and press **F8** to enable keyboard control. Press F8 again to pause. Game input and repeat are sent only while the official Remote Play window is in the foreground.
-5. To edit bindings or repeat, click **「按鍵與連點設定」 — Key bindings and repeat**. Changes apply only after a successful **Save**. Cancel keeps your previous settings. Editing leaves control paused; return to Remote Play and press F8 when ready.
-6. When finished, click **「中斷手把」 — Disconnect controller**, or close the tool normally. If it cannot confirm cleanup, it blocks another attachment. Keep the error message and report it instead of repeatedly attaching devices or restarting Sony's app.
+5. To edit bindings or repeat, click **Keys and auto-repeat**. Changes apply only after a successful **Save**. Cancel keeps your previous settings. Editing leaves control paused; return to Remote Play and press F8 when ready.
+6. When finished, click **Disconnect controller**, or close the tool normally. If it cannot confirm cleanup, it blocks another attachment. Keep the error message and report it instead of repeatedly attaching devices or restarting Sony's app.
 
 ## Bindings, repeat and saved settings
 
@@ -71,9 +75,9 @@ Long sessions, reboots, repeated reconnections, installation on a second PC and 
 
 ## Optional support and feedback
 
-If you find the app useful, you can [contribute US$1 through PayPal to support our three cats](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) and help buy them canned food. Contributions are entirely optional, unlock no features and do not create a subscription. Clicking **「贊助貓咪 US$1」 — Support our cats** opens your browser; PayPal handles payment, and this app does not receive or store payment details.
+If you find the app useful, you can [contribute US$1 through PayPal to support our three cats](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) and help buy them canned food. Contributions are entirely optional, unlock no features and do not create a subscription. Clicking **Treat the cats · US$1** opens your browser; PayPal handles payment, and this app does not receive or store payment details.
 
-[Send feedback to xiun1019@gmail.com](mailto:xiun1019@gmail.com). Clicking the app's **「意見回饋」 — Feedback** button opens your mail application with only the recipient and a version-specific subject filled in. It does not send the message or attach settings, diagnostics or personal data automatically.
+[Send feedback to xiun1019@gmail.com](mailto:xiun1019@gmail.com). Clicking the app's **Send feedback** button opens your mail application with only the recipient and a version-specific subject filled in. It does not send the message or attach settings, diagnostics or personal data automatically.
 
 ## Source and license
 

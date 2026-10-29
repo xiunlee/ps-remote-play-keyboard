@@ -6,7 +6,7 @@ Use your keyboard to control your PS5 through **Sony's official PS Remote Play f
 
 **Designed for 2D games, especially JRPGs that rely on menus and directional input.** There is no mouse aiming or right-stick direction mapping, so this version is not suitable for 3D games that need flexible camera movement or fine analog control. Suitability depends on each game's controls; support is not guaranteed for every JRPG.
 
-**Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.0-alpha.12**, an alpha test version, not a stable release. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
+**Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.0, the first regular release**, without an alpha suffix. The simpler version name does not establish complete hardware acceptance or long-term reliability; see the testing scope below. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
 
 The runtime binaries are unsigned. SHA-256 checksums establish file identity, not digital signing or compatibility with your setup.
 
@@ -90,7 +90,9 @@ Changes are written and applied only after **Save changes succeeds**. Canceling 
 
 ## What has been tested
 
-All four alpha.9 candidates received user reports of successful PS5 operation through official Remote Play. This release uses the standard DualSense gamepad-only mode. **Alpha.12 has not yet received user acceptance testing on a real PS5 setup.** Windows detecting a device, a green light or passing offline tests does not establish successful gameplay. Long sessions, different reconnection sequences, reboots and installation on another PC still need more testing.
+All four alpha.9 candidates received user reports of successful PS5 operation through official Remote Play. This release uses the standard DualSense gamepad-only mode. **Detailed user acceptance testing of 0.1.0 on a real PS5 setup remains pending.** Windows detecting a device, a green light or passing offline tests does not establish successful gameplay. Long sessions, different reconnection sequences, reboots and installation on another PC still need more testing.
+
+On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The tool's build was not specified, so this report does not establish 0.1.0 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
 
 There is no 30-minute session limit. Audio, haptics, adaptive triggers, mouse input, recording/replay and macOS are not included as completed features in this version. See the [support scope](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/docs/PRODUCT-SCOPE.md) and [alpha.9 operation record](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/research/dualsense-preview/ALPHA9-TRIAL.md) for details; these records are currently in Traditional Chinese.
 

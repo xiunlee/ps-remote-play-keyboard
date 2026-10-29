@@ -10,13 +10,17 @@
 
 ## 下載與目前狀態
 
-**0.1.0-alpha.11 已公開發布為免費測試版，不是穩定版。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0-alpha.11/PSKeyboard-0.1.0-alpha.11-windows-x64.zip)，或前往 [alpha.11 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11)取得完整對應原始碼與 SHA-256 清單。四個公開附件下載後均已核對雜湊；該版使用者實機驗收仍待完成。
+**0.1.0 首個正式發行版正在準備，尚未發布。** 依使用者要求，接下來對外版本只顯示 `0.1.0`，不再附加 alpha 序號；既有測試版的標籤與附件保留。版本名稱簡化不代表實機、長時間或新電腦安裝已完成驗收，目前下載仍為下列 alpha.12。
 
-三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/ALPHA11-TRIAL.md)。Mac 版尚未開發，後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
+**0.1.0-alpha.12 已公開發布為免費測試版，不是穩定版。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0-alpha.12/PSKeyboard-0.1.0-alpha.12-windows-x64.zip)，或前往 [alpha.12 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.12)取得完整對應原始碼與 SHA-256 清單。四個公開附件匿名下載後均已核對雜湊；本版逐項實機驗收仍待完成。
+
+三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/ALPHA12-TRIAL.md)。Mac 版尚未開發，後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
 
 alpha.9 的四種 DualSense 方案已有使用者透過官方 Remote Play 操作 PS5 的[成功回報](research/dualsense-preview/ALPHA9-TRIAL.md)。目前固定其中第二種「一般 DualSense／純手把」模式；alpha.10 已完成設定與連點整合、本機交付，alpha.11 接續加入免費開源說明、回饋與公開封裝。上述結果不代表所有電腦、遊戲或新版本均已驗收。
 
-**介面語言：** 已發布的 alpha.11 主畫面以繁體中文為主，按鍵設定頁已有九語。**alpha.12 九語介面版正在準備，尚未發布**：將主畫面、連線狀態、錯誤提示、贊助及回饋主旨補齊繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇、未支援語言回退英文。翻譯與離線排版不等於母語校閱或實機驗收；目前下載仍是 alpha.11，既有附件不覆寫。
+**介面語言：** alpha.12 的主畫面、連線狀態、錯誤提示、贊助、回饋主旨及按鍵設定頁支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。九語主畫面及設定頁共 18 張離線圖片已逐張檢視；母語校閱、實際高 DPI、多螢幕及本版實機仍待驗。
+
+**使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 alpha.12 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
 
 ## 使用需求
 
@@ -28,7 +32,7 @@ alpha.9 的四種 DualSense 方案已有使用者透過官方 Remote Play 操作
 
 ## 開始使用
 
-1. 發布後下載執行包並完整解壓縮，保留 EXE、DLL、後端與其他隨附檔案，不要只取出單一 EXE。
+1. 下載執行包並完整解壓縮，保留 EXE、DLL、後端與其他隨附檔案，不要只取出單一 EXE。
 2. 用官方 PS Remote Play 連上 PS5，保持該程式開啟；正常退出其他版本的「上班不要玩」。兩版不能同時接管 F8。
 3. 開啟 `PSKeyboard-DualSensePreview.exe`，按「連接手把」。啟動不自動接入，鍵盤控制預設暫停。
 4. 切回官方 Remote Play，按 **F8** 啟用鍵盤；再按 F8 暫停。只有官方 Remote Play 在前景時，遊戲按鍵與連點才會送出。

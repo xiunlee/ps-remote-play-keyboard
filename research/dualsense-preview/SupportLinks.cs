@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace PSKeyboard
@@ -14,9 +15,22 @@ namespace PSKeyboard
 
         internal static string FeedbackUrl(string version)
         {
-            if (version == null || version.Length > 40 || !Regex.IsMatch(version, @"\A[0-9]+\.[0-9]+\.[0-9]+-alpha\.[0-9]+\z"))
+            if (!IsSupportedVersion(version))
                 throw new ArgumentException("Expected a product version.", "version");
             return "mailto:" + FeedbackAddress + "?subject=" + Uri.EscapeDataString(PreviewText.F("FeedbackSubjectFmt", version));
+        }
+
+        private static bool IsSupportedVersion(string version)
+        {
+            if (version == null || version.Length > 40) return false;
+            Match release = Regex.Match(version, @"\A(0|[1-9][0-9]{0,4})\.(0|[1-9][0-9]{0,4})\.([0-9])\z");
+            if (release.Success)
+                return Int32.Parse(release.Groups[1].Value, CultureInfo.InvariantCulture) <= 65534 &&
+                    Int32.Parse(release.Groups[2].Value, CultureInfo.InvariantCulture) <= 65534;
+            Match alpha = Regex.Match(version, @"\A0\.1\.0-alpha\.([0-9]+)\z");
+            int revision;
+            return alpha.Success && Int32.TryParse(alpha.Groups[1].Value, NumberStyles.None, CultureInfo.InvariantCulture, out revision) &&
+                revision >= 11 && revision <= 65534;
         }
 
         internal static bool IsAllowedSponsorUrl(string value)

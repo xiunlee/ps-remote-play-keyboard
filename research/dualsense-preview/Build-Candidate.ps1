@@ -11,8 +11,11 @@ $repo=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
 $out=[IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $out) { throw 'Candidate output must be a new directory; old builds are immutable.' }
 $version=[IO.File]::ReadAllText((Join-Path $repo 'VERSION')).Trim()
-if ($version -cnotmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -or [int]$Matches[1] -lt 11 -or [int]$Matches[1] -gt 65534) { throw 'Expected a new public alpha version, starting with alpha.11.' }
-$fileVersion='0.1.0.'+$Matches[1]
+if ($version -cmatch '\A(0|[1-9][0-9]{0,4})\.(0|[1-9][0-9]{0,4})\.([0-9])\z' -and [int]$Matches[1] -le 65534 -and [int]$Matches[2] -le 65534) {
+    $fileVersion=$Matches[1]+'.'+$Matches[2]+'.'+$Matches[3]+'.0';$assemblyVersion=$fileVersion;$channel='public-release'
+} elseif ($version -cmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -and [int]$Matches[1] -ge 11 -and [int]$Matches[1] -le 65534) {
+    $fileVersion='0.1.0.'+$Matches[1];$assemblyVersion='0.1.0.0';$channel='public-alpha'
+} else { throw 'Expected major.minor.patch (major/minor 0-65534, patch 0-9), or historical 0.1.0-alpha.11 through alpha.65534.' }
 $commit=(& git -C $repo rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $commit -cnotmatch '\A[0-9a-f]{40}\z') { throw 'Cannot identify source commit.' }
 $dirty=@(& git -C $repo status --porcelain --untracked-files=normal).Count -ne 0
@@ -72,7 +75,7 @@ $generated=Join-Path $out 'BuildInfo.g.cs'
 using System.Reflection;
 [assembly: AssemblyTitle("上班不要玩 — DualSense 鍵盤控制")]
 [assembly: AssemblyProduct("上班不要玩")]
-[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyVersion("$assemblyVersion")]
 [assembly: AssemblyFileVersion("$fileVersion")]
 [assembly: AssemblyInformationalVersion("$infoVersion")]
 namespace PSKeyboard { internal static class BuildInfo {
@@ -153,7 +156,7 @@ $runtimeNames=@('PSKeyboard-DualSensePreview.exe','DualSenseCandidateServer.exe'
 $manifest=[ordered]@{
     schemaVersion=1;product='上班不要玩';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
     informationalVersion=$infoVersion;sourceCommit=$commit;workingTreeDirty=$dirty;builtUtc=$builtUtc;
-    entryPoint='PSKeyboard-DualSensePreview.exe';channel='public-alpha';priceModel='free';license='GPL-3.0-only';driversBundled=$false;
+    entryPoint='PSKeyboard-DualSensePreview.exe';channel=$channel;priceModel='free';license='GPL-3.0-only';driversBundled=$false;
     sonyOperationVerified=$false;commercialReady=$false;profileReadOnly=$false;profileSaveRequiresUserAction=$true;defaultConnected=$false;defaultEnabled=$false;
     sonyBaselineEvidence=[ordered]@{version='0.1.0-alpha.9';date='2026-10-29';source='user-report';persona='dualsensegamepadv5';operationPassed=$true};
     sessionTimeLimitSeconds=0;

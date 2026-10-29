@@ -29,7 +29,12 @@ if((Get-FileHash -LiteralPath $upstreamZip).Hash -cne $backendRecord.upstreamArc
 if(@(& git -C $repo status --porcelain --untracked-files=normal).Count -ne 0){throw 'Commit release sources before packaging.'}
 if((& git -C $repo rev-parse HEAD).Trim() -cne $manifest.sourceCommit){throw 'Package from the exact clean release checkout.'}
 $version=$manifest.version
-if($version -cnotmatch '\A0\.1\.0-alpha\.[0-9]+\z'){throw 'Unexpected release version.'}
+if($version -cmatch '\A(0|[1-9][0-9]{0,4})\.(0|[1-9][0-9]{0,4})\.([0-9])\z' -and [int]$Matches[1] -le 65534 -and [int]$Matches[2] -le 65534) {
+    $releaseChannel='public-release'
+} elseif($version -cmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -and [int]$Matches[1] -ge 11 -and [int]$Matches[1] -le 65534) {
+    $releaseChannel='public-alpha'
+} else { throw 'Unexpected release version.' }
+if($manifest.channel -cne $releaseChannel){throw 'Release channel does not match the version.'}
 $prefix='PSKeyboard-'+$version
 New-Item -ItemType Directory -Path $out | Out-Null
 $utf8=[Text.UTF8Encoding]::new($false)
@@ -108,7 +113,7 @@ $sourceChecksums=@(Get-ChildItem -LiteralPath $source -Recurse -File | Sort-Obje
 $sourceZip=Join-Path $out ($prefix+'-source.zip')
 Compress-Archive -LiteralPath $source -DestinationPath $sourceZip
 $release=[ordered]@{
-    version=$version;sourceCommit=$manifest.sourceCommit;channel='public-alpha';price=0;license='GPL-3.0-only';
+    version=$version;sourceCommit=$manifest.sourceCommit;channel=$releaseChannel;price=0;license='GPL-3.0-only';
     author='xiunlee';driversBundled=$false;sonyOperationVerified=$false;
     files=@($runtimeZip,$sourceZip | ForEach-Object{[ordered]@{name=(Split-Path -Leaf $_);sha256=(Get-FileHash -LiteralPath $_).Hash;bytes=(Get-Item -LiteralPath $_).Length}})
 }

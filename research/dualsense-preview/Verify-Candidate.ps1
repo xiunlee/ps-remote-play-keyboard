@@ -3,11 +3,16 @@ param([Parameter(Mandatory=$true)][string]$BuildDirectory,[switch]$RequireClean)
 $ErrorActionPreference='Stop'
 $root=(Resolve-Path -LiteralPath $BuildDirectory).Path
 $manifest=Get-Content -LiteralPath (Join-Path $root 'BUILD.json') -Raw | ConvertFrom-Json
+if($manifest.version -cmatch '\A(0|[1-9][0-9]{0,4})\.(0|[1-9][0-9]{0,4})\.([0-9])\z' -and [int]$Matches[1] -le 65534 -and [int]$Matches[2] -le 65534) {
+    $expectedChannel='public-release';$expectedFileVersion=$Matches[1]+'.'+$Matches[2]+'.'+$Matches[3]+'.0';$requireLocalization=$true
+} elseif($manifest.version -cmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -and [int]$Matches[1] -ge 11 -and [int]$Matches[1] -le 65534) {
+    $expectedChannel='public-alpha';$expectedFileVersion='0.1.0.'+$Matches[1];$requireLocalization=[int]$Matches[1] -ge 12
+} else { throw 'Unexpected public candidate version.' }
 if($manifest.schemaVersion -ne 1 -or $manifest.variant -cne 'dualsense-candidate' -or
     $manifest.entryPoint -cne 'PSKeyboard-DualSensePreview.exe' -or $manifest.driverVersion -cne '0.9.8.1' -or
-    $manifest.sourceCommit -cnotmatch '\A[0-9a-f]{40}\z' -or $manifest.channel -cne 'public-alpha' -or
+    $manifest.sourceCommit -cnotmatch '\A[0-9a-f]{40}\z' -or $manifest.channel -cne $expectedChannel -or
     $manifest.priceModel -cne 'free' -or $manifest.license -cne 'GPL-3.0-only' -or
-    $manifest.version -cnotmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -or [int]$Matches[1] -lt 11) { throw 'Unexpected public candidate identity.' }
+    $manifest.fileVersion -cne $expectedFileVersion) { throw 'Unexpected public candidate identity.' }
 if($RequireClean -and ($manifest.workingTreeDirty -ne $false -or $manifest.testsRun -ne $true)) { throw 'Delivery requires clean sources and completed offline tests.' }
 foreach($name in @('sonyOperationVerified','commercialReady','driversBundled','defaultConnected','defaultEnabled')) {
     if($manifest.$name -isnot [bool] -or $manifest.$name -ne $false) { throw ('Invalid candidate claim: '+$name) }
@@ -93,7 +98,7 @@ if($manifest.testsRun) {
     if(@($native.testResults).Count -ne 2 -or $nativeTest.Count -ne 1 -or $interopTest.Count -ne 1 -or
         $nativeTest[0].passed -ne $true -or $nativeTest[0].checks -le 0 -or $interopTest[0].passed -ne $true) { throw 'Native offline tests are incomplete.' }
 }
-if([int]($manifest.version.Split('.')[-1]) -ge 12) {
+if($requireLocalization) {
     if((@($manifest.uiLanguages) -join ',') -cne 'en,zh-Hant,zh-Hans,ja,ko,de,fr,es,pt-BR' -or
         $manifest.uiLanguageSelection -cne 'windows-ui-culture' -or $manifest.uiLanguageFallback -cne 'en') { throw 'Unexpected UI language coverage.' }
     foreach($sourceName in @('research/dualsense-preview/PreviewText.cs','research/dualsense-preview/PreviewTextTests.cs','src/physical-keyboard/UiTextTests.cs')) {
