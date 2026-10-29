@@ -7,7 +7,7 @@ using PSKeyboard;
 // Pure profile and physical-key lifecycle tests. No hooks, devices or user settings.
 static class BindingProfileTests
 {
-    const int K = 0x4B, W = 0x57, Space = 0x20;
+    const int CrossKey = 0x28, W = 0x57, CustomKey = 0x4B;
     const uint Cross = 1u << 8, Circle = 1u << 9;
     static int checks;
 
@@ -74,12 +74,12 @@ static class BindingProfileTests
             Check(original.RapidFireModeForAction(i) == RapidFireMode.Off &&
                 original.IntervalMillisecondsForAction(i) == 100, "all actions default to ordinary input: " + i);
         BindingProfile custom = original.WithRapidFire(8, RapidFireMode.Hold, 20)
-            .WithRapidFire(9, RapidFireMode.Toggle, 5000).WithBinding(8, Space);
+            .WithRapidFire(9, RapidFireMode.Toggle, 5000).WithBinding(8, CustomKey);
         Check(custom.RapidFireModeForAction(8) == RapidFireMode.Hold && custom.IntervalMillisecondsForAction(8) == 20 &&
-            custom.KeyForAction(8) == Space, "remapping preserves per-action rapid-fire settings");
+            custom.KeyForAction(8) == CustomKey, "remapping preserves per-action rapid-fire settings");
         Check(custom.RapidFireModeForAction(9) == RapidFireMode.Toggle && custom.IntervalMillisecondsForAction(9) == 5000,
             "independent action stores its own mode and interval");
-        Check(original.RapidFireModeForAction(8) == RapidFireMode.Off && original.KeyForAction(8) == K,
+        Check(original.RapidFireModeForAction(8) == RapidFireMode.Off && original.KeyForAction(8) == CrossKey,
             "rapid-fire edits preserve original immutable settings and bindings");
         Check(custom.WithBinding(9, 0).RapidFireModeForAction(9) == RapidFireMode.Toggle,
             "unassignment preserves a user's rapid-fire setting for later reassignment");
@@ -96,27 +96,36 @@ static class BindingProfileTests
     static void DefaultAndValidation()
     {
         BindingProfile profile = BindingProfile.Default();
-        bool sameMapping = true;
-        for (int i = 0; i < 256; ++i)
-            if (profile.ActionForKey(i) != KeyboardMapping.ActionForKey(i)) sameMapping = false;
-        Check(sameMapping, "default profile preserves all original native action bits");
+        int[] expected = {
+            0x57, 0x53, 0x41, 0x44, 0x24, 0x23, 0x2D, 0x21,
+            0x28, 0x27, 0x25, 0x26, 0x45, 0x2E, 0x51, 0x22,
+            0x09, 0x0D, 0x46, 0x20, 0x70, 0x52
+        };
+        for (int i = 0; i < expected.Length; ++i)
+            Check(profile.KeyForAction(i) == expected[i], "ergonomic default key for native action " + i);
+        Check(profile.ActionForKey(0x26) == (1u << 11) && profile.ActionForKey(0x25) == (1u << 10) &&
+            profile.ActionForKey(0x28) == (1u << 8) && profile.ActionForKey(0x27) == (1u << 9),
+            "arrow diamond follows Triangle, Square, Cross and Circle positions");
+        Check(profile.ActionForKey(0x45) == (1u << 12) && profile.ActionForKey(0x51) == (1u << 14) &&
+            profile.ActionForKey(0x2E) == (1u << 13) && profile.ActionForKey(0x22) == (1u << 15),
+            "E and Q operate left shoulders; Delete and PageDown operate right shoulders");
         Check(profile.ActionForKey(-1) == 0 && profile.ActionForKey(256) == 0 && profile.ActionForKey(0) == 0,
             "unassigned and out-of-range keys have no action");
         for (int i = 0; i < BindingProfile.ActionCount; ++i)
             Check(profile.ActionForKey(profile.KeyForAction(i)) == (1u << i), "stable native action index " + i);
 
-        BindingProfile changed = profile.WithBinding(8, Space);
-        Check(changed.ActionForKey(Space) == Cross && changed.ActionForKey(K) == 0,
+        BindingProfile changed = profile.WithBinding(8, CustomKey);
+        Check(changed.ActionForKey(CustomKey) == Cross && changed.ActionForKey(CrossKey) == 0,
             "remapping removes the previous key and activates the replacement");
-        Check(profile.ActionForKey(K) == Cross && profile.ActionForKey(Space) == 0,
+        Check(profile.ActionForKey(CrossKey) == Cross && profile.ActionForKey(CustomKey) == 0,
             "WithBinding preserves the original immutable profile");
-        Check(Same(changed, changed.WithBinding(8, Space)), "assigning the existing key is valid");
+        Check(Same(changed, changed.WithBinding(8, CustomKey)), "assigning the existing key is valid");
         BindingProfile cleared = changed.WithBinding(8, 0).WithBinding(9, 0);
-        Check(cleared.KeyForAction(8) == 0 && cleared.KeyForAction(9) == 0 && cleared.ActionForKey(Space) == 0,
+        Check(cleared.KeyForAction(8) == 0 && cleared.KeyForAction(9) == 0 && cleared.ActionForKey(CustomKey) == 0,
             "multiple actions may be unassigned");
         Check(Same(BindingProfile.Default(), profile), "a fresh default resets all edits");
         Throws<ArgumentException>(delegate { profile.WithBinding(8, W); }, "duplicate key rejected");
-        Throws<ArgumentOutOfRangeException>(delegate { profile.WithBinding(-1, Space); }, "negative action rejected");
+        Throws<ArgumentOutOfRangeException>(delegate { profile.WithBinding(-1, CustomKey); }, "negative action rejected");
         Throws<ArgumentOutOfRangeException>(delegate { profile.KeyForAction(22); }, "out-of-range action rejected");
         Throws<ArgumentNullException>(delegate { new KeyboardInputState(null); }, "null resolver rejected");
 
@@ -138,47 +147,47 @@ static class BindingProfileTests
     {
         BindingProfile profile = BindingProfile.Default();
         KeyboardInputState state = new KeyboardInputState(delegate(int key) { return profile.ActionForKey(key); });
-        Check(Down(state, K) && state.Held == Cross, "original binding captures Cross");
+        Check(Down(state, CrossKey) && state.Held == Cross, "original binding captures Cross");
         state.Reset();
         profile = profile.WithBinding(8, 0);
-        Check(Down(state, K) && state.Held == 0, "unassigned captured key repeat remains swallowed and disarmed");
-        Check(Up(state, K) && state.Held == 0, "unassigned captured key release is still swallowed");
-        Check(!Down(state, K) && !Up(state, K), "fresh unassigned press passes to Windows");
+        Check(Down(state, CrossKey) && state.Held == 0, "unassigned captured key repeat remains swallowed and disarmed");
+        Check(Up(state, CrossKey) && state.Held == 0, "unassigned captured key release is still swallowed");
+        Check(!Down(state, CrossKey) && !Up(state, CrossKey), "fresh unassigned press passes to Windows");
 
         profile = BindingProfile.Default();
-        Check(Down(state, K) && state.Held == Cross, "original binding can be restored");
+        Check(Down(state, CrossKey) && state.Held == Cross, "original binding can be restored");
         state.Reset();
-        profile = profile.WithBinding(8, Space).WithBinding(9, K);
-        Check(Down(state, K) && state.Held == 0, "changing a held key to another action cannot re-arm it");
-        Check(!state.Process(K, false, true, true, true), "injected release is ignored during remap");
-        Check(Down(state, K) && state.Held == 0, "injected release cannot permit a repeat to re-arm");
-        Check(Up(state, K), "real original release remains paired");
-        Check(Down(state, K) && state.Held == Circle, "fresh press uses changed Circle binding");
-        Check(Down(state, Space) && state.Held == (Cross | Circle), "custom bindings combine independent held actions");
-        Check(Up(state, K) && state.Held == Cross, "releasing one custom binding preserves another");
-        Check(Up(state, Space) && state.Held == 0, "custom inputs release fully");
+        profile = profile.WithBinding(8, CustomKey).WithBinding(9, CrossKey);
+        Check(Down(state, CrossKey) && state.Held == 0, "changing a held key to another action cannot re-arm it");
+        Check(!state.Process(CrossKey, false, true, true, true), "injected release is ignored during remap");
+        Check(Down(state, CrossKey) && state.Held == 0, "injected release cannot permit a repeat to re-arm");
+        Check(Up(state, CrossKey), "real original release remains paired");
+        Check(Down(state, CrossKey) && state.Held == Circle, "fresh press uses changed Circle binding");
+        Check(Down(state, CustomKey) && state.Held == (Cross | Circle), "custom bindings combine independent held actions");
+        Check(Up(state, CrossKey) && state.Held == Cross, "releasing one custom binding preserves another");
+        Check(Up(state, CustomKey) && state.Held == 0, "custom inputs release fully");
     }
 
     static void MappingPreviouslyUnmappedKey()
     {
         BindingProfile profile = BindingProfile.Default();
         KeyboardInputState state = new KeyboardInputState(delegate(int key) { return profile.ActionForKey(key); });
-        Check(!Down(state, Space), "initial unmapped down passes to Windows");
+        Check(!Down(state, CustomKey), "initial unmapped down passes to Windows");
         state.Reset();
-        profile = profile.WithBinding(8, Space);
-        Check(!Down(state, Space) && state.Held == 0, "unmapped held key cannot capture after it becomes mapped");
-        Check(!state.Process(Space, false, true, true, true), "injected up cannot end an unmapped physical press");
-        Check(!Down(state, Space) && state.Held == 0, "repeat after injected up remains passed");
-        Check(!Up(state, Space), "release of original passed down remains passed");
-        Check(Down(state, Space) && state.Held == Cross, "new physical press uses the custom binding");
-        Check(Up(state, Space) && state.Held == 0, "new captured press has paired swallowed up");
+        profile = profile.WithBinding(8, CustomKey);
+        Check(!Down(state, CustomKey) && state.Held == 0, "unmapped held key cannot capture after it becomes mapped");
+        Check(!state.Process(CustomKey, false, true, true, true), "injected up cannot end an unmapped physical press");
+        Check(!Down(state, CustomKey) && state.Held == 0, "repeat after injected up remains passed");
+        Check(!Up(state, CustomKey), "release of original passed down remains passed");
+        Check(Down(state, CustomKey) && state.Held == Cross, "new physical press uses the custom binding");
+        Check(Up(state, CustomKey) && state.Held == 0, "new captured press has paired swallowed up");
 
         profile = BindingProfile.Default();
-        Check(!state.Process(Space, true, false, false, false), "startup snapshot records unmapped held keys");
-        profile = profile.WithBinding(8, Space);
-        Check(!Down(state, Space) && state.Held == 0, "snapshot prevents capture until initially held key is released");
-        Check(!Up(state, Space), "snapshot release passes to Windows");
-        Check(Down(state, Space) && Up(state, Space), "fresh post-snapshot custom press works");
+        Check(!state.Process(CustomKey, true, false, false, false), "startup snapshot records unmapped held keys");
+        profile = profile.WithBinding(8, CustomKey);
+        Check(!Down(state, CustomKey) && state.Held == 0, "snapshot prevents capture until initially held key is released");
+        Check(!Up(state, CustomKey), "snapshot release passes to Windows");
+        Check(Down(state, CustomKey) && Up(state, CustomKey), "fresh post-snapshot custom press works");
     }
 
     static void Persistence()
@@ -193,14 +202,31 @@ static class BindingProfileTests
             Check(Same(original, BindingProfile.Load(Path.Combine(root, "missing", "profile.json"))),
                 "missing directory loads defaults without creating it");
             Check(!Directory.Exists(Path.Combine(root, "missing")), "loading missing profile makes no filesystem changes");
-            BindingProfile custom = original.WithBinding(8, Space).WithBinding(21, 0).WithBinding(18, 0x70)
+            int[] oldDefaults = {
+                0x57, 0x53, 0x41, 0x44, 0x26, 0x28, 0x25, 0x27,
+                0x4B, 0x4C, 0x4A, 0x49, 0x51, 0x45, 0x55, 0x4F,
+                0x08, 0x0D, 0x31, 0x32, 0x50, 0x54
+            };
+            string oldJson = Json(1, oldDefaults);
+            File.WriteAllText(path, oldJson);
+            BindingProfile oldProfile = BindingProfile.Load(path);
+            for (int i = 0; i < oldDefaults.Length; ++i)
+                Check(oldProfile.KeyForAction(i) == oldDefaults[i] && oldProfile.RapidFireModeForAction(i) == RapidFireMode.Off,
+                    "loading existing schema 1 preserves old layout without applying new defaults: " + i);
+            Check(File.ReadAllText(path) == oldJson, "loading legacy layout never rewrites the user's saved profile");
+            BindingProfile oldWithRepeat = oldProfile.WithRapidFire(8, RapidFireMode.Toggle, 175).WithBinding(21, 0x56);
+            oldWithRepeat.Save(path);
+            string oldSchema2 = File.ReadAllText(path);
+            Check(Same(oldWithRepeat, BindingProfile.Load(path)), "schema 2 retains old keys, custom binding and repeat settings");
+            Check(File.ReadAllText(path) == oldSchema2, "loading existing schema 2 never rewrites it for new defaults");
+            BindingProfile custom = original.WithBinding(8, CustomKey).WithBinding(21, 0).WithBinding(18, 0x71)
                 .WithRapidFire(8, RapidFireMode.Hold, 20).WithRapidFire(9, RapidFireMode.Toggle, 5000)
                 .WithRapidFire(21, RapidFireMode.Toggle, 301);
             custom.Save(path);
             Check(Same(custom, BindingProfile.Load(path)), "custom keys, modes and independent intervals survive save/load");
             Dictionary<string, object> written = new JavaScriptSerializer().DeserializeObject(File.ReadAllText(path)) as Dictionary<string, object>;
             Check(written != null && (int)written["version"] == 2, "new saves use schema 2");
-            BindingProfile legacy = original.WithBinding(8, Space).WithBinding(21, 0);
+            BindingProfile legacy = original.WithBinding(8, CustomKey).WithBinding(21, 0);
             File.WriteAllText(path, Json(1, Keys(legacy)));
             Check(Same(legacy, BindingProfile.Load(path)), "schema 1 preserves keys with all rapid-fire settings disabled");
             original.Save(path);

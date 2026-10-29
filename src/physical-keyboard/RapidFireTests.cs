@@ -139,7 +139,7 @@ static class RapidFireTests
         Check(engine.Evaluate(changed, 303) == 0, "profile replacement clears a previous latch");
         engine.UpdateInput(Cross, changed, 304);
         Check(engine.Evaluate(changed, 304) == Cross, "fresh key works with newly published profile");
-        BindingProfile remapped = changed.WithBinding(8, 0x20);
+        BindingProfile remapped = changed.WithBinding(8, 0x4B);
         Check(engine.Evaluate(remapped, 305) == 0, "profile replacement while held disarms previous physical action");
         engine.UpdateInput(Cross, remapped, 306);
         Check(engine.Evaluate(remapped, 306) == 0, "held repeat does not activate changed profile");
@@ -160,24 +160,24 @@ static class RapidFireTests
         BindingProfile profile = BindingProfile.Default().WithRapidFire(8, RapidFireMode.Toggle, 100);
         KeyboardInputState input = new KeyboardInputState(profile.ActionForKey);
         RapidFireEngine engine = new RapidFireEngine();
-        input.Process(0x4B, true, false, false, true); engine.UpdateInput(input.Held, profile, 0);
-        input.Process(0x4B, false, true, false, true); engine.UpdateInput(input.Held, profile, 1);
+        input.Process(profile.KeyForAction(8), true, false, false, true); engine.UpdateInput(input.Held, profile, 0);
+        input.Process(profile.KeyForAction(8), false, true, false, true); engine.UpdateInput(input.Held, profile, 1);
         Check(engine.Evaluate(profile, 2) == Cross, "hook event updates retain a tap shorter than one USB report interval");
         input.Reset(); engine.Reset();
-        input.Process(0x4B, true, false, false, false); engine.UpdateInput(input.Held, profile, 3);
-        input.Process(0x4B, true, false, false, true); engine.UpdateInput(input.Held, profile, 4);
+        input.Process(profile.KeyForAction(8), true, false, false, false); engine.UpdateInput(input.Held, profile, 3);
+        input.Process(profile.KeyForAction(8), true, false, false, true); engine.UpdateInput(input.Held, profile, 4);
         Check(engine.Evaluate(profile, 4) == 0, "key pressed outside foreground cannot start Toggle on focus return");
-        input.Process(0x4B, false, true, false, true); engine.UpdateInput(input.Held, profile, 5);
-        input.Process(0x4B, true, false, true, true); engine.UpdateInput(input.Held, profile, 6);
+        input.Process(profile.KeyForAction(8), false, true, false, true); engine.UpdateInput(input.Held, profile, 5);
+        input.Process(profile.KeyForAction(8), true, false, true, true); engine.UpdateInput(input.Held, profile, 6);
         Check(engine.Evaluate(profile, 6) == 0, "injected down does not start Toggle");
-        input.Process(0x4B, true, false, false, true); engine.UpdateInput(input.Held, profile, 7);
-        input.Process(0x4B, true, false, false, true); engine.UpdateInput(input.Held, profile, 8);
+        input.Process(profile.KeyForAction(8), true, false, false, true); engine.UpdateInput(input.Held, profile, 7);
+        input.Process(profile.KeyForAction(8), true, false, false, true); engine.UpdateInput(input.Held, profile, 8);
         Check(engine.Evaluate(profile, 8) == Cross, "real fresh down starts Toggle and OS repeat does not switch it off");
         input.Reset(); engine.Reset();
-        input.Process(0x4B, true, false, false, true); engine.UpdateInput(input.Held, profile, 9);
+        input.Process(profile.KeyForAction(8), true, false, false, true); engine.UpdateInput(input.Held, profile, 9);
         Check(engine.Evaluate(profile, 9) == 0, "held captured press through focus reset cannot resume Toggle");
-        input.Process(0x4B, false, true, false, true); engine.UpdateInput(input.Held, profile, 10);
-        input.Process(0x4B, true, false, false, true); engine.UpdateInput(input.Held, profile, 11);
+        input.Process(profile.KeyForAction(8), false, true, false, true); engine.UpdateInput(input.Held, profile, 10);
+        input.Process(profile.KeyForAction(8), true, false, false, true); engine.UpdateInput(input.Held, profile, 11);
         Check(engine.Evaluate(profile, 11) == Cross, "real release then fresh press is required after focus reset");
     }
 

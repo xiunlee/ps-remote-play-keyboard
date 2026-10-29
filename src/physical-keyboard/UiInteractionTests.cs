@@ -48,7 +48,8 @@ namespace PSKeyboard
         private static void VerifyHeldCaptureKey(Keys key)
         {
             BindingProfile original = BindingProfile.Default();
-            if (key == Keys.Enter) original = original.WithBinding(17, 0);
+            for (int action = 0; action < BindingProfile.ActionCount; action++)
+                if (original.KeyForAction(action) == (int)key) original = original.WithBinding(action, 0);
             using (BindingEditor editor = new BindingEditor(original))
             {
                 SelectAction(editor, 0);
@@ -76,7 +77,7 @@ namespace PSKeyboard
             using (BindingEditor editor = new BindingEditor(original))
             {
                 SelectAction(editor, 0); SetField(editor, "capturing", true);
-                Check(DispatchCommand(editor, Keys.K, false), "A conflicting key must be consumed in capture mode.");
+                Check(DispatchCommand(editor, (Keys)original.KeyForAction(8), false), "A conflicting key must be consumed in capture mode.");
                 Check(Object.ReferenceEquals(editor.Result, original), "A conflicting key must keep the draft unchanged.");
                 Check(Field<Label>(editor, "hint").Text == UiText.T("BindingConflict"), "Conflict feedback must be shown.");
                 editor.ReservedHotkeyPressed();
@@ -121,7 +122,7 @@ namespace PSKeyboard
                     "Remapping a key must preserve that action's repeat settings.");
                 Check((string)grid.Rows[8].Cells[2].Value == UiText.T("RepeatHold") && (int)grid.Rows[8].Cells[3].Value == 20,
                     "Grid summary must reflect the selected repeat settings.");
-                Check(original.KeyForAction(8) == (int)Keys.K && original.RapidFireModeForAction(8) == RapidFireMode.Off,
+                Check(original.KeyForAction(8) == (int)Keys.Down && original.RapidFireModeForAction(8) == RapidFireMode.Off,
                     "Editor changes must not mutate the live profile before Save.");
                 typeof(BindingEditor).GetMethod("ResetDraft", PrivateInstance).Invoke(editor, new object[0]);
                 for (int action = 0; action < BindingProfile.ActionCount; action++)

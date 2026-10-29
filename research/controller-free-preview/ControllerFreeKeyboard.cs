@@ -135,7 +135,7 @@ namespace PSKeyboard
             Controls.Add(root);
             Label title = KeyboardUi.Label("上班不要玩 · " + BuildInfo.Version, 23, KeyboardUi.Ink); title.Font = KeyboardUi.Font(23, FontStyle.Bold); title.Dock = DockStyle.Fill;
             root.Controls.Add(title, 0, 0);
-            Label description = KeyboardUi.Label("免實體手把，使用鍵盤控制官方 Remote Play。\r\nPS4 模式已有操作與重開機成功紀錄；PS5 模式仍待實機驗證。", 10, KeyboardUi.Amber); description.Dock = DockStyle.Fill;
+            Label description = KeyboardUi.Label("免實體手把，使用鍵盤控制官方 Remote Play。\r\nPS4 模式已實測可用；PS5 模式尚未通過 Remote Play 操作測試。", 10, KeyboardUi.Amber); description.Dock = DockStyle.Fill;
             root.Controls.Add(description, 0, 1);
             FlowLayoutPanel modelRow = new FlowLayoutPanel { Dock = DockStyle.Fill, Margin = Padding.Empty, WrapContents = false };
             Label modelLabel = KeyboardUi.Label("模擬手把", 10, KeyboardUi.Ink); modelLabel.Size = new Size(95, 32);

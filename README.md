@@ -6,6 +6,8 @@
 
 版本總控：[目前版本](VERSION) · [變更紀錄](CHANGELOG.md) · [版本控管與回退](docs/VERSIONING.md)。
 
+`0.1.0-alpha.7` 依使用者要求調整[預設鍵位](docs/DEFAULT-KEYS.md)：方向鍵對應 △／□／×／○，E／Q 對應 L1／L2，Delete／Page Down 對應 R1／R2。已有設定會保留，須按「恢復預設」才套用新排列。
+
 ## 主要方向：免手把鍵盤控制
 
 [免手把測試程式](research/controller-free-preview/README.md) 將鍵盤輸入交給免費開源 VIIPER 與既有 usbip-win2 驅動，讓官方 Remote Play 讀取模擬 DS4。使用者不需插入實體手把，也不需交出 PSN 帳號；仍使用 Sony 官方用戶端。完整依賴、證據與限制見[首次成功紀錄](research/controller-free-preview/LIVE-TRIAL.md)。
