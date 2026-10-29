@@ -51,7 +51,9 @@ static class UiTextTests
             "ExperimentalHint", "ProfileLoadWarning", "KeyboardSetupFailure", "RelayStartupFailure", "AlreadyRunning",
             "InvalidArguments", "BindingsTitle", "BindingsSubtitle", "ActionColumn", "KeyColumn", "CaptureKey",
             "CapturePrompt", "ClearBinding", "RestoreDefaults", "Save", "Cancel", "BindingConflict", "BindingInvalid",
-            "BindingsPausedHint", "ProfileSaveFailure", "LanguageLabel", "Unassigned"
+            "BindingsPausedHint", "ProfileSaveFailure", "LanguageLabel", "Unassigned",
+            "RepeatTitle", "RepeatModeLabel", "RepeatOff", "RepeatHold", "RepeatToggle",
+            "RepeatIntervalLabel", "RepeatHint", "RepeatColumn"
         };
         foreach (string tag in tags)
         {

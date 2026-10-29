@@ -13,7 +13,8 @@ namespace PSKeyboard
     internal sealed class PhysicalKeyboard : Form
     {
         private const int ListenPort = 33251, UpstreamPort = 3240, ToggleHotkey = 0x504C;
-        private readonly KeyboardInputState input;
+        private readonly KeyboardControlPipeline input;
+        private readonly Stopwatch inputClock = Stopwatch.StartNew();
         private volatile BindingProfile profile;
         private readonly string profilePath;
         private readonly bool preview;
@@ -148,7 +149,7 @@ namespace PSKeyboard
                 catch { profileWarning = true; }
                 statusFile = new OptionalStatusFile(statusPath, GetStatusSnapshot);
             }
-            input = new KeyboardInputState(delegate(int key) { return profile.ActionForKey(key); });
+            input = new KeyboardControlPipeline(delegate { return profile; });
             Text = UiText.T("AppTitle"); ClientSize = new Size(900, 720); MinimumSize = new Size(850, 710);
             StartPosition = FormStartPosition.CenterScreen; AutoScaleMode = AutoScaleMode.Dpi;
             Font = KeyboardUi.Font(10, FontStyle.Regular); ForeColor = KeyboardUi.Ink; BackColor = KeyboardUi.Background;
@@ -313,7 +314,7 @@ namespace PSKeyboard
             }
             for (int key = 0; key < 256; key++)
                 if ((GetAsyncKeyState(key) & 0x8000) != 0)
-                    input.Process(key, true, false, false, false);
+                    input.Process(key, true, false, false, false, inputClock.ElapsedMilliseconds);
         }
 
         private void UpdateFocus()
@@ -322,8 +323,8 @@ namespace PSKeyboard
             long now = Stopwatch.GetTimestamp();
             if (pid == lastFocusPid && now - lastFocusCheck < Stopwatch.Frequency / 4) return;
             lastFocusPid = pid; lastFocusCheck = now;
-            bool allowed = pid == ownPid;
-            if (!allowed && pid != 0)
+            bool allowed = false;
+            if (pid != 0 && pid != ownPid)
                 try { using (Process p = Process.GetProcessById((int)pid))
                     allowed = String.Equals(p.MainModule.FileName, sonyPath, StringComparison.OrdinalIgnoreCase); }
                 catch { }
@@ -335,7 +336,7 @@ namespace PSKeyboard
         {
             uint pid; GetWindowThreadProcessId(GetForegroundWindow(), out pid);
             FocusDecision decision = hookFocus;
-            return pid == ownPid || (decision.Pid == pid && decision.Allowed);
+            return pid != ownPid && decision.Pid == pid && decision.Allowed;
         }
 
         private static bool ModifiersDown()
@@ -357,7 +358,7 @@ namespace PSKeyboard
                 UsbIpRelay current = relay;
                 bool capture = enabled && !closing && !editing && current != null && current.IsAttached && current.EndpointVerified &&
                     !modifiers && HookForeground();
-                if (input.Process((int)key.Key, down, up, (key.Flags & 0x10) != 0, capture))
+                if (input.Process((int)key.Key, down, up, (key.Flags & 0x10) != 0, capture, inputClock.ElapsedMilliseconds))
                     return new IntPtr(1);
             }
             return CallNextHookEx(hook, code, message, data);
@@ -369,8 +370,8 @@ namespace PSKeyboard
             // callback takes a fresh enabled state and a fresh physical report;
             // no cached merged report is ever repeated after pause or release.
             bool active = enabled && !closing && !editing && !ModifiersDown() && HookForeground();
-            if (!active) input.Reset();
-            return PhysicalReportMerge.Merge(physical, active ? input.Held : 0, active);
+            uint held = input.Evaluate(active, inputClock.ElapsedMilliseconds);
+            return PhysicalReportMerge.Merge(physical, held, active);
         }
 
         private RelayStatusSnapshot GetStatusSnapshot()

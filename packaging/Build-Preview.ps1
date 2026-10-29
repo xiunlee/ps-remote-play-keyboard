@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$Zig,
-    [string]$Version='0.1.0-alpha.3',
+    [string]$Version='0.1.0-alpha.4',
     [string]$OutputRoot=(Join-Path $env:USERPROFILE '.pskeyboard-tools\release-candidates')
 )
 # Build/package only: never executes setup, launcher, HID observation or Sony.
@@ -28,6 +28,7 @@ foreach($file in @('Install-Exporter.ps1','Switch-PhysicalDriver.ps1','Start-Exp
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'PREVIEW-README.txt') -Destination (Join-Path $stage '請先閱讀.txt')
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'DEPENDENCIES.json') -Destination (Join-Path $stage 'DEPENDENCIES.json')
 Copy-Item -LiteralPath (Join-Path $repo 'docs\PRODUCT-SCOPE.md') -Destination (Join-Path $stage 'PRODUCT-SCOPE.md')
+Copy-Item -LiteralPath (Join-Path $repo 'docs\AUTOMATION-AND-CONTROLLER-TESTS.md') -Destination (Join-Path $stage 'AUTOMATION-AND-CONTROLLER-TESTS.md')
 Copy-Item -LiteralPath (Join-Path $repo 'src\physical-keyboard\Check-Status.ps1') -Destination (Join-Path $stage 'Check-Status.ps1')
 $commit=(& git -C $repo rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0){throw 'Cannot identify source revision.'}

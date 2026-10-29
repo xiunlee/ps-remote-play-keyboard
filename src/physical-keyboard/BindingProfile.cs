@@ -6,22 +6,42 @@ using System.Web.Script.Serialization;
 
 namespace PSKeyboard
 {
+    public enum RapidFireMode { Off = 0, Hold = 1, Toggle = 2 }
+
     // Immutable one-key-per-action profile. Action order is the native merge ABI.
     public sealed class BindingProfile
     {
         public const int ActionCount = 22;
-        private const int SchemaVersion = 1, MaxFileBytes = 16384;
+        public const int MinRapidFireIntervalMilliseconds = 20;
+        public const int MaxRapidFireIntervalMilliseconds = 5000;
+        public const int DefaultRapidFireIntervalMilliseconds = 100;
+        private const int SchemaVersion = 2, MaxFileBytes = 16384;
         private readonly int[] keys;
+        private readonly int[] rapidFireModes, intervalMilliseconds;
         private readonly uint[] actionsByKey;
 
-        private BindingProfile(int[] source)
+        private BindingProfile(int[] source) : this(source, new int[ActionCount], DefaultIntervals()) { }
+
+        private static int[] DefaultIntervals()
+        {
+            int[] result = new int[ActionCount];
+            for (int i = 0; i < result.Length; ++i) result[i] = DefaultRapidFireIntervalMilliseconds;
+            return result;
+        }
+
+        private BindingProfile(int[] source, int[] modes, int[] intervals)
         {
             if (source == null || source.Length != ActionCount)
                 throw new ArgumentException("Expected exactly 22 action bindings.", "source");
+            if (modes == null || modes.Length != ActionCount || intervals == null || intervals.Length != ActionCount)
+                throw new ArgumentException("Expected exactly 22 rapid-fire settings.");
             keys = (int[])source.Clone();
+            rapidFireModes = (int[])modes.Clone();
+            intervalMilliseconds = (int[])intervals.Clone();
             actionsByKey = new uint[256];
             for (int action = 0; action < keys.Length; ++action)
             {
+                ValidateRapidFire((RapidFireMode)rapidFireModes[action], intervalMilliseconds[action]);
                 int key = keys[action];
                 if (!IsAllowedKey(key)) throw new ArgumentException("Unsupported or reserved key.", "source");
                 if (key == 0) continue;
@@ -71,6 +91,35 @@ namespace PSKeyboard
             return keys[actionIndex];
         }
 
+        public RapidFireMode RapidFireModeForAction(int actionIndex)
+        {
+            if (actionIndex < 0 || actionIndex >= ActionCount) throw new ArgumentOutOfRangeException("actionIndex");
+            return (RapidFireMode)rapidFireModes[actionIndex];
+        }
+
+        public int IntervalMillisecondsForAction(int actionIndex)
+        {
+            if (actionIndex < 0 || actionIndex >= ActionCount) throw new ArgumentOutOfRangeException("actionIndex");
+            return intervalMilliseconds[actionIndex];
+        }
+
+        private static void ValidateRapidFire(RapidFireMode mode, int interval)
+        {
+            if (mode < RapidFireMode.Off || mode > RapidFireMode.Toggle)
+                throw new ArgumentOutOfRangeException("mode");
+            if (interval < MinRapidFireIntervalMilliseconds || interval > MaxRapidFireIntervalMilliseconds)
+                throw new ArgumentOutOfRangeException("intervalMilliseconds");
+        }
+
+        public BindingProfile WithRapidFire(int actionIndex, RapidFireMode mode, int interval)
+        {
+            if (actionIndex < 0 || actionIndex >= ActionCount) throw new ArgumentOutOfRangeException("actionIndex");
+            ValidateRapidFire(mode, interval);
+            int[] changedModes = (int[])rapidFireModes.Clone(), changedIntervals = (int[])intervalMilliseconds.Clone();
+            changedModes[actionIndex] = (int)mode; changedIntervals[actionIndex] = interval;
+            return new BindingProfile(keys, changedModes, changedIntervals);
+        }
+
         public BindingProfile WithBinding(int actionIndex, int virtualKey)
         {
             if (actionIndex < 0 || actionIndex >= ActionCount) throw new ArgumentOutOfRangeException("actionIndex");
@@ -79,7 +128,7 @@ namespace PSKeyboard
                 throw new ArgumentException("Key is already assigned to another action.", "virtualKey");
             int[] changed = (int[])keys.Clone();
             changed[actionIndex] = virtualKey;
-            return new BindingProfile(changed);
+            return new BindingProfile(changed, rapidFireModes, intervalMilliseconds);
         }
 
         public void Save(string path)
@@ -90,7 +139,9 @@ namespace PSKeyboard
             Directory.CreateDirectory(directory);
             string temporary = Path.Combine(directory, ".bindings-" + Guid.NewGuid().ToString("N") + ".tmp");
             Dictionary<string, object> data = new Dictionary<string, object> {
-                { "version", SchemaVersion }, { "keys", (int[])keys.Clone() }
+                { "version", SchemaVersion }, { "keys", (int[])keys.Clone() },
+                { "rapidFireModes", (int[])rapidFireModes.Clone() },
+                { "intervalMilliseconds", (int[])intervalMilliseconds.Clone() }
             };
             try
             {
@@ -121,22 +172,36 @@ namespace PSKeyboard
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer { MaxJsonLength = MaxFileBytes, RecursionLimit = 8 };
                 Dictionary<string, object> data = serializer.DeserializeObject(json) as Dictionary<string, object>;
-                object version, values;
-                if (data == null || data.Count != 2 || !data.TryGetValue("version", out version) ||
-                    !(version is int) || (int)version != SchemaVersion || !data.TryGetValue("keys", out values))
+                object version;
+                if (data == null || !data.TryGetValue("version", out version) || !(version is int))
                     throw new InvalidDataException("Unsupported profile schema.");
-                object[] array = values as object[];
-                if (array == null || array.Length != ActionCount) throw new InvalidDataException("Invalid binding count.");
-                int[] loaded = new int[ActionCount];
-                for (int i = 0; i < loaded.Length; ++i)
+                if ((int)version == 1)
                 {
-                    if (!(array[i] is int)) throw new InvalidDataException("Bindings must be integer virtual-key codes.");
-                    loaded[i] = (int)array[i];
+                    if (data.Count != 2) throw new InvalidDataException("Unsupported legacy profile schema.");
+                    return new BindingProfile(ReadIntegers(data, "keys"));
                 }
-                return new BindingProfile(loaded);
+                if ((int)version != SchemaVersion || data.Count != 4)
+                    throw new InvalidDataException("Unsupported profile schema.");
+                return new BindingProfile(ReadIntegers(data, "keys"), ReadIntegers(data, "rapidFireModes"),
+                    ReadIntegers(data, "intervalMilliseconds"));
             }
             catch (ArgumentException ex) { throw new InvalidDataException("Invalid keyboard profile.", ex); }
             catch (InvalidOperationException ex) { throw new InvalidDataException("Invalid keyboard profile.", ex); }
+        }
+
+        private static int[] ReadIntegers(Dictionary<string, object> data, string name)
+        {
+            object values;
+            if (!data.TryGetValue(name, out values)) throw new InvalidDataException("Missing profile setting: " + name);
+            object[] array = values as object[];
+            if (array == null || array.Length != ActionCount) throw new InvalidDataException("Invalid setting count: " + name);
+            int[] result = new int[ActionCount];
+            for (int i = 0; i < result.Length; ++i)
+            {
+                if (!(array[i] is int)) throw new InvalidDataException("Settings must be integer values: " + name);
+                result[i] = (int)array[i];
+            }
+            return result;
         }
     }
 }

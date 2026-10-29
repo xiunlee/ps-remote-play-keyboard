@@ -23,6 +23,7 @@ namespace PSKeyboard
                 VerifyHeldCaptureKey(Keys.Enter);
                 VerifyHeldCaptureKey(Keys.Space);
                 VerifyRejectedKeys();
+                VerifyPerActionRepeat();
                 Console.WriteLine("UI interaction tests PASS (" + checks + " checks). No live input or devices used.");
                 return 0;
             }
@@ -83,6 +84,59 @@ namespace PSKeyboard
                 Check(Object.ReferenceEquals(editor.Result, original), "F8 must not change the profile.");
                 Check(DispatchCommand(editor, Keys.Control | Keys.B, false), "Modified combinations must be consumed while editing.");
                 Check(Object.ReferenceEquals(editor.Result, original), "Unsupported combinations must keep the draft unchanged.");
+            }
+        }
+
+        private static void VerifyPerActionRepeat()
+        {
+            BindingProfile original = BindingProfile.Default();
+            using (BindingEditor editor = new BindingEditor(original))
+            {
+                ComboBox mode = Field<ComboBox>(editor, "repeatMode");
+                NumericUpDown interval = Field<NumericUpDown>(editor, "repeatInterval");
+                DataGridView grid = Field<DataGridView>(editor, "grid");
+                Check(mode.Items.Count == 3, "Exactly Off, Hold and Toggle modes must be offered.");
+                Check(interval.Minimum == 20 && interval.Maximum == 5000, "Repeat interval must use the model bounds.");
+                SelectAction(editor, 8); mode.SelectedIndex = (int)RapidFireMode.Hold; interval.Value = 20;
+                Check(editor.Result.RapidFireModeForAction(8) == RapidFireMode.Hold, "Selected action must use Hold mode.");
+                Check(editor.Result.IntervalMillisecondsForAction(8) == 20, "Minimum interval must be accepted.");
+                Check(editor.Result.RapidFireModeForAction(9) == RapidFireMode.Off, "An adjacent action must stay unchanged.");
+                BindingProfile beforeSelection = editor.Result;
+                SelectAction(editor, 9);
+                Check(Object.ReferenceEquals(beforeSelection, editor.Result), "Changing rows must not write displayed settings into another action.");
+                Check(mode.SelectedIndex == (int)RapidFireMode.Off && interval.Value == 100,
+                    "Selected action controls must load that action's own defaults.");
+                mode.SelectedIndex = (int)RapidFireMode.Toggle; interval.Value = 5000;
+                Check(editor.Result.RapidFireModeForAction(9) == RapidFireMode.Toggle, "Another action can use independent Toggle mode.");
+                Check(editor.Result.IntervalMillisecondsForAction(9) == 5000, "Maximum interval must be accepted.");
+                SelectAction(editor, 8);
+                Check(mode.SelectedIndex == (int)RapidFireMode.Hold && interval.Value == 20, "Returning to an action must restore its own settings.");
+                mode.SelectedIndex = (int)RapidFireMode.Off;
+                Check(editor.Result.IntervalMillisecondsForAction(8) == 20, "Turning repeat off must preserve its chosen interval.");
+                SetField(editor, "capturing", true); mode.SelectedIndex = (int)RapidFireMode.Hold;
+                Check(!Field<bool>(editor, "capturing"), "Editing repeat settings must leave key capture mode.");
+                typeof(BindingEditor).GetMethod("SetBinding", PrivateInstance).Invoke(editor, new object[] { (int)Keys.V });
+                Check(editor.Result.KeyForAction(8) == (int)Keys.V, "Remapping must still change the chosen key.");
+                Check(editor.Result.RapidFireModeForAction(8) == RapidFireMode.Hold && editor.Result.IntervalMillisecondsForAction(8) == 20,
+                    "Remapping a key must preserve that action's repeat settings.");
+                Check((string)grid.Rows[8].Cells[2].Value == UiText.T("RepeatHold") && (int)grid.Rows[8].Cells[3].Value == 20,
+                    "Grid summary must reflect the selected repeat settings.");
+                Check(original.KeyForAction(8) == (int)Keys.K && original.RapidFireModeForAction(8) == RapidFireMode.Off,
+                    "Editor changes must not mutate the live profile before Save.");
+                typeof(BindingEditor).GetMethod("ResetDraft", PrivateInstance).Invoke(editor, new object[0]);
+                for (int action = 0; action < BindingProfile.ActionCount; action++)
+                    Check(editor.Result.RapidFireModeForAction(action) == RapidFireMode.Off &&
+                        editor.Result.IntervalMillisecondsForAction(action) == 100 &&
+                        editor.Result.KeyForAction(action) == original.KeyForAction(action),
+                        "Restore defaults must reset keys and repeat settings together.");
+                Check(mode.SelectedIndex == (int)RapidFireMode.Off && interval.Value == 100, "Reset must refresh selected-action controls.");
+                SetField(editor, "capturing", true);
+                typeof(Control).GetMethod("OnEnter", PrivateInstance).Invoke(interval, new object[] { EventArgs.Empty });
+                Check(!Field<bool>(editor, "capturing"), "Entering the interval field must cancel key capture before typing numbers.");
+                SetField(editor, "capturing", true);
+                typeof(Control).GetMethod("OnEnter", PrivateInstance).Invoke(mode, new object[] { EventArgs.Empty });
+                Check(!Field<bool>(editor, "capturing"), "Entering the mode list must cancel key capture before using arrows.");
+                Check(!editor.Visible, "Repeat configuration tests must remain unshown.");
             }
         }
 

@@ -32,7 +32,9 @@ static class BindingProfileTests
     static bool Same(BindingProfile a, BindingProfile b)
     {
         for (int i = 0; i < BindingProfile.ActionCount; ++i)
-            if (a.KeyForAction(i) != b.KeyForAction(i)) return false;
+            if (a.KeyForAction(i) != b.KeyForAction(i) ||
+                a.RapidFireModeForAction(i) != b.RapidFireModeForAction(i) ||
+                a.IntervalMillisecondsForAction(i) != b.IntervalMillisecondsForAction(i)) return false;
         return true;
     }
 
@@ -48,6 +50,47 @@ static class BindingProfileTests
         return new JavaScriptSerializer().Serialize(new Dictionary<string, object> {
             { "version", version }, { "keys", keys }
         });
+    }
+
+    static string Json2(object modes, object intervals)
+    {
+        return new JavaScriptSerializer().Serialize(new Dictionary<string, object> {
+            { "version", 2 }, { "keys", Keys(BindingProfile.Default()) },
+            { "rapidFireModes", modes }, { "intervalMilliseconds", intervals }
+        });
+    }
+
+    static int[] AllIntervals(int value)
+    {
+        int[] result = new int[BindingProfile.ActionCount];
+        for (int i = 0; i < result.Length; ++i) result[i] = value;
+        return result;
+    }
+
+    static void RapidFireSettings()
+    {
+        BindingProfile original = BindingProfile.Default();
+        for (int i = 0; i < BindingProfile.ActionCount; ++i)
+            Check(original.RapidFireModeForAction(i) == RapidFireMode.Off &&
+                original.IntervalMillisecondsForAction(i) == 100, "all actions default to ordinary input: " + i);
+        BindingProfile custom = original.WithRapidFire(8, RapidFireMode.Hold, 20)
+            .WithRapidFire(9, RapidFireMode.Toggle, 5000).WithBinding(8, Space);
+        Check(custom.RapidFireModeForAction(8) == RapidFireMode.Hold && custom.IntervalMillisecondsForAction(8) == 20 &&
+            custom.KeyForAction(8) == Space, "remapping preserves per-action rapid-fire settings");
+        Check(custom.RapidFireModeForAction(9) == RapidFireMode.Toggle && custom.IntervalMillisecondsForAction(9) == 5000,
+            "independent action stores its own mode and interval");
+        Check(original.RapidFireModeForAction(8) == RapidFireMode.Off && original.KeyForAction(8) == K,
+            "rapid-fire edits preserve original immutable settings and bindings");
+        Check(custom.WithBinding(9, 0).RapidFireModeForAction(9) == RapidFireMode.Toggle,
+            "unassignment preserves a user's rapid-fire setting for later reassignment");
+        Throws<ArgumentOutOfRangeException>(delegate { original.WithRapidFire(22, RapidFireMode.Hold, 100); }, "invalid turbo action rejected");
+        Throws<ArgumentOutOfRangeException>(delegate { original.WithRapidFire(8, (RapidFireMode)(-1), 100); }, "negative mode rejected");
+        Throws<ArgumentOutOfRangeException>(delegate { original.WithRapidFire(8, (RapidFireMode)3, 100); }, "unknown mode rejected");
+        Throws<ArgumentOutOfRangeException>(delegate { original.WithRapidFire(8, RapidFireMode.Hold, 19); }, "too short interval rejected");
+        Throws<ArgumentOutOfRangeException>(delegate { original.WithRapidFire(8, RapidFireMode.Toggle, 5001); }, "too long interval rejected");
+        Throws<ArgumentOutOfRangeException>(delegate { original.WithRapidFire(8, RapidFireMode.Off, 0); }, "interval validated even while off");
+        Throws<ArgumentOutOfRangeException>(delegate { original.RapidFireModeForAction(-1); }, "mode getter validates action");
+        Throws<ArgumentOutOfRangeException>(delegate { original.IntervalMillisecondsForAction(22); }, "interval getter validates action");
     }
 
     static void DefaultAndValidation()
@@ -150,9 +193,16 @@ static class BindingProfileTests
             Check(Same(original, BindingProfile.Load(Path.Combine(root, "missing", "profile.json"))),
                 "missing directory loads defaults without creating it");
             Check(!Directory.Exists(Path.Combine(root, "missing")), "loading missing profile makes no filesystem changes");
-            BindingProfile custom = original.WithBinding(8, Space).WithBinding(21, 0).WithBinding(18, 0x70);
+            BindingProfile custom = original.WithBinding(8, Space).WithBinding(21, 0).WithBinding(18, 0x70)
+                .WithRapidFire(8, RapidFireMode.Hold, 20).WithRapidFire(9, RapidFireMode.Toggle, 5000)
+                .WithRapidFire(21, RapidFireMode.Toggle, 301);
             custom.Save(path);
-            Check(Same(custom, BindingProfile.Load(path)), "custom, unassigned and function-key bindings survive save/load");
+            Check(Same(custom, BindingProfile.Load(path)), "custom keys, modes and independent intervals survive save/load");
+            Dictionary<string, object> written = new JavaScriptSerializer().DeserializeObject(File.ReadAllText(path)) as Dictionary<string, object>;
+            Check(written != null && (int)written["version"] == 2, "new saves use schema 2");
+            BindingProfile legacy = original.WithBinding(8, Space).WithBinding(21, 0);
+            File.WriteAllText(path, Json(1, Keys(legacy)));
+            Check(Same(legacy, BindingProfile.Load(path)), "schema 1 preserves keys with all rapid-fire settings disabled");
             original.Save(path);
             Check(Same(original, BindingProfile.Load(path)), "atomic replacement saves over an existing profile");
 
@@ -168,12 +218,24 @@ static class BindingProfileTests
             object[] nonInteger = new object[BindingProfile.ActionCount];
             for (int i = 0; i < nonInteger.Length; ++i) nonInteger[i] = original.KeyForAction(i);
             nonInteger[8] = "75";
+            int[] invalidMode = new int[22]; invalidMode[8] = 3;
+            int[] negativeMode = new int[22]; negativeMode[8] = -1;
+            int[] shortInterval = AllIntervals(100); shortInterval[9] = 19;
+            int[] longInterval = AllIntervals(100); longInterval[9] = 5001;
+            object[] invalidIntervalType = new object[22];
+            for (int i = 0; i < invalidIntervalType.Length; ++i) invalidIntervalType[i] = 100;
+            invalidIntervalType[0] = 100.5;
             string[] bad = {
                 "", "{", "null", "[]", "{}",
-                Json(2, Keys(original)), Json("1", Keys(original)), Json(1.5, Keys(original)),
+                Json(2, Keys(original)), Json(3, Keys(original)), Json("1", Keys(original)), Json(1.5, Keys(original)),
                 Json(1, new int[21]), Json(1, new int[23]), Json(1, null),
                 Json(1, duplicate), Json(1, reserved), Json(1, unsupported), Json(1, nonInteger),
-                "{\"version\":1,\"keys\":[],\"extra\":true}", new string(' ', 16385)
+                "{\"version\":1,\"keys\":[],\"extra\":true}", new string(' ', 16385),
+                Json2(invalidMode, AllIntervals(100)), Json2(negativeMode, AllIntervals(100)),
+                Json2(new int[21], AllIntervals(100)), Json2(new int[22], new int[23]),
+                Json2(new int[22], shortInterval), Json2(new int[22], longInterval),
+                Json2(new int[22], invalidIntervalType), Json2(nonInteger, AllIntervals(100)),
+                Json2(null, AllIntervals(100)), Json2(new int[22], null)
             };
             for (int i = 0; i < bad.Length; ++i)
             {
@@ -192,7 +254,7 @@ static class BindingProfileTests
 
     static int Main()
     {
-        DefaultAndValidation(); RemappingHeldKeys(); MappingPreviouslyUnmappedKey(); Persistence();
+        DefaultAndValidation(); RapidFireSettings(); RemappingHeldKeys(); MappingPreviouslyUnmappedKey(); Persistence();
         Console.WriteLine("BINDING_PROFILE_PASS checks=" + checks + "; isolated temporary files and pure key events only");
         return 0;
     }

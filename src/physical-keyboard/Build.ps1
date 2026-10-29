@@ -22,11 +22,13 @@ $statusSource = Join-Path $PSScriptRoot 'OptionalStatusFile.cs'
 $relaySource = Join-Path $repo 'research\physical-usb-relay\UsbIpRelay.cs'
 $profileSource = Join-Path $PSScriptRoot 'BindingProfile.cs'
 $uiTextSource = Join-Path $PSScriptRoot 'UiText.cs'
+$repeatSource = Join-Path $PSScriptRoot 'RapidFireEngine.cs'
+$pipelineSource = Join-Path $PSScriptRoot 'KeyboardControlPipeline.cs'
 & $csc /nologo /target:winexe /platform:x64 /optimize+ /warnaserror /langversion:5 /codepage:65001 `
     /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll `
     ('/out:'+(Join-Path $out 'PSKeyboard-Physical.exe')) `
     (Join-Path $PSScriptRoot 'PhysicalKeyboard.cs') (Join-Path $PSScriptRoot 'BindingEditor.cs') (Join-Path $PSScriptRoot 'KeyboardUi.cs') `
-    $profileSource $uiTextSource $mergeSource $optionsSource $statusSource $inputSource $bindingSource $relaySource
+    $profileSource $uiTextSource $repeatSource $pipelineSource $mergeSource $optionsSource $statusSource $inputSource $bindingSource $relaySource
 if ($LASTEXITCODE -ne 0) { throw 'Physical keyboard app build failed.' }
 if ($RunTests) {
     $test = Join-Path $out 'PhysicalMergeTests.exe'
@@ -41,6 +43,19 @@ if ($RunTests) {
     if ($LASTEXITCODE -ne 0) { throw 'Custom binding tests failed to build.' }
     & $profileTest
     if ($LASTEXITCODE -ne 0) { throw 'Custom binding tests failed.' }
+    $repeatTest = Join-Path $out 'RapidFireTests.exe'
+    & $csc /nologo /target:exe /platform:x64 /optimize+ /warnaserror /langversion:5 /codepage:65001 `
+        /r:System.Web.Extensions.dll ('/out:'+$repeatTest) (Join-Path $PSScriptRoot 'RapidFireTests.cs') $profileSource $repeatSource $inputSource $bindingSource
+    if ($LASTEXITCODE -ne 0) { throw 'Repeat tests failed to build.' }
+    & $repeatTest
+    if ($LASTEXITCODE -ne 0) { throw 'Repeat tests failed.' }
+    $pipelineTest = Join-Path $out 'KeyboardControlPipelineTests.exe'
+    & $csc /nologo /target:exe /platform:x64 /optimize+ /warnaserror /langversion:5 /codepage:65001 `
+        /r:System.Web.Extensions.dll ('/out:'+$pipelineTest) (Join-Path $PSScriptRoot 'KeyboardControlPipelineTests.cs') `
+        $profileSource $repeatSource $pipelineSource $inputSource $bindingSource $mergeSource
+    if ($LASTEXITCODE -ne 0) { throw 'Keyboard pipeline tests failed to build.' }
+    & $pipelineTest
+    if ($LASTEXITCODE -ne 0) { throw 'Keyboard pipeline tests failed.' }
     $languageTest = Join-Path $out 'UiTextTests.exe'
     & $csc /nologo /target:exe /platform:x64 /optimize+ /warnaserror /langversion:5 /codepage:65001 ('/out:'+$languageTest) `
         (Join-Path $PSScriptRoot 'UiTextTests.cs') $uiTextSource
