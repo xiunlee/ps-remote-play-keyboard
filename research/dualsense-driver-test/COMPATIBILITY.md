@@ -1,6 +1,6 @@
 # DualSense 候選與 usbip-win2 0.9.8.1 相容性查核
 
-2026-10-29（Asia/Taipei）。本文件記錄固定來源的靜態分析及待驗證條件，接續 [V5 使用者空間結果](../dualsense-v5-test/RESULTS-20261029.md)。**hosted Windows driver 測試尚待實際結果，不預判通過。**
+2026-10-29（Asia/Taipei）。本文件記錄固定來源的靜態分析及待驗證條件，接續 [V5 使用者空間結果](../dualsense-v5-test/RESULTS-20261029.md)。後續四方案已完成 hosted Windows HID 實測，結果另見 [實測紀錄](RESULTS-20261029.md)；下文的音訊及 Sony 驗證限制仍成立。
 
 目前結論：USB/IP 網路封包格式有繼續驗證的基礎，但原版候選的 Windows 啟動檢查及預設 native attach ABI 都不適用現有 0.9.8.1。這不是更換或降級驅動的理由。產品仍為 alpha.8，既有 PS4 模式、Sony Remote Play、個人設定及現有驅動均不因本文件而變更。
 

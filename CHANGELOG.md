@@ -2,6 +2,14 @@
 
 所有日期採 Asia/Taipei。這些版本均為內部測試版；Git 標籤只固定原始碼，不代表已公開二進位下載或開始收費。
 
+## 0.1.0-alpha.9 — 2026-10-29
+
+- 新增獨立的 DualSense 相容性測試程式，可逐一選擇一般 DualSense／Edge 各自的含音訊介面與純手把共四方案。沿用現有 0.9.8.1 成套驅動，不更換或降級；沒有修改 alpha.8 的 PS4 程式、執行檔或標籤。
+- 四方案已在 GitHub hosted Windows Server 完成驅動接入、22 個動作按下／放開與完整移除；每方案 63 項檢查通過，詳見 [驅動實測](research/dualsense-driver-test/RESULTS-20261029.md)。**這不是 Sony 官方 Remote Play 操作通過，使用者 Windows 11 實測仍待進行。**
+- 候選採固定來源的受限後端、獨立 `33641/33642` 埠、V5 傳輸與持續回饋讀取；同版 CLI 對接驅動，不使用候選舊 native attach。後端隨 stdin 關閉或 30 分鐘上限停止。
+- 啟動不接入、控制先暫停；沿用官方 Remote Play 前景、切窗清連點與 F8 保護，與舊版共用單實例限制。個人設定只讀，移除未確認時鎖住重新連接；回退使用保留的 alpha.8 PS4 模式。
+- 專用建置／校驗流程與操作說明位於 [dualsense-preview](research/dualsense-preview/README.md)，不啟用安裝器、支付或公開二進位 Release。
+
 ## 研究補記 — 2026-10-29（成品仍為 alpha.8）
 
 - 新增僅限 GitHub hosted Windows VM 的 0.9.8.1 驅動測試流程，分別驗證一般 DualSense／Edge 的複合及純手把四方案；使用相同成套 CLI／DLL 與固定來源網路後端，避開候選不相容的舊 native attach ABI。本機不執行安裝或接入。原始碼與限制見 [驅動研究](research/dualsense-driver-test/README.md)；測試結果另行記錄，沒有預先宣稱 Sony 通過。

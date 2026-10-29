@@ -2,7 +2,7 @@
 
 ## 版本與來源
 
-- 根目錄 `VERSION` 是目前免手把版版本號的唯一來源；採 `主版.次版.修訂-alpha.序號`，目前 `0.1.0-alpha.8`。
+- 根目錄 `VERSION` 是目前交付版本號的唯一來源；採 `主版.次版.修訂-alpha.序號`，目前 `0.1.0-alpha.9`。alpha.9 是獨立 DualSense 四方案候選；已可用的 PS4 仍保留 alpha.8，不覆蓋。
 - 測試期間每次交付有程式變更的新版，就增加 alpha 序號並更新 [CHANGELOG.md](../CHANGELOG.md)。已標記版本不重用於另一份程式碼。
 - `v<版本號>` 為附註 Git 標籤，固定經測試的原始碼提交。禁止強制移動、刪除後重建或強制覆寫遠端標籤。
 - 編譯檔的 ProductVersion 包含版本與 Git 短碼；未提交的工作區另有 `.dirty`。視窗顯示產品版本，狀態與啟動紀錄保存完整來源提交及 dirty 狀態。
@@ -12,7 +12,7 @@
 ## 建置、驗證與交付
 
 1. 更新 `VERSION` 與變更紀錄，完成程式碼審查及離線測試。
-2. 提交程式碼，確認工作區乾淨，再執行：
+2. 提交程式碼，確認工作區乾淨。**alpha.9 四方案候選**先用 `research/dualsense-preview/backend/Build-Backend.ps1` 建置受限後端，再以 `research/dualsense-preview/Build-Candidate.ps1 -BackendDirectory <新後端目錄> -OutputDirectory <全新目錄> -RunTests -RequireClean` 建置，使用同目錄的 `Verify-Candidate.ps1` 驗證。以下舊主程式指令僅供原 PS4／舊 DualSense 路線：
 
    ```powershell
    .\research\controller-free-preview\Build.ps1 -RunTests -RequireClean

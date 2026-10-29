@@ -7,10 +7,10 @@
 - 產品主線是 **Windows、免實體手把、鍵盤映射、Sony 官方 PS Remote Play**。名稱是「上班不要玩」。
 - **模擬 PS4 DUALSHOCK 4 已能控制 PS5**：alpha.5 有拔除實體手把與一次 Windows 重開機後的使用者成功回報；alpha.6 PS4 模式亦由使用者確認正常。不是只能操控 PS4 主機。
 - **模擬 PS5 DualSense 尚未成功**：alpha.6 在 Windows 可建立裝置，使用者在官方 Remote Play 回報無反應；切回同版 PS4 模式後可操作。失敗根因尚未定位。
-- 最新交付 **0.1.0-alpha.8** 完成白色幾何 PS 圖示、莓紅介面與設定頁，保留 alpha.7 鍵位及原後端。已編譯、離線驗證、放到桌面，未把 UI 更新當成新的 Sony 相容性證據。
+- 保留的 PS4 成品 **0.1.0-alpha.8** 完成白色幾何 PS 圖示、莓紅介面與設定頁，保留 alpha.7 鍵位及原後端。新 **0.1.0-alpha.9** 是另一個 [DualSense 四方案測試程式](../research/dualsense-preview/README.md)，不能拿它替換已可用的 alpha.8 PS4 執行檔；官方 Remote Play 操作仍待使用者驗證。
 - 本次交接唯讀檢查發現 alpha.8 已在執行，官方 Remote Play 仍是原先程序；**尚未收到使用者對 alpha.8 的遊戲操作及視覺驗收回報**。程序狀態會變動，下串先唯讀確認，不按歷史 PID 操作。
 - 使用者最新順序是：**完成 UI／圖示後，接著研究如何讓 DualSense 模擬被官方 Remote Play 接受**。可先進行不影響現有連線的原始碼研究與隔離協定測試。
-- **接手後的隔離研究已完成一階段**：新增 [V5 研究工具](../research/dualsense-v5-test/README.md)，固定候選來源的 V5／使用者空間 USB/IP 往返通過；找到並修正候選轉接層的觸控 inactive 格式差異。這不是新的成品交付，alpha.8 不變。候選正式 Windows CLI 的驅動版本硬性檢查仍擋住直接替換，Windows／Sony 驗收尚未進行；詳見[本階段證據](../research/dualsense-v5-test/RESULTS-20261029.md)。
+- **隔離研究已完成兩階段**：[V5 使用者空間驗證](../research/dualsense-v5-test/RESULTS-20261029.md) 通過並修正觸控 inactive 差異；後續[四方案的 0.9.8.1 hosted Windows HID 驗證](../research/dualsense-driver-test/RESULTS-20261029.md) 亦全部通過。原候選正式 EXE 的啟動限制與舊 native ABI 未改，候選程式使用另寫的受限入口及匹配 CLI。**Windows Server HID 成功不等於本機 Windows 11／Sony 操作成功。**
 - 使用者進一步明確要求：**沿用目前 0.9.8.1，不降級，不影響能用的 PS4 與 Remote Play**。新增 [獨立 Windows 驅動研究](../research/dualsense-driver-test/README.md)，把接入測試安排在一次性的 GitHub hosted Windows VM；不得把該安裝／接入流程搬到使用者電腦執行。
 
 ## 2. GitHub、版本與哪些東西沒有公開
@@ -44,7 +44,7 @@ GitHub 保存：自製原始碼、研究與實機紀錄、設計素材／預覽�
 | 項目 | 現況 | 還缺什麼 |
 | --- | --- | --- |
 | 免手把 DS4 → PS5 | alpha.5／alpha.6 使用者實機通過，一次重開機成功 | 多種啟動順序、反覆重連、全按鍵、長時間及第二台電腦 |
-| 免手把 DualSense | 原版後端的 Windows 接入／輸出通過，Sony 操作失敗 | 下一候選協定、驅動相容性與真正 Sony 操作驗收 |
+| 免手把 DualSense | 原版 Sony 操作失敗；新候選四方案的 0.9.8.1 hosted Windows HID／清理通過 | alpha.9 使用者本機與真正 Sony 操作驗收；音訊／長時間另驗 |
 | 22 動作自訂鍵 | 實作、儲存、載入、清除、重複鍵檢查及離線測試完成 | 最新版完整實機回歸 |
 | 每鍵連點 | 關閉／按住／按一下啟停；20–5000 毫秒；預設 100 | 實機逐項驗收及長時間停止可靠性 |
 | UI／圖示 | alpha.8 已交付；主色 `#D62355`、白色圖示、狀態燈 | 使用者視覺確認、150%／200% DPI、多螢幕 |
@@ -94,10 +94,11 @@ alpha.7／alpha.8 新建或「恢復預設」的排列如下；已有格式 1／
 | `research/dualsense-usb-test/` | 現有 DualSense 使用者空間 USB/IP 測試、後續候選研究 |
 | `research/dualsense-v5-test/` | 固定 hbashton 候選 V5 轉接、離線測試、純使用者空間 lab server；不可作玩家後端 |
 | `research/dualsense-driver-test/` | 僅供 GitHub hosted Windows VM 的 0.9.8.1 接入／HID 讀回研究；禁止本機啟動 |
+| `research/dualsense-preview/` | alpha.9 四方案玩家候選、獨立傳輸／受限後端／建置；使用 33641/33642，設定唯讀 |
 | `research/native-probe/` | Sony handle 唯讀檢查，`--dualsense` 限定 `054C:0CE6` |
 | `packaging/Verify-ControllerFreeBuild.ps1` | 來源／檔案版本、雜湊、品牌資源驗證 |
 
-不要誤用 `packaging/Build-Preview.ps1` 或 `src/physical-keyboard/Build.ps1` 當作免手把成品建置；前者封裝歷史實體中繼版。`docs/architecture.md` 原有內容亦屬較早的路線研究。
+alpha.9 必須使用 `research/dualsense-preview/Build-Candidate.ps1`；原 `controller-free-preview/Build.ps1` 仍是 alpha.8 所用 PS4／舊 DualSense 主程式，不能拿它交付新的四方案。不要誤用 `packaging/Build-Preview.ps1` 或 `src/physical-keyboard/Build.ps1`；它們是歷史路線。`docs/architecture.md` 原有內容亦屬較早研究。
 
 目前後端是已固定雜湊並驗證簽章的 **Alia5 VIIPER 0.9.0**；接收端是已安裝的 **usbip-win2 0.9.8.1**。本機通訊僅 loopback，主程式 API 埠 33242、USB/IP 埠 33241，明確匯入自己建立的裝置。DS4 VID/PID `054C:09CC`；DualSense `054C:0CE6`。不要將 VID/PID 相同當成完整實作或 Sony 相容性的證明。
 
@@ -115,7 +116,7 @@ alpha.7／alpha.8 新建或「恢復預設」的排列如下；已有格式 1／
 
 接續順序：
 
-前述步驟 2、3 的 V5／使用者空間部分已有[本輪結果](../research/dualsense-v5-test/RESULTS-20261029.md)：104 項自製離線檢查、70 項 USB/IP 檢查與 13 個上游精準測試通過。下一輪先讀該結果，無需重做原版 62 項試驗；**仍缺現有 0.9.8.1 成套驅動的隔離 Windows 相容性證據及真正 Sony 操作**。保留以下整體順序作驗收界線。
+前述 V5／使用者空間部分已有[結果](../research/dualsense-v5-test/RESULTS-20261029.md)：104 項自製離線檢查、70 項 USB/IP 檢查與 13 個上游精準測試通過。後續 [CI 40838199781](https://github.com/xiunlee/ps-remote-play-keyboard/actions/runs/40838199781) 四個獨立 Windows VM 各通過 63 項 HID 檢查與自有裝置移除，現有 0.9.8.1 成套驅動不需降級。下一步是 alpha.9 本機四方案操作驗證，不重做原版 62 項試驗；**Sony 實際操作、音訊串流及長時間仍未通過**。以下保留整體驗收順序。
 
 1. 唯讀核對目前版本、分支、程序及既有資料；先保護正常的 DS4 連線，不重做已完成研究。
 2. 以固定 tag／commit 比較複合描述、feature/control 回覆及 V5 協定；在獨立研究目錄實作候選 adapter 與離線測試。預設 PS4 不變。
@@ -136,7 +137,7 @@ alpha.7／alpha.8 新建或「恢復預設」的排列如下；已有格式 1／
 - 其他版本保留於 `versions`；alpha.5 原始成功基準另在 `versioned-baselines\0.1.0-alpha.5`。alpha.7 前的個人設定備份位於 `profile-backups`，不公開內容。
 - 回退先正常退出我們的程式，再開保留版；不要強殺 Sony，也不要同時開兩版。
 
-遵循 [版本規則](VERSIONING.md)：後續有程式變更的交付版本從 alpha.9 起增加，不覆寫 alpha.8、不重用或移動既有 tag。文件／驗收補記不用升程式版本。
+遵循 [版本規則](VERSIONING.md)：本次四方案候選使用 alpha.9，之後有應用程式碼變更的交付從 alpha.10 起增加，不覆寫 alpha.8／9、不重用或移動既有 tag。文件／驗收補記不用升程式版本。
 
 建置前提交程式碼、保持工作區乾淨；使用 `research/controller-free-preview/Build.ps1 -RunTests -RequireClean`，再用 `packaging/Verify-ControllerFreeBuild.ps1 -BuildDirectory <新建置目錄> -RequireClean` 驗證。**在已標記的 alpha.8 上新增文件後，不應為重新編譯而移動標籤；若要精確重現，使用該標籤的隔離 checkout，若交付新程式則升版本。**
 

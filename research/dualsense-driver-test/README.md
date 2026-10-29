@@ -1,5 +1,7 @@
 # DualSense 與既有 0.9.8.1 驅動的隔離驗證
 
+**四方案已通過 hosted Windows HID 讀回與清理**，詳見 [實測結果](RESULTS-20261029.md)。Sony Remote Play 操作仍未驗證。
+
 這是獨立研究工具，不是新版「上班不要玩」，也不供玩家啟動。成品維持 alpha.8；不得用本工具替換現行 PS4 後端。
 
 目的：在可丟棄的 GitHub 標準 Windows 測試機，安裝與本機相同的官方 usbip-win2 **0.9.8.1**，測試固定 hbashton 候選的複合 DualSense 接入、實際 HID 按鍵讀回及移除。**不在使用者電腦安裝或切換驅動，不連線 Sony、不擷取鍵盤，也不將 Windows 通過稱作 Remote Play 成功。**
