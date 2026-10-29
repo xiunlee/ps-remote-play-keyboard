@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$Zig,
-    [string]$Version='0.1.0-alpha.1',
+    [string]$Version='0.1.0-alpha.2',
     [string]$OutputRoot=(Join-Path $env:USERPROFILE '.pskeyboard-tools\release-candidates')
 )
 # Build/package only: never executes setup, launcher, HID observation or Sony.
@@ -21,12 +21,13 @@ foreach($file in @('PSKeyboard-Physical.exe','pskb-keyboard-merge.dll')) {
     Copy-Item -LiteralPath (Join-Path $work $file) -Destination (Join-Path $stage $file)
 }
 New-Item -ItemType Directory -Path (Join-Path $stage 'operator-tools') | Out-Null
-foreach($file in @('Install-Exporter.ps1','Switch-PhysicalDriver.ps1','Start-ExporterService.ps1','Open-PhysicalRelay.ps1')) {
+foreach($file in @('Install-Exporter.ps1','Switch-PhysicalDriver.ps1','Start-ExporterService.ps1')) {
     $text=[IO.File]::ReadAllText((Join-Path $repo ('src\physical-keyboard\'+$file)),[Text.Encoding]::UTF8)
     [IO.File]::WriteAllText((Join-Path $stage ('operator-tools\'+$file)),$text,(New-Object Text.UTF8Encoding($true)))
 }
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'PREVIEW-README.txt') -Destination (Join-Path $stage '請先閱讀.txt')
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'DEPENDENCIES.json') -Destination (Join-Path $stage 'DEPENDENCIES.json')
+Copy-Item -LiteralPath (Join-Path $repo 'docs\PRODUCT-SCOPE.md') -Destination (Join-Path $stage 'PRODUCT-SCOPE.md')
 Copy-Item -LiteralPath (Join-Path $repo 'src\physical-keyboard\Check-Status.ps1') -Destination (Join-Path $stage 'Check-Status.ps1')
 $commit=(& git -C $repo rev-parse HEAD).Trim()
 if($LASTEXITCODE -ne 0){throw 'Cannot identify source revision.'}

@@ -14,6 +14,7 @@
 - [USB/IP 中繼與驗證](research/physical-usb-relay/README.md)：限定本機、單一裝置，核對實際 HID 輸入通道後才合併按鍵。
 - [實機測試準備](research/physical-usb-relay/FEASIBILITY.md)：免費簽章驅動、單一實體裝置切換、網路限制及還原步驟。
 - [本機實測紀錄](research/physical-usb-relay/LIVE-TRIAL.md)：區分使用者的正常測試回報、本機輸出核對與尚未逐項確認的功能；原始手把驅動還原仍未實測。
+- [發布前功能與支援範圍](docs/PRODUCT-SCOPE.md)：自訂鍵盤、狀態燈、系統語言，以及其他手把／免手把／Mac 的目前界線；先完善再發布。
 
 ## 已測試但沒有 PS5 控制效果：獨立 USB 手把
 

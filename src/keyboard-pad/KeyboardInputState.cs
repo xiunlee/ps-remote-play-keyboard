@@ -11,7 +11,16 @@ namespace PSKeyboard
         private readonly bool[] capturedDown = new bool[256];
         private readonly bool[] disarmed = new bool[256];
         private readonly uint[] actionByKey = new uint[256];
+        private readonly Func<int, uint> resolver;
         private uint held;
+
+        public KeyboardInputState() : this(KeyboardMapping.ActionForKey) { }
+
+        public KeyboardInputState(Func<int, uint> resolver)
+        {
+            if (resolver == null) throw new ArgumentNullException("resolver");
+            this.resolver = resolver;
+        }
 
         public uint Held { get { lock (gate) { return held; } } }
 
@@ -47,13 +56,14 @@ namespace PSKeyboard
                             bool canCapture)
         {
             if (injected || down == up) return false;
-            uint action = KeyboardMapping.ActionForKey(virtualKey);
             lock (gate)
             {
                 if (!canCapture) ResetCore();
-                if (virtualKey < 0 || virtualKey >= physicalDown.Length || action == 0)
+                if (virtualKey < 0 || virtualKey >= physicalDown.Length)
                     return false;
 
+                // A captured release still belongs to its original down even
+                // if that key has been removed from the current profile.
                 if (up)
                 {
                     bool swallow = capturedDown[virtualKey];
@@ -73,12 +83,16 @@ namespace PSKeyboard
                     return capturedDown[virtualKey];
                 }
 
+                uint action = resolver(virtualKey);
+                bool capture = canCapture && action != 0;
+                // Track unmapped downs too: changing a mapping must not claim
+                // a press which Windows already received before that change.
                 physicalDown[virtualKey] = true;
-                capturedDown[virtualKey] = canCapture;
-                disarmed[virtualKey] = !canCapture;
+                capturedDown[virtualKey] = capture;
+                disarmed[virtualKey] = !capture;
                 actionByKey[virtualKey] = action;
                 RecomputeHeld();
-                return canCapture;
+                return capture;
             }
         }
     }
