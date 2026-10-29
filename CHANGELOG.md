@@ -1,12 +1,15 @@
 # 版本紀錄
 
-所有日期採 Asia/Taipei。alpha.10 以前為內部測試交付，alpha.11／12 為免費開源的公開測試版；最新已發布為 **v0.1.0 首個正式發行版**，0.1.1 國際化品牌修正準備中。Git 標籤只固定原始碼；公開下載與實機驗收分開記錄。
+所有日期採 Asia/Taipei。alpha.10 以前為內部測試交付，alpha.11／12 為免費開源的公開測試版；最新已發布為 **v0.1.1 國際化品牌修正版**。Git 標籤只固定原始碼；公開下載與實機驗收分開記錄。
 
-## 0.1.1 — 國際化品牌修正準備中（2026-10-29）
+## 0.1.1 — 國際化品牌修正（2026-10-29）
 
 - 依使用者要求，中文介面保留「上班不要玩」，英文及其他非中文語系統一使用 **PS Remote Play Keyboard**；修正主畫面、設定頁、說明與回饋主旨的產品名，英文手冊及英文發行說明也不混入中文品牌。
 - 保留九語、2D／JRPG 定位、22 動作改鍵／連點、F8／前景保護、設定儲存規則及目前 0.9.8.1 相依需求；未簽章、逐項實機待驗及《Final Fantasy Resonance》回報未指定 build 的界線不變。
-- 本版最終來源、乾淨建置、測試、封裝、發布與交付尚待完成；不預填成功數字，不覆寫已發布的 v0.1.0 或歷史 alpha 附件／標籤。
+- 固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629` 完成獨立乾淨建置：**6912 項 C# 檢查**（162＋2890＋149＋276＋101＋36＋167＋3131）、5743 項 native 及 C# ABI 驗證通過；公開包 39／39 項稽核通過。後端沿用 r4 與先前 Go 證據，未重跑 Go 測試；三個 runtime 二進位仍為 NotSigned。
+- 已發布 [PS Remote Play Keyboard V 0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)，Release ID `427807747`，`prerelease=false` 且為 GitHub latest；四附件匿名下載雜湊全數吻合，本機程式、封存及桌面入口交付完成。不覆寫 v0.1.0 或歷史 alpha 附件／標籤，詳見[發布紀錄](research/dualsense-preview/RELEASE-0.1.1.md)。
+- 九張最終主畫面全部目視；九張設定頁 SHA-256 與已審閱 v0.1.0 圖片相同，沿用該視覺證據。另有開發階段 11 個離線排版情境、0 項問題；母語校閱、實際高 DPI、多螢幕及本版逐項實機仍待驗。
+- 本輪舊版與重建暫存清理完成：移除 9 項、753,491,748 logical bytes，失敗 0 項；99 項原已不存在，2 份小型 log 保留。`versions`／`versioned-archives` 均只剩 0.1.1，個人設定／備份、驅動、Sony 及標籤前後一致。這是邏輯刪除大小，不是淨磁碟差；歷史 v0.1.0 的清理數字不重複計入。
 
 ## 0.1.0 — 正式首發（2026-10-29）
 
@@ -15,7 +18,7 @@
 - 沿用九語介面、2D／JRPG 定位、22 動作改鍵與連點、F8／前景保護及自願贊助。命名調整不代表控制協定或實機驗收改善；三元件未簽章、外部成套 0.9.8.1 與逐項實機待驗的限制保留。
 - 《Final Fantasy Resonance》正常操作回報仍記為 2026-10-29 使用者回報、工具 build 未指定，不當作 0.1.0 逐鍵／連點驗收或所有 JRPG 的保證。
 - 固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe` 已完成獨立乾淨建置：5834 項 C#（162＋2472＋149＋276＋101＋36＋167＋2471）、5743 項 native 及 ABI 檢查、67 項版號純邏輯檢查通過；35／35 項公開包稽核通過。三個 runtime 二進位仍為 NotSigned，後端沿用 r4 與其先前 Go 測試證據。
-- [v0.1.0 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0)已公開，Release ID `427775269`，`prerelease=false`、`make_latest=true`，GitHub latest API 已核對為 v0.1.0。執行包與完整對應原始碼另存新附件，不覆寫 alpha.11／12；詳見[發布紀錄](research/dualsense-preview/RELEASE-0.1.0.md)。
+- [v0.1.0 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0)已公開，Release ID `427775269`，`prerelease=false`，發布時以 `make_latest=true` 設為最新，當時 GitHub latest API 已核對為 v0.1.0。執行包與完整對應原始碼另存新附件，不覆寫 alpha.11／12；詳見[發布紀錄](research/dualsense-preview/RELEASE-0.1.0.md)。
 - 九張新版主畫面已逐張目視；九張設定頁圖片與已審閱的 alpha.12 SHA-256 相同，沿用該視覺證據。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。
 - 四個公開附件匿名下載的 bytes／SHA-256 全部吻合；本機 v0.1.0 程式、封存與桌面入口已交付，沒有啟動一般模式。舊版清理已完成：最後 26 項 1,583,433,983 bytes，與先前 92 項 4,006,258,013 bytes 累計 118 項、5,589,691,996 logical bytes，包含重建暫存，**不是淨磁碟差**。97 項原已不存在，2 份小型 log 刻意保留；個人設定／備份、驅動、Sony 與 Git 標籤比對通過。
 

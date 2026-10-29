@@ -1,4 +1,4 @@
-# PS Remote Play Keyboard
+# PS Remote Play Keyboard V 0.1.1
 
 [Traditional Chinese](README.md) · **English**
 
@@ -10,17 +10,17 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 ## Download and status
 
-**v0.1.1 is being prepared to complete the international branding.** English and all other non-Chinese interfaces will use **PS Remote Play Keyboard** consistently in titles, descriptions and feedback subjects. This update has not been released yet; the current download remains v0.1.0 below.
+**PS Remote Play Keyboard V 0.1.1 is available as the latest regular release.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.1/PSKeyboard-0.1.1-windows-x64.zip), or visit the [v0.1.1 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1) for the corresponding source and SHA-256 checksums. GitHub's latest release and all four anonymously downloaded asset hashes have been verified. The v0.1.0 and historical alpha tags and assets remain available. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
 
-**v0.1.0, the first regular release, is available.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0/PSKeyboard-0.1.0-windows-x64.zip), or visit the [v0.1.0 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0) for the corresponding source and SHA-256 checksums. GitHub's latest release has been confirmed as `v0.1.0`; the alpha.11 and alpha.12 test-release tags and assets remain available. The version no longer has an alpha suffix, but detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
+All non-Chinese interfaces now use **PS Remote Play Keyboard** consistently in the main window, binding editor, descriptions and feedback subjects. Chinese interfaces retain their Chinese product name.
 
-The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.0.md). A Mac version has not been developed; the [Mac handoff](docs/MAC-HANDOFF.md) describes the next research stage. Both records are in Traditional Chinese.
+The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.1.md). A Mac version has not been developed; the [Mac handoff](docs/MAC-HANDOFF.md) describes the next research stage. Both records are in Traditional Chinese.
 
 For alpha.9, a user [reported successful PS5 control through the official Remote Play app](research/dualsense-preview/ALPHA9-TRIAL.md) with all four DualSense configurations. The current version uses their chosen second configuration: **standard DualSense, gamepad only**. Alpha.10 integrated key bindings and per-key repeat and was delivered locally; alpha.11 adds the free/open-source notice, feedback and public packaging. These results do not establish compatibility with every PC, game or later build.
 
-**Interface language:** the app supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. The published v0.1.0 still retains Chinese branding in some non-Chinese screens; v0.1.1 is being prepared to correct this. Its final checks are pending. Native-speaker review, real high-DPI behavior, multi-monitor use and detailed PS5 acceptance remain unverified.
+**Interface language:** the app supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. International branding and offline language checks are complete for v0.1.1. Native-speaker review, real high-DPI behavior, multi-monitor use and detailed PS5 acceptance remain unverified. [Main-window preview](assets/previews/0.1.1/main-en.png) · [Binding-editor preview](assets/previews/0.1.1/editor-en.png), both rendered offline.
 
-**User game report:** On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The report did not identify the tool's build, so it does not establish v0.1.0 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
+**User game report:** On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The report did not identify the tool's build, so it does not establish v0.1.1 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
 
 ## Requirements
 
