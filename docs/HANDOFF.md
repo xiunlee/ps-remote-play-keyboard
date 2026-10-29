@@ -10,7 +10,7 @@
 - **alpha.9 DualSense 已有官方 Remote Play 控制 PS5 的使用者成功回報**：使用者表示「四種都可以 保留第二種就好了」，指定一般 DualSense／純手把 `dualsensegamepadv5`。見 [alpha.9 實機補記](../research/dualsense-preview/ALPHA9-TRIAL.md)。這不是由 Windows 辨識或 CI 推論，亦不代表逐鍵、重開機、長時間或音訊／觸覺全部驗收。
 - alpha.6 原版 DualSense 在 Windows 可建立裝置但 Sony 無反應，屬於**歷史失敗**；切回同版 PS4 可操作。alpha.9 成功仍不足以定位原版失敗的唯一根因。alpha.8 是先前 PS4 品牌介面版，完成白色幾何 PS 圖示與 `#D62355` 配色。
 - 使用者接續要求「把我們的按鍵設定 連點 那些功能都放進來吧，就用這版本」。**0.1.0-alpha.10 已完成乾淨建置、本機交付及離線驗證**，固定第二種模式、恢復完整按鍵／連點設定並取消 30 分鐘自動結束限制；[交付紀錄](../research/dualsense-preview/ALPHA10-TRIAL.md)。已建立本地固定標籤，本次文件更新時尚未推送遠端，亦未取得該版實機回報，不覆寫成下一版。
-- **0.1.0-alpha.11 正在準備公開 alpha 草稿**：新增免費開源／作者署名、自願 US$1 贊助三隻貓咪罐頭文案、意見回饋，以及可從來源建置的公開封裝。使用者已撤回先前 PayPal 網址，`SponsorUrl` 為空、不顯示贊助按鈕，等待正確連結；`xiun1019@gmail.com` 回饋仍有效。**尚未完成 alpha.11 公開發布或使用者實機驗收**，完成建置封裝核對後可發布免費版，贊助另待正確網址。
+- **0.1.0-alpha.11 正在準備免費公開 alpha**：新增免費開源／作者署名、自願贊助 US$1 幫三隻貓咪買罐頭、意見回饋，以及可從來源建置的公開封裝。使用者最後指定的唯一公開入口為 [PayPal 贊助頁](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)，僅點擊後開瀏覽器，由 PayPal 處理收款，本程式不接收付款資料；公開頁設定已唯讀核對為啟用、USD 1.00。`xiun1019@gmail.com` 回饋仍有效。**alpha.11 尚未建立版本標籤、本機交付、公開發布或取得使用者實機驗收**；`35eee` 開頭的提交只是未發布候選，最終修正可仍用同版號另建全新產物，不覆寫舊建置。完成建置封裝核對後可發布免費版。
 - 使用者因空間有限授權「舊版本在本地端都清除吧，就留下最新版本」，取代先前本機保留多版本的規則。alpha.11 建置交付及正常切換後，最終只留 alpha.11；仍執行中的舊版先正常退出。個人設定／備份、GitHub 歷史標籤、研究與 PS4 原始碼仍保留。**本段記錄授權，尚不代表清理完成**。
 - **隔離研究已完成兩階段**：[V5 使用者空間驗證](../research/dualsense-v5-test/RESULTS-20261029.md) 通過並修正觸控 inactive 差異；後續[四方案的 0.9.8.1 hosted Windows HID 驗證](../research/dualsense-driver-test/RESULTS-20261029.md) 亦全部通過。原候選正式 EXE 的啟動限制與舊 native ABI 未改，候選程式使用另寫的受限入口及匹配 CLI。**Windows Server HID 成功不等於本機 Windows 11／Sony 操作成功。**
 - 使用者進一步明確要求：**沿用目前 0.9.8.1，不降級，不影響能用的 PS4 與 Remote Play**。新增 [獨立 Windows 驅動研究](../research/dualsense-driver-test/README.md)，把接入測試安排在一次性的 GitHub hosted Windows VM；不得把該安裝／接入流程搬到使用者電腦執行。
@@ -42,7 +42,7 @@ GitHub 保存自製原始碼、研究／實機紀錄、設計素材、版本標�
 5. 現有自訂鍵與連點不可自動覆寫。「恢復預設」是使用者主動動作，且會將連點改為關閉、間隔 100 毫秒。
 6. 不注入 Sony 程序、不讀取其記憶體、不保存帳號資料或原始按鍵歷史。既有探針僅讀取裝置 handle 中繼資料；查到 handle 不等於遊戲接受輸入。
 7. 清理僅針對當下核對過、由本程式建立的裝置／完整本機 URL，不用全裝置 detach，不停止其他軟體的裝置或服務。
-8. 使用繁體中文、盡量直接完成工作，不反覆詢問已確認偏好。所有功能免費；贊助自願、不解鎖功能、不建立訂閱。收款帳號身分與金融資料由本人處理；不得猜測 PayPal 帳號，不能把回饋信箱當作收款網址。回饋僅由點擊開啟郵件草稿，不自動寄出或附加個人資料。
+8. 使用繁體中文、盡量直接完成工作，不反覆詢問已確認偏好。所有功能免費；贊助自願、不解鎖功能、不建立訂閱。收款帳號身分與金融資料由本人處理；只使用最後指定的 PayPal 公開收款連結，不猜測收款帳號或把回饋信箱當作收款網址，不公開收款者的私人身分與金融資料。回饋僅由點擊開啟郵件草稿，不自動寄出或附加個人資料。
 
 ## 4. 功能完成度
 
@@ -59,7 +59,7 @@ GitHub 保存自製原始碼、研究／實機紀錄、設計素材、版本標�
 | 其他實體手把 | 暫緩；舊有線第一代 DS4 中繼保留備援 | 不作首版必要條件；任意手把尚未支援 |
 | macOS | 不支援 | 須實體 Mac 先驗證輸出，再研究平台移植 |
 | 免費開源發布 | 已選定 GPL-3.0-only、作者 xiunlee；alpha.11 包裝準備中 | 完整對應原始碼、第三方 notices、公開產物隱私／雜湊與下載驗證；乾淨安裝另驗 |
-| 贊助與回饋 | 自願 US$1 三貓文案；mailto 固定回饋信箱，僅版本主旨 | PayPal 等正確網址，目前入口未啟用；不得使用已撤回連結 |
+| 贊助與回饋 | PayPal 自願贊助 US$1 幫三隻貓咪買罐頭；mailto 固定回饋信箱，僅版本主旨 | 唯一現行公開連結 GET 回應 200、設定啟用、金額 USD 1.00；HTTP GET 不等於實付款，尚未驗收入帳，不使用已撤回連結 |
 
 設定頁九語：繁中、簡中、英文、日文、韓文、德文、法文、西班牙文、巴西葡語。不要將設定頁完成說成整個免手把程式已九語。
 
@@ -92,7 +92,7 @@ alpha.7 起的新建或「恢復預設」排列如下，alpha.10／11 沿用；�
 | 路徑 | 用途 |
 | --- | --- |
 | `research/dualsense-preview/DualSensePreview.cs` | **現行 DualSense 主程式**，一般版純手把、按鍵／連點；alpha.11 新增免費與回饋區塊 |
-| `research/dualsense-preview/SupportLinks.cs` | 固定 mailto／PayPal 許可規則；目前 PayPal 空值停用，僅使用者點擊可開外部程式 |
+| `research/dualsense-preview/SupportLinks.cs` | 固定 mailto／PayPal 公開收款連結許可規則，僅使用者點擊可開外部程式；不在本程式收集付款資料 |
 | `research/dualsense-preview/CandidateTransport.cs` | 單一 persona 的 V5 傳輸、回饋與自有 bus 清理 |
 | `research/dualsense-preview/backend/` | 固定 hbashton 來源的受限玩家後端與獨立建置；不走舊 native attach |
 | `research/dualsense-preview/Build-Candidate.ps1`、`Verify-Candidate.ps1` | 現行建置與唯讀完整性驗證；非安裝／啟動工具 |
@@ -130,7 +130,7 @@ alpha.11 必須使用 `research/dualsense-preview/Build-Candidate.ps1`，先建�
 
 1. 唯讀核對目前版本、分支、程序及設定；先保護正在使用的程式與 Sony 連線，不按歷史 PID 操作，也不重做四方案選型或原版 62 項試驗。
 2. alpha.10 乾淨建置、774 項前端／傳輸／設定／連點／UI 檢查及後端純函式測試已通過，兩張最終離線畫面已檢視；先讀 [交付紀錄](../research/dualsense-preview/ALPHA10-TRIAL.md)，不要將其當成遊戲驗收。
-3. 完成 alpha.11 乾淨建置、離線／畫面驗證、完整對應原始碼與第三方 notices、公開材料隱私核對，先備妥 Release 草稿。等待正確 PayPal 網址，不使用已撤回帳號；目前只有回饋入口可用。推送指定來源與標籤後核對遠端，發布完成才補下載證據。
+3. 完成 alpha.11 最終乾淨建置、離線／畫面驗證、完整對應原始碼與第三方 notices、公開材料隱私核對，再發布免費公開 alpha。核對 PayPal 唯一現行公開連結、自願 US$1 三貓贊助文案及點擊才開瀏覽器；不使用已撤回入口，也不代使用者付款。推送指定來源與標籤後核對遠端，發布完成才補下載證據。
 4. 由舊程式正常退出後切換 alpha.11；驗收既有設定沿用、22 動作改鍵、儲存／取消／重新載入、三種連點及不同間隔。不得因切換自行重啟 Sony 或更動驅動。
 5. 驗收切窗清除連點、切回不自動恢復、F8 暫停、編輯期間暫停、斷線停止與自有裝置清理；另外安排長時間及重開機驗收，不把移除 30 分鐘限制說成長時間已通過。
 6. 依最新授權清理舊本地版本與重複建置／封存，最終保留 alpha.11、個人設定／備份及 GitHub 歷史；完成後記錄清理範圍與仍保留項目。只處理已核對且未使用中的專案檔案。
@@ -145,7 +145,7 @@ alpha.9 曾交付至 `%USERPROFILE%\.pskeyboard-tools\versions\0.1.0-alpha.9`，
 
 **alpha.10 已交付**至 `%USERPROFILE%\.pskeyboard-tools\versions\0.1.0-alpha.10`，桌面捷徑「上班不要玩 0.1.0-alpha.10」，入口 `PSKeyboard-DualSensePreview.exe`。來源為 `8359c1ded5cf3310ad85ed3b42e0f47fd55da586`；[建置清單](../packaging/build-records/0.1.0-alpha.10.json)、[封存雜湊](../packaging/build-records/0.1.0-alpha.10-archives.json)及[完整交付紀錄](../research/dualsense-preview/ALPHA10-TRIAL.md)已保存。只執行離線繪圖，沒有代使用者啟動或接入新版，尚無新版實機回報。
 
-alpha.11 的最終建置／封裝、標籤、交付與 Release 狀態完成核對後再補，不預填來源提交或雜湊。免費及回饋功能可在核對完成後發布；PayPal 等正確網址另版啟用。發布包須排除含已撤回網址的舊開發測試產物。
+alpha.11 的最終建置／封裝、標籤、交付與 Release 狀態完成核對後再補，不預填最終來源提交或雜湊。使用者已指定 PayPal 公開入口，免費功能可在建置封裝核對完成後發布，不以收款實測為前提。發布包須排除含已撤回網址的舊開發測試產物；HTTP GET 或頁面可開啟不代表付款已完成或款項已入帳。
 
 最新本機保存規則：
 

@@ -67,7 +67,7 @@ Long sessions, reboots, repeated reconnections, installation on a second PC and 
 
 ## Optional support and feedback
 
-If you find it useful, you're welcome to donate US$1 to help buy canned food for our three cats. **The PayPal link is not enabled yet, and the app currently hides the donation button.** Donations are entirely optional, unlock no features and do not create a subscription.
+If you find the app useful, you can [contribute US$1 through PayPal to support our three cats](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) and help buy them canned food. Contributions are entirely optional, unlock no features and do not create a subscription. Clicking **「贊助貓咪 US$1」 — Support our cats** opens your browser; PayPal handles payment, and this app does not receive or store payment details.
 
 [Send feedback to xiun1019@gmail.com](mailto:xiun1019@gmail.com). Clicking the app's **「意見回饋」 — Feedback** button opens your mail application with only the recipient and a version-specific subject filled in. It does not send the message or attach settings, diagnostics or personal data automatically.
 

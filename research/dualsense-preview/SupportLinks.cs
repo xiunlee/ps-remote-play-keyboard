@@ -6,11 +6,11 @@ namespace PSKeyboard
     // Fixed public destinations only. No account, profile, input, or diagnostic data.
     internal static class SupportLinks
     {
-        // Awaiting the owner's corrected public PayPal destination.
-        internal const string SponsorUrl = "";
+        // User-designated public link. Any payment is handled on PayPal's page.
+        internal const string SponsorUrl = "https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW";
         internal const string FeedbackAddress = "xiun1019@gmail.com";
 
-        internal static bool SponsorAvailable { get { return IsAllowedPayPalUrl(SponsorUrl); } }
+        internal static bool SponsorAvailable { get { return IsAllowedSponsorUrl(SponsorUrl); } }
 
         internal static string FeedbackUrl(string version)
         {
@@ -19,20 +19,11 @@ namespace PSKeyboard
             return "mailto:" + FeedbackAddress + "?subject=" + Uri.EscapeDataString("上班不要玩 " + version + " 意見回饋");
         }
 
-        internal static bool IsAllowedPayPalUrl(string value)
+        internal static bool IsAllowedSponsorUrl(string value)
         {
-            if (String.IsNullOrEmpty(value) || value.Length > 2048 || value != value.Trim()) return false;
-            foreach (char character in value) if (Char.IsControl(character) || character == '\\') return false;
-            Uri uri;
-            if (!Uri.TryCreate(value, UriKind.Absolute, out uri) || uri.Scheme != Uri.UriSchemeHttps ||
-                !uri.IsDefaultPort || uri.UserInfo.Length != 0 || uri.Fragment.Length != 0) return false;
-            string host = uri.DnsSafeHost;
-            bool paypal = String.Equals(host, "www.paypal.com", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(host, "paypal.com", StringComparison.OrdinalIgnoreCase);
-            bool paypalMe = String.Equals(host, "paypal.me", StringComparison.OrdinalIgnoreCase) ||
-                String.Equals(host, "www.paypal.me", StringComparison.OrdinalIgnoreCase);
-            return (paypal && (uri.AbsolutePath == "/donate" || uri.AbsolutePath == "/donate/")) ||
-                (paypalMe && Regex.IsMatch(uri.AbsolutePath, @"\A/[A-Za-z0-9_.-]+/1USD/?\z", RegexOptions.IgnoreCase));
+            // Match the entire raw URL: no credentials, ports, query, fragment,
+            // escaping, path normalization, backslashes or control characters.
+            return value != null && Regex.IsMatch(value, @"\Ahttps://www\.paypal\.com/ncp/payment/[A-Z0-9]{13}\z", RegexOptions.CultureInvariant);
         }
 
         internal static bool IsAllowedLaunchUrl(string value, string version)

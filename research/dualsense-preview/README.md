@@ -25,11 +25,11 @@
 
 ## 贊助與回饋
 
-覺得好用的話，歡迎贊助 US$1，幫我們的三隻貓咪加個罐頭。
+覺得好用的話，歡迎[透過 PayPal 贊助 US$1，幫三隻貓咪買罐頭](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)。
 
-PayPal 贊助連結尚未開放，等待作者提供正確網址。[意見回饋：xiun1019@gmail.com](mailto:xiun1019@gmail.com)
+[意見回饋：xiun1019@gmail.com](mailto:xiun1019@gmail.com)
 
-贊助不解鎖功能、不建立訂閱。目前只有回饋入口可用；待正確贊助網址確認後，才顯示由使用者點擊開啟的 PayPal 按鈕。回饋信只預填收件人與版本主旨，不自動寄出、不附個人設定或診斷資料。授權見 [LICENSE](../../LICENSE)與 [COPYRIGHT.md](../../COPYRIGHT.md)。
+贊助完全自願，不解鎖功能、不建立訂閱。只有點擊「贊助貓咪 US$1」才會開啟瀏覽器，由 PayPal 處理收款；本程式不接收或保存付款資料。回饋信只預填收件人與版本主旨，不自動寄出、不附個人設定或診斷資料。授權見 [LICENSE](../../LICENSE)與 [COPYRIGHT.md](../../COPYRIGHT.md)。
 
 ## 保留與限制
 

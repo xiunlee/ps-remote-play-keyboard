@@ -95,16 +95,19 @@ namespace PSKeyboard
             Check(SupportLinks.IsAllowedLaunchUrl(feedback, version) &&
                 !SupportLinks.IsAllowedLaunchUrl(feedback + "&cc=another@example.com", version), "Only the exact feedback destination can launch.");
             Reject(delegate { SupportLinks.FeedbackUrl(version + "\r\nBcc:another@example.com"); });
-            Check(SupportLinks.IsAllowedPayPalUrl("https://www.paypal.com/donate/?hosted_button_id=review-only") &&
-                SupportLinks.IsAllowedPayPalUrl("https://paypal.me/review-only/1USD"), "Supported PayPal HTTPS forms pass without opening them.");
-            foreach (string invalid in new string[] { "", "http://www.paypal.com/donate/", "https://www.paypal.com.evil.example/",
-                "https://user@www.paypal.com/donate/", "https://www.paypal.com:8443/donate/", "file:///C:/example.exe",
-                "https://www.paypal.com/donate/\r\n", "https://evil.example/", "https://paypal.me/review-only/10USD" })
-                Check(!SupportLinks.IsAllowedPayPalUrl(invalid), "Non-public or untrusted support target is rejected.");
-            Check(String.IsNullOrEmpty(SupportLinks.SponsorUrl) && !SupportLinks.SponsorAvailable &&
-                !SupportLinks.IsAllowedLaunchUrl(SupportLinks.SponsorUrl, version), "Without an approved PayPal destination, sponsorship cannot launch.");
-            Check(!SupportLinks.IsAllowedLaunchUrl("https://www.paypal.com/donate/?hosted_button_id=unconfigured", version),
-                "Allowing a PayPal host does not authorize an arbitrary destination.");
+            Check(SupportLinks.IsAllowedSponsorUrl("https://www.paypal.com/ncp/payment/AAAAAAAAAAAAA"), "The precise PayPal HTTPS host, payment path and token format are supported.");
+            foreach (string invalid in new string[] { null, "", "http://www.paypal.com/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com.evil.example/ncp/payment/HAW9YBJXNEMFW",
+                "https://user@www.paypal.com/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com:8443/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com:443/ncp/payment/HAW9YBJXNEMFW",
+                "https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW?amount=1", "https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW#fragment", "https://www.paypal.com\\ncp/payment/HAW9YBJXNEMFW",
+                "https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW\r\n", " https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW", "https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW ",
+                "https://www.paypal.com/ncp/payment/haw9ybjxnemfw", "https://www.paypal.com/ncp/payment/ABC123", "https://www.paypal.com/ncp/payment/AAAAAAAAAAAAAA",
+                "https://www.paypal.com/ncp/payment/%48AW9YBJXNEMFW", "https://www.paypal.com/other/../ncp/payment/HAW9YBJXNEMFW", "https://paypal.com/ncp/payment/HAW9YBJXNEMFW",
+                "file:///C:/example.exe", "https://evil.example/ncp/payment/HAW9YBJXNEMFW" })
+                Check(!SupportLinks.IsAllowedSponsorUrl(invalid), "Malformed, altered or untrusted sponsor target is rejected.");
+            Check(SupportLinks.SponsorUrl == "https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW" && SupportLinks.SponsorAvailable &&
+                SupportLinks.IsAllowedLaunchUrl(SupportLinks.SponsorUrl, version), "Only the user's latest designated PayPal destination can launch.");
+            Check(!SupportLinks.IsAllowedLaunchUrl("https://www.paypal.com/ncp/payment/AAAAAAAAAAAAA", version),
+                "A valid PayPal payment token format does not authorize another payment page.");
         }
 
         private static void ProfileEditing()

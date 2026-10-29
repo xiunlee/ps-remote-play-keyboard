@@ -284,7 +284,7 @@ namespace PSKeyboard
         }
         private void SupportLinkFailure(bool sponsorship)
         {
-            MessageBox.Show(this, sponsorship ? "無法開啟 PayPal，請稍後再試。" :
+            MessageBox.Show(this, sponsorship ? "無法開啟 PayPal 贊助頁，請稍後再試。" :
                 "無法開啟郵件程式。你可以自行寄信至 " + SupportLinks.FeedbackAddress + "。", "上班不要玩");
         }
 

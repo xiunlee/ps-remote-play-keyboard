@@ -23,8 +23,11 @@ instructions and scripts for rebuilding the shipped components.
 
 Author and feedback: **xiunlee**, <xiun1019@gmail.com>.
 
-Optional sponsorship is not enabled until the author confirms the destination.
-Sponsorship is voluntary and does not unlock features or create a subscription.
+Optional [US$1 contributions through PayPal](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)
+help buy canned food for our three cats. Clicking the sponsorship button opens
+a browser; PayPal handles payment, and this app does not receive or store payment
+details. Sponsorship is voluntary and does not unlock features or create a
+subscription.
 
 This is an independent community project and is not affiliated with or endorsed
 by Sony Interactive Entertainment, PlayStation, PayPal or the upstream projects.

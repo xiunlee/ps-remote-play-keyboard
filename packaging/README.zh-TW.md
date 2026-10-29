@@ -94,6 +94,6 @@ alpha.9 的四種候選已有使用者透過官方 Remote Play 操作 PS5 的成
 
 回饋請寄至 [xiun1019@gmail.com](mailto:xiun1019@gmail.com)，附上程式版本、畫面錯誤與重現步驟即可。程式的回饋按鈕只開啟郵件程式，預填收件人和版本主旨，不會自動寄信或附加個人設定、診斷資料；不需要提供 PSN 密碼或付款資料。
 
-覺得好用的話，歡迎自願贊助 **US$1**，幫我們的三隻貓咪加個罐頭。**PayPal 贊助連結目前未開放**，待作者確認正確網址後才提供；全部功能仍可免費使用，沒有付費解鎖或訂閱。
+覺得好用的話，歡迎[透過 PayPal 自願贊助 US$1，幫三隻貓咪買罐頭](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)。點擊「贊助貓咪 US$1」才會開啟瀏覽器，由 PayPal 處理收款；本程式不接收或保存付款資料。全部功能仍可免費使用，沒有付費解鎖或訂閱。
 
 原創程式作者為 **xiunlee**，採 [GPL 第 3 版，僅此版本](LICENSE)；第三方元件保留各自授權，見 [著作權說明](COPYRIGHT.md)與隨附 `notices` 目錄。[公開儲存庫](https://github.com/xiunlee/ps-remote-play-keyboard/tree/codex/commercial-preview)提供程式說明；對應原始碼與重建資料隨公開版本放在[同一發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。本專案與 Sony、PlayStation 或 PayPal 無隸屬或背書關係。
