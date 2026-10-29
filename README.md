@@ -2,7 +2,7 @@
 
 將鍵盤轉成手把輸入，搭配 Sony 官方 PS Remote Play 使用。主要開發方向為**免實體手把**；專案原名為 PS Remote Play 鍵盤手把。
 
-> **專案狀態：2026-10-29 免手把實機測試成功，使用者重開機後再確認功能正常。** 成功基準為 `0.1.0-alpha.5` 的 PS4 模擬模式；新的 `0.1.0-alpha.6` 加入版本追溯與可選 PS5 DualSense 實驗模式，DualSense 尚未完成官方 Remote Play 操作驗收。長時間使用、各種重連與乾淨電腦安裝仍待驗證，尚未正式發布。
+> **專案狀態：2026-10-29 免手把 PS4 模式實機成功。** `0.1.0-alpha.5` 已有重開機後正常回報；新版 `0.1.0-alpha.6` 的 PS4 模式亦由使用者確認可操作。alpha.6 的 PS5 DualSense 模式能接入 Windows，但官方 Remote Play 操作無反應，保留為實驗選項。主捷徑預設可用的 PS4 模式；[實機紀錄](research/controller-free-preview/ALPHA6-TRIAL.md)。長時間使用、各種重連與乾淨電腦安裝仍待驗證，尚未正式發布。
 
 版本總控：[目前版本](VERSION) · [變更紀錄](CHANGELOG.md) · [版本控管與回退](docs/VERSIONING.md)。
 

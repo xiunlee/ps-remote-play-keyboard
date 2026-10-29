@@ -62,7 +62,7 @@ Sony 官方列出 Windows Remote Play 支援 DUALSHOCK 4、DualSense 與 DualSen
 
 ### 接續的主要驗收關卡
 
-同日使用者重開機後回報「開機了，功能正常」，記入 `0.1.0-alpha.5` DS4 模式的第一次重開機驗收。新 `0.1.0-alpha.6` 可選 DualSense 模式；獨立後端回讀已完成，但 Windows HID 與 Sony 採用輸入尚待實測。其測試不能沿用 DS4 的驗收結果。
+同日使用者重開機後回報「開機了，功能正常」，記入 `0.1.0-alpha.5` DS4 模式的第一次重開機驗收。新 `0.1.0-alpha.6` 的 DualSense 雖已接入 Windows，使用者在 Sony 回報無反應；改回同版 PS4 模式後確認正常。主捷徑預設 PS4，DualSense 保留實驗選項；見[實機紀錄](../research/controller-free-preview/ALPHA6-TRIAL.md)，不能沿用 DS4 的驗收結果。
 
 1. **重開機與首次啟動**：保持實體手把拔除，驗證 Windows 重開後、Sony 先開／候選先開均能正常操作；不能依賴前次留下的裝置或已建立連線。
 2. **重新連線與復原**：驗證 PS5 斷線後重連、候選重開、正常退出與錯誤清理，確認不殘留按鍵、不重複匯入裝置，也不處理其他程式的裝置。

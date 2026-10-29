@@ -9,7 +9,7 @@
 - 增加可選的 PS5 DualSense 實驗模式；預設仍是已通過使用者操作與重開機確認的 PS4 模式。只能在未接入時選擇型號。
 - DualSense 沿用目前 22 個鍵盤動作，正確轉換 PS／觸控板按鈕與 33-byte 輸入、6-byte 回饋，不宣稱完整體感、音訊、自適應扳機或進階觸覺支援。
 - 開發建置通過 36 項控制保護、106 項傳輸／轉換及 13 項版本完整性測試；獨立後端的 62 項使用者空間 USB/IP 回讀通過，沒有匯入 Windows 裝置或操作 Sony。
-- **驗收界線：** 本版 DualSense 尚未完成 Windows HID 與官方 Remote Play 實機操作驗證，不將 alpha.5 的 DS4 成功結果當成 DualSense 成功。
+- **實機結果：** DualSense 已接入 Windows，但使用者在官方 Remote Play 操作無反應；同一版改回 PS4 模式後，使用者確認正常。桌面主捷徑預設 PS4，PS5 暫留實驗選項。完整[驗收紀錄](research/controller-free-preview/ALPHA6-TRIAL.md) 與[建置清單](packaging/build-records/0.1.0-alpha.6.json)另存，不移動既有標籤。
 
 ## 0.1.0-alpha.5 — 2026-10-29
 

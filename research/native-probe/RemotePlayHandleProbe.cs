@@ -75,6 +75,7 @@ internal static class RemotePlayHandleProbe
 
     static int CheckHandle(string[] args)
     {
+        bool dualSense = args.Length == 6 && args[5] == "--dualsense";
         int pid = int.Parse(args[1], CultureInfo.InvariantCulture);
         long start = long.Parse(args[2], CultureInfo.InvariantCulture);
         long value = long.Parse(args[3], NumberStyles.HexNumber, CultureInfo.InvariantCulture);
@@ -99,7 +100,8 @@ internal static class RemotePlayHandleProbe
                     uint kind = GetFileType(duplicate);
                     if (kind == 1 || kind == 3) return 6; // Skip disk files and pipes.
                     Attributes attr = new Attributes(); attr.Size=(uint)Marshal.SizeOf(typeof(Attributes));
-                    if (HidD_GetAttributes(duplicate, ref attr) && attr.Vendor==0x054C && (attr.Product==0x05C4 || attr.Product==0x09CC))
+                    if (HidD_GetAttributes(duplicate, ref attr) && attr.Vendor==0x054C &&
+                        (dualSense ? attr.Product==0x0CE6 : (attr.Product==0x05C4 || attr.Product==0x09CC)))
                     {
                         IoStatus ioStatus; uint mode;
                         uint modeStatus=NtQueryInformationFile(duplicate, out ioStatus, out mode, 4, 16);
@@ -107,12 +109,12 @@ internal static class RemotePlayHandleProbe
                         {
                             IntPtr metadata;
                             // On access denial, request only FILE_READ_ATTRIBUTES
-                            // after VID/PID has identified this as the target DS4.
+                            // after VID/PID has identified the selected controller.
                             if (DuplicateHandle(process, selected.Handle, GetCurrentProcess(), out metadata, 0x80, false, 0))
                                 try { modeStatus=NtQueryInformationFile(metadata, out ioStatus, out mode, 4, 16); }
                                 finally { CloseHandle(metadata); }
                         }
-                        Console.WriteLine("DS4 handle=0x{0:X} access=0x{1:X8} VID=054C PID={6:X4} modeStatus=0x{2:X8} mode=0x{3:X8} syncAlert={4} syncNonAlert={5}",
+                        Console.WriteLine((dualSense ? "DualSense" : "DS4") + " handle=0x{0:X} access=0x{1:X8} VID=054C PID={6:X4} modeStatus=0x{2:X8} mode=0x{3:X8} syncAlert={4} syncNonAlert={5}",
                             value, selected.GrantedAccess, modeStatus, mode, modeStatus==0 && (mode&0x10)!=0, modeStatus==0 && (mode&0x20)!=0, attr.Product);
                         return 0;
                     }
@@ -129,8 +131,10 @@ internal static class RemotePlayHandleProbe
         try
         {
             if (IntPtr.Size != 8) throw new InvalidOperationException("Build this probe for x64");
-            if (args.Length==5 && args[0]=="--check-handle") return CheckHandle(args);
-            if (args.Length!=1) { Console.Error.WriteLine("Usage: RemotePlayHandleProbe.exe <RemotePlay PID>"); return 2; }
+            if ((args.Length==5 || (args.Length==6 && args[5]=="--dualsense")) && args[0]=="--check-handle") return CheckHandle(args);
+            if (args.Length!=1 && !(args.Length==2 && args[1]=="--dualsense")) { Console.Error.WriteLine("Usage: RemotePlayHandleProbe.exe <RemotePlay PID> [--dualsense]"); return 2; }
+            bool dualSense = args.Length==2;
+            string selectedName = dualSense ? "DualSense" : "DS4";
             int pid=int.Parse(args[0], CultureInfo.InvariantCulture);
             using (Process target=ValidateTarget(pid, 0))
             {
@@ -155,16 +159,16 @@ internal static class RemotePlayHandleProbe
                     if (entry.ObjectTypeIndex!=fileType || (entry.GrantedAccess & ~AllowedFileAccess)!=0) continue;
                     if (++candidates > 100) throw new InvalidOperationException("Candidate bound exceeded");
                     ProcessStartInfo info=new ProcessStartInfo(self,
-                        "--check-handle " + pid + " " + start + " " + entry.Handle.ToInt64().ToString("X") + " " + fileType);
+                        "--check-handle " + pid + " " + start + " " + entry.Handle.ToInt64().ToString("X") + " " + fileType + (dualSense ? " --dualsense" : ""));
                     info.UseShellExecute=false; info.CreateNoWindow=true; info.RedirectStandardOutput=true; info.RedirectStandardError=true;
                     using (Process worker=Process.Start(info))
                     {
                         if (!worker.WaitForExit(1500)) { worker.Kill(); worker.WaitForExit(1000); timeouts++; continue; }
                         string output=worker.StandardOutput.ReadToEnd().Trim();
-                        if (worker.ExitCode==0 && output.StartsWith("DS4 handle=", StringComparison.Ordinal)) { matches++; Console.WriteLine(output); }
+                        if (worker.ExitCode==0 && output.StartsWith(selectedName + " handle=", StringComparison.Ordinal)) { matches++; Console.WriteLine(output); }
                     }
                 }
-                Console.WriteLine("Probe: PID={0}, candidates={1}, DS4 matches={2}, timeouts={3}; no reports read", pid, candidates, matches, timeouts);
+                Console.WriteLine("Probe: PID={0}, candidates={1}, " + selectedName + " matches={2}, timeouts={3}; no reports read", pid, candidates, matches, timeouts);
                 return matches>0 ? 0 : 1;
             }
         }

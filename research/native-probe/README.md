@@ -15,6 +15,11 @@ The latter covers the V2 identity used by the VIIPER keyboard-only candidate;
 the output prints the actual PID so physical and virtual observations are not
 conflated. Seeing either handle does not prove the client uses its input.
 
+Pass `--dualsense` after the PID to select only `054C:0CE6` instead. The
+same read-only, access-mask and timeout restrictions apply. Zero matches
+means none were observed among eligible handles at that time; it does not
+prove the process never opened the device or establish why input is ignored.
+
 Only a matching DS4 handle receives the additional `FileModeInformation = 16`
 metadata query. If zero-access querying is denied, the probe retries with
 `FILE_READ_ATTRIBUTES` only. No data-read/write permission is requested.
@@ -26,6 +31,7 @@ $probeDir = Join-Path $env:LOCALAPPDATA 'PSKeyboard\native-probe'
 New-Item -ItemType Directory -Path $probeDir -Force | Out-Null
 & 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe' /nologo /platform:x64 /optimize+ ('/out:' + (Join-Path $probeDir 'RemotePlayHandleProbe.exe')) 'research\native-probe\RemotePlayHandleProbe.cs'
 & (Join-Path $probeDir 'RemotePlayHandleProbe.exe') <RemotePlay-PID>
+& (Join-Path $probeDir 'RemotePlayHandleProbe.exe') <RemotePlay-PID> --dualsense
 ```
 
 ## Observed on 2026-10-28

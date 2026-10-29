@@ -1,6 +1,6 @@
 # 上班不要玩 — 免手把實驗版
 
-**2026-10-29 實機測試成功：** 實體手把拔除後，使用者確認能用鍵盤操作官方 Remote Play 裡的 PS5，並於重開機後再確認功能正常。成功基準是 `0.1.0-alpha.5` 的 PS4 模擬模式。`0.1.0-alpha.6` 增加版本追溯及 PS5 DualSense 選擇；DualSense 尚未完成 Sony 實機驗收。詳細證據見 [LIVE-TRIAL.md](LIVE-TRIAL.md)、[版本紀錄](../../CHANGELOG.md)。
+**2026-10-29 實機測試成功：** 實體手把拔除後，使用者確認能用鍵盤操作官方 Remote Play 裡的 PS5，並於重開機後再確認功能正常。成功基準是 `0.1.0-alpha.5` 的 PS4 模擬模式。新版 alpha.6 的 PS4 模式亦確認正常；DualSense 雖已接入 Windows，首次 Sony 操作測試無反應，保留為實驗選項。詳細證據見 [LIVE-TRIAL.md](LIVE-TRIAL.md)、[alpha.6 驗收](ALPHA6-TRIAL.md)、[版本紀錄](../../CHANGELOG.md)。
 
 沿用新版的自訂按鍵、連點與前景視窗限制；輸出改走既有 VIIPER v0.9.0 與已安裝的 usbip-win2。實體中繼版沒有手把時本來就不輸出，不能用其斷線畫面推論 Sony 是否接受模擬手把。
 
