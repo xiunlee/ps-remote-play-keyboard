@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0-alpha.7",
+  "tag": "v0.1.0-alpha.7",
+  "sourceCommit": "aaef2da98e6c1e8844a0561124f26480e3f68b81",
+  "publicDistribution": false,
+  "files": [
+    {
+      "file": "PSKeyboard-0.1.0-alpha.7-local-preview.zip",
+      "sha256": "87C445748E07FCBF46B85ED2F14669567322B6203BD3F17C4A64A36F46886249"
+    },
+    {
+      "file": "PSKeyboard-0.1.0-alpha.7-source.zip",
+      "sha256": "B7E0FA31F64BDB4940B6E5816794C2F84E4EE631AD7C413565A3A49752FB972E"
+    }
+  ]
+}
