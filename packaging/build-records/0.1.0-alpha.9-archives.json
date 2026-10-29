@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0-alpha.9",
+  "sourceCommit": "18c370cb528bbc2107827bebb7799bdb095e133b",
+  "runtimeZipSha256": "5939EB6192582719BD665C42F410710B65CF0F1981EDBC188ED458DC6E20571E",
+  "sourceZipSha256": "45593D1B5C2715BF07E5460FCF767C325FB95E363680A41ECCBB1E86DA228FDC",
+  "entryPoint": "PSKeyboard-DualSensePreview.exe",
+  "sonyTested": false
+}

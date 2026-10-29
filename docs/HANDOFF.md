@@ -23,6 +23,7 @@
 | `v0.1.0-alpha.6` | `15fc0d35ae93737317684fc33920f6f8c7dc5a1c` | 加入版本控管與 DualSense 實驗；PS4 通過、PS5 操作未通過 |
 | `v0.1.0-alpha.7` | `aaef2da98e6c1e8844a0561124f26480e3f68b81` | 人體工學預設鍵位、保留使用者設定 |
 | `v0.1.0-alpha.8` | `a6c5c2a99ed32709287000319ec0f44f95254847` | 圖示與 UI；後端及控制規則未改 |
+| `v0.1.0-alpha.9` | `18c370cb528bbc2107827bebb7799bdb095e133b` | 獨立 DualSense 四方案候選；hosted HID 通過，Sony 操作待使用者驗收 |
 
 alpha.8 建置／封存紀錄與最終畫面另於 `cf51de1` 提交；本交接文件再作文件提交。**文件提交超前版本標籤是正常的，不要移動舊標籤來追齊分支。**
 
@@ -127,6 +128,8 @@ alpha.9 必須使用 `research/dualsense-preview/Build-Candidate.ps1`；原 `con
 ## 8. 本機交付、回退與版本規則
 
 公開文件用環境變數表示路徑；下串在使用者原工作目錄繼續即可。不要把個人設定、程序收據、原始 USB／按鍵資料或裝置序號推送到公開 GitHub。
+
+alpha.9 已交付至 `%USERPROFILE%\.pskeyboard-tools\versions\0.1.0-alpha.9`，入口 `PSKeyboard-DualSensePreview.exe`，桌面捷徑「上班不要玩 0.1.0-alpha.9 四方案測試」。開啟不自動接入，鍵盤暫停；只讀既有設定，四方案由使用者逐一連接。完整 [交付／待驗收紀錄](../research/dualsense-preview/ALPHA9-TRIAL.md)、[建置](../packaging/build-records/0.1.0-alpha.9.json) 與[封存](../packaging/build-records/0.1.0-alpha.9-archives.json)已保存。**尚未在使用者本機接入或驗證 Sony 操作；不能把 hosted 成功外推為已可玩。** 下列 alpha.8 資料作可用 PS4 回退保留。
 
 - alpha.8 安裝目錄：`%USERPROFILE%\.pskeyboard-tools\versions\0.1.0-alpha.8`。
 - 執行檔：`PSKeyboard-ControllerFree.exe`；同目錄保留 `pskb-keyboard-merge.dll`、`viiper.exe`、`BUILD.json`、`SHA256SUMS.txt`。

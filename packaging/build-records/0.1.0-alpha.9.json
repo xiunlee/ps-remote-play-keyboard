@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "product": "上班不要玩",
+  "variant": "dualsense-candidate",
+  "version": "0.1.0-alpha.9",
+  "fileVersion": "0.1.0.9",
+  "informationalVersion": "0.1.0-alpha.9+g18c370cb528b",
+  "sourceCommit": "18c370cb528bbc2107827bebb7799bdb095e133b",
+  "workingTreeDirty": false,
+  "builtUtc": "2026-10-29T08:11:22.1927616Z",
+  "entryPoint": "PSKeyboard-DualSensePreview.exe",
+  "channel": "local-compatibility-preview",
+  "driversBundled": false,
+  "sonyOperationVerified": false,
+  "commercialReady": false,
+  "profileReadOnly": true,
+  "defaultConnected": false,
+  "defaultEnabled": false,
+  "driverVersion": "0.9.8.1",
+  "apiPort": 33642,
+  "usbPort": 33641,
+  "backendSha256": "B9F2010ADAD256A24E6747CE9E4318D34AB4A4BFE826341DB6C71A9B6F9FDEE2",
+  "nativeSha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE",
+  "controllerModes": [
+    "dualsensecombinedaudioduplexv5",
+    "dualsensegamepadv5",
+    "dualsenseedgecombinedaudioduplexv5",
+    "dualsenseedgegamepadv5"
+  ],
+  "driverValidationRun": "https://github.com/xiunlee/ps-remote-play-keyboard/actions/runs/40838199781",
+  "testsRun": true,
+  "testResults": [
+    {
+      "kind": "candidate-guards",
+      "passed": true,
+      "output": [
+        "DUALSENSE_PREVIEW_GUARDS_PASS checks=52; no GUI, profile, process, driver, keyboard, Sony or network operations"
+      ]
+    },
+    {
+      "kind": "candidate-fake-transport",
+      "passed": true
+    },
+    {
+      "kind": "BindingProfileTests",
+      "passed": true,
+      "output": [
+        "BINDING_PROFILE_PASS checks=276; isolated temporary files and pure key events only"
+      ]
+    },
+    {
+      "kind": "RapidFireTests",
+      "passed": true,
+      "output": [
+        "RAPID_FIRE_PASS checks=101; fake clocks and pure key/action events only"
+      ]
+    },
+    {
+      "kind": "KeyboardControlPipelineTests",
+      "passed": true,
+      "output": [
+        "KEYBOARD_PIPELINE_PASS checks=36; fake clock, native merge only; no live input or devices"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/branding/app.ico",
+      "sha256": "8F4DC012FF28FA08C6B36892FFB0B4F76C6F54F061B0B2F5BCC7DE2BF1A0C268"
+    },
+    {
+      "path": "assets/branding/ps-mark.png",
+      "sha256": "FD8EFE0032AF465C486D322B0D0897F597ECB1A9FAE38CC327E891E80F695831"
+    },
+    {
+      "path": "research/dualsense-preview/backend/Build-Backend.ps1",
+      "sha256": "5212AE48E6AEB63B0B013C0344EF0F2BD34C95081551388B8720FAF84ADB8B83"
+    },
+    {
+      "path": "research/dualsense-preview/backend/main_test.go",
+      "sha256": "D9BBFEF50826D60571F5F6599E7297A6AAEA9D0720245AFD022D889EA1D9DB77"
+    },
+    {
+      "path": "research/dualsense-preview/backend/main.go",
+      "sha256": "1BDE5FDED08B4F3CEF9028F882C0686526B9ECC1961B20DA81FD5328F8716196"
+    },
+    {
+      "path": "research/dualsense-preview/backend/README.md",
+      "sha256": "5B5A7E15F278194A921B04C4178EF7549B4ADEC787E5D374C0668395A0ED6FF2"
+    },
+    {
+      "path": "research/dualsense-preview/Build-Candidate.ps1",
+      "sha256": "BFF39BE12399AC007CE6C9475FED548FDAFEDE4D799FCA2A2C5F34B74473953B"
+    },
+    {
+      "path": "research/dualsense-preview/CandidateTransport.cs",
+      "sha256": "E0C7559580C6684A3EC484FB111A47B3F44C5BE497F0FC4D7B98F9DC3A94A37C"
+    },
+    {
+      "path": "research/dualsense-preview/CandidateTransportTests.cs",
+      "sha256": "D796AFA9B0E099DB6166033BFEE71B12E4DD48E4BD66C3B37268D8D89FAFF09D"
+    },
+    {
+      "path": "research/dualsense-preview/DualSensePreview.cs",
+      "sha256": "61979CADA55B0768598C73964334EB59F96B043A7711DA84803429EEEB0B596A"
+    },
+    {
+      "path": "research/dualsense-preview/PreviewGuardTests.cs",
+      "sha256": "DF84F6EC2DDF2D3301F7A8A7EAEB4D2527ACEFB0971AD50B16F96961A8183CA7"
+    },
+    {
+      "path": "research/dualsense-preview/README.md",
+      "sha256": "78F2A289381145423B583768303E655F90CA9D1F1AE55D822D50F7753002716E"
+    },
+    {
+      "path": "research/dualsense-preview/RunTransportTests.ps1",
+      "sha256": "81637E73A54EBB93F06DBA9AE55CC03D8D82A82A562420187271D0E05B877002"
+    },
+    {
+      "path": "research/dualsense-preview/Verify-Candidate.ps1",
+      "sha256": "383ED05E514D023782EAA20F62AAFB9B62D2AAD0F42522EF3B57AD15B4BC6DBA"
+    },
+    {
+      "path": "research/dualsense-v5-test/V5Protocol.cs",
+      "sha256": "6242D3DAF3157C2C839BCE735F6CEDD2BB7F261EBB72C6AADBED5426062014EE"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardInputState.cs",
+      "sha256": "61ABCF97408FEA3B11830A946522A135AE3330F88ED879C2FF1BC8E190558A4A"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardMapping.cs",
+      "sha256": "7DAC0D686E376327A1B364B0BABADCF2E2CA3F02B21685CB15DEDE0041DBB472"
+    },
+    {
+      "path": "src/keyboard-pad/ViiperTransport.cs",
+      "sha256": "5C46BE155DA8DA99A00DA6FE93495A823454E614D50C627A0A0ED63B299E5255"
+    },
+    {
+      "path": "src/physical-keyboard/BindingEditor.cs",
+      "sha256": "7EF9AAAD84C036A33D2D9413D41D7C89810F5AEAD3BB29BB2603415FDEE40A6C"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfile.cs",
+      "sha256": "B6BB8C7D6D18599FA95F6D91C1DD0A449FD90DDB61C8AE241DF11EE9E6ECC644"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfileTests.cs",
+      "sha256": "3821F24573F82D5DE6199C364DA6AD6E9E32CCB18DF96FAC319F4DC1E8D9EABC"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipeline.cs",
+      "sha256": "CD65A683C6D04EBFBFCFD877E3D02412DA0A70D921A5CF73A5A60B1A1EE8F773"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipelineTests.cs",
+      "sha256": "7FABB1FB5F6279C25C8A24CBDCF44E461DBCE54E3467A73D80DB5338E6A0D46F"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardUi.cs",
+      "sha256": "D935F13A78D13DE6C082CB379EAEFBB7B3BFFBA219118D974F9C3268AF149060"
+    },
+    {
+      "path": "src/physical-keyboard/PhysicalReportMerge.cs",
+      "sha256": "2F29143BFC521E20102D8B786E35D84EF84A52AF49EA6546ABF650F7988BC0AE"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireEngine.cs",
+      "sha256": "69667837E44235DB4CFB0D9A93E39372F195BB244EFD24262AD97A132B8F1BF4"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireTests.cs",
+      "sha256": "0752B38A861C5B9B567AB793AECFCAD78D17B0550A3AF62A406F0C298C713E87"
+    },
+    {
+      "path": "src/physical-keyboard/UiText.cs",
+      "sha256": "06F51FA02DA5305F4D9E74BC6E514CE6AF4AAE841CA49D4F223323E5CB6493CA"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "3A21E1F17BF7E94C5949C56C2648010ADA032D5D15E54169F4F6A27847FEA552"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "PSKeyboard-DualSensePreview.exe",
+      "sha256": "8A6F76AC19E0587FCA997FFCC4F67E07639BD8CCD1F0C25EC54C2526FC8D62BB"
+    },
+    {
+      "path": "DualSenseCandidateServer.exe",
+      "sha256": "B9F2010ADAD256A24E6747CE9E4318D34AB4A4BFE826341DB6C71A9B6F9FDEE2"
+    },
+    {
+      "path": "pskb-keyboard-merge.dll",
+      "sha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE"
+    },
+    {
+      "path": "BACKEND-BUILD.json",
+      "sha256": "5EA40FADF18544612CF8EB98F8E867D76D0FC4D5CF96343437F8D4D4DAABB5BB"
+    },
+    {
+      "path": "MATERIALS.json",
+      "sha256": "F42A4E1EBDB9C8F03FF26F131DEDF3E4A1F95600F7A6260025FAB74F81BB7066"
+    },
+    {
+      "path": "README.md",
+      "sha256": "78F2A289381145423B583768303E655F90CA9D1F1AE55D822D50F7753002716E"
+    },
+    {
+      "path": "notices/github.com_Alia5_VIIPER-LICENSE.txt",
+      "sha256": "F24EE094842DC3347A7A06B71373573CE18F6DCB935C81E95623723EE22E6CA6"
+    },
+    {
+      "path": "notices/golang.org_x_crypto-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/golang.org_x_exp-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/golang.org_x_sys-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/Go-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    }
+  ]
+}
