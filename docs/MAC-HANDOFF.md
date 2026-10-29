@@ -1,6 +1,6 @@
 # Mac 接手交接
 
-更新日期：2026-10-29（Asia/Taipei）。**使用者要求移除 alpha 標記，Windows 首發版 0.1.0 正在準備；本文件交接下一串的 Mac 研究，不是 Mac 成品或可行性結論。** 首發版另建來源提交、`v0.1.0` 標籤與附件，不把已發布的 alpha.12 改名或覆寫。待新建置、交付及發布完成後，再補入 0.1.0 的固定來源與結果。
+更新日期：2026-10-29（Asia/Taipei）。**Windows 首發版 0.1.0 已正式公開發布及本機交付；本文件交接下一串的 Mac 研究，不是 Mac 成品或可行性結論。** 標籤 `v0.1.0` 固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`，[GitHub Release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0) ID `427775269`，API 已核對 `prerelease=false` 且為 Latest。四個公開附件已匿名下載並通過大小及 SHA-256 核對；本機版本、封存與捷徑均另建 `0.1.0`，代理未啟動交付版。alpha.12 標籤與公開附件保留原樣。
 
 歷史版本 **0.1.0-alpha.12 已公開發布及本機交付**：標籤 `v0.1.0-alpha.12` 固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`，[GitHub pre-release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.12) ID `427756025`。四個附件已匿名下載，大小及 SHA-256 全數相同；代理未啟動交付版。舊本地檔案清理已部分執行後中斷，最終保留版本、剩餘項目與總量仍待 0.1.0 交付後核對。
 
@@ -13,7 +13,7 @@
 接手先讀文件，再按所處驗證階段讀原始碼：
 
 1. [HANDOFF.md](HANDOFF.md) → [CHANGELOG.md](../CHANGELOG.md) → [VERSIONING.md](VERSIONING.md) → 本文件。以最新已提交證據更新版本認知，不以聊天中的「最新版」字樣代替來源提交。
-2. 先確認 0.1.0 是否已有最終發布紀錄；目前歷史基準為 alpha.12 的 [BUILD](../packaging/build-records/0.1.0-alpha.12.json)、[公開附件清單](../packaging/build-records/0.1.0-alpha.12-archives.json)及 [九語離線畫面](../assets/previews/alpha.12)，再讀 [alpha.11 發布紀錄](../research/dualsense-preview/ALPHA11-TRIAL.md)理解歷史界線。固定版本的原始碼取對應 tag；文件補記可以超前 tag，不移動 tag 追齊文件。
+2. 0.1.0 的 [BUILD](../packaging/build-records/0.1.0.json)、[公開附件清單](../packaging/build-records/0.1.0-archives.json)及 [九語離線畫面](../assets/previews/0.1.0)，再依需要讀 alpha.12 的 [BUILD](../packaging/build-records/0.1.0-alpha.12.json)與 [alpha.11 發布紀錄](../research/dualsense-preview/ALPHA11-TRIAL.md)理解歷史界線。固定版本的原始碼取對應 tag；文件補記可以超前 tag，不移動 tag 追齊文件。
 3. [alpha.9 使用者操作回報](../research/dualsense-preview/ALPHA9-TRIAL.md) → [alpha.10 功能整合](../research/dualsense-preview/ALPHA10-TRIAL.md) → [現行功能說明](../research/dualsense-preview/README.md) → [預設鍵位](DEFAULT-KEYS.md)。
 4. [V5 隔離結果](../research/dualsense-v5-test/RESULTS-20261029.md) → [Windows 0.9.8.1 四方案測試](../research/dualsense-driver-test/RESULTS-20261029.md)與 [fixture 限制](../research/dualsense-driver-test/README.md) → [候選來源研究](../research/dualsense-usb-test/UPSTREAM-CANDIDATES-20261029.md)。這些是 Windows／協定證據，不是 Mac 驅動方案。
 5. 原始碼先讀 [V5Protocol.cs](../research/dualsense-v5-test/V5Protocol.cs)、[CandidateTransport.cs](../research/dualsense-preview/CandidateTransport.cs)、[backend/main.go](../research/dualsense-preview/backend/main.go)及其測試，再讀 [DualSensePreview.cs](../research/dualsense-preview/DualSensePreview.cs)的 Windows 平台依賴與生命週期。
@@ -29,12 +29,14 @@
 | Windows alpha.10 | 第二種模式、22 動作改鍵／連點整合、取消 30 分鐘期限、離線測試及本機交付 | 無本版使用者實機回報 |
 | Windows alpha.11 | 固定來源 `6dbc154a6a887398796d442fd34b73455672aba3`；[Release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11) ID `427698167`，四附件公開下載雜湊通過 | 三個執行元件仍未簽章；沒有新 Sony 實機驗收；主畫面仍未完整九語 |
 | Windows alpha.12 | 固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`，Release `427756025`；主介面與設定頁九語、2D／JRPG 定位，已發布及本機交付 | 代理未啟動交付版；三個執行元件仍未簽章，本版仍未取得實機逐項驗收 |
-| Windows 0.1.0 | 首發版正在準備；沿用九語與 2D／JRPG 定位，另建正式版本及公開附件 | 不預填來源、發布或實機驗收結果；移除 alpha 字樣不等於新增相容性證據 |
+| Windows 0.1.0 | 固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`，Release `427775269`；正式版且為 Latest，四附件匿名下載通過，已另建本機交付 | 代理未啟動交付版；三個執行元件仍未簽章，未取得本版實機逐項驗收；移除 alpha 字樣不等於新增相容性證據 |
 | 單款遊戲回報 | 使用者回報 Final Fantasy Resonance 可正常操作，但未指明當時工具 build | 不能歸屬為 alpha.12 或 0.1.0 驗收，也不代表其他 JRPG、3D 遊戲或所有操作情境適用 |
 | 舊檔清理 | Apply 已執行後因準備 0.1.0 中斷；私人逐項紀錄確認刪除 92 項，共 4,006,258,013 邏輯 bytes | 不是完整清理結果或實際磁碟回收量；中斷時未完成末次保護狀態核對，剩餘及部分刪除項目須另核對 |
 | Mac | 尚無環境與虛擬輸出驗證 | 不保證免實體手把、某個 API、某種驅動或 Windows 後端能直接使用 |
 
-alpha.12 最終乾淨建置通過 **5816 項 C#**（144+2472+149+276+101+36+167+2471）、**5743 項 native** 與 C# ABI；固定後端 Go 4 個頂層測試及 2 個子情境亦通過。公開包 **33／33 項稽核**通過，九語共 **18 張 PNG** 已逐張目視，另有 **18 個主畫面排版情境、36 個設定頁排版情境**的離線檢查。這些沒有擷取真實鍵盤、建立使用者電腦裝置或操作 Sony，不是 macOS 或 PS5 實機測試。
+0.1.0 最終乾淨建置通過 **5834 項 C#**（162+2472+149+276+101+36+167+2471）、**5743 項 native** 與 C# ABI，另有 **67 項版號邊界純檢查**；公開包 **35／35 項稽核**通過。沿用固定後端 Go 4 個頂層測試及 2 個子情境的既有證據。這些沒有擷取真實鍵盤、建立使用者電腦裝置或操作 Sony，不是 macOS 或 PS5 實機測試。
+
+九語共 18 張離線 PNG：**9 張主畫面因版號變更新產並逐張目視**；**9 張設定頁與 alpha.12 的 SHA-256 相同，沿用已完成的目視結果**。alpha.12 另有 18 個主畫面、36 個設定頁排版情境的離線檢查；它們是既有排版證據，不記成 0.1.0 新跑的實機 DPI 驗證。
 
 主介面 50 個資源、共用／設定頁 93 個資源均涵蓋繁中、簡中、英文、日文、韓文、德文、法文、西班牙文及巴西葡語；一般使用依 Windows 介面語言自動選擇，不支援的語言回退英文。品牌、控制器名稱與技術診斷碼保留原文。長文可換行、內容可捲動；母語校閱、真實高 DPI、多螢幕、逐鍵／連點、重連、長時間與重開機仍待本版實機驗證。
 
@@ -86,7 +88,7 @@ Windows 現有路徑是：鍵盤擷取 → 前景／F8 → 設定與連點 → 3
 
 ## 收尾紀錄與下一串仍待驗的項目
 
-- alpha.12 發布與交付已完成；0.1.0 首發版的建置、固定提交、交付、公開附件與匿名下載核對仍待補。Mac 下一串先核對最新版交接與各固定來源，不將 Windows 執行包拿到 Mac 當成原生程式。
+- 0.1.0 首發版的建置、固定提交、交付、正式發布與四附件匿名下載核對已完成；alpha.12 作為歷史版本保留。Mac 下一串先核對最新版交接與各固定來源，不將 Windows 執行包拿到 Mac 當成原生程式。
 - 逐鍵、設定、連點、失焦／F8、重連、長時間／重開機仍待相應版本的實機逐項回報。Final Fantasy Resonance 的單款正常操作回報因工具 build 未指明，獨立記錄，不補猜版本。
-- **清理最終結果待補。** 第一段中斷收據確認 92 項已刪除、4,006,258,013 邏輯 bytes；部分刪除或尚未寫入收據的內容不加算。0.1.0 交付後須重新核對剩餘路徑、個人設定／備份、驅動檔、Sony 程序與舊 tag，再記錄最終清理及保留項目。不將邏輯檔案大小當成實際磁碟回收量。
+- **清理最終結果待補。** 第一段中斷收據確認 92 項已刪除、4,006,258,013 邏輯 bytes；部分刪除或尚未寫入收據的內容不加算。0.1.0 交付後的新 dry-run 已通過，該次刪除數為 0；最終 Apply 及剩餘路徑、個人設定／備份、驅動檔、Sony 程序與舊 tag 的核對結果另補。不將邏輯檔案大小或 dry-run 候選總量當成實際磁碟回收量。
 - Mac 環境、所需權限、虛擬輸出可行性及 Sony 接受與否都尚未驗證；下一串依上方順序先做唯讀盤點與隔離研究。

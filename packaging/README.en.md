@@ -1,12 +1,12 @@
-# 上班不要玩 — Keyboard controls for PS Remote Play
+# PS Remote Play Keyboard
 
-English user guide · [繁體中文](README.md)
+English user guide · [Traditional Chinese](README.md)
 
 Use your keyboard to control your PS5 through **Sony's official PS Remote Play for Windows**, with 22 remappable actions, per-action rapid fire and an F8 pause hotkey. The app creates a virtual DualSense, so a physical controller is not required. Sony's official app still handles your PS5 connection, sign-in and streaming.
 
 **Designed for 2D games, especially JRPGs that rely on menus and directional input.** There is no mouse aiming or right-stick direction mapping, so this version is not suitable for 3D games that need flexible camera movement or fine analog control. Suitability depends on each game's controls; support is not guaranteed for every JRPG.
 
-**Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.0, the first regular release**, without an alpha suffix. The simpler version name does not establish complete hardware acceptance or long-term reliability; see the testing scope below. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
+**Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.1**, the international branding update to the first regular release. The version number does not establish complete hardware acceptance or long-term reliability; see the testing scope below. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
 
 The runtime binaries are unsigned. SHA-256 checksums establish file identity, not digital signing or compatibility with your setup.
 
@@ -27,7 +27,7 @@ Drivers are not bundled. The app does not automatically install, replace, downgr
 5. Click **Keys and auto-repeat** to edit controls. Editing pauses input, and it stays paused when the editor closes. Return to Remote Play and press F8 to continue.
 6. Click **Disconnect controller** or close the app's window normally when finished. If cleanup cannot be confirmed, keep the error message and report it instead of repeatedly creating devices.
 
-The main window, binding editor, connection states, error prompts, sponsorship and feedback text follow the Windows UI language: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish or Brazilian Portuguese. Unsupported languages fall back to English. The brand name 上班不要玩 and technical diagnostic codes remain unchanged. User guides are currently available in English and Traditional Chinese. Resource and layout checks do not establish native-speaker approval; translation feedback is welcome.
+The main window, binding editor, connection states, error prompts, sponsorship and feedback text follow the Windows UI language: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish or Brazilian Portuguese. Unsupported languages fall back to English. All non-Chinese interfaces use the name **PS Remote Play Keyboard**; Chinese interfaces retain their Chinese product name. Technical diagnostic codes remain unchanged. User guides are currently available in English and Traditional Chinese. Resource and layout checks do not establish native-speaker approval; translation feedback is welcome.
 
 ## Default keys
 
@@ -90,9 +90,9 @@ Changes are written and applied only after **Save changes succeeds**. Canceling 
 
 ## What has been tested
 
-All four alpha.9 candidates received user reports of successful PS5 operation through official Remote Play. This release uses the standard DualSense gamepad-only mode. **Detailed user acceptance testing of 0.1.0 on a real PS5 setup remains pending.** Windows detecting a device, a green light or passing offline tests does not establish successful gameplay. Long sessions, different reconnection sequences, reboots and installation on another PC still need more testing.
+All four alpha.9 candidates received user reports of successful PS5 operation through official Remote Play. This release uses the standard DualSense gamepad-only mode. **Detailed user acceptance testing of 0.1.1 on a real PS5 setup remains pending.** Windows detecting a device, a green light or passing offline tests does not establish successful gameplay. Long sessions, different reconnection sequences, reboots and installation on another PC still need more testing.
 
-On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The tool's build was not specified, so this report does not establish 0.1.0 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
+On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The tool's build was not specified, so this report does not establish 0.1.1 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
 
 There is no 30-minute session limit. Audio, haptics, adaptive triggers, mouse input, recording/replay and macOS are not included as completed features in this version. See the [support scope](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/docs/PRODUCT-SCOPE.md) and [alpha.9 operation record](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/research/dualsense-preview/ALPHA9-TRIAL.md) for details; these records are currently in Traditional Chinese.
 

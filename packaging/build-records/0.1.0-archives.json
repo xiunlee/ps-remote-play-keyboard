@@ -1,0 +1,22 @@
+{
+  "version": "0.1.0",
+  "sourceCommit": "ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe",
+  "channel": "public-release",
+  "price": 0,
+  "license": "GPL-3.0-only",
+  "author": "xiunlee",
+  "driversBundled": false,
+  "sonyOperationVerified": false,
+  "files": [
+    {
+      "name": "PSKeyboard-0.1.0-windows-x64.zip",
+      "sha256": "9C28E917B8343C18591BB4A37142EBA32ACA5EEC57F2914A31889DB147F1552F",
+      "bytes": 6283796
+    },
+    {
+      "name": "PSKeyboard-0.1.0-source.zip",
+      "sha256": "B29C57B0C7628ADAE8B9DBCB149D788C9D4BE2489CC7A07BCD293742ECD2F939",
+      "bytes": 12416180
+    }
+  ]
+}

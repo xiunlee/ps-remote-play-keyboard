@@ -77,15 +77,15 @@ namespace PSKeyboard
                 "Uso: " + command + "\r\nAbra o aplicativo, conecte o controle e pressione F8 para ativar o teclado.");
 
             Add(tables, "AlreadyRunning",
-                "Another version of 上班不要玩 is still running.\r\nClose it normally before opening this version. Keep Sony Remote Play open.",
+                "Another version of PS Remote Play Keyboard is still running.\r\nClose it normally before opening this version. Keep Sony Remote Play open.",
                 "另一版「上班不要玩」仍在執行。\r\n請先正常關閉它，再開本版本；Sony Remote Play 請保持開啟。",
                 "另一个版本的“上班不要玩”仍在运行。\r\n请先正常关闭它，再打开本版本；请保持 Sony Remote Play 开启。",
-                "別のバージョンの「上班不要玩」が起動中です。\r\n先に通常の手順で終了してください。Sony Remote Play は開いたままにしてください。",
-                "다른 버전의 上班不要玩이 실행 중입니다.\r\n먼저 정상 종료한 뒤 이 버전을 여세요. Sony Remote Play는 계속 켜 두세요.",
-                "Eine andere Version von 上班不要玩 läuft noch.\r\nBeende sie regulär, bevor du diese Version öffnest. Lass Sony Remote Play geöffnet.",
-                "Une autre version de 上班不要玩 est encore ouverte.\r\nFermez-la normalement avant d’ouvrir celle-ci. Gardez Sony Remote Play ouvert.",
-                "Otra versión de 上班不要玩 sigue abierta.\r\nCiérrala normalmente antes de abrir esta versión. Mantén Sony Remote Play abierto.",
-                "Outra versão de 上班不要玩 ainda está aberta.\r\nFeche-a normalmente antes de abrir esta versão. Mantenha o Sony Remote Play aberto.");
+                "別のバージョンの PS Remote Play Keyboard が起動中です。\r\n先に通常の手順で終了してください。Sony Remote Play は開いたままにしてください。",
+                "다른 버전의 PS Remote Play Keyboard가 실행 중입니다.\r\n먼저 정상 종료한 뒤 이 버전을 여세요. Sony Remote Play는 계속 켜 두세요.",
+                "Eine andere Version von PS Remote Play Keyboard läuft noch.\r\nBeende sie regulär, bevor du diese Version öffnest. Lass Sony Remote Play geöffnet.",
+                "Une autre version de PS Remote Play Keyboard est encore ouverte.\r\nFermez-la normalement avant d’ouvrir celle-ci. Gardez Sony Remote Play ouvert.",
+                "Otra versión de PS Remote Play Keyboard sigue abierta.\r\nCiérrala normalmente antes de abrir esta versión. Mantén Sony Remote Play abierto.",
+                "Outra versão de PS Remote Play Keyboard ainda está aberta.\r\nFeche-a normalmente antes de abrir esta versão. Mantenha o Sony Remote Play aberto.");
 
             Add(tables, "Eyebrow",
                 "KEYBOARD / REMOTE PLAY", "鍵盤 / REMOTE PLAY", "键盘 / REMOTE PLAY",
@@ -366,9 +366,9 @@ namespace PSKeyboard
                 "Impossible de créer la manette virtuelle. Consultez l’état des diagnostics locaux.", "No se pudo crear el mando virtual. Consulta el estado de los diagnósticos locales.", "Não foi possível criar o controle virtual. Confira o estado dos diagnósticos locais.");
 
             Add(tables, "FeedbackSubjectFmt",
-                "上班不要玩 {0} feedback", "上班不要玩 {0} 意見回饋", "上班不要玩 {0} 意见反馈",
-                "上班不要玩 {0} フィードバック", "上班不要玩 {0} 의견", "上班不要玩 {0} Feedback",
-                "上班不要玩 {0} — avis", "上班不要玩 {0} — comentarios", "上班不要玩 {0} — feedback");
+                "PS Remote Play Keyboard V {0} feedback", "上班不要玩 V {0} 意見回饋", "上班不要玩 V {0} 意见反馈",
+                "PS Remote Play Keyboard V {0} フィードバック", "PS Remote Play Keyboard V {0} 의견", "PS Remote Play Keyboard V {0} Feedback",
+                "PS Remote Play Keyboard V {0} — avis", "PS Remote Play Keyboard V {0} — comentarios", "PS Remote Play Keyboard V {0} — feedback");
 
             return tables;
         }

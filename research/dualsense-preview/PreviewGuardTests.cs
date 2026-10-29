@@ -93,7 +93,7 @@ namespace PSKeyboard
             UiText.Initialize(CultureInfo.GetCultureInfo("zh-Hant"));
             string feedback = SupportLinks.FeedbackUrl(version);
             Check(feedback.StartsWith("mailto:xiun1019@gmail.com?subject=", StringComparison.Ordinal) &&
-                Uri.UnescapeDataString(feedback.Substring(feedback.IndexOf("?subject=", StringComparison.Ordinal) + 9)) == "上班不要玩 " + version + " 意見回饋" &&
+                Uri.UnescapeDataString(feedback.Substring(feedback.IndexOf("?subject=", StringComparison.Ordinal) + 9)) == "上班不要玩 V " + version + " 意見回饋" &&
                 feedback.IndexOf('&') < 0, "Feedback has only the fixed recipient and encoded version subject, without body, attachments or extra recipients.");
             Check(SupportLinks.IsAllowedLaunchUrl(feedback, version) &&
                 !SupportLinks.IsAllowedLaunchUrl(feedback + "&cc=another@example.com", version), "Only the exact feedback destination can launch.");
@@ -125,7 +125,7 @@ namespace PSKeyboard
                 Check(localized.StartsWith(prefix, StringComparison.Ordinal) && localized.IndexOf('&') < 0 && localized.IndexOf('#') < 0,
                     "Localized feedback remains a subject-only draft to the fixed recipient: " + language);
                 string subject = Uri.UnescapeDataString(localized.Substring(prefix.Length));
-                Check(subject.Contains(version) && subject.Contains("上班不要玩") && subject.IndexOf('\r') < 0 && subject.IndexOf('\n') < 0,
+                Check(subject.StartsWith(UiText.T("AppTitle") + " V " + version, StringComparison.Ordinal) && subject.IndexOf('\r') < 0 && subject.IndexOf('\n') < 0,
                     "Localized subject preserves brand/version without header injection: " + language);
                 Check(SupportLinks.IsAllowedLaunchUrl(localized, version) && !SupportLinks.IsAllowedLaunchUrl(localized + "&body=unapproved", version),
                     "Only the exact localized draft can launch: " + language);

@@ -2,7 +2,7 @@
 
 Copyright (C) 2026 xiunlee.
 
-The original source code of **上班不要玩 (PS Remote Play Keyboard)** is licensed
+The original source code of **PS Remote Play Keyboard** is licensed
 under the GNU General Public License, version 3 only (`GPL-3.0-only`), as provided
 in [LICENSE](LICENSE). You may use, modify and redistribute it under that license.
 The software is provided without warranty, to the extent permitted by applicable

@@ -39,6 +39,10 @@ namespace PSKeyboard
                 foreach(string language in languages)
                 {
                     UiText.Initialize(CultureInfo.GetCultureInfo(language));
+                    bool chinese = language == "zh-Hant" || language == "zh-Hans";
+                    string brand = chinese ? "上班不要玩" : "PS Remote Play Keyboard";
+                    Check(UiText.T("AppTitle") == brand && DualSensePreview.WindowTitle == brand + " V " + BuildInfo.Version,
+                        "Main brand and window title match the language and version: " + language);
                     foreach(string key in keys)
                     {
                         Check(PreviewText.HasTranslation(language, key), "Actual translation: " + language + "/" + key);
@@ -46,12 +50,15 @@ namespace PSKeyboard
                         Check(!String.IsNullOrWhiteSpace(value) && value != key, "Nonempty displayed translation: " + language + "/" + key);
                         Check(Slots(value) == Slots(english[key]), "Formatting arguments preserved: " + language + "/" + key);
                         Check(value.IndexOf('\ufffd') < 0 && value.IndexOf('\0') < 0 && value.Length < 2000, "Valid resource text: " + language + "/" + key);
+                        if(!chinese) Check(!value.Contains("上班不要玩"), "Non-Chinese UI messages do not contain the Chinese brand: " + language + "/" + key);
+                        if(language == "en") Check(!Regex.IsMatch(value, @"\p{IsCJKUnifiedIdeographs}"), "English UI resources contain no Chinese text: " + key);
                         // Rendering is exercised separately; this catches malformed composite formats.
                         Check(!String.IsNullOrEmpty(String.Format(CultureInfo.InvariantCulture, value, "sample-version", "sample-address", "sample-detail")),
                             "Resource format is valid: " + language + "/" + key);
                     }
                     string feedback = PreviewText.F("FeedbackSubjectFmt", BuildInfo.Version);
-                    Check(feedback.Contains(BuildInfo.Version) && feedback.Contains("上班不要玩"), "Feedback preserves the release identity: " + language);
+                    Check(feedback.StartsWith(brand + " V " + BuildInfo.Version, StringComparison.Ordinal), "Feedback preserves the localized brand and release identity: " + language);
+                    Check(PreviewText.T("AlreadyRunning").Contains(brand), "Startup warning identifies the localized product name: " + language);
                     Check(PreviewText.T("SponsorButton").Contains("US$1"), "Donation currency and amount are unchanged: " + language);
                     Check(PreviewText.HasTranslation(language, "GameSuitability") && PreviewText.T("GameSuitability").Contains("2D") &&
                         PreviewText.T("GameSuitability").Contains("JRPG") && PreviewText.T("GameSuitability").Contains("3D"),

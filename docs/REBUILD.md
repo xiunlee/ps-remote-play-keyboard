@@ -1,7 +1,8 @@
-# Building release 0.1.0 from source
+# Building PS Remote Play Keyboard 0.1.1 from source
 
-Version 0.1.0 is the first regular release without an alpha suffix. Historical
-alpha tags and assets remain unchanged. A shorter version name does not expand
+Version 0.1.1 standardizes the PS Remote Play Keyboard name in all non-Chinese
+interfaces. Version 0.1.0 and historical alpha tags and assets remain unchanged.
+A branding or version-name update does not expand
 the verified gameplay scope or remove the unsigned-binary and external-driver
 limitations. Runtime operation requires the complete matching usbip-win2 0.9.8.1
 driver, CLI and DLL; building the program does not install or operate them.
@@ -29,7 +30,7 @@ out the exact tag or the full commit named in the source asset's `SOURCE.json`:
 ```powershell
 git clone https://github.com/xiunlee/ps-remote-play-keyboard.git
 Set-Location ps-remote-play-keyboard
-git checkout --detach v0.1.0
+git checkout --detach v0.1.1
 ```
 
 Use the supplied `dependencies/VIIPER-source.zip`. It must have SHA-256

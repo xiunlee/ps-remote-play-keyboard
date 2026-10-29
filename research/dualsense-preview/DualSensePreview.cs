@@ -23,6 +23,7 @@ namespace PSKeyboard
         private const string UsbipDllHash = "F123EF5D288B817A890CBE39A3C2D212B3D8B1765C691C8703CCB76C7337986C";
         internal const string Persona = "dualsensegamepadv5";
         private static string ModeLabel { get { return PreviewText.T("ModeLabel"); } }
+        internal static string WindowTitle { get { return UiText.T("AppTitle") + " V " + BuildInfo.Version; } }
         private readonly object sessionGate = new object(), logGate = new object(), focusGate = new object();
         private readonly Stopwatch clock = Stopwatch.StartNew();
         private readonly KeyboardControlPipeline input;
@@ -84,12 +85,12 @@ namespace PSKeyboard
             try { ParseOptions(args, out autoConnect, out statusFile, out deviceType); }
             catch (ArgumentException)
             {
-                MessageBox.Show(PreviewText.T("Usage"), UiText.T("AppTitle") + " " + BuildInfo.Version); return 2;
+                MessageBox.Show(PreviewText.T("Usage"), WindowTitle); return 2;
             }
             bool created;
             using (Mutex mutex = new Mutex(true, "Local\\PSKeyboardControllerFreeExperiment", out created))
             {
-                if (!created) { MessageBox.Show(PreviewText.T("AlreadyRunning"), UiText.T("AppTitle")); return 1; }
+                if (!created) { MessageBox.Show(PreviewText.T("AlreadyRunning"), WindowTitle); return 1; }
                 Application.EnableVisualStyles(); Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new DualSensePreview(autoConnect, statusFile, deviceType, false));
             }
@@ -178,7 +179,7 @@ namespace PSKeyboard
             profile = BindingProfile.Default(); bool badProfile = false;
             if (!preview) try { profile = BindingProfile.Load(profilePath); } catch { badProfile = true; }
             input = new KeyboardControlPipeline(delegate { return profile; });
-            Text = UiText.T("AppTitle") + " " + BuildInfo.Version + " · DualSense"; ClientSize = new Size(960, 840); MinimumSize = new Size(900, 720);
+            Text = WindowTitle; ClientSize = new Size(960, 840); MinimumSize = new Size(900, 720);
             StartPosition = FormStartPosition.CenterScreen; AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = KeyboardUi.Background; ForeColor = KeyboardUi.Ink; Font = KeyboardUi.Font(10, FontStyle.Regular);
             Icon brandIcon = KeyboardUi.LoadAppIcon(); if (brandIcon != null) { Icon = brandIcon; Disposed += delegate { brandIcon.Dispose(); }; }
@@ -232,7 +233,7 @@ namespace PSKeyboard
             Label title = WrappedLabel(UiText.T("AppTitle"), 27, Color.White); title.Font = KeyboardUi.Font(27, FontStyle.Bold);
             Label subtitle = WrappedLabel(UiText.T("AppSubtitle"), 10, Color.White);
             wordmark.Controls.Add(eyebrow, 0, 0); wordmark.Controls.Add(title, 0, 1); wordmark.Controls.Add(subtitle, 0, 2); hero.Controls.Add(wordmark, 1, 0);
-            Label version = WrappedLabel("DUALSENSE\r\nv" + BuildInfo.Version, 10, Color.White); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
+            Label version = WrappedLabel("DUALSENSE\r\nV " + BuildInfo.Version, 10, Color.White); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
             shell.Controls.Add(hero, 0, 0);
             Panel scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(28, 22, 28, 18), Margin = Padding.Empty };
             TableLayoutPanel body = AutoTable(1, 8);
@@ -308,7 +309,7 @@ namespace PSKeyboard
         private void SupportLinkFailure(bool sponsorship)
         {
             MessageBox.Show(this, sponsorship ? PreviewText.T("SponsorFailure") :
-                PreviewText.F("FeedbackFailure", SupportLinks.FeedbackAddress), UiText.T("AppTitle"));
+                PreviewText.F("FeedbackFailure", SupportLinks.FeedbackAddress), WindowTitle);
         }
 
         private static Control StatusCard(string heading, Label value, StatusDot dot, Padding margin)

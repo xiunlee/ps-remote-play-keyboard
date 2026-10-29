@@ -59,10 +59,14 @@ static class UiTextTests
         {
             UiText.Initialize(CultureInfo.GetCultureInfo(tag));
             Check(UiText.LanguageTag == tag, "Each advertised language can be selected: " + tag);
+                bool chinese = tag == "zh-Hant" || tag == "zh-Hans";
+                Check(UiText.T("AppTitle") == (chinese ? "上班不要玩" : "PS Remote Play Keyboard"),
+                    "Brand follows the selected UI language: " + tag);
             foreach (string key in keys)
             {
                 Check(UiText.HasTranslation(tag, key), "Actual translation present: " + tag + "/" + key);
                 Check(!String.IsNullOrWhiteSpace(UiText.T(key)), "Nonempty translation: " + tag + "/" + key);
+                    if (!chinese) Check(!UiText.T(key).Contains("上班不要玩"), "Non-Chinese resources do not leak the Chinese brand: " + tag + "/" + key);
             }
             foreach (string key in required)
                 Check(UiText.HasTranslation(tag, key), "Visible UI coverage: " + tag + "/" + key);
@@ -106,7 +110,7 @@ static class UiTextTests
         UiText.Initialize(CultureInfo.GetCultureInfo("de-DE"));
         Check(UiText.T("Save") == "Änderungen speichern", "German accented text preserved");
         UiText.Initialize(CultureInfo.GetCultureInfo("ja-JP"));
-        Check(UiText.T("AppTitle") == "上班不要玩", "Exact Traditional Chinese brand preserved in Japanese UI");
+        Check(UiText.T("AppTitle") == "PS Remote Play Keyboard", "Japanese UI uses the shared international brand");
         UiText.Initialize(CultureInfo.GetCultureInfo("fr-FR"));
         Check(UiText.KeyName(0x0d) == "Entrée", "French key name preserved");
     }

@@ -73,8 +73,8 @@ $dirtyLiteral=if($dirty){'true'}else{'false'}
 $generated=Join-Path $out 'BuildInfo.g.cs'
 [IO.File]::WriteAllText($generated,@"
 using System.Reflection;
-[assembly: AssemblyTitle("上班不要玩 — DualSense 鍵盤控制")]
-[assembly: AssemblyProduct("上班不要玩")]
+[assembly: AssemblyTitle("PS Remote Play Keyboard")]
+[assembly: AssemblyProduct("PS Remote Play Keyboard")]
 [assembly: AssemblyVersion("$assemblyVersion")]
 [assembly: AssemblyFileVersion("$fileVersion")]
 [assembly: AssemblyInformationalVersion("$infoVersion")]
@@ -154,7 +154,7 @@ $runtimeNames=@('PSKeyboard-DualSensePreview.exe','DualSenseCandidateServer.exe'
     'BACKEND-BUILD.json','MATERIALS.json','NATIVE-BUILD.json','NATIVE-MATERIALS.json','README.md','README.en.md','LICENSE','COPYRIGHT.md')+
     @($materials|ForEach-Object{$_.license})+@($nativeMaterials|ForEach-Object{$_.license})
 $manifest=[ordered]@{
-    schemaVersion=1;product='上班不要玩';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
+    schemaVersion=1;product='PS Remote Play Keyboard';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
     informationalVersion=$infoVersion;sourceCommit=$commit;workingTreeDirty=$dirty;builtUtc=$builtUtc;
     entryPoint='PSKeyboard-DualSensePreview.exe';channel=$channel;priceModel='free';license='GPL-3.0-only';driversBundled=$false;
     sonyOperationVerified=$false;commercialReady=$false;profileReadOnly=$false;profileSaveRequiresUserAction=$true;defaultConnected=$false;defaultEnabled=$false;
