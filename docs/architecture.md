@@ -12,7 +12,9 @@
 
 使用者要求讓鍵盤操作併入實體手把的輸入，而非繼續建立獨立手把。候選路徑為「實體 USB DS4 → usbipd-win → 自製本機 USB/IP 中繼 → 已安裝的 usbip-win2 → 官方 Remote Play」。中繼只改寫格式已知的按鍵 input report，保留控制、feature 與輸出請求及回覆；不仿造實體手把的驗證回覆。此路徑仍會改變 USB 拓撲和 Windows 裝置路徑，不能聲稱 Sony 一定接受。
 
-經使用者明確授權後，已安裝 usbipd-win 5.3.0，確認服務與簽章有效，並將服務限制在本機使用。針對唯一核對的實體 DS4 切換至 VBoxUSB，避開同機重新捕獲的篩選器；Windows 經中繼回讀兩分鐘正常，Sony 也已開啟匯入手把的介面。這還不能證明 PS5 接受鍵盤：畫面操作結果與原始驅動還原仍待驗證，詳見[本機實測紀錄](../research/physical-usb-relay/LIVE-TRIAL.md)。
+經使用者明確授權後，已安裝 usbipd-win 5.3.0，確認服務與簽章有效，並將服務限制在本機使用。針對唯一核對的實體 DS4 切換至 VBoxUSB，避開同機重新捕獲的篩選器；Windows 經中繼回讀兩分鐘正常，Sony 也已開啟匯入手把的介面。2026-10-29 使用者回報重新開啟後測試正常，同時唯讀核對確認鍵盤已啟用、已有合併輸出且未回報錯誤。這是使用者回報加上本機輸出證據，尚非完整逐鍵及驅動還原驗收，詳見[本機實測紀錄](../research/physical-usb-relay/LIVE-TRIAL.md)。
+
+使用者要求保留目前連線：後續檢查與文件更新不關閉或重啟 PS Remote Play；確需中斷連線的操作，須先說明並取得當次同意。不能沿用先前安裝階段的重啟授權來中斷目前的遊玩。
 
 ## 已測試的獨立 USB 輸出候選
 
@@ -20,7 +22,7 @@
 
 實際映射程式透過 VIIPER 回讀 USB/IP 報告的 16 項檢查已通過。後續[Windows HID 實測](../research/windows-hid-test/README.md)也通過 20 項檢查，證明真正的 Windows 手把介面能讀到合成狀態。再以[唯讀觀測程式](../research/windows-hid-observer/README.md)確認使用者真實鍵盤按鍵能進入 Windows，但使用者在 Sony 中看不到控制效果，暫時拔掉實體手把後仍然無反應。未做只保留虛擬裝置後重新啟動 Sony 的另一輪測試。部分認證 feature report 未實作，但尚未證明這就是無效原因。詳見 [候選評估](../research/static-analysis/VIIPER-ASSESSMENT.md)。
 
-使用者已明確同意安裝及實測。安裝前建立了系統還原點，官方安裝檔通過 SHA-256 與 Authenticode 核對；安裝回傳 3010，驅動目前已啟動，系統尚未重開機。沒有重新安裝 ViGEmBus、變更 PSN 登入、啟用測試簽章或關閉 Windows 保護。
+使用者已明確同意當次安裝及實測。安裝前建立了系統還原點，官方安裝檔通過 SHA-256 與 Authenticode 核對；當時安裝回傳 3010，驅動已啟動而尚未重開機，使用者後續已自行重新啟動電腦。沒有重新安裝 ViGEmBus、變更 PSN 登入、啟用測試簽章或關閉 Windows 保護。
 
 ## 先前 ViGEm 原型的缺口
 
