@@ -4,6 +4,8 @@ English user guide · [繁體中文](README.md)
 
 Use your keyboard to control your PS5 through **Sony's official PS Remote Play for Windows**, with 22 remappable actions, per-action rapid fire and an F8 pause hotkey. The app creates a virtual DualSense, so a physical controller is not required. Sony's official app still handles your PS5 connection, sign-in and streaming.
 
+**Designed for 2D games, especially JRPGs that rely on menus and directional input.** There is no mouse aiming or right-stick direction mapping, so this version is not suitable for 3D games that need flexible camera movement or fine analog control. Suitability depends on each game's controls; support is not guaranteed for every JRPG.
+
 **Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.0-alpha.12**, an alpha test version, not a stable release. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
 
 The runtime binaries are unsigned. SHA-256 checksums establish file identity, not digital signing or compatibility with your setup.

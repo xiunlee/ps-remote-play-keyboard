@@ -4,6 +4,8 @@
 
 用鍵盤操作 **Sony 官方 Windows PS Remote Play 裡的 PS5**，提供 22 個動作改鍵、每鍵連點與 F8 暫停。程式建立虛擬 DualSense，不需插入實體手把；PS5 連線、帳號登入與串流仍由 Sony 官方 Remote Play 處理。
 
+**本版以 2D 遊戲為定位，尤其適合以選單與方向操作為主的 JRPG。** 目前沒有滑鼠瞄準或右搖桿方向映射，不適合需要靈活視角或精細類比控制的 3D 遊戲。是否適用仍取決於個別遊戲的操作需求，不保證所有 JRPG 都適合。
+
 **免費開源 · 作者 xiunlee · GPL-3.0-only。** 本手冊對應 **0.1.0-alpha.12 測試版**，不是穩定版。所有功能免費，贊助不影響功能。[下載、更新與對應原始碼](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。
 
 程式的執行元件未提供數位簽章；SHA-256 只用於核對檔案完整性，不代表簽章或相容性驗收。

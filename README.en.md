@@ -4,6 +4,8 @@
 
 **A Windows keyboard-mapping tool built specifically for Sony's official PS Remote Play app.** Connect the official app to your PS5 first, then use this tool to turn keyboard input into an emulated DualSense controller. It is not a replacement Remote Play client and does not connect directly to your console.
 
+**Designed for 2D games, especially JRPGs that rely on menus and directional input.** There is no mouse aiming or right-stick direction mapping, so this version is not suitable for 3D games that need flexible camera movement or fine analog control. Suitability depends on each game's controls; support is not guaranteed for every JRPG.
+
 Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature is free; donations do not affect access to any feature.
 
 ## Download and status

@@ -30,7 +30,7 @@ namespace PSKeyboard
             {
                 string[] keys = PreviewText.ResourceKeys;
                 string[] languages = PreviewText.SupportedLanguageTags;
-                Check(keys.Length >= 49, "Main screen, connection failures and feedback subject resources are included.");
+                Check(keys.Length >= 50, "Main screen, game suitability, connection failures and feedback subject resources are included.");
                 Check(String.Join(",", languages) == String.Join(",", UiText.SupportedLanguageTags), "Main screen and settings use the same nine languages.");
                 Check(new HashSet<string>(keys, StringComparer.Ordinal).Count == keys.Length, "Resource keys are unique.");
                 Dictionary<string, string> english = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -53,6 +53,9 @@ namespace PSKeyboard
                     string feedback = PreviewText.F("FeedbackSubjectFmt", "0.1.0-alpha.12");
                     Check(feedback.Contains("0.1.0-alpha.12") && feedback.Contains("上班不要玩"), "Feedback preserves the release identity: " + language);
                     Check(PreviewText.T("SponsorButton").Contains("US$1"), "Donation currency and amount are unchanged: " + language);
+                    Check(PreviewText.HasTranslation(language, "GameSuitability") && PreviewText.T("GameSuitability").Contains("2D") &&
+                        PreviewText.T("GameSuitability").Contains("JRPG") && PreviewText.T("GameSuitability").Contains("3D"),
+                        "Every language includes the 2D/JRPG suitability and 3D camera limitation: " + language);
                     foreach(string failure in new string[] { "keyboard_setup_failed", "usbip_missing", "usbip_invalid", "existing_import",
                         "backend_invalid", "ports_unavailable", "usb_attach_failed", "send_failed", "cancelled", "backend_start_failed",
                         "backend_exited", "usbip_timeout", "usbip_output_limit", "unrecognized-private-detail" })

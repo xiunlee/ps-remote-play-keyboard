@@ -254,7 +254,7 @@ namespace PSKeyboard
             guide.Controls.Add(guideTitle, 0, 0); guide.SetColumnSpan(guideTitle, 4);
             for (int i = 0; i < 4; i++) { guide.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25)); keySummaries[i] = WrappedLabel("", 10, KeyboardUi.Ink); keySummaries[i].Margin = new Padding(0, 0, 12, 0); guide.Controls.Add(keySummaries[i], i, 1); }
             UpdateBindingSummary(); body.Controls.Add(guide, 0, 3);
-            Label help = WrappedLabel(PreviewText.T("ControlsHelp"), 9, KeyboardUi.Muted); help.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(help, 0, 4);
+            Label help = WrappedLabel(PreviewText.T("ControlsHelp") + "\r\n" + PreviewText.T("GameSuitability"), 9, KeyboardUi.Muted); help.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(help, 0, 4);
             notice.Text = badProfile ? UiText.T("ProfileLoadWarning") : PreviewText.T("ProfilePreserved");
             notice.ForeColor = badProfile ? KeyboardUi.Amber : KeyboardUi.Muted; notice.Font = KeyboardUi.Font(9, FontStyle.Regular); notice.AutoSize = true; notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; notice.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(notice, 0, 5);
             Label connectionScope = WrappedLabel(PreviewText.T("ConnectionScope"), 9, KeyboardUi.Muted); connectionScope.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(connectionScope, 0, 6);

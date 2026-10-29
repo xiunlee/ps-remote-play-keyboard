@@ -148,6 +148,17 @@ namespace PSKeyboard
                 "F8 activa o pausa los controles. Solo funcionan con Remote Play oficial en primer plano. Cambiar de ventana detiene la repetición; al volver, pulsa la tecla de nuevo.\r\nPersonaliza 22 acciones y elige repetición desactivada, al mantener o al alternar.",
                 "F8 ativa ou pausa os comandos. A entrada só funciona com o Remote Play oficial em primeiro plano. Trocar de janela interrompe a repetição; ao voltar, pressione a tecla novamente.\r\nPersonalize 22 ações, com repetição desativada, ao segurar ou ao alternar.");
 
+            Add(tables, "GameSuitability",
+                "Suited to 2D games, especially JRPGs. Not suitable for 3D games that require flexible camera control.",
+                "適合 2D 遊戲，尤其是 JRPG；不適合需要靈活視角控制的 3D 遊戲。",
+                "适合 2D 游戏，尤其是 JRPG；不适合需要灵活视角控制的 3D 游戏。",
+                "2D ゲーム、特に JRPG に向いています。自由なカメラ操作が必要な 3D ゲームには向いていません。",
+                "2D 게임, 특히 JRPG에 적합합니다. 자유로운 시점 조작이 필요한 3D 게임에는 적합하지 않습니다.",
+                "Gut geeignet für 2D-Spiele, besonders JRPGs. Nicht geeignet für 3D-Spiele, die eine flexible Kamerasteuerung erfordern.",
+                "Adapté aux jeux 2D, surtout aux JRPG. Ne convient pas aux jeux 3D qui demandent une grande liberté de contrôle de la caméra.",
+                "Adecuado para juegos 2D, especialmente JRPG. No es adecuado para juegos 3D que requieren un control flexible de la cámara.",
+                "Adequado para jogos 2D, especialmente JRPGs. Não é indicado para jogos 3D que exigem controle livre da câmera.");
+
             Add(tables, "ProfilePreserved",
                 "Your saved keys and auto-repeat settings are kept. They change only when you choose Save.", "沿用你的個人按鍵與連點設定，只有按下儲存才會更新。", "沿用你的个人按键与连发设置，只有点击保存才会更新。",
                 "保存済みのキー・連射設定を引き継ぎます。「保存」を選ぶまで変更されません。", "저장된 키 및 연사 설정을 유지합니다. 저장을 선택할 때만 변경됩니다.", "Deine Tasten- und Dauerfeuer-Einstellungen bleiben erhalten. Nur Speichern übernimmt Änderungen.",
