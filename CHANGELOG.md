@@ -4,6 +4,7 @@
 
 ## 研究補記 — 2026-10-29（成品仍為 alpha.8）
 
+- 新增僅限 GitHub hosted Windows VM 的 0.9.8.1 驅動測試流程，分別驗證一般 DualSense／Edge 的複合及純手把四方案；使用相同成套 CLI／DLL 與固定來源網路後端，避開候選不相容的舊 native attach ABI。本機不執行安裝或接入。原始碼與限制見 [驅動研究](research/dualsense-driver-test/README.md)；測試結果另行記錄，沒有預先宣稱 Sony 通過。
 - 新增固定 hbashton 候選的獨立 V5 adapter、離線測試與使用者空間 USB/IP 工具；修正兩個觸控狀態 `00`／`80` 的語義差異，未改主程式或現行傳輸。
 - 核對候選下載檔未簽章，並確認其正式 Windows CLI 強制要求 usbip-win2 0.9.7.7；現有 0.9.8.1 驅動保留。
 - 隔離協定階段通過不代表 Windows 或 Sony 相容。結果、原先失敗與後續實機門檻見 [研究證據](research/dualsense-v5-test/RESULTS-20261029.md)；未新增成品、Release 或移動標籤。
