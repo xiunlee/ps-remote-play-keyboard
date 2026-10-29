@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "timezone": "Asia/Taipei",
+  "researchVersion": "dualsense-v5-research.1",
+  "productVersion": "0.1.0-alpha.8",
+  "baseCommit": "0c26f98a024dd8373cf4a0c09f78b1153b39bd13",
+  "releaseCandidate": {
+    "repository": "hbashton/VIIPER",
+    "tag": "v0.1.9-rc4.6.6",
+    "commit": "b78e31e93e84b4cb7c4b4c15b8aace10749106d2",
+    "archiveSha256": "C68D89319A12D4ADC408EE8C779917B943C2AE2FAC247F9933330E25B04C5842",
+    "executableSha256": "9392A49E619E1D9B7956EA4BEDAFD2E74CBF5065C011554E80F756D1524F892B",
+    "authenticodeStatus": "NotSigned",
+    "executed": false
+  },
+  "csharpBuild": {
+    "schemaVersion": 1,
+    "researchVersion": "dualsense-v5-research.1",
+    "upstreamCommit": "b78e31e93e84b4cb7c4b4c15b8aace10749106d2",
+    "nativeSha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE",
+    "codecTestsRun": true,
+    "windowsAttached": false,
+    "sonyTested": false,
+    "sources": [
+      {
+        "path": "research/dualsense-v5-test/Build.ps1",
+        "sha256": "A05718B509C9F718AAA01981C3E3A01CA061147ECE9D839FA1C3C1720B2BFCE3"
+      },
+      {
+        "path": "research/dualsense-v5-test/V5Protocol.cs",
+        "sha256": "6242D3DAF3157C2C839BCE735F6CEDD2BB7F261EBB72C6AADBED5426062014EE"
+      },
+      {
+        "path": "research/dualsense-v5-test/V5ProtocolTests.cs",
+        "sha256": "940DEC7EBD4B7D0580E4D623C83115EDC6C2AD82F1C1F4D31AFC6B26627A9CCC"
+      },
+      {
+        "path": "research/dualsense-v5-test/V5UsbReadbackTest.cs",
+        "sha256": "2DFB61ABD30C2FD1F97D13FFA10BD6CE963D793E9C3A88CDDC869F2B50B5485F"
+      },
+      {
+        "path": "src/keyboard-pad/KeyboardMapping.cs",
+        "sha256": "7DAC0D686E376327A1B364B0BABADCF2E2CA3F02B21685CB15DEDE0041DBB472"
+      },
+      {
+        "path": "src/keyboard-pad/ViiperTransport.cs",
+        "sha256": "5C46BE155DA8DA99A00DA6FE93495A823454E614D50C627A0A0ED63B299E5255"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "pskb-keyboard-merge.dll",
+        "sha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE"
+      },
+      {
+        "name": "V5ProtocolTests.exe",
+        "sha256": "439E3443019BA17C0085A14EDB4AD8C4C1B57E3881B3D074E88E29F92590789E"
+      },
+      {
+        "name": "V5UsbReadbackTest.exe",
+        "sha256": "A07501EC856BBD65AB41F5381914BD3DCAF700020D4B826A0B97BA1CAC344E5B"
+      }
+    ]
+  },
+  "labBuild": {
+    "artifact": "PSKeyboard DualSense V5 userspace lab server",
+    "researchVersion": 1,
+    "upstreamRepository": "https://github.com/hbashton/VIIPER",
+    "upstreamCommit": "b78e31e93e84b4cb7c4b4c15b8aace10749106d2",
+    "upstreamTag": "v0.1.9-rc4.6.6",
+    "upstreamArchiveSha256": "8305750E881E7E955DCF26DC5FEDC2B43D55902C9F1FA5B4ECA31FE51901B2A5",
+    "labSourceSha256": "8C5C1DAB60D4D83463AD2CE51DC7CF8081CEC762D06E34AD482D9813D8647B59",
+    "buildScriptSha256": "79DF72FFF743C142896903E48B0E917B072CC0DE0CC01F684720B6FF2F7BB428",
+    "upstreamGoSumSha256": "3F04862B7E2902231D60180FC1C7E2B6415063C951717D6C647A14124F1F1264",
+    "dependencyChecksumsUnchanged": true,
+    "executableSha256": "0A47AE7F32FB5A84B54AFBE84046F55525F35347BF7081072D458A57E607A9AD",
+    "goVersion": "go version go1.27.3 windows/amd64",
+    "cgoEnabled": false,
+    "builtOnly": true,
+    "telemetryMode": "off",
+    "telemetryDirectoryIsolated": true,
+    "windowsAttached": false,
+    "sonyTested": false,
+    "productVersionChanged": false
+  },
+  "validation": {
+    "codecChecks": 104,
+    "codecPassed": true,
+    "userspaceUsbChecks": 70,
+    "userspaceUsbPassed": true,
+    "userspaceUsbElapsedMs": 954,
+    "upstreamTopLevelTests": [
+      "TestDualSenseAudioFeatureControlsMatchProductionReference",
+      "TestDualSenseAudioControlHandlersAgreeWithBothDescriptors",
+      "TestDualSenseAudioFeatureControlsRejectMalformedRequests",
+      "TestVirtualSonyCalibrationMatchesDS4WindowsCanonicalMotion",
+      "TestDualSenseUSBOutputReportDescriptorMatchesCapture",
+      "TestDualSenseDescriptorDoesNotAdvertiseEdgeFeatureReports",
+      "TestDualSenseDescriptorAdvertisesExperimentalHapticsAudioEndpoint",
+      "TestReadDualSenseV5InputStreamAcceptsInterleavedStateAndMicrophone",
+      "TestReadDualSenseV5InputStreamRejectsLegacyVersion",
+      "TestReadDualSenseV5InputStreamRejectsBadCRC",
+      "TestReadDualSenseV5InputStreamRejectsSequenceGap",
+      "TestReadDualSenseV5InputStreamRejectsInvalidControlBits",
+      "TestReadDualSenseV5InputStreamRejectsUnknownFrameType"
+    ],
+    "upstreamTopLevelTestCount": 13,
+    "upstreamTestsPassed": true,
+    "upstreamTestsTransport": "memory and net.Pipe",
+    "windowsDriverTested": false,
+    "sonyOperationTested": false,
+    "realKeyboardCaptured": false
+  },
+  "finalTrial": {
+    "researchVersion": "dualsense-v5-research.1",
+    "testExitCode": 0,
+    "labStopped": true,
+    "labExitCode": 0,
+    "labForcedTermination": false,
+    "cleanupErrors": [],
+    "protectedProcessesAndProfileUnchanged": true,
+    "windowsAttached": false,
+    "sonyTested": false,
+    "labSha256": "0A47AE7F32FB5A84B54AFBE84046F55525F35347BF7081072D458A57E607A9AD",
+    "testSha256": "A07501EC856BBD65AB41F5381914BD3DCAF700020D4B826A0B97BA1CAC344E5B"
+  },
+  "firstTrial": {
+    "success": false,
+    "passedChecks": 7,
+    "failure": "initial mapped neutral: legacy inactive touch bytes were interpreted as active",
+    "legacyReadbackSha256": "762FF18892217F010DFF23210494DBCD884FE2AF6FF5FF63C2BF16AC5ED7ECB3",
+    "correctedBy": "ConvertLegacyKeyboardState maps touch status bytes 15 and 20 from 00 to 80",
+    "protectedProcessesAndProfileUnchanged": true
+  },
+  "orchestration": {
+    "path": "research/dualsense-v5-test/Run-Isolated.ps1",
+    "sha256": "7402E6B879763BB2350F8A88A7998B77867704384AA119A788E41822693B1372"
+  },
+  "driver": {
+    "installedCliVersion": "0.9.8.1",
+    "candidateCliRequires": "0.9.7.7",
+    "startupGateVerifiedBy": "fixed source inspection; official candidate not executed",
+    "changed": false,
+    "downgraded": false
+  },
+  "delivery": {
+    "applicationCodeChanged": false,
+    "applicationRebuilt": false,
+    "tagsMoved": false,
+    "githubReleaseCreated": false,
+    "thirdPartyBinariesPublished": false
+  },
+  "runtimeObservation": {
+    "perTrialSnapshotsUnchanged": true,
+    "finalSnapshotProcessNames": [
+      "PSKeyboard-ControllerFree",
+      "RemotePlay"
+    ],
+    "productionBackendObservedInEarlierTrials": true,
+    "productionBackendAbsentInFinalTrialSnapshots": true,
+    "productionBackendLaterObservedWithNewProcess": true,
+    "cause": "unverified",
+    "existingSonyAndApplicationProcessesPreserved": true,
+    "productionBackendStartStopCommandIssuedByThisResearch": false
+  }
+}

@@ -10,6 +10,7 @@
 - 最新交付 **0.1.0-alpha.8** 完成白色幾何 PS 圖示、莓紅介面與設定頁，保留 alpha.7 鍵位及原後端。已編譯、離線驗證、放到桌面，未把 UI 更新當成新的 Sony 相容性證據。
 - 本次交接唯讀檢查發現 alpha.8 已在執行，官方 Remote Play 仍是原先程序；**尚未收到使用者對 alpha.8 的遊戲操作及視覺驗收回報**。程序狀態會變動，下串先唯讀確認，不按歷史 PID 操作。
 - 使用者最新順序是：**完成 UI／圖示後，接著研究如何讓 DualSense 模擬被官方 Remote Play 接受**。可先進行不影響現有連線的原始碼研究與隔離協定測試。
+- **接手後的隔離研究已完成一階段**：新增 [V5 研究工具](../research/dualsense-v5-test/README.md)，固定候選來源的 V5／使用者空間 USB/IP 往返通過；找到並修正候選轉接層的觸控 inactive 格式差異。這不是新的成品交付，alpha.8 不變。候選正式 Windows CLI 的驅動版本硬性檢查仍擋住直接替換，Windows／Sony 驗收尚未進行；詳見[本階段證據](../research/dualsense-v5-test/RESULTS-20261029.md)。
 
 ## 2. GitHub、版本與哪些東西沒有公開
 
@@ -90,6 +91,7 @@ alpha.7／alpha.8 新建或「恢復預設」的排列如下；已有格式 1／
 | `src/keyboard-pad/ViiperTransport.cs`、`KeyboardInputState.cs`、`KeyboardMapping.cs` | 主線沿用的傳輸與鍵盤處理 |
 | `research/native-merge/keyboard_merge.c`、`.h` | 22 動作的原生報告處理；順序是 ABI，不可只改一端 |
 | `research/dualsense-usb-test/` | 現有 DualSense 使用者空間 USB/IP 測試、後續候選研究 |
+| `research/dualsense-v5-test/` | 固定 hbashton 候選 V5 轉接、離線測試、純使用者空間 lab server；不可作玩家後端 |
 | `research/native-probe/` | Sony handle 唯讀檢查，`--dualsense` 限定 `054C:0CE6` |
 | `packaging/Verify-ControllerFreeBuild.ps1` | 來源／檔案版本、雜湊、品牌資源驗證 |
 
@@ -103,12 +105,14 @@ alpha.7／alpha.8 新建或「恢復預設」的排列如下；已有格式 1／
 
 - 原版 Alia5 最新正式版仍為 v0.9.0；當日 main 比正式版新增的四次提交未改 DualSense 裝置實作。這是當日快照，下串若需「最新」須重新核對上游。
 - hbashton/VIIPER 的 `v0.1.9-rc4.6.6` 有實質不同的 DualSense 複合裝置：音訊介面 0–2、HID 介面 3；原版是單一 HID 介面 0。**差異是研究線索，尚未證明就是 Sony 拒絕原版的根因。**
-- 候選使用 V5 裝置名稱（如 `dualsensecombinedaudioduplexv5`），需要 16-byte VPCM 標頭、種類、長度、序號、CRC32 與 framed feedback。不是換一個 exe 就能沿用目前 33-byte 輸入／6-byte 回饋。
-- 候選文件固定 usbip-win2 0.9.7.7 ABI，本機是 0.9.8.1。候選與現有驅動的相容性未驗證；**不可為試候選直接降級現在正常的驅動**。
-- 尚未下載／執行該新候選，尚未核對候選下載檔簽章，也未找到其已通過 Sony Remote Play 9.5 的明確實測證據。
+- 候選使用 V5 裝置名稱（如 `dualsensecombinedaudioduplexv5`），需要 16-byte VPCM 標頭、種類、長度、序號、CRC32 與 framed feedback；原始碼另有文件表未列的 `0x84` 回饋。**33-byte 內容也不完全相容**：原版觸控 bool `00` 表示未接觸，候選 packed 狀態必須用 `80`。獨立 adapter 已修正，沒有修改現行 PS4／原版 DualSense 傳輸。
+- 候選正式 Windows CLI 不只文件要求，而是在開啟 server 前**無條件檢查** usbip-win2 必須為 0.9.7.7，關閉 auto-attach 也不例外。本機唯讀確認為 0.9.8.1。候選網路後端與現有成套驅動的實際相容性仍未驗證；**不可降級、混用不同版 CLI/DLL，或移除檢查便宣稱相容**。
+- 固定候選 ZIP 已下載核對 GitHub digest／BUILD-INFO，`viiper.exe` 實際為 **NotSigned**；正式候選執行檔未啟動。另以固定來源底層套件自建 lab server，在獨立 loopback `33441/33442` 完成使用者空間測試，沒有 Windows attach、驅動操作或 Sony 操作。尚無此候選已通過 Sony Remote Play 9.5 的明確實測證據。
 - DS5Dongle 需要實體 DualSense 與 Pico 硬體，僅作協定參考，不是目前免手把方向的直接解法。使用者手邊沒有 PS5 手把。
 
 接續順序：
+
+前述步驟 2、3 的 V5／使用者空間部分已有[本輪結果](../research/dualsense-v5-test/RESULTS-20261029.md)：104 項自製離線檢查、70 項 USB/IP 檢查與 13 個上游精準測試通過。下一輪先讀該結果，無需重做原版 62 項試驗；**仍缺現有 0.9.8.1 成套驅動的隔離 Windows 相容性證據及真正 Sony 操作**。保留以下整體順序作驗收界線。
 
 1. 唯讀核對目前版本、分支、程序及既有資料；先保護正常的 DS4 連線，不重做已完成研究。
 2. 以固定 tag／commit 比較複合描述、feature/control 回覆及 V5 協定；在獨立研究目錄實作候選 adapter 與離線測試。預設 PS4 不變。
@@ -146,7 +150,7 @@ alpha.8：36 項控制保護、106 項假傳輸／轉換、17 項建置完整性
 ## 10. 其餘待辦與閱讀順序
 
 1. 本文件 → [版本紀錄](../CHANGELOG.md) → [版本控管](VERSIONING.md)。
-2. [alpha.6 實機結果](../research/controller-free-preview/ALPHA6-TRIAL.md) → [DualSense 候選](../research/dualsense-usb-test/UPSTREAM-CANDIDATES-20261029.md) → 相關程式與測試。
+2. [alpha.6 實機結果](../research/controller-free-preview/ALPHA6-TRIAL.md) → [DualSense 候選](../research/dualsense-usb-test/UPSTREAM-CANDIDATES-20261029.md) → [V5 隔離結果](../research/dualsense-v5-test/RESULTS-20261029.md) → 相關程式與測試。
 3. 需要確認早期成功證據時讀 [首次免手把紀錄](../research/controller-free-preview/LIVE-TRIAL.md)；歷史失敗仍保留，不能當成現況或假定其根因已修正。
 4. [支援範圍](PRODUCT-SCOPE.md)、[連點／錄製設計](AUTOMATION-AND-CONTROLLER-TESTS.md)、[發行工作表](../packaging/RELEASE-CHECKLIST.md) 是後續待辦。錄製只記錄已映射的手把動作與時間，不記錄全部 Windows 打字、不執行任意程式碼；失焦／F8／斷線停止。
 5. 正式發布前補足乾淨電腦安裝／移除、恢復與長時間測試、第三方 notices／對應原始碼、發行簽章與授權、退款支援及支付平台。不要宣稱首創、Sony 官方授權或所有遊戲／電腦通用。
