@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory=$true)][string]$BackendDirectory,
     [Parameter(Mandatory=$true)][string]$OutputDirectory,
-    [Parameter(Mandatory=$true)][string]$MappingDirectory,
+    [Parameter(Mandatory=$true)][string]$Zig,
     [switch]$RunTests,
     [switch]$RequireClean
 )
@@ -11,7 +11,7 @@ $repo=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
 $out=[IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $out) { throw 'Candidate output must be a new directory; old builds are immutable.' }
 $version=[IO.File]::ReadAllText((Join-Path $repo 'VERSION')).Trim()
-if ($version -cnotmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -or [int]$Matches[1] -lt 10 -or [int]$Matches[1] -gt 65534) { throw 'Expected a new alpha version, starting with alpha.10.' }
+if ($version -cnotmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -or [int]$Matches[1] -lt 11 -or [int]$Matches[1] -gt 65534) { throw 'Expected a new public alpha version, starting with alpha.11.' }
 $fileVersion='0.1.0.'+$Matches[1]
 $commit=(& git -C $repo rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $commit -cnotmatch '\A[0-9a-f]{40}\z') { throw 'Cannot identify source commit.' }
@@ -33,18 +33,19 @@ if ($backendRecord.executableSha256 -cne $backendHash -or $backendRecord.upstrea
     $backendRecord.pureUnitTestsPassed -ne $true -or $backendRecord.materialsManifestSha256 -cne (Get-FileHash -LiteralPath (Join-Path $backendRoot 'MATERIALS.json')).Hash) {
     throw 'Candidate backend provenance does not match the reviewed source.'
 }
-$native=Join-Path (Resolve-Path -LiteralPath $MappingDirectory).Path 'pskb-keyboard-merge.dll'
-$nativeHash='DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE'
-if ((Get-FileHash -LiteralPath $native).Hash -cne $nativeHash) { throw 'Requires the unchanged alpha.8 native mapping DLL.' }
 $sourceNames=@(
     'research/dualsense-preview/DualSensePreview.cs','research/dualsense-preview/CandidateTransport.cs',
+    'research/dualsense-preview/SupportLinks.cs',
     'research/dualsense-v5-test/V5Protocol.cs','src/keyboard-pad/ViiperTransport.cs',
     'src/keyboard-pad/KeyboardMapping.cs','src/keyboard-pad/KeyboardInputState.cs',
     'src/physical-keyboard/BindingProfile.cs','src/physical-keyboard/RapidFireEngine.cs',
     'src/physical-keyboard/KeyboardControlPipeline.cs','src/physical-keyboard/PhysicalReportMerge.cs','src/physical-keyboard/BindingEditor.cs',
     'src/physical-keyboard/KeyboardUi.cs','src/physical-keyboard/UiText.cs'
 )
-$trackedInputs=$sourceNames+@('VERSION','research/dualsense-preview/Build-Candidate.ps1',
+$trackedInputs=$sourceNames+@('VERSION','LICENSE','COPYRIGHT.md','research/dualsense-preview/Build-Candidate.ps1',
+    'packaging/Build-PublicRelease.ps1','docs/REBUILD.md','packaging/README.zh-TW.md','packaging/README.en.md',
+    'research/dualsense-preview/Build-Native.ps1','research/native-merge/keyboard_merge.c',
+    'research/native-merge/keyboard_merge.h','research/native-merge/keyboard_merge_test.c','research/native-merge/KeyboardMergeInteropTest.cs',
     'research/dualsense-preview/Verify-Candidate.ps1','research/dualsense-preview/README.md',
     'research/dualsense-preview/PreviewGuardTests.cs','research/dualsense-preview/CandidateTransportTests.cs',
     'research/dualsense-preview/RunTransportTests.ps1','research/dualsense-preview/backend/main.go',
@@ -54,6 +55,13 @@ $trackedInputs=$sourceNames+@('VERSION','research/dualsense-preview/Build-Candid
     'src/physical-keyboard/KeyboardControlPipelineTests.cs','src/physical-keyboard/UiInteractionTests.cs')
 $sourceHashes=@($trackedInputs|Sort-Object -Unique|ForEach-Object{[ordered]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $repo $_)).Hash}})
 New-Item -ItemType Directory -Path $out | Out-Null
+$nativeRoot=Join-Path $out 'native-build'
+& (Join-Path $PSScriptRoot 'Build-Native.ps1') -Zig $Zig -OutputDirectory $nativeRoot -RunTests:$RunTests
+if(-not $?) { throw 'Native source build failed.' }
+$native=Join-Path $nativeRoot 'pskb-keyboard-merge.dll'
+$nativeRecord=Get-Content -LiteralPath (Join-Path $nativeRoot 'NATIVE-BUILD.json') -Raw | ConvertFrom-Json
+$nativeHash=(Get-FileHash -LiteralPath $native).Hash
+if($nativeRecord.executableSha256 -cne $nativeHash -or $nativeRecord.testsRun -ne [bool]$RunTests) { throw 'Native build record does not match the freshly compiled library.' }
 $utf8=[Text.UTF8Encoding]::new($false)
 $builtUtc=[DateTime]::UtcNow.ToString('o')
 $infoVersion=$version+'+g'+$commit.Substring(0,12)
@@ -86,7 +94,10 @@ Copy-Item -LiteralPath $native -Destination (Join-Path $out 'pskb-keyboard-merge
 Copy-Item -LiteralPath $backend -Destination (Join-Path $out 'DualSenseCandidateServer.exe')
 Copy-Item -LiteralPath (Join-Path $backendRoot 'BUILD.json') -Destination (Join-Path $out 'BACKEND-BUILD.json')
 Copy-Item -LiteralPath (Join-Path $backendRoot 'MATERIALS.json') -Destination (Join-Path $out 'MATERIALS.json')
+Copy-Item -LiteralPath (Join-Path $nativeRoot 'NATIVE-BUILD.json') -Destination (Join-Path $out 'NATIVE-BUILD.json')
+Copy-Item -LiteralPath (Join-Path $nativeRoot 'NATIVE-MATERIALS.json') -Destination (Join-Path $out 'NATIVE-MATERIALS.json')
 $materials=Get-Content -LiteralPath (Join-Path $backendRoot 'MATERIALS.json') -Raw | ConvertFrom-Json
+$nativeMaterials=Get-Content -LiteralPath (Join-Path $nativeRoot 'NATIVE-MATERIALS.json') -Raw | ConvertFrom-Json
 New-Item -ItemType Directory -Path (Join-Path $out 'notices') | Out-Null
 foreach($material in $materials) {
     if($material.license -cnotmatch '\Anotices/[A-Za-z0-9_.-]+\.txt\z') { throw 'Invalid notice path.' }
@@ -94,8 +105,17 @@ foreach($material in $materials) {
     if((Get-FileHash -LiteralPath $license).Hash -cne $material.licenseSha256) { throw 'Notice content hash mismatch.' }
     Copy-Item -LiteralPath $license -Destination (Join-Path $out $material.license)
 }
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'README.md') -Destination (Join-Path $out 'README.md')
-$testResults=@()
+foreach($material in $nativeMaterials) {
+    if($material.license -cnotmatch '\Anotices/Native-[A-Za-z0-9_.-]+\.txt\z') { throw 'Invalid native notice path.' }
+    $license=Join-Path $nativeRoot $material.license
+    $destination=Join-Path $out $material.license
+    if((Test-Path -LiteralPath $destination) -or (Get-FileHash -LiteralPath $license).Hash -cne $material.licenseSha256) { throw 'Duplicate native notice or content hash mismatch.' }
+    Copy-Item -LiteralPath $license -Destination $destination
+}
+Copy-Item -LiteralPath (Join-Path $repo 'packaging/README.zh-TW.md') -Destination (Join-Path $out 'README.md')
+Copy-Item -LiteralPath (Join-Path $repo 'packaging/README.en.md') -Destination (Join-Path $out 'README.en.md')
+foreach($name in @('LICENSE','COPYRIGHT.md')) { Copy-Item -LiteralPath (Join-Path $repo $name) -Destination (Join-Path $out $name) }
+$testResults=@($nativeRecord.testResults)
 if ($RunTests) {
     $guard=Join-Path $out 'PreviewGuardTests.exe'
     & $csc @common /target:exe /main:PSKeyboard.PreviewGuardTests ('/out:'+$guard) @sources (Join-Path $PSScriptRoot 'PreviewGuardTests.cs')
@@ -121,11 +141,13 @@ foreach($source in $sourceHashes) {
 }
 if ((& git -C $repo rev-parse HEAD).Trim() -cne $commit) { throw 'Commit changed during build.' }
 if ($RequireClean -and @(& git -C $repo status --porcelain --untracked-files=normal).Count -ne 0) { throw 'Working tree changed during build.' }
-$runtimeNames=@('PSKeyboard-DualSensePreview.exe','DualSenseCandidateServer.exe','pskb-keyboard-merge.dll','BACKEND-BUILD.json','MATERIALS.json','README.md')+@($materials|ForEach-Object{$_.license})
+$runtimeNames=@('PSKeyboard-DualSensePreview.exe','DualSenseCandidateServer.exe','pskb-keyboard-merge.dll',
+    'BACKEND-BUILD.json','MATERIALS.json','NATIVE-BUILD.json','NATIVE-MATERIALS.json','README.md','README.en.md','LICENSE','COPYRIGHT.md')+
+    @($materials|ForEach-Object{$_.license})+@($nativeMaterials|ForEach-Object{$_.license})
 $manifest=[ordered]@{
     schemaVersion=1;product='上班不要玩';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
     informationalVersion=$infoVersion;sourceCommit=$commit;workingTreeDirty=$dirty;builtUtc=$builtUtc;
-    entryPoint='PSKeyboard-DualSensePreview.exe';channel='local-compatibility-preview';driversBundled=$false;
+    entryPoint='PSKeyboard-DualSensePreview.exe';channel='public-alpha';priceModel='free';license='GPL-3.0-only';driversBundled=$false;
     sonyOperationVerified=$false;commercialReady=$false;profileReadOnly=$false;profileSaveRequiresUserAction=$true;defaultConnected=$false;defaultEnabled=$false;
     sonyBaselineEvidence=[ordered]@{version='0.1.0-alpha.9';date='2026-10-29';source='user-report';persona='dualsensegamepadv5';operationPassed=$true};
     sessionTimeLimitSeconds=0;

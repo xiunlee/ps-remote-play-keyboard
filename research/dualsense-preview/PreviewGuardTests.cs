@@ -79,9 +79,32 @@ namespace PSKeyboard
             Check(!json.Contains("secret-payload") && !json.Contains("secret-account") && !json.Contains("payload"), "Diagnostics do not persist arbitrary input or raw tool text.");
             Check((string)metadata["reportID"] == "0xF0" && (string)metadata["wLength"] == "64", "Only bounded request metadata is retained.");
             Check(!DualSensePreview.SanitizeServerLine("stdout", "private-input").ContainsKey("text"), "No raw-text diagnostic field.");
+            SupportDestinations();
             ProfileEditing();
             Console.WriteLine("DUALSENSE_PREVIEW_GUARDS_PASS checks=" + checks + "; synthetic profile only; no GUI, personal profile, process, driver, keyboard, Sony or network operations");
             return 0;
+        }
+
+        private static void SupportDestinations()
+        {
+            const string version = "0.1.0-alpha.11";
+            string feedback = SupportLinks.FeedbackUrl(version);
+            Check(feedback.StartsWith("mailto:xiun1019@gmail.com?subject=", StringComparison.Ordinal) &&
+                Uri.UnescapeDataString(feedback.Substring(feedback.IndexOf("?subject=", StringComparison.Ordinal) + 9)) == "上班不要玩 " + version + " 意見回饋" &&
+                feedback.IndexOf('&') < 0, "Feedback has only the fixed recipient and encoded version subject, without body, attachments or extra recipients.");
+            Check(SupportLinks.IsAllowedLaunchUrl(feedback, version) &&
+                !SupportLinks.IsAllowedLaunchUrl(feedback + "&cc=another@example.com", version), "Only the exact feedback destination can launch.");
+            Reject(delegate { SupportLinks.FeedbackUrl(version + "\r\nBcc:another@example.com"); });
+            Check(SupportLinks.IsAllowedPayPalUrl("https://www.paypal.com/donate/?hosted_button_id=review-only") &&
+                SupportLinks.IsAllowedPayPalUrl("https://paypal.me/review-only/1USD"), "Supported PayPal HTTPS forms pass without opening them.");
+            foreach (string invalid in new string[] { "", "http://www.paypal.com/donate/", "https://www.paypal.com.evil.example/",
+                "https://user@www.paypal.com/donate/", "https://www.paypal.com:8443/donate/", "file:///C:/example.exe",
+                "https://www.paypal.com/donate/\r\n", "https://evil.example/", "https://paypal.me/review-only/10USD" })
+                Check(!SupportLinks.IsAllowedPayPalUrl(invalid), "Non-public or untrusted support target is rejected.");
+            Check(String.IsNullOrEmpty(SupportLinks.SponsorUrl) && !SupportLinks.SponsorAvailable &&
+                !SupportLinks.IsAllowedLaunchUrl(SupportLinks.SponsorUrl, version), "Without an approved PayPal destination, sponsorship cannot launch.");
+            Check(!SupportLinks.IsAllowedLaunchUrl("https://www.paypal.com/donate/?hosted_button_id=unconfigured", version),
+                "Allowing a PayPal host does not authorize an arbitrary destination.");
         }
 
         private static void ProfileEditing()

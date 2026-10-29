@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "product": "上班不要玩",
+  "variant": "dualsense-candidate",
+  "version": "0.1.0-alpha.10",
+  "fileVersion": "0.1.0.10",
+  "informationalVersion": "0.1.0-alpha.10+g8359c1ded5cf",
+  "sourceCommit": "8359c1ded5cf3310ad85ed3b42e0f47fd55da586",
+  "workingTreeDirty": false,
+  "builtUtc": "2026-10-29T08:39:27.6290004Z",
+  "entryPoint": "PSKeyboard-DualSensePreview.exe",
+  "channel": "local-compatibility-preview",
+  "driversBundled": false,
+  "sonyOperationVerified": false,
+  "commercialReady": false,
+  "profileReadOnly": false,
+  "profileSaveRequiresUserAction": true,
+  "defaultConnected": false,
+  "defaultEnabled": false,
+  "sonyBaselineEvidence": {
+    "version": "0.1.0-alpha.9",
+    "date": "2026-10-29",
+    "source": "user-report",
+    "persona": "dualsensegamepadv5",
+    "operationPassed": true
+  },
+  "sessionTimeLimitSeconds": 0,
+  "driverVersion": "0.9.8.1",
+  "apiPort": 33642,
+  "usbPort": 33641,
+  "backendSha256": "CEE9B59469ED414935CDCCCF07D831DFB4671D5E2FFB3154749038FB3605B58A",
+  "nativeSha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE",
+  "controllerModes": [
+    "dualsensegamepadv5"
+  ],
+  "defaultControllerMode": "dualsensegamepadv5",
+  "driverValidationRun": "https://github.com/xiunlee/ps-remote-play-keyboard/actions/runs/40838199781",
+  "testsRun": true,
+  "testResults": [
+    {
+      "kind": "candidate-guards",
+      "passed": true,
+      "output": [
+        "DUALSENSE_PREVIEW_GUARDS_PASS checks=90; synthetic profile only; no GUI, personal profile, process, driver, keyboard, Sony or network operations"
+      ]
+    },
+    {
+      "kind": "candidate-fake-transport",
+      "passed": true
+    },
+    {
+      "kind": "BindingProfileTests",
+      "passed": true,
+      "output": [
+        "BINDING_PROFILE_PASS checks=276; isolated temporary files and pure key events only"
+      ]
+    },
+    {
+      "kind": "RapidFireTests",
+      "passed": true,
+      "output": [
+        "RAPID_FIRE_PASS checks=101; fake clocks and pure key/action events only"
+      ]
+    },
+    {
+      "kind": "KeyboardControlPipelineTests",
+      "passed": true,
+      "output": [
+        "KEYBOARD_PIPELINE_PASS checks=36; fake clock, native merge only; no live input or devices"
+      ]
+    },
+    {
+      "kind": "UiInteractionTests",
+      "passed": true,
+      "output": [
+        "UI interaction tests PASS (122 checks). No live input or devices used."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/branding/app.ico",
+      "sha256": "8F4DC012FF28FA08C6B36892FFB0B4F76C6F54F061B0B2F5BCC7DE2BF1A0C268"
+    },
+    {
+      "path": "assets/branding/ps-mark.png",
+      "sha256": "FD8EFE0032AF465C486D322B0D0897F597ECB1A9FAE38CC327E891E80F695831"
+    },
+    {
+      "path": "research/dualsense-preview/backend/Build-Backend.ps1",
+      "sha256": "BB5A953530CA0F47F5BEEE35D7885BEF0683FC5193FBF20834EF21EE947519E7"
+    },
+    {
+      "path": "research/dualsense-preview/backend/main_test.go",
+      "sha256": "B7B8597062E200659A8CC49F30D84AE4DCB0D12E672F7A21D91B21B9091F06AA"
+    },
+    {
+      "path": "research/dualsense-preview/backend/main.go",
+      "sha256": "B75DDB7A8B86336736716D38E1E7C012B5515E3085E32A05A7E01491FE61F305"
+    },
+    {
+      "path": "research/dualsense-preview/backend/README.md",
+      "sha256": "2F45985E5581778054319C625A77FDBD6DF936CDBF2A27EDB49FE11696C03225"
+    },
+    {
+      "path": "research/dualsense-preview/Build-Candidate.ps1",
+      "sha256": "0FCA70463236EF4F634739B02D5B2F3A419CAEF5582DB1A016454A96076D33B9"
+    },
+    {
+      "path": "research/dualsense-preview/CandidateTransport.cs",
+      "sha256": "E0C7559580C6684A3EC484FB111A47B3F44C5BE497F0FC4D7B98F9DC3A94A37C"
+    },
+    {
+      "path": "research/dualsense-preview/CandidateTransportTests.cs",
+      "sha256": "D796AFA9B0E099DB6166033BFEE71B12E4DD48E4BD66C3B37268D8D89FAFF09D"
+    },
+    {
+      "path": "research/dualsense-preview/DualSensePreview.cs",
+      "sha256": "B7D9405A014E93515529F073C24A6CC2B090295C65F65D5EAF7BD61F2F5B87CC"
+    },
+    {
+      "path": "research/dualsense-preview/PreviewGuardTests.cs",
+      "sha256": "B7BD44BD858E33665A1068B72F972A7358A967F087F75192B65C06D444CDA942"
+    },
+    {
+      "path": "research/dualsense-preview/README.md",
+      "sha256": "E3D985AD8E03B4A11E850C4F24211B3EA6AAC39BDCE7082B18436155F07986FF"
+    },
+    {
+      "path": "research/dualsense-preview/RunTransportTests.ps1",
+      "sha256": "81637E73A54EBB93F06DBA9AE55CC03D8D82A82A562420187271D0E05B877002"
+    },
+    {
+      "path": "research/dualsense-preview/Verify-Candidate.ps1",
+      "sha256": "A9EA83B311F25B4FCB23D685048ECDDD7C755E04172E370C45CD01935BB81A65"
+    },
+    {
+      "path": "research/dualsense-v5-test/V5Protocol.cs",
+      "sha256": "6242D3DAF3157C2C839BCE735F6CEDD2BB7F261EBB72C6AADBED5426062014EE"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardInputState.cs",
+      "sha256": "61ABCF97408FEA3B11830A946522A135AE3330F88ED879C2FF1BC8E190558A4A"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardMapping.cs",
+      "sha256": "7DAC0D686E376327A1B364B0BABADCF2E2CA3F02B21685CB15DEDE0041DBB472"
+    },
+    {
+      "path": "src/keyboard-pad/ViiperTransport.cs",
+      "sha256": "5C46BE155DA8DA99A00DA6FE93495A823454E614D50C627A0A0ED63B299E5255"
+    },
+    {
+      "path": "src/physical-keyboard/BindingEditor.cs",
+      "sha256": "7EF9AAAD84C036A33D2D9413D41D7C89810F5AEAD3BB29BB2603415FDEE40A6C"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfile.cs",
+      "sha256": "B6BB8C7D6D18599FA95F6D91C1DD0A449FD90DDB61C8AE241DF11EE9E6ECC644"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfileTests.cs",
+      "sha256": "3821F24573F82D5DE6199C364DA6AD6E9E32CCB18DF96FAC319F4DC1E8D9EABC"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipeline.cs",
+      "sha256": "CD65A683C6D04EBFBFCFD877E3D02412DA0A70D921A5CF73A5A60B1A1EE8F773"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipelineTests.cs",
+      "sha256": "7FABB1FB5F6279C25C8A24CBDCF44E461DBCE54E3467A73D80DB5338E6A0D46F"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardUi.cs",
+      "sha256": "D935F13A78D13DE6C082CB379EAEFBB7B3BFFBA219118D974F9C3268AF149060"
+    },
+    {
+      "path": "src/physical-keyboard/PhysicalReportMerge.cs",
+      "sha256": "2F29143BFC521E20102D8B786E35D84EF84A52AF49EA6546ABF650F7988BC0AE"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireEngine.cs",
+      "sha256": "69667837E44235DB4CFB0D9A93E39372F195BB244EFD24262AD97A132B8F1BF4"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireTests.cs",
+      "sha256": "0752B38A861C5B9B567AB793AECFCAD78D17B0550A3AF62A406F0C298C713E87"
+    },
+    {
+      "path": "src/physical-keyboard/UiInteractionTests.cs",
+      "sha256": "2470EF4E8C2704C9AE609895EB0F9C37D3E8B7B980055AE6F72BCFCC47AFC038"
+    },
+    {
+      "path": "src/physical-keyboard/UiText.cs",
+      "sha256": "06F51FA02DA5305F4D9E74BC6E514CE6AF4AAE841CA49D4F223323E5CB6493CA"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "B7BC598018EA5E92831BD0411744E271C0B59CBA3D23716244D83A6F35483C85"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "PSKeyboard-DualSensePreview.exe",
+      "sha256": "9F29163C6E4B1C1344C59698A1ECE3C50DE406FB52DBD9ED3DDF94CC5AC0CB53"
+    },
+    {
+      "path": "DualSenseCandidateServer.exe",
+      "sha256": "CEE9B59469ED414935CDCCCF07D831DFB4671D5E2FFB3154749038FB3605B58A"
+    },
+    {
+      "path": "pskb-keyboard-merge.dll",
+      "sha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE"
+    },
+    {
+      "path": "BACKEND-BUILD.json",
+      "sha256": "F83F584FC9DBD6A9ED5F872520FD5D3B02698D8ED875148FB9E7605FC3C3E112"
+    },
+    {
+      "path": "MATERIALS.json",
+      "sha256": "55BC7B44AF19008DAF86B1DA5025FAB65EA301FD96A00DC1EDDA1B6E6BA62CDF"
+    },
+    {
+      "path": "README.md",
+      "sha256": "E3D985AD8E03B4A11E850C4F24211B3EA6AAC39BDCE7082B18436155F07986FF"
+    },
+    {
+      "path": "notices/github.com_Alia5_VIIPER-LICENSE.txt",
+      "sha256": "F24EE094842DC3347A7A06B71373573CE18F6DCB935C81E95623723EE22E6CA6"
+    },
+    {
+      "path": "notices/golang.org_x_crypto-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/golang.org_x_exp-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/golang.org_x_sys-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/Go-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    }
+  ]
+}

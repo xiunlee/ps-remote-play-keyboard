@@ -96,7 +96,7 @@ The next hardware test should establish raw relay compatibility before enabling 
 ## Signature verification performed without installation
 
 Downloaded official v5.3.0 x64 driver files only, into:
-`C:\Users\o9356\.pskeyboard-tools\physical-relay-research`
+`%USERPROFILE%\.pskeyboard-tools\physical-relay-research`
 
 | File | Authenticode result | Publisher | SHA-256 |
 | --- | --- | --- | --- |
@@ -106,7 +106,7 @@ Downloaded official v5.3.0 x64 driver files only, into:
 
 The official x64 MSI was subsequently downloaded, inspected read-only, and verified without execution:
 
-- Path: `C:\Users\o9356\.pskeyboard-tools\physical-relay-research\usbipd-win_5.3.0_x64.msi`
+- Path: `%USERPROFILE%\.pskeyboard-tools\physical-relay-research\usbipd-win_5.3.0_x64.msi`
 - Length: `4501504` bytes.
 - Authenticode: **Valid**, signer `Open Source Developer, Frans van Dorsselaer`.
 - SHA-256: `1C984914AEC944DE19B64EFF232421439629699F8138E3DDC29301175BC6D938`.

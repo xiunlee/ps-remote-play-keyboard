@@ -2,17 +2,18 @@
 
 ## 版本與來源
 
-- 根目錄 `VERSION` 是建置版本號的唯一來源；採 `主版.次版.修訂-alpha.序號`，目前開發／下一交付為 `0.1.0-alpha.10`。alpha.9 四方案已有官方 Remote Play／PS5 操作的使用者成功回報，使用者指定第二種 `dualsensegamepadv5`；alpha.10 固定此模式、整合改鍵／連點並移除 30 分鐘限制。**本次文件更新時尚未完成 alpha.10 正式建置交付或實機驗收**，不能沿用 alpha.9 結果宣稱新版已驗收。
-- 測試期間每次交付有程式變更的新版，就增加 alpha 序號並更新 [CHANGELOG.md](../CHANGELOG.md)。已標記版本不重用於另一份程式碼。
-- `v<版本號>` 為附註 Git 標籤，固定經測試的原始碼提交。禁止強制移動、刪除後重建或強制覆寫遠端標籤。
-- 編譯檔的 ProductVersion 包含版本與 Git 短碼；未提交的工作區另有 `.dirty`。視窗顯示產品版本，狀態與啟動紀錄保存完整來源提交及 dirty 狀態。
-- `alpha.5` 是事後命名的成功基準：原執行檔沒有內嵌版本，不能事後改寫它並宣稱原檔已有版本。歷史校驗與來源紀錄保留；本機副本可依最新清理授權移除，事後重建不能宣稱就是當初原檔。
-- 交付後的驗收文件、建置清單與研究工具可另作提交；不因此移動版本標籤或覆寫原執行檔。本次 alpha.10 完成後，重新交付有應用程式碼變更的版本從 **alpha.11** 起增加。
+- 根目錄 `VERSION` 是建置版本號的唯一來源；採 `主版.次版.修訂-alpha.序號`。目前準備 **0.1.0-alpha.11 免費開源公開測試版**，加入自願贊助、回饋及公開封裝；尚未完成該版公開發布或使用者實機驗收。
+- alpha.10 已完成乾淨建置及本機交付，來源／本地標籤固定於 `8359c1ded5cf3310ad85ed3b42e0f47fd55da586`；本次文件更新時尚未推送該標籤至遠端。見 [交付紀錄](../research/dualsense-preview/ALPHA10-TRIAL.md)，不得覆寫成 alpha.11。
+- 每次交付有應用程式碼變更的新版，就增加 alpha 序號並更新 [CHANGELOG.md](../CHANGELOG.md)。alpha.11 完成後，下一個有程式變更的交付從 **alpha.12** 起增加。
+- `v<版本號>` 為附註 Git 標籤，固定經測試的原始碼提交。禁止強制移動、刪除重建或強制覆寫遠端標籤。
+- 編譯檔的 ProductVersion 包含版本與 Git 短碼；未提交工作區另有 `.dirty`。視窗顯示版本，狀態／啟動紀錄保存來源提交及 dirty 狀態。
+- 驗收文件與建置清單可於交付後另作提交，不因此移動版本標籤。alpha.9 的 PS5 操作成功回報不等於 alpha.10／11 每個新 session 已獲 Sony 接受。
+- `alpha.5` 是事後命名的成功基準，原檔沒有內嵌版本。歷史校驗與來源保留；本機副本可依清理授權移除，事後重建不能宣稱就是當初原檔。
 
-## 建置、驗證與交付
+## 建置與驗證
 
-1. 更新 `VERSION` 與變更紀錄，完成程式碼審查及離線測試。
-2. 提交程式碼，確認工作區乾淨。**alpha.10 現行 DualSense 主線**使用以下腳本；每個輸出目錄必須尚不存在：
+1. 更新 `VERSION` 與變更紀錄，完成來源審查及離線測試；提交程式碼並保持工作區乾淨。
+2. **alpha.11 現行 DualSense 主線**使用以下流程，每個輸出目錄必須尚不存在：
 
    ```powershell
    .\research\dualsense-preview\backend\Build-Backend.ps1 `
@@ -20,34 +21,38 @@
      -OutputDirectory <全新後端建置目錄>
 
    .\research\dualsense-preview\Build-Candidate.ps1 `
-     -BackendDirectory <上述後端建置目錄> `
-     -MappingDirectory <含固定雜湊mapping DLL的保留版本目錄> `
+     -BackendDirectory <上述後端建置目錄> -Zig <Zig執行檔完整路徑> `
      -OutputDirectory <全新玩家建置目錄> -RunTests -RequireClean
+
+   .\research\dualsense-preview\Verify-Candidate.ps1 `
+     -BuildDirectory <玩家建置目錄> -RequireClean
    ```
 
-   `MappingDirectory` 必須明列，內含 `pskb-keyboard-merge.dll`，SHA-256 必須為 `DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE`。alpha.10 建置後仍攜帶相同 DLL；清理舊 alpha.8 目錄後，下一次建置可指向保留的最新版，不能依賴已刪除的路徑或替換成任意 DLL。固定 hbashton 來源與 ZIP 雜湊由後端建置腳本核對，不用原候選 EXE 的舊 native attach 路徑。
+   `-Zig` 必填，不再使用 alpha.10 的 `-MappingDirectory`。建置從未變更的 `research/native-merge/keyboard_merge.c`／`.h` 編譯 mapping DLL，不依賴舊版二進位檔。固定 Zig 0.17.0，套件／執行檔雜湊及 native 測試由建置流程核對；保存 `NATIVE-BUILD.json`、`NATIVE-MATERIALS.json` 與適用 notices。
 
-3. 建置自動使用全新的版本目錄，寫入 `BUILD.json` 與 `SHA256SUMS.txt`；不覆寫目前版本，不啟動 GUI、後端或 USB 裝置。既有 `v<版本號>` 若指向不同提交，建置拒絕以該號碼產出候選。
-4. 使用下列唯讀工具驗證程式版本與檔案雜湊：
+3. 後端固定 hbashton/VIIPER commit `b78e31e93e84b4cb7c4b4c15b8aace10749106d2`，以受限入口建置，不使用原候選的舊 native attach。MATERIALS 公開輸出須移除本機個人路徑；這不表示控制協定已更換。
+4. `BUILD.json`／`SHA256SUMS.txt` 記錄版本、提交、來源與產物雜湊、工具、依賴及測試狀態。來源在建置中變動、版本標籤指向別份提交或輸出目錄已存在時，必須停止，不覆寫舊產物。
+5. 建置與離線驗證不安裝驅動、不接入 Windows 裝置、不啟停 Sony。離線渲染只使用合成設定，不開啟瀏覽器／郵件程式或擷取真實按鍵。
 
-   ```powershell
-   .\research\dualsense-preview\Verify-Candidate.ps1 -BuildDirectory <玩家建置目錄> -RequireClean
-   ```
+雜湊只證明檔案身分與完整性，不等於數位簽章或 Sony 實機驗收。alpha.11 的具體來源提交、最終測試、產物雜湊與交付位置，完成核對後另補紀錄，不預填成功。
 
-5. 測試通過後，以附註標籤固定該提交並同步開發分支及指定標籤。標籤不等於 GitHub Release；正式下載、收費與第三方散布另有驗收條件。
+`research/controller-free-preview/Build.ps1` 與 `packaging/Verify-ControllerFreeBuild.ps1` 僅供 alpha.8 PS4／舊 DualSense 歷史路線。`packaging/Build-Preview.ps1` 是 alpha.4 實體中繼封裝工具；不能用上述舊工具交付目前主線。
 
-每份 `BUILD.json` 保存來源清單、各檔 SHA-256、版本、Git 提交、建置時間、執行入口、依賴與離線測試狀態。檔案雜湊用來辨識與檢查完整性，不代表發行者數位簽章。測試成功也不等於 Sony 接受輸入；實機結果另記日期、模式、版本與使用者回報。
+## 免費公開發布
 
-alpha.10 的具體 commit、tag、交付位置、建置／封存清單與雜湊，須在實際完成並核對後補入。文件中的預定步驟不是完成證據。`research/controller-free-preview/Build.ps1` 與 `packaging/Verify-ControllerFreeBuild.ps1` 留給 alpha.8 PS4／舊 DualSense 歷史路線，不能用來交付 alpha.10。
+- 原始碼使用 [GPL-3.0-only](../LICENSE)，作者 **xiunlee**；詳見 [COPYRIGHT.md](../COPYRIGHT.md)。儲存庫維持公開，歷史分支名稱 `codex/commercial-preview` 不代表收費計畫。
+- 測試通過後，以附註標籤固定來源並推送指定分支／標籤，再核對遠端；不移動既有 tag。alpha 測試版使用 GitHub **pre-release**，不宣稱穩定版。
+- 公開執行包與完整對應原始碼包須在同一 Release 提供。來源包含本專案精確來源、固定 VIIPER 與實際 Go 依賴來源、native 來源、建置腳本及重建說明；執行包保留各元件 notices、材料清單與 SHA-256。
+- 發布前檢查來源包是否足以重建所交付元件，並核對第三方授權、公開檔案白名單及個人路徑排除；不要只附本專案 source ZIP 就宣稱後端對應原始碼完整。
+- 本包不含 USBip 驅動，也不會自動安裝或更換。下載頁清楚列出 0.9.8.1 成套先決條件與未驗收項目。完整核對見 [發行工作表](../packaging/RELEASE-CHECKLIST.md)。
+- 贊助網址目前已撤回且未啟用；先完成免費版與來源封裝，通過發布核對後可公開；贊助待正確網址再另版啟用。
+- [alpha.11 預定發布頁（待發布）](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11)須於實際上傳及下載核對後才改為已發布。
 
 ## 更新、本機清理與回退
 
-- 使用者於 2026-10-29 明確要求「電腦空間有限，舊版本在本地端都清除吧，就留下最新版本」。這項授權取代先前本機永久保留多版本的規則；**待 alpha.10 建置交付後清舊，本次文件更新不代表清理已完成**。
-- 新版仍先建置到獨立全新資料夾並驗證，不能覆寫正在使用的版本。切換完成後，本機只保留最新版與其必要依賴、可追溯紀錄，以及個人設定／備份；舊執行檔、舊捷徑、重複建置與封存可依授權清理。
-- 切換只處理「上班不要玩」及它自己建立的模擬裝置；不任意關閉或重啟 Remote Play，也不碰其他程式的裝置。
-- 兩版本不能同時接管 F8 或同一組服務連接埠。執行中的 alpha.9 先正常退出，再開 alpha.10；未退出前不刪該程式／後端，不把清理磁碟授權當成停止 Sony、驅動或其他軟體的授權。
-- 清理前逐項核對解析後的完整路徑、專案歸屬與程序占用，僅刪已確認的舊本地檔。不要整包遞迴刪除工具根目錄，不刪 `%LOCALAPPDATA%\PSKeyboard\bindings.json`、`profile-backups` 或最新版的必要檔案。完成後補記清理範圍、保留項目與驗證結果。
-- **GitHub 歷史標籤、來源、研究、PS4 路線、建置與雜湊紀錄繼續保留**。本機刪除副本不授權刪改遠端歷史，也不移動舊 tag。清理後如需回退，依舊標籤及固定依賴另行重建；不要再指示開啟已移除的本地舊捷徑。
-- 按鍵設定與程式分離；格式變更前另存備份，不用舊程式強行覆寫新格式。`alpha.5` 至 `alpha.8` 使用格式 2，alpha.9 唯讀載入，alpha.10 恢復儲存格式 2；開啟與取消不寫檔，僅使用者按儲存且成功後套用。這不代表將來所有版本都能互相讀取設定。
-
-目前主線是 `research/dualsense-preview/`，USB/IP 埠 33641、API 埠 33642。`packaging/Build-Preview.ps1` 保留為歷史實體中繼 alpha.4 封裝工具，不用它建立目前版本。正式授權、公開二進位散布與販售另行研究；本次更新與清理不更改授權或儲存庫可見性。
+- 使用者要求本機舊版本清除，只留最新版本。待 alpha.11 建置交付及正常切換後，最終只留 alpha.11、必要依賴及可追溯紀錄；個人設定／備份另行保留。文件中的授權不等於清理已完成。
+- 新版先建置到全新資料夾並驗證，不能覆寫運行中的版本。舊版正常退出後才切換／清除，不讓兩版爭用 F8 或同一組服務埠。
+- 清理前核對解析後的完整路徑、專案歸屬與程序占用，只刪確認的舊執行檔、捷徑、重複建置與封存。不對工具根目錄整包遞迴刪除，不停止 Sony、驅動或其他軟體。
+- 不刪 `%LOCALAPPDATA%\PSKeyboard\bindings.json`、`profile-backups` 或最新版必要檔案。清理完成後補記範圍、保留項目與驗證結果。
+- GitHub 歷史標籤、PS4 原始碼、研究、建置與雜湊紀錄繼續保留。清舊後如需回退，依舊標籤與固定依賴另行重建，不能再指示開已移除的捷徑。
+- 設定與程式分離；alpha.9 唯讀載入，alpha.10／11 僅使用者按儲存且成功後更新格式 2。開啟或取消不寫檔；格式變更前另存備份，不用舊程式強行覆寫新格式。

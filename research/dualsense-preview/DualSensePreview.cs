@@ -174,7 +174,7 @@ namespace PSKeyboard
             profile = BindingProfile.Default(); bool badProfile = false;
             if (!preview) try { profile = BindingProfile.Load(profilePath); } catch { badProfile = true; }
             input = new KeyboardControlPipeline(delegate { return profile; });
-            Text = "上班不要玩 " + BuildInfo.Version + " · DualSense"; ClientSize = new Size(960, 680); MinimumSize = new Size(900, 690);
+            Text = "上班不要玩 " + BuildInfo.Version + " · DualSense"; ClientSize = new Size(960, 840); MinimumSize = new Size(900, 720);
             StartPosition = FormStartPosition.CenterScreen; AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = KeyboardUi.Background; ForeColor = KeyboardUi.Ink; Font = KeyboardUi.Font(10, FontStyle.Regular);
             Icon brandIcon = KeyboardUi.LoadAppIcon(); if (brandIcon != null) { Icon = brandIcon; Disposed += delegate { brandIcon.Dispose(); }; }
@@ -231,8 +231,8 @@ namespace PSKeyboard
             Label version = KeyboardUi.Label("DUALSENSE\r\nv" + BuildInfo.Version, 10, Color.White); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.Dock = DockStyle.Fill; version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
             shell.Controls.Add(hero, 0, 0);
             Panel scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(28, 22, 28, 18), Margin = Padding.Empty };
-            TableLayoutPanel body = KeyboardUi.Table(1); body.Dock = DockStyle.Top; body.AutoSize = true; body.AutoSizeMode = AutoSizeMode.GrowAndShrink; body.RowCount = 6;
-            foreach (int height in new int[] { 70, 110, 64, 138, 56, 36 }) body.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
+            TableLayoutPanel body = KeyboardUi.Table(1); body.Dock = DockStyle.Top; body.AutoSize = true; body.AutoSizeMode = AutoSizeMode.GrowAndShrink; body.RowCount = 7;
+            foreach (int height in new int[] { 70, 110, 64, 138, 56, 36, 132 }) body.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
             scroll.Controls.Add(body); shell.Controls.Add(scroll, 0, 1);
             TableLayoutPanel mode = KeyboardUi.Table(2); mode.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 145)); mode.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             Label modeTitle = KeyboardUi.Label("手把模式", 12, KeyboardUi.Ink); modeTitle.Font = KeyboardUi.Font(12, FontStyle.Bold); modeTitle.Dock = DockStyle.Fill;
@@ -255,6 +255,37 @@ namespace PSKeyboard
             Label help = KeyboardUi.Label("F8 隨時啟用／暫停 · 切換到其他視窗會停止連點\r\n22 個動作可自訂按鍵；各鍵可設定關閉、按住或切換連點。", 9, KeyboardUi.Muted); help.Dock = DockStyle.Fill; body.Controls.Add(help, 0, 4);
             notice.Text = badProfile ? "原設定檔讀取失敗，暫用預設；儲存前原檔保持不變。" : "沿用你的個人按鍵與連點設定，只有按下儲存才會更新。";
             notice.ForeColor = badProfile ? KeyboardUi.Amber : KeyboardUi.Muted; notice.Font = KeyboardUi.Font(9, FontStyle.Regular); notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; body.Controls.Add(notice, 0, 5);
+            TableLayoutPanel support = KeyboardUi.Table(1); support.BackColor = KeyboardUi.Surface; support.Padding = new Padding(18, 10, 18, 10); support.Margin = new Padding(0, 8, 0, 0); support.RowCount = 3;
+            support.RowStyles.Add(new RowStyle(SizeType.Absolute, 24)); support.RowStyles.Add(new RowStyle(SizeType.Absolute, 32)); support.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+            Label free = KeyboardUi.Label("免費開源 · 作者 xiunlee · 贊助完全自願，不影響任何功能。", 10, KeyboardUi.Ink); free.Font = KeyboardUi.Font(10, FontStyle.Bold); free.Dock = DockStyle.Fill;
+            Label cats = KeyboardUi.Label("覺得好用的話，歡迎贊助 US$1，幫我們的三隻貓咪加個罐頭。", 10, KeyboardUi.Muted); cats.Dock = DockStyle.Fill;
+            FlowLayoutPanel supportActions = new FlowLayoutPanel { Dock = DockStyle.Fill, Margin = Padding.Empty, WrapContents = false };
+            Button sponsor = new Button(), feedback = new Button();
+            KeyboardUi.Button(sponsor, "贊助貓咪 US$1", false); KeyboardUi.Button(feedback, "意見回饋", false);
+            sponsor.Click += delegate { OpenSupportLink(true); }; feedback.Click += delegate { OpenSupportLink(false); };
+            if (SupportLinks.SponsorAvailable) supportActions.Controls.Add(sponsor); else sponsor.Dispose();
+            supportActions.Controls.Add(feedback);
+            if (!SupportLinks.SponsorAvailable)
+            {
+                Label pending = KeyboardUi.Label("贊助連結尚未開放。", 9, KeyboardUi.Muted); pending.AutoSize = true; pending.Margin = new Padding(0, 12, 0, 0); supportActions.Controls.Add(pending);
+            }
+            support.Controls.Add(free, 0, 0); support.Controls.Add(cats, 0, 1); support.Controls.Add(supportActions, 0, 2); body.Controls.Add(support, 0, 6);
+        }
+
+        private void OpenSupportLink(bool sponsorship)
+        {
+            // Only the two explicit Click handlers call this; rendering cannot launch anything.
+            if (preview || closing || editing) return;
+            string target = sponsorship ? SupportLinks.SponsorUrl : SupportLinks.FeedbackUrl(BuildInfo.Version);
+            if (!SupportLinks.IsAllowedLaunchUrl(target, BuildInfo.Version)) return;
+            try { using (Process opened = Process.Start(new ProcessStartInfo(target) { UseShellExecute = true })) { } }
+            catch (System.ComponentModel.Win32Exception) { SupportLinkFailure(sponsorship); }
+            catch (InvalidOperationException) { SupportLinkFailure(sponsorship); }
+        }
+        private void SupportLinkFailure(bool sponsorship)
+        {
+            MessageBox.Show(this, sponsorship ? "無法開啟 PayPal，請稍後再試。" :
+                "無法開啟郵件程式。你可以自行寄信至 " + SupportLinks.FeedbackAddress + "。", "上班不要玩");
         }
 
         private static Control StatusCard(string heading, Label value, StatusDot dot, Padding margin)

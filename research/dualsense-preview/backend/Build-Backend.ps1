@@ -34,7 +34,7 @@ $upstreamSumHash = (Get-FileHash -LiteralPath $upstreamSum -Algorithm SHA256).Ha
 $moduleSum = Join-Path $module 'go.sum'
 Copy-Item -LiteralPath $upstreamSum -Destination $moduleSum
 if ((Get-FileHash -LiteralPath $moduleSum -Algorithm SHA256).Hash -ne $upstreamSumHash) { throw 'Pinned dependency checksums changed during copy.' }
-$replacePath = ($upstream.Replace('\','/') | ConvertTo-Json -Compress)
+$replacePath = ('../upstream/VIIPER-' + $upstreamCommit | ConvertTo-Json -Compress)
 $moduleText = "module github.com/Alia5/VIIPER/pskeyboardcandidate`n`ngo 1.26.2`n`nrequire github.com/Alia5/VIIPER v0.0.0`n`nreplace github.com/Alia5/VIIPER => $replacePath`n"
 [IO.File]::WriteAllText((Join-Path $module 'go.mod'), $moduleText, [Text.UTF8Encoding]::new($false))
 
@@ -68,6 +68,10 @@ try {
     try {
         & $go build -mod=mod -trimpath -buildvcs=false -o $executable .
         if ($LASTEXITCODE -ne 0) { throw 'Candidate backend build failed.' }
+        $binaryText=[Text.Encoding]::UTF8.GetString([IO.File]::ReadAllBytes($executable))
+        foreach($privatePath in @($out,$out.Replace('\','/'),$env:USERPROFILE,$env:USERPROFILE.Replace('\','/'))) {
+            if($privatePath -and $binaryText.Contains($privatePath)){throw 'Backend embeds a private build path.'}
+        }
         $testResults = & $go test -mod=readonly -count=1 -json -run '^TestCandidate(Arguments|Allowlist|StdinStops|ShutdownWatchdog)$' .
         if ($LASTEXITCODE -ne 0) { throw 'Pure candidate backend unit tests failed.' }
         [IO.File]::WriteAllLines((Join-Path $out 'PURE-TESTS.jsonl'), [string[]]$testResults, [Text.UTF8Encoding]::new($false))
@@ -94,7 +98,8 @@ try {
         Copy-Item -LiteralPath $license[0] -Destination $noticePath
         $licenseHash=(Get-FileHash -LiteralPath $license[0] -Algorithm SHA256).Hash
         if ((Get-FileHash -LiteralPath $noticePath -Algorithm SHA256).Hash -ne $licenseHash) { throw 'Source license copy changed.' }
-        $materials += [ordered]@{module=$parts[0];version=$parts[1];sourceDirectory=$parts[2];license=('notices/'+$noticeName);licenseSha256=$licenseHash}
+        # Public runtime metadata contains module identities, never local account paths.
+        $materials += [ordered]@{module=$parts[0];version=$parts[1];license=('notices/'+$noticeName);licenseSha256=$licenseHash}
     }
     $goLicense=Join-Path (Split-Path -Parent (Split-Path -Parent $go)) 'LICENSE'
     Copy-Item -LiteralPath $goLicense -Destination (Join-Path $notices 'Go-LICENSE.txt')
@@ -111,7 +116,7 @@ try {
         backendSourceSha256=$mainHash; pureTestSourceSha256=$testHash; buildScriptSha256=$buildScriptHash;
         upstreamGoSumSha256=$upstreamSumHash; dependencyChecksumsUnchanged=$true;
         executableSha256=(Get-FileHash -LiteralPath $executable -Algorithm SHA256).Hash;
-        goVersion=$goVersion; cgoEnabled=$false; builtOnly=$true;
+        goVersion=$goVersion; cgoEnabled=$false; builtOnly=$true;privateBuildPathsEmbedded=$false;
         pureUnitTestsPassed=$true; testResultsSha256=(Get-FileHash -LiteralPath (Join-Path $out 'PURE-TESTS.jsonl') -Algorithm SHA256).Hash;
         moduleManifestSha256=(Get-FileHash -LiteralPath (Join-Path $out 'MODULES.jsonl') -Algorithm SHA256).Hash;
         materialsManifestSha256=(Get-FileHash -LiteralPath (Join-Path $out 'MATERIALS.json') -Algorithm SHA256).Hash;
