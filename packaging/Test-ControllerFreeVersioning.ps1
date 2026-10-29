@@ -90,6 +90,29 @@ $manifest.workingTreeDirty = $true
 Write-TestManifest $manifest
 Expect-Rejection 'dirty candidate in clean verification mode' -Clean
 
+$manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+if ($null -ne $manifest.branding) {
+    $manifest.branding.accent = '#000000'
+    Write-TestManifest $manifest
+    Expect-Rejection 'incorrect brand accent'
+
+    $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $manifest.sources = @($manifest.sources | Where-Object { $_.path -ne 'assets/branding/app.ico' })
+    Write-TestManifest $manifest
+    Expect-Rejection 'missing icon source provenance'
+
+    $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $manifest.branding.iconSha256 = '0' * 64
+    foreach ($source in $manifest.sources) { if ($source.path -eq 'assets/branding/app.ico') { $source.sha256 = '0' * 64 } }
+    Write-TestManifest $manifest
+    Expect-Rejection 'changed icon hash disagrees with embedded resource'
+
+    $manifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $manifest.branding.markResource = 'Unexpected.Resource'
+    Write-TestManifest $manifest
+    Expect-Rejection 'unexpected bitmap resource name'
+}
+
 & $verifier -BuildDirectory $testRoot | Out-Null
 $checks++
 [pscustomobject]@{ passed = $true; checks = $checks; applicationStarted = $false; usbOperations = $false }

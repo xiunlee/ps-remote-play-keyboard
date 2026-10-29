@@ -72,7 +72,13 @@ $guardSource = Join-Path $PSScriptRoot 'ControllerFreeGuardTests.cs'
 $verifyScript = Join-Path $repo 'packaging\Verify-ControllerFreeBuild.ps1'
 $versioningTestsScript = Join-Path $repo 'packaging\Test-ControllerFreeVersioning.ps1'
 $transportTestsScript = Join-Path $repo 'research\viiper-client-tests\Run.ps1'
+$brandIcon = Join-Path $repo 'assets\branding\app.ico'
+$brandMark = Join-Path $repo 'assets\branding\ps-mark.png'
+foreach ($asset in @($brandIcon, $brandMark)) {
+    if (-not (Test-Path -LiteralPath $asset -PathType Leaf)) { throw ('Brand asset is missing: ' + [IO.Path]::GetFileName($asset)) }
+}
 $inputPaths = @($sources) + @($guardSource, $versionFile, $PSCommandPath, $verifyScript, $versioningTestsScript,
+    $brandIcon, $brandMark,
     $transportTestsScript, (Join-Path $repo 'research\viiper-client-tests\TransportTests.cs'),
     (Join-Path $repo 'research\native-merge\keyboard_merge.c'), (Join-Path $repo 'research\native-merge\keyboard_merge.h'))
 $sourceHashes = @($inputPaths | Sort-Object -Unique | ForEach-Object {
@@ -110,9 +116,10 @@ if (-not $env:ZIG_GLOBAL_CACHE_DIR) { $env:ZIG_GLOBAL_CACHE_DIR = Join-Path $out
     (Join-Path $repo 'research\native-merge\keyboard_merge.c') -o (Join-Path $out 'pskb-keyboard-merge.dll')
 if ($LASTEXITCODE -ne 0) { throw 'Native mapping build failed.' }
 $compileSources = @($sources) + @($generated)
+$brandCompilerArgs = @(('/win32icon:' + $brandIcon), ('/resource:' + $brandIcon + ',PSKeyboard.BrandIcon'), ('/resource:' + $brandMark + ',PSKeyboard.BrandMark'))
 & $csc /nologo /target:winexe /platform:x64 /optimize+ /warnaserror /langversion:5 /codepage:65001 `
     /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll `
-    ('/out:' + (Join-Path $out 'PSKeyboard-ControllerFree.exe')) @compileSources
+    ('/out:' + (Join-Path $out 'PSKeyboard-ControllerFree.exe')) @brandCompilerArgs @compileSources
 if ($LASTEXITCODE -ne 0) { throw 'Controller-free experimental GUI build failed.' }
 $guardChecks = $null
 $transportTestsPassed = $false
@@ -120,7 +127,7 @@ if ($RunTests) {
     $guardOutput = Join-Path $out 'ControllerFreeGuardTests.exe'
     & $csc /nologo /target:exe /main:PSKeyboard.ControllerFreeGuardTests /platform:x64 /optimize+ /warnaserror /langversion:5 /codepage:65001 `
         /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Web.Extensions.dll `
-        ('/out:' + $guardOutput) @compileSources $guardSource
+        ('/out:' + $guardOutput) @brandCompilerArgs @compileSources $guardSource
     if ($LASTEXITCODE -ne 0) { throw 'Controller-free guard tests failed to compile.' }
     $guardLines = @(& $guardOutput)
     if ($LASTEXITCODE -ne 0) { throw 'Controller-free guard tests failed.' }
@@ -154,6 +161,12 @@ $manifest = [ordered]@{
     channel = 'internal-preview'; sourceCommit = $commit; workingTreeDirty = $dirty; builtUtc = $builtUtc
     entryPoint = 'PSKeyboard-ControllerFree.exe'; commercialReady = $false; driversBundled = $false; setupSupported = $false
     controllerModes = @('dualshock4', 'dualsense'); defaultControllerMode = 'dualshock4'
+    branding = [ordered]@{
+        accent = '#D62355'; iconSource = 'assets/branding/app.ico'; markSource = 'assets/branding/ps-mark.png'
+        iconResource = 'PSKeyboard.BrandIcon'; markResource = 'PSKeyboard.BrandMark'; nativeExecutableIcon = $true
+        iconSha256 = (Get-FileHash -LiteralPath $brandIcon -Algorithm SHA256).Hash
+        markSha256 = (Get-FileHash -LiteralPath $brandMark -Algorithm SHA256).Hash
+    }
     verification = [ordered]@{ controllerFreeGuardsRun = [bool]$RunTests; controllerFreeGuardChecks = $guardChecks; fakeTransportTestsPassed = $transportTestsPassed; sonyOperationVerifiedByBuild = $false }
     externalBinaries = @([ordered]@{ name = 'VIIPER'; version = '0.9.0'; path = 'viiper.exe'; sha256 = $expected; signatureVerified = $true; localUseOnly = $true; redistributionApproved = $false })
     sources = $sourceHashes; outputs = $binaryHashes

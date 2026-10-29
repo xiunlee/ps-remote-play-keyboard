@@ -6,6 +6,8 @@
 
 版本總控：[目前版本](VERSION) · [變更紀錄](CHANGELOG.md) · [版本控管與回退](docs/VERSIONING.md)。
 
+`0.1.0-alpha.8` 新增白色 PS 圖示與莓紅介面，統一主畫面、按鍵設定及狀態燈；[查看設計與畫面預覽](docs/VISUAL-DESIGN.md)。保留已使用的按鍵配置與模擬後端，PS5 相容性研究未在本輪變更。
+
 `0.1.0-alpha.7` 依使用者要求調整[預設鍵位](docs/DEFAULT-KEYS.md)：方向鍵對應 △／□／×／○，E／Q 對應 L1／L2，Delete／Page Down 對應 R1／R2。已有設定會保留，須按「恢復預設」才套用新排列。
 
 ## 主要方向：免手把鍵盤控制

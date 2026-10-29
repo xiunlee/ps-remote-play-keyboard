@@ -14,6 +14,8 @@ namespace PSKeyboard
         private readonly ComboBox repeatMode = new ComboBox();
         private readonly NumericUpDown repeatInterval = new NumericUpDown();
         private readonly Label repeatLabel = new Label();
+        private Icon brandIcon;
+        private Image brandMark;
         private bool capturing, updatingRepeatControls;
         private int consumedKey;
         internal BindingProfile Result { get { return draft; } }
@@ -29,10 +31,12 @@ namespace PSKeyboard
             AutoScaleMode = AutoScaleMode.Dpi; ClientSize = new Size(840, 820);
             MinimumSize = new Size(800, 720); StartPosition = FormStartPosition.CenterParent;
             ShowInTaskbar = false; MinimizeBox = false; MaximizeBox = false; KeyPreview = true;
+            brandIcon = KeyboardUi.LoadAppIcon(); if (brandIcon != null) Icon = brandIcon;
+            brandMark = KeyboardUi.LoadBrandMark();
 
             TableLayoutPanel root = KeyboardUi.Table(1);
             root.Padding = new Padding(24); root.RowCount = 6;
-            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 76));
+            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 112));
             root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 58));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 126));
@@ -40,16 +44,26 @@ namespace PSKeyboard
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
             Controls.Add(root);
 
-            TableLayoutPanel heading = KeyboardUi.Table(1); heading.RowCount = 2;
+            TableLayoutPanel heading = KeyboardUi.Table(2); heading.RowCount = 2;
+            heading.BackColor = KeyboardUi.Accent; heading.Padding = new Padding(16, 12, 16, 12);
+            heading.Margin = new Padding(0, 0, 0, 16);
+            heading.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, brandMark == null ? 0 : 72));
+            heading.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             heading.RowStyles.Add(new RowStyle(SizeType.Absolute, 36)); heading.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            Label title = KeyboardUi.Label(UiText.T("BindingsTitle"), 20, KeyboardUi.Ink);
+            if (brandMark != null)
+            {
+                PictureBox brand = new PictureBox { Image = brandMark, SizeMode = PictureBoxSizeMode.Zoom,
+                    Dock = DockStyle.Fill, Margin = new Padding(0, 2, 14, 2), BackColor = KeyboardUi.Accent };
+                heading.Controls.Add(brand, 0, 0); heading.SetRowSpan(brand, 2);
+            }
+            Label title = KeyboardUi.Label(UiText.T("BindingsTitle"), 20, Color.White);
             title.Font = KeyboardUi.Font(20, FontStyle.Bold); title.Dock = DockStyle.Fill;
-            Label subtitle = KeyboardUi.Label(UiText.T("BindingsSubtitle"), 10, KeyboardUi.Muted);
+            Label subtitle = KeyboardUi.Label(UiText.T("BindingsSubtitle"), 10, Color.FromArgb(255, 234, 241));
             subtitle.Dock = DockStyle.Fill;
-            heading.Controls.Add(title, 0, 0); heading.Controls.Add(subtitle, 0, 1); root.Controls.Add(heading, 0, 0);
+            heading.Controls.Add(title, 1, 0); heading.Controls.Add(subtitle, 1, 1); root.Controls.Add(heading, 0, 0);
 
             grid.Dock = DockStyle.Fill; grid.Margin = Padding.Empty;
-            grid.BackgroundColor = Color.White; grid.BorderStyle = BorderStyle.None;
+            grid.BackgroundColor = KeyboardUi.Surface; grid.BorderStyle = BorderStyle.None;
             grid.AllowUserToAddRows = grid.AllowUserToDeleteRows = grid.AllowUserToResizeRows = false;
             grid.AllowUserToOrderColumns = false; grid.MultiSelect = false;
             grid.ReadOnly = true; grid.RowHeadersVisible = false;
@@ -59,17 +73,20 @@ namespace PSKeyboard
             grid.GridColor = KeyboardUi.Border; grid.EnableHeadersVisualStyles = false;
             grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            grid.ColumnHeadersHeight = 36;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(235, 240, 248);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = KeyboardUi.Muted;
-            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(235, 240, 248);
-            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = KeyboardUi.Muted;
+            grid.ColumnHeadersHeight = 40;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = KeyboardUi.AccentSoft;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = KeyboardUi.AccentDark;
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = KeyboardUi.AccentSoft;
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = KeyboardUi.AccentDark;
             grid.ColumnHeadersDefaultCellStyle.Font = KeyboardUi.Font(9, FontStyle.Bold);
             grid.ColumnHeadersDefaultCellStyle.Padding = new Padding(12, 0, 0, 0);
             grid.DefaultCellStyle.Padding = new Padding(12, 0, 0, 0);
-            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 237, 255);
-            grid.DefaultCellStyle.SelectionForeColor = KeyboardUi.Accent;
-            grid.RowTemplate.Height = 29;
+            grid.DefaultCellStyle.BackColor = KeyboardUi.Surface;
+            grid.DefaultCellStyle.ForeColor = KeyboardUi.Ink;
+            grid.DefaultCellStyle.SelectionBackColor = KeyboardUi.AccentSoft;
+            grid.DefaultCellStyle.SelectionForeColor = KeyboardUi.AccentDark;
+            grid.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 251, 253);
+            grid.RowTemplate.Height = 32;
             grid.Columns.Add("action", UiText.T("ActionColumn"));
             grid.Columns.Add("key", UiText.T("KeyColumn"));
             grid.Columns.Add("repeat", UiText.T("RepeatColumn"));
@@ -77,7 +94,10 @@ namespace PSKeyboard
             grid.Columns[0].FillWeight = 36; grid.Columns[1].FillWeight = 21;
             grid.Columns[2].FillWeight = 27; grid.Columns[3].FillWeight = 16;
             grid.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            grid.RowTemplate.MinimumHeight = 29; grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            grid.Columns[1].DefaultCellStyle.Font = KeyboardUi.Font(10, FontStyle.Bold);
+            grid.Columns[1].DefaultCellStyle.ForeColor = KeyboardUi.AccentDark;
+            grid.Columns[3].DefaultCellStyle.Font = KeyboardUi.CodeFont(10, FontStyle.Regular);
+            grid.RowTemplate.MinimumHeight = 32; grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             foreach (DataGridViewColumn column in grid.Columns) column.SortMode = DataGridViewColumnSortMode.NotSortable;
             for (int i = 0; i < BindingProfile.ActionCount; i++)
                 grid.Rows.Add(UiText.ActionName(i), UiText.KeyName(draft.KeyForAction(i)),
@@ -98,25 +118,28 @@ namespace PSKeyboard
             reset.Click += delegate { ResetDraft(); };
             commands.Controls.AddRange(new Control[] { capture, clear, reset }); root.Controls.Add(commands, 0, 2);
 
-            TableLayoutPanel repetition = KeyboardUi.Table(2); repetition.BackColor = Color.White;
-            repetition.Padding = new Padding(14, 8, 14, 8); repetition.RowCount = 3;
+            TableLayoutPanel repetition = KeyboardUi.Table(2); repetition.BackColor = KeyboardUi.Surface;
+            repetition.Padding = new Padding(16, 10, 16, 10); repetition.RowCount = 3;
             repetition.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66));
             repetition.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 34));
             repetition.RowStyles.Add(new RowStyle(SizeType.Absolute, 22));
             repetition.RowStyles.Add(new RowStyle(SizeType.Absolute, 32));
             repetition.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             repeatLabel.Dock = DockStyle.Fill; repeatLabel.ForeColor = KeyboardUi.Muted;
-            repeatLabel.Font = KeyboardUi.Font(9, FontStyle.Regular); repeatLabel.Margin = Padding.Empty;
+            repeatLabel.Font = KeyboardUi.Font(9, FontStyle.Bold); repeatLabel.Margin = Padding.Empty;
             Label intervalLabel = KeyboardUi.Label(UiText.T("RepeatIntervalLabel"), 9, KeyboardUi.Muted);
             intervalLabel.Dock = DockStyle.Fill;
             repetition.Controls.Add(repeatLabel, 0, 0); repetition.Controls.Add(intervalLabel, 1, 0);
             repeatMode.DropDownStyle = ComboBoxStyle.DropDownList;
+            repeatMode.FlatStyle = FlatStyle.Flat; repeatMode.BackColor = KeyboardUi.AccentSoft; repeatMode.ForeColor = KeyboardUi.Ink;
             repeatMode.Items.AddRange(new object[] { UiText.T("RepeatOff"), UiText.T("RepeatHold"), UiText.T("RepeatToggle") });
             repeatMode.Dock = DockStyle.Fill; repeatMode.Margin = new Padding(0, 0, 16, 0);
             repeatInterval.Minimum = BindingProfile.MinRapidFireIntervalMilliseconds;
             repeatInterval.Maximum = BindingProfile.MaxRapidFireIntervalMilliseconds;
             repeatInterval.Value = BindingProfile.DefaultRapidFireIntervalMilliseconds;
             repeatInterval.Increment = 10; repeatInterval.Dock = DockStyle.Fill; repeatInterval.Margin = Padding.Empty;
+            repeatInterval.BorderStyle = BorderStyle.FixedSingle; repeatInterval.BackColor = KeyboardUi.Surface;
+            repeatInterval.ForeColor = KeyboardUi.Ink; repeatInterval.Font = KeyboardUi.CodeFont(10, FontStyle.Regular);
             repeatMode.SelectedIndexChanged += delegate { ApplyRepeatSettings(); };
             repeatInterval.ValueChanged += delegate { ApplyRepeatSettings(); };
             repeatMode.Enter += delegate { if (capturing) EndCapture(); };
@@ -143,6 +166,16 @@ namespace PSKeyboard
         }
 
         protected override bool ShowWithoutActivation { get { return renderingPreview; } }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (brandIcon != null) { brandIcon.Dispose(); brandIcon = null; }
+                if (brandMark != null) { brandMark.Dispose(); brandMark = null; }
+            }
+            base.Dispose(disposing);
+        }
 
         private void BeginCapture()
         {

@@ -1,10 +1,54 @@
 param(
     [Parameter(Mandatory = $true)][string]$BuildDirectory,
-    [switch]$RequireClean
+    [switch]$RequireClean,
+    [switch]$ReadBrandResources
 )
-# Read-only artifact verification. Does not load/run any application or backend.
+# Read-only artifact verification. Never executes application or backend code.
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $BuildDirectory).Path
+if ($ReadBrandResources) {
+    # Run only in a separate Windows PowerShell/.NET Framework host. Reflection-
+    # only loading cannot execute the application's entry point or initializers.
+    $assembly = [Reflection.Assembly]::ReflectionOnlyLoadFrom((Join-Path $root 'PSKeyboard-ControllerFree.exe'))
+    $resourceNames = @($assembly.GetManifestResourceNames())
+    $resourceHashes = [ordered]@{}
+    foreach ($resourceName in @('PSKeyboard.BrandIcon', 'PSKeyboard.BrandMark')) {
+        if ($resourceNames -cnotcontains $resourceName) { throw ('Missing embedded brand resource: ' + $resourceName) }
+        $stream = $assembly.GetManifestResourceStream($resourceName)
+        $hash = [Security.Cryptography.SHA256]::Create()
+        try { $resourceHashes[$resourceName] = [BitConverter]::ToString($hash.ComputeHash($stream)).Replace('-', '') }
+        finally { if ($stream) { $stream.Dispose() }; $hash.Dispose() }
+    }
+    # Mapping as data/image resource prevents DllMain or entry-point execution.
+    Add-Type -TypeDefinition @'
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+public static class BrandNativeIconProbe
+{
+    private delegate bool EnumNames(IntPtr module, IntPtr type, IntPtr name, IntPtr data);
+    [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
+    private static extern IntPtr LoadLibraryEx(string path, IntPtr reserved, uint flags);
+    [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
+    private static extern bool EnumResourceNames(IntPtr module, IntPtr type, EnumNames callback, IntPtr data);
+    [DllImport("kernel32.dll")] private static extern bool FreeLibrary(IntPtr module);
+    public static int CountIconGroups(string path)
+    {
+        IntPtr module = LoadLibraryEx(path, IntPtr.Zero, 0x22);
+        if (module == IntPtr.Zero) throw new Win32Exception(Marshal.GetLastWin32Error());
+        try {
+            int count = 0;
+            EnumNames callback = delegate(IntPtr m, IntPtr t, IntPtr n, IntPtr d) { count++; return true; };
+            EnumResourceNames(module, new IntPtr(14), callback, IntPtr.Zero);
+            GC.KeepAlive(callback); return count;
+        } finally { FreeLibrary(module); }
+    }
+}
+'@
+    $resourceHashes['nativeIconGroups'] = [BrandNativeIconProbe]::CountIconGroups((Join-Path $root 'PSKeyboard-ControllerFree.exe'))
+    $resourceHashes | ConvertTo-Json -Compress
+    exit 0
+}
 $manifest = Get-Content -LiteralPath (Join-Path $root 'BUILD.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if ($manifest.schemaVersion -ne 1 -or $manifest.variant -cne 'controller-free' -or $manifest.channel -cne 'internal-preview' -or
     $manifest.entryPoint -cne 'PSKeyboard-ControllerFree.exe' -or $manifest.commercialReady -ne $false) { throw 'Unsupported build manifest.' }
@@ -51,6 +95,23 @@ foreach ($source in $manifest.sources) {
     $seenSources[[string]$source.path] = $true
 }
 if (-not $seenSources.ContainsKey('VERSION')) { throw 'VERSION input hash is missing.' }
+if ($null -ne $manifest.branding) {
+    $brand = $manifest.branding
+    if ($brand.accent -cne '#D62355' -or $brand.iconSource -cne 'assets/branding/app.ico' -or
+        $brand.markSource -cne 'assets/branding/ps-mark.png' -or $brand.iconResource -cne 'PSKeyboard.BrandIcon' -or
+        $brand.markResource -cne 'PSKeyboard.BrandMark' -or $brand.nativeExecutableIcon -ne $true -or
+        $brand.iconSha256 -cnotmatch '\A[0-9A-F]{64}\z' -or $brand.markSha256 -cnotmatch '\A[0-9A-F]{64}\z') { throw 'Invalid branding metadata.' }
+    foreach ($asset in @(@{ path=$brand.iconSource; hash=$brand.iconSha256 }, @{ path=$brand.markSource; hash=$brand.markSha256 })) {
+        $sourceRecord = @($manifest.sources | Where-Object { $_.path -ceq $asset.path })
+        if ($sourceRecord.Count -ne 1 -or $sourceRecord[0].sha256 -cne $asset.hash) { throw 'Branding source provenance is inconsistent.' }
+    }
+    $metadataHost = Join-Path $env:WINDIR 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    $resourceResult = @(& $metadataHost -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $PSCommandPath -BuildDirectory $root -ReadBrandResources)
+    if ($LASTEXITCODE -ne 0 -or $resourceResult.Count -ne 1) { throw 'Embedded branding could not be inspected.' }
+    $embedded = $resourceResult[0] | ConvertFrom-Json
+    if ($embedded.'PSKeyboard.BrandIcon' -cne $brand.iconSha256 -or $embedded.'PSKeyboard.BrandMark' -cne $brand.markSha256 -or
+        $embedded.nativeIconGroups -lt 1) { throw 'Executable branding does not match BUILD.json.' }
+}
 $external = @($manifest.externalBinaries)
 if ($external.Count -ne 1 -or $external[0].name -cne 'VIIPER' -or $external[0].version -cne '0.9.0' -or
     $external[0].path -cne 'viiper.exe' -or $external[0].sha256 -cne '142C144F6ABEE8B8A5F6A1ABBC7018683444DE71D2E45102CDE6AAAB9B2223E6' -or
