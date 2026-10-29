@@ -1,5 +1,7 @@
 # 架構評估
 
+> **歷史研究文件，非目前主線架構。** 以下保留較早的實體中繼、ViGEm 與候選評估。2026-10-29 主線已改為免手把 DS4，alpha.5／alpha.6 已有使用者 PS5 操作成功回報；目前 alpha.8 完成品牌介面，DualSense 仍未通過 Sony 操作。現況、架構與下一步以 [總進度交接](HANDOFF.md) 及 [免手把主線](../research/controller-free-preview/README.md) 為準；下文的「目前」均指當時研究階段。
+
 ## 產品目標
 
 使用者希望保留 Sony 官方 PS Remote Play，並以我們的 Windows 程式將鍵盤與滑鼠轉換成手把操作；滑鼠移動控制右搖桿視角。因帳號安全顧慮，使用者不希望改用第三方 Remote Play 客戶端。

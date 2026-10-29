@@ -4,7 +4,7 @@
 
 > **專案狀態：2026-10-29 免手把 PS4 模式實機成功。** `0.1.0-alpha.5` 已有重開機後正常回報；新版 `0.1.0-alpha.6` 的 PS4 模式亦由使用者確認可操作。alpha.6 的 PS5 DualSense 模式能接入 Windows，但官方 Remote Play 操作無反應，保留為實驗選項。主捷徑預設可用的 PS4 模式；[實機紀錄](research/controller-free-preview/ALPHA6-TRIAL.md)。長時間使用、各種重連與乾淨電腦安裝仍待驗證，尚未正式發布。
 
-版本總控：[目前版本](VERSION) · [變更紀錄](CHANGELOG.md) · [版本控管與回退](docs/VERSIONING.md)。
+版本總控：[總進度與換串交接](docs/HANDOFF.md) · [目前版本](VERSION) · [變更紀錄](CHANGELOG.md) · [版本控管與回退](docs/VERSIONING.md)。最新開發內容在 `codex/commercial-preview`，GitHub 預設 `main` 可能落後；請以工作分支的交接文件接續。
 
 `0.1.0-alpha.8` 新增白色 PS 圖示與莓紅介面，統一主畫面、按鍵設定及狀態燈；[查看設計與畫面預覽](docs/VISUAL-DESIGN.md)。保留已使用的按鍵配置與模擬後端，PS5 相容性研究未在本輪變更。
 
