@@ -1,7 +1,7 @@
 param(
     [Parameter(Mandatory=$true)][string]$BackendDirectory,
     [Parameter(Mandatory=$true)][string]$OutputDirectory,
-    [string]$MappingDirectory = (Join-Path $env:USERPROFILE '.pskeyboard-tools/versions/0.1.0-alpha.8'),
+    [Parameter(Mandatory=$true)][string]$MappingDirectory,
     [switch]$RunTests,
     [switch]$RequireClean
 )
@@ -11,7 +11,7 @@ $repo=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
 $out=[IO.Path]::GetFullPath($OutputDirectory)
 if (Test-Path -LiteralPath $out) { throw 'Candidate output must be a new directory; old builds are immutable.' }
 $version=[IO.File]::ReadAllText((Join-Path $repo 'VERSION')).Trim()
-if ($version -cnotmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -or [int]$Matches[1] -lt 9 -or [int]$Matches[1] -gt 65534) { throw 'Expected a new alpha version, starting with alpha.9.' }
+if ($version -cnotmatch '\A0\.1\.0-alpha\.([0-9]+)\z' -or [int]$Matches[1] -lt 10 -or [int]$Matches[1] -gt 65534) { throw 'Expected a new alpha version, starting with alpha.10.' }
 $fileVersion='0.1.0.'+$Matches[1]
 $commit=(& git -C $repo rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0 -or $commit -cnotmatch '\A[0-9a-f]{40}\z') { throw 'Cannot identify source commit.' }
@@ -51,7 +51,7 @@ $trackedInputs=$sourceNames+@('VERSION','research/dualsense-preview/Build-Candid
     'research/dualsense-preview/backend/Build-Backend.ps1','research/dualsense-preview/backend/main_test.go',
     'research/dualsense-preview/backend/README.md','assets/branding/app.ico','assets/branding/ps-mark.png',
     'src/physical-keyboard/BindingProfileTests.cs','src/physical-keyboard/RapidFireTests.cs',
-    'src/physical-keyboard/KeyboardControlPipelineTests.cs')
+    'src/physical-keyboard/KeyboardControlPipelineTests.cs','src/physical-keyboard/UiInteractionTests.cs')
 $sourceHashes=@($trackedInputs|Sort-Object -Unique|ForEach-Object{[ordered]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $repo $_)).Hash}})
 New-Item -ItemType Directory -Path $out | Out-Null
 $utf8=[Text.UTF8Encoding]::new($false)
@@ -62,7 +62,7 @@ $dirtyLiteral=if($dirty){'true'}else{'false'}
 $generated=Join-Path $out 'BuildInfo.g.cs'
 [IO.File]::WriteAllText($generated,@"
 using System.Reflection;
-[assembly: AssemblyTitle("上班不要玩 — DualSense 相容性測試")]
+[assembly: AssemblyTitle("上班不要玩 — DualSense 鍵盤控制")]
 [assembly: AssemblyProduct("上班不要玩")]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("$fileVersion")]
@@ -106,9 +106,10 @@ if ($RunTests) {
     & (Join-Path $PSScriptRoot 'RunTransportTests.ps1') -OutputDirectory (Join-Path $out 'transport-tests')
     if (-not $?) { throw 'Candidate fake transport tests failed.' }
     $testResults+=@([ordered]@{kind='candidate-fake-transport';passed=$true})
-    foreach($testName in @('BindingProfileTests','RapidFireTests','KeyboardControlPipelineTests')) {
+    foreach($testName in @('BindingProfileTests','RapidFireTests','KeyboardControlPipelineTests','UiInteractionTests')) {
         $testExe=Join-Path $out ($testName+'.exe')
-        & $csc @common /target:exe ('/main:'+$testName) ('/out:'+$testExe) @sources (Join-Path $repo ('src/physical-keyboard/'+$testName+'.cs'))
+        $testMain=if($testName -eq 'UiInteractionTests'){'PSKeyboard.UiInteractionTests'}else{$testName}
+        & $csc @common /target:exe ('/main:'+$testMain) ('/out:'+$testExe) @sources (Join-Path $repo ('src/physical-keyboard/'+$testName+'.cs'))
         if ($LASTEXITCODE -ne 0) { throw ('Shared input tests did not compile: '+$testName) }
         $lines=@(& $testExe); $lines|Write-Output
         if ($LASTEXITCODE -ne 0) { throw ('Shared input tests failed: '+$testName) }
@@ -125,9 +126,11 @@ $manifest=[ordered]@{
     schemaVersion=1;product='上班不要玩';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
     informationalVersion=$infoVersion;sourceCommit=$commit;workingTreeDirty=$dirty;builtUtc=$builtUtc;
     entryPoint='PSKeyboard-DualSensePreview.exe';channel='local-compatibility-preview';driversBundled=$false;
-    sonyOperationVerified=$false;commercialReady=$false;profileReadOnly=$true;defaultConnected=$false;defaultEnabled=$false;
+    sonyOperationVerified=$false;commercialReady=$false;profileReadOnly=$false;profileSaveRequiresUserAction=$true;defaultConnected=$false;defaultEnabled=$false;
+    sonyBaselineEvidence=[ordered]@{version='0.1.0-alpha.9';date='2026-10-29';source='user-report';persona='dualsensegamepadv5';operationPassed=$true};
+    sessionTimeLimitSeconds=0;
     driverVersion='0.9.8.1';apiPort=33642;usbPort=33641;backendSha256=$backendHash;nativeSha256=$nativeHash;
-    controllerModes=@('dualsensecombinedaudioduplexv5','dualsensegamepadv5','dualsenseedgecombinedaudioduplexv5','dualsenseedgegamepadv5');
+    controllerModes=@('dualsensegamepadv5');defaultControllerMode='dualsensegamepadv5';
     driverValidationRun='https://github.com/xiunlee/ps-remote-play-keyboard/actions/runs/40838199781';
     testsRun=[bool]$RunTests;testResults=$testResults;sources=$sourceHashes;
     outputs=@($runtimeNames|ForEach-Object{[ordered]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $out $_)).Hash}})

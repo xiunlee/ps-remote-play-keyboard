@@ -2,10 +2,17 @@
 
 所有日期採 Asia/Taipei。這些版本均為內部測試版；Git 標籤只固定原始碼，不代表已公開二進位下載或開始收費。
 
+## 0.1.0-alpha.10 — 2026-10-29
+
+- 使用者回報 alpha.9 四種方案都能操作 PS5，指定保留第二種；本版固定「一般 DualSense／純手把」（`dualsensegamepadv5`），移除其他選項。
+- 整合原有 22 動作改鍵與每鍵連點設定頁：關閉／按住／按一下啟停、20–5000 毫秒、恢復預設。載入現有設定，僅使用者儲存才更新；儲存失敗不替換目前設定。
+- 編輯時暫停，F8 與官方 Remote Play 前景保護保留；切窗停止並清除連點，回來不自動恢復連點。移除 alpha.9 的 30 分鐘測試期限，退出時仍有清理期限。
+- 仍使用既有 0.9.8.1 驅動，不自動更換；歷史 PS4／四方案原始碼與標籤保留。依使用者後續空間需求，本機交付後只留最新版，清除舊程式與重複建置，保留個人設定及其備份。alpha.9 的操作證據與 alpha.10 新版驗收分開記錄。
+
 ## 0.1.0-alpha.9 — 2026-10-29
 
 - 新增獨立的 DualSense 相容性測試程式，可逐一選擇一般 DualSense／Edge 各自的含音訊介面與純手把共四方案。沿用現有 0.9.8.1 成套驅動，不更換或降級；沒有修改 alpha.8 的 PS4 程式、執行檔或標籤。
-- 四方案已在 GitHub hosted Windows Server 完成驅動接入、22 個動作按下／放開與完整移除；每方案 63 項檢查通過，詳見 [驅動實測](research/dualsense-driver-test/RESULTS-20261029.md)。**這不是 Sony 官方 Remote Play 操作通過，使用者 Windows 11 實測仍待進行。**
+- 四方案已在 GitHub hosted Windows Server 完成驅動接入、22 個動作按下／放開與完整移除；每方案 63 項檢查通過，詳見 [驅動實測](research/dualsense-driver-test/RESULTS-20261029.md)。交付後使用者另回報「四種都可以」，指定保留第二種；此 [Sony 操作回報](research/dualsense-preview/ALPHA9-TRIAL.md) 與 CI 證據分開，未擴張為逐鍵、長時間或重開機驗收。
 - 候選採固定來源的受限後端、獨立 `33641/33642` 埠、V5 傳輸與持續回饋讀取；同版 CLI 對接驅動，不使用候選舊 native attach。後端隨 stdin 關閉或 30 分鐘上限停止。
 - 啟動不接入、控制先暫停；沿用官方 Remote Play 前景、切窗清連點與 F8 保護，與舊版共用單實例限制。個人設定只讀，移除未確認時鎖住重新連接；回退使用保留的 alpha.8 PS4 模式。
 - 專用建置／校驗流程與操作說明位於 [dualsense-preview](research/dualsense-preview/README.md)，不啟用安裝器、支付或公開二進位 Release。

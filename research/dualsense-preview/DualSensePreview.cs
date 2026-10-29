@@ -14,15 +14,15 @@ using System.Windows.Forms;
 
 namespace PSKeyboard
 {
-    // Separate experimental transport. This never opens a physical controller,
+    // Fixed DualSense gamepad transport. This never opens a physical controller,
     // modifies Sony, starts/stops Sony, or installs a driver.
     internal sealed class DualSensePreview : Form
     {
         private const int ApiPort = 33642, UsbPort = 33641, ToggleHotkey = 0x504D;
         private const string UsbipHash = "817DA219FA153B4B37C3BC1AA8FCC63F33E046188C57CC3DD2C60A6EF0883C56";
         private const string UsbipDllHash = "F123EF5D288B817A890CBE39A3C2D212B3D8B1765C691C8703CCB76C7337986C";
-        internal static readonly string[] Personas = { "dualsensecombinedaudioduplexv5", "dualsensegamepadv5", "dualsenseedgecombinedaudioduplexv5", "dualsenseedgegamepadv5" };
-        private static readonly string[] PersonaLabels = { "1 · DualSense 一般版／含音訊介面", "2 · DualSense 一般版／純手把", "3 · DualSense Edge／含音訊介面", "4 · DualSense Edge／純手把" };
+        internal const string Persona = "dualsensegamepadv5";
+        private const string ModeLabel = "DualSense 一般版 · 純手把";
         private readonly object sessionGate = new object(), logGate = new object(), focusGate = new object();
         private readonly Stopwatch clock = Stopwatch.StartNew();
         private readonly KeyboardControlPipeline input;
@@ -33,7 +33,6 @@ namespace PSKeyboard
         private readonly string usbipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "USBip", "usbip.exe");
         private readonly int ownPid = Process.GetCurrentProcess().Id;
         private readonly Button connect = new Button(), toggle = new Button(), configure = new Button();
-        private readonly ComboBox controllerChoice = new ComboBox();
         private readonly bool preview;
         private readonly StatusDot connectionDot = new StatusDot(), keyboardDot = new StatusDot();
         private readonly Label[] keySummaries = new Label[4];
@@ -53,6 +52,7 @@ namespace PSKeyboard
         private IntPtr hook;
         private HookCallback callback;
         private bool hotkeyRegistered;
+        private BindingEditor activeEditor;
         private uint focusedPid;
         private long focusedAt;
         private sealed class FocusDecision
@@ -78,17 +78,17 @@ namespace PSKeyboard
         [STAThread]
         private static int Main(string[] args)
         {
-            if (args.Length > 0 && args[0] == "--render-preview") return RenderPreview(args);
+            if (args.Length > 0 && (args[0] == "--render-preview" || args[0] == "--render-editor-preview")) return RenderPreview(args);
             bool autoConnect; string statusFile, deviceType;
             try { ParseOptions(args, out autoConnect, out statusFile, out deviceType); }
             catch (ArgumentException)
             {
-                MessageBox.Show("用法：PSKeyboard-DualSensePreview.exe [--persona 候選名稱] [--status-file 本測試版目錄內的完整 JSON 路徑]\r\n開啟後請自行選擇方案並連接，F8 啟用鍵盤。", "上班不要玩 " + BuildInfo.Version); return 2;
+                MessageBox.Show("用法：PSKeyboard-DualSensePreview.exe [--persona dualsensegamepadv5] [--status-file 本版本目錄內的完整 JSON 路徑]\r\n開啟後連接手把，再按 F8 啟用鍵盤。", "上班不要玩 " + BuildInfo.Version); return 2;
             }
             bool created;
             using (Mutex mutex = new Mutex(true, "Local\\PSKeyboardControllerFreeExperiment", out created))
             {
-                if (!created) { MessageBox.Show("另一版「上班不要玩」仍在執行。\r\n請先正常關閉它，再開本測試版；Sony Remote Play 請保持開啟。", "上班不要玩"); return 1; }
+                if (!created) { MessageBox.Show("另一版「上班不要玩」仍在執行。\r\n請先正常關閉它，再開本版本；Sony Remote Play 請保持開啟。", "上班不要玩"); return 1; }
                 Application.EnableVisualStyles(); Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new DualSensePreview(autoConnect, statusFile, deviceType, false));
             }
@@ -101,14 +101,14 @@ namespace PSKeyboard
         }
         internal static void ParseOptions(string[] args, out bool autoConnect, out string statusFile, out string deviceType)
         {
-            autoConnect = false; statusFile = null; deviceType = Personas[0]; bool typeSet = false;
+            autoConnect = false; statusFile = null; deviceType = Persona; bool typeSet = false;
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] == "--status-file" && statusFile == null && i + 1 < args.Length) statusFile = ValidateStatusPath(args[++i]);
                 else if (args[i] == "--persona" && !typeSet && i + 1 < args.Length)
                 {
                     deviceType = args[++i];
-                    if (Array.IndexOf(Personas, deviceType) < 0) throw new ArgumentException("Unknown candidate persona.");
+                    if (deviceType != Persona) throw new ArgumentException("Only the selected DualSense gamepad mode is supported.");
                     typeSet = true;
                 }
                 else throw new ArgumentException("Invalid options.");
@@ -144,7 +144,8 @@ namespace PSKeyboard
                     UiText.Initialize(CultureInfo.GetCultureInfo(args[3]));
                 }
                 Application.EnableVisualStyles(); Application.SetCompatibleTextRenderingDefault(false);
-                using (Form form = new DualSensePreview(false, null, Personas[0], true))
+                using (Form form = args[0] == "--render-editor-preview" ? (Form)new BindingEditor(BindingProfile.Default(), true) :
+                    new DualSensePreview(false, null, Persona, true))
                 {
                     CreatePreviewControls(form); form.PerformLayout();
                     form.Opacity = 0; form.ShowInTaskbar = false; form.StartPosition = FormStartPosition.Manual;
@@ -173,14 +174,14 @@ namespace PSKeyboard
             profile = BindingProfile.Default(); bool badProfile = false;
             if (!preview) try { profile = BindingProfile.Load(profilePath); } catch { badProfile = true; }
             input = new KeyboardControlPipeline(delegate { return profile; });
-            Text = "上班不要玩 " + BuildInfo.Version + " · DualSense 相容性測試"; ClientSize = new Size(980, 710); MinimumSize = new Size(940, 720);
+            Text = "上班不要玩 " + BuildInfo.Version + " · DualSense"; ClientSize = new Size(960, 680); MinimumSize = new Size(900, 690);
             StartPosition = FormStartPosition.CenterScreen; AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = KeyboardUi.Background; ForeColor = KeyboardUi.Ink; Font = KeyboardUi.Font(10, FontStyle.Regular);
             Icon brandIcon = KeyboardUi.LoadAppIcon(); if (brandIcon != null) { Icon = brandIcon; Disposed += delegate { brandIcon.Dispose(); }; }
             BuildInterface(badProfile);
             if (preview)
             {
-                status.Text = "尚未連接\r\n選一種方案，逐一測試。"; connectionDot.DotColor = KeyboardUi.Gray;
+                status.Text = "尚未連接\r\n點選下方按鈕連接手把。"; connectionDot.DotColor = KeyboardUi.Gray;
                 keyboardStatus.Text = "已暫停\r\n連接後按 F8 啟用。"; keyboardDot.DotColor = KeyboardUi.Gray;
                 return;
             }
@@ -225,28 +226,24 @@ namespace PSKeyboard
             wordmark.RowStyles.Add(new RowStyle(SizeType.Absolute, 22)); wordmark.RowStyles.Add(new RowStyle(SizeType.Absolute, 48)); wordmark.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
             Label eyebrow = KeyboardUi.Label("KEYBOARD / REMOTE PLAY", 9, Color.FromArgb(255, 216, 229)); eyebrow.Font = KeyboardUi.CodeFont(9, FontStyle.Regular); eyebrow.Dock = DockStyle.Fill;
             Label title = KeyboardUi.Label("上班不要玩", 27, Color.White); title.Font = KeyboardUi.Font(27, FontStyle.Bold); title.Dock = DockStyle.Fill;
-            Label subtitle = KeyboardUi.Label("DualSense 相容性測試版 · Remote Play 操作尚待確認", 10, Color.White); subtitle.Dock = DockStyle.Fill;
+            Label subtitle = KeyboardUi.Label("把熟悉的鍵盤，變成你的手把。", 10, Color.White); subtitle.Dock = DockStyle.Fill;
             wordmark.Controls.Add(eyebrow, 0, 0); wordmark.Controls.Add(title, 0, 1); wordmark.Controls.Add(subtitle, 0, 2); hero.Controls.Add(wordmark, 1, 0);
-            Label version = KeyboardUi.Label("TEST / 4 OPTIONS\r\nv" + BuildInfo.Version, 9, Color.White); version.Font = KeyboardUi.CodeFont(9, FontStyle.Regular); version.Dock = DockStyle.Fill; version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
+            Label version = KeyboardUi.Label("DUALSENSE\r\nv" + BuildInfo.Version, 10, Color.White); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.Dock = DockStyle.Fill; version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
             shell.Controls.Add(hero, 0, 0);
             Panel scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(28, 22, 28, 18), Margin = Padding.Empty };
             TableLayoutPanel body = KeyboardUi.Table(1); body.Dock = DockStyle.Top; body.AutoSize = true; body.AutoSizeMode = AutoSizeMode.GrowAndShrink; body.RowCount = 6;
-            foreach (int height in new int[] { 70, 110, 64, 138, 72, 42 }) body.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
+            foreach (int height in new int[] { 70, 110, 64, 138, 56, 36 }) body.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
             scroll.Controls.Add(body); shell.Controls.Add(scroll, 0, 1);
             TableLayoutPanel mode = KeyboardUi.Table(2); mode.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 145)); mode.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            Label modeTitle = KeyboardUi.Label("測試方案", 12, KeyboardUi.Ink); modeTitle.Font = KeyboardUi.Font(12, FontStyle.Bold); modeTitle.Dock = DockStyle.Fill;
-            controllerChoice.DropDownStyle = ComboBoxStyle.DropDownList; controllerChoice.Width = 470; controllerChoice.Anchor = AnchorStyles.Left;
-            controllerChoice.FlatStyle = FlatStyle.Flat; controllerChoice.BackColor = KeyboardUi.Surface; controllerChoice.ForeColor = KeyboardUi.Ink;
-            controllerChoice.Items.AddRange(PersonaLabels);
-            controllerChoice.SelectedIndex = Array.IndexOf(Personas, controllerType);
-            controllerChoice.SelectedIndexChanged += delegate { controllerType = Personas[controllerChoice.SelectedIndex]; };
-            mode.Controls.Add(modeTitle, 0, 0); mode.Controls.Add(controllerChoice, 1, 0); body.Controls.Add(mode, 0, 0);
+            Label modeTitle = KeyboardUi.Label("手把模式", 12, KeyboardUi.Ink); modeTitle.Font = KeyboardUi.Font(12, FontStyle.Bold); modeTitle.Dock = DockStyle.Fill;
+            Label fixedMode = KeyboardUi.Label(ModeLabel, 12, KeyboardUi.Ink); fixedMode.Dock = DockStyle.Fill; fixedMode.TextAlign = ContentAlignment.MiddleLeft;
+            mode.Controls.Add(modeTitle, 0, 0); mode.Controls.Add(fixedMode, 1, 0); body.Controls.Add(mode, 0, 0);
             TableLayoutPanel states = KeyboardUi.Table(2); states.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 56)); states.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44));
             states.Controls.Add(StatusCard("手把連線", status, connectionDot, new Padding(0, 0, 12, 12)), 0, 0);
             states.Controls.Add(StatusCard("鍵盤控制", keyboardStatus, keyboardDot, new Padding(0, 0, 0, 12)), 1, 0); body.Controls.Add(states, 0, 1);
-            status.Text = "尚未連接\r\n選一種方案，逐一測試。"; keyboardStatus.Text = "已暫停\r\n連接後按 F8 啟用。";
+            status.Text = "尚未連接\r\n點選下方按鈕連接手把。"; keyboardStatus.Text = "已暫停\r\n連接後按 F8 啟用。";
             FlowLayoutPanel actions = new FlowLayoutPanel { Dock = DockStyle.Fill, Margin = Padding.Empty, WrapContents = false, Padding = new Padding(0, 2, 0, 0) };
-            KeyboardUi.Button(toggle, "啟用鍵盤 · F8", true); KeyboardUi.Button(configure, "查看按鍵設定", false); KeyboardUi.Button(connect, "連接此方案", false);
+            KeyboardUi.Button(toggle, "啟用鍵盤 · F8", true); KeyboardUi.Button(configure, "按鍵與連點設定", false); KeyboardUi.Button(connect, "連接手把", false);
             toggle.Enabled = false; connect.Click += ConnectClick; toggle.Click += delegate { Toggle(); }; configure.Click += delegate { EditBindings(); };
             actions.Controls.AddRange(new Control[] { toggle, configure, connect }); body.Controls.Add(actions, 0, 2);
             TableLayoutPanel guide = KeyboardUi.Table(4); guide.BackColor = KeyboardUi.Surface; guide.Padding = new Padding(18, 12, 18, 12); guide.Margin = new Padding(0, 0, 0, 12); guide.RowCount = 2;
@@ -255,8 +252,8 @@ namespace PSKeyboard
             guide.Controls.Add(guideTitle, 0, 0); guide.SetColumnSpan(guideTitle, 4);
             for (int i = 0; i < 4; i++) { guide.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25)); keySummaries[i] = KeyboardUi.Label("", 10, KeyboardUi.Ink); keySummaries[i].Dock = DockStyle.Fill; guide.Controls.Add(keySummaries[i], i, 1); }
             UpdateBindingSummary(); body.Controls.Add(guide, 0, 3);
-            Label help = KeyboardUi.Label("1 選方案並連接 → 2 切回官方 Remote Play，按 F8 → 3 測試方向與確認鍵\r\nF8 暫停；切窗停止。測下一方案前，先在這裡中斷目前手把。\r\n四種方案逐一測試；回退 PS4 請使用保留的 alpha.8。", 9, KeyboardUi.Muted); help.Dock = DockStyle.Fill; body.Controls.Add(help, 0, 4);
-            notice.Text = badProfile ? "原設定檔讀取失敗，暫用預設；原檔保留不變。" : "沿用既有個人鍵位與連點，這個測試版只讀設定。Windows 通過不代表 PS5 操作成功。";
+            Label help = KeyboardUi.Label("F8 隨時啟用／暫停 · 切換到其他視窗會停止連點\r\n22 個動作可自訂按鍵；各鍵可設定關閉、按住或切換連點。", 9, KeyboardUi.Muted); help.Dock = DockStyle.Fill; body.Controls.Add(help, 0, 4);
+            notice.Text = badProfile ? "原設定檔讀取失敗，暫用預設；儲存前原檔保持不變。" : "沿用你的個人按鍵與連點設定，只有按下儲存才會更新。";
             notice.ForeColor = badProfile ? KeyboardUi.Amber : KeyboardUi.Muted; notice.Font = KeyboardUi.Font(9, FontStyle.Regular); notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; body.Controls.Add(notice, 0, 5);
         }
 
@@ -335,30 +332,34 @@ namespace PSKeyboard
         {
             if (message.Msg == 0x312 && message.WParam.ToInt32() == ToggleHotkey)
             {
-                Toggle(); return;
+                if (editing && activeEditor != null) activeEditor.ReservedHotkeyPressed(); else Toggle(); return;
             }
             base.WndProc(ref message);
         }
         private void EditBindings()
         {
-            if (closing || editing || busy) return;
+            if (preview || closing || editing || busy) return;
             editing = true; SetEnabled(false);
             try
             {
-                StringBuilder text = new StringBuilder("目前設定（唯讀）\r\nF8：啟用／暫停\r\n\r\n");
-                for (int action = 0; action < BindingProfile.ActionCount; action++)
+                using (BindingEditor editor = new BindingEditor(profile))
                 {
-                    RapidFireMode mode = profile.RapidFireModeForAction(action);
-                    text.Append(UiText.ActionName(action)).Append("  →  ").Append(UiText.KeyName(profile.KeyForAction(action)));
-                    if (mode != RapidFireMode.Off) text.Append(mode == RapidFireMode.Hold ? "　按住連點 " : "　切換連點 ").Append(profile.IntervalMillisecondsForAction(action)).Append(" ms");
-                    text.AppendLine();
+                    activeEditor = editor;
+                    if (editor.ShowDialog(this) != DialogResult.OK) return;
+                    try { profile = SaveEditedProfile(editor.Result, profilePath); }
+                    catch { MessageBox.Show(this, UiText.T("ProfileSaveFailure"), UiText.T("BindingsTitle")); return; }
+                    input.Reset(); UpdateBindingSummary();
+                    notice.Text = "設定已儲存；切回 Remote Play，再按 F8 啟用。";
                 }
-                text.AppendLine("\r\n測試版不會修改個人設定。若需改鍵，請在保留的 alpha.8 設定後再開本測試版。");
-                using (Form dialog = new Form { Text = "按鍵與連點（唯讀）", StartPosition = FormStartPosition.CenterParent, ClientSize = new Size(580, 620), MinimizeBox = false, MaximizeBox = false })
-                using (TextBox content = new TextBox { Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical, Dock = DockStyle.Fill, Text = text.ToString(), Font = KeyboardUi.Font(10, FontStyle.Regular), BackColor = KeyboardUi.Surface })
-                { dialog.Controls.Add(content); dialog.ShowDialog(this); }
             }
-            finally { SetEnabled(false); editing = false; RefreshStatus(); }
+            finally { activeEditor = null; SetEnabled(false); editing = false; RefreshStatus(); }
+        }
+        // The immutable draft is published only after persistence succeeds.
+        internal static BindingProfile SaveEditedProfile(BindingProfile edited, string destination)
+        {
+            if (edited == null) throw new ArgumentNullException("edited");
+            edited.Save(destination);
+            return edited;
         }
         private void RefreshStatus()
         {
@@ -384,13 +385,13 @@ namespace PSKeyboard
                 case "keyboard_setup_failed": return "F8 或鍵盤擷取無法啟用，請先關閉其他版本的鍵盤程式。";
                 case "usbip_missing": return "找不到已安裝的 USBip；本程式不會自動安裝驅動。";
                 case "usbip_invalid": return "USBip 0.9.8.1 元件驗證失敗，沒有更換或降級驅動。";
-                case "existing_import": return "發現先前測試通道仍有接入，已停止建立新裝置。";
-                case "backend_invalid": return "候選後端遺失或驗證失敗。";
-                case "ports_unavailable": return "實驗通道正由其他程式使用，沒有啟動新手把。";
+                case "existing_import": return "發現先前手把通道仍有接入，已停止建立新裝置。";
+                case "backend_invalid": return "手把元件遺失或驗證失敗。";
+                case "ports_unavailable": return "連線通道正由其他程式使用，沒有啟動新手把。";
                 case "usb_attach_failed": return "USB 手把接入未能確認；尚未啟用鍵盤。";
                 case "send_failed": return "虛擬手把輸出通道已中斷，鍵盤已暫停。";
                 case "cancelled": return "操作已取消。";
-                default: return "建立實驗手把失敗。請查看本機診斷狀態。";
+                default: return "建立模擬手把失敗。請查看本機診斷狀態。";
             }
         }
 
@@ -400,7 +401,6 @@ namespace PSKeyboard
         { return !cleanupUnknown && !attachUnresolved && !commandUnconfirmed; }
         internal static bool HasCandidateImport(string listing)
         { return (listing ?? "").IndexOf("usbip://127.0.0.1:" + UsbPort + "/", StringComparison.OrdinalIgnoreCase) >= 0; }
-        private string SelectedLabel() { return PersonaLabels[Array.IndexOf(Personas, controllerType)]; }
         private void ConnectClick(object senderObject, EventArgs args)
         {
             if (closing || editing || busy || !hotkeyRegistered) return;
@@ -409,10 +409,10 @@ namespace PSKeyboard
             if (transport != null || server != null)
             {
                 SetEnabled(false); busy = true; connect.Enabled = toggle.Enabled = configure.Enabled = false;
-                ThreadPool.QueueUserWorkItem(delegate { Cleanup(); UpdateUi(delegate { busy = false; configure.Enabled = true; connect.Enabled = controllerChoice.Enabled = CanReconnect(cleanupBlocked, attachAttempted, usbipCommandTerminationUnconfirmed); connect.Text = "連接此方案"; status.Text = cleanupCode == null ? "手把已中斷，可選下一方案。\r\n鍵盤保持暫停，Sony 仍維持原狀。" : "清理未完全確認，已鎖住重新連接。"; }); });
+                ThreadPool.QueueUserWorkItem(delegate { Cleanup(); UpdateUi(delegate { busy = false; configure.Enabled = true; connect.Enabled = CanReconnect(cleanupBlocked, attachAttempted, usbipCommandTerminationUnconfirmed); connect.Text = "連接手把"; status.Text = cleanupCode == null ? "手把已中斷\r\n鍵盤控制已暫停。" : "清理未完全確認，已鎖住重新連接。"; }); });
                 return;
             }
-            busy = true; connect.Enabled = configure.Enabled = controllerChoice.Enabled = false; failureCode = cleanupCode = null; attachReturned = false; SetEnabled(false); status.Text = "正在連接…\r\n" + SelectedLabel();
+            busy = true; connect.Enabled = configure.Enabled = false; failureCode = cleanupCode = null; attachReturned = false; SetEnabled(false); status.Text = "正在連接…\r\n" + ModeLabel;
             ThreadPool.QueueUserWorkItem(delegate {
                 lock (sessionGate)
                 {
@@ -458,14 +458,14 @@ namespace PSKeyboard
                         if (!OwnPortUrl(Usbip("port " + parsed), attachedBusId)) throw new ExperimentException("usb_attach_failed");
                         usbAttachedVerified = true; WriteReceipt("attached", null); CheckClosing();
                         sender = new Thread(SendLoop) { IsBackground = true, Name = "Controller-free state sender" }; sender.Start();
-                        UpdateUi(delegate { busy = false; connect.Enabled = configure.Enabled = toggle.Enabled = true; connect.Text = "中斷此方案"; status.Text = "Windows 接入已確認，PS5 尚待操作。\r\n" + SelectedLabel(); });
+                        UpdateUi(delegate { busy = false; connect.Enabled = configure.Enabled = toggle.Enabled = true; connect.Text = "中斷手把"; status.Text = "Windows 手把已接入\r\n" + ModeLabel; });
                     }
                     catch (Exception ex)
                     {
                         ExperimentException expected = ex as ExperimentException;
                         failureCode = expected == null ? "connect_failed" : expected.Code;
                         RecordDiagnostic("connect_failure", ex.GetType().Name); Cleanup();
-                        UpdateUi(delegate { busy = false; configure.Enabled = true; connect.Enabled = controllerChoice.Enabled = CanReconnect(cleanupBlocked, attachAttempted, usbipCommandTerminationUnconfirmed); connect.Text = "連接此方案"; RefreshStatus(); });
+                        UpdateUi(delegate { busy = false; configure.Enabled = true; connect.Enabled = CanReconnect(cleanupBlocked, attachAttempted, usbipCommandTerminationUnconfirmed); connect.Text = "連接手把"; RefreshStatus(); });
                     }
                 }
             });

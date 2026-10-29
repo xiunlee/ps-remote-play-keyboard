@@ -5,8 +5,8 @@ using System.Web.Script.Serialization;
 
 namespace PSKeyboard
 {
-    // Pure argument/ownership/diagnostic checks. No Form, process, keyboard hook,
-    // driver, Sony, network, or personal profile is opened by this executable.
+    // Offline argument/ownership/diagnostic and synthetic-profile checks. No Form,
+    // process, keyboard hook, driver, Sony, network, or personal profile is opened.
     internal static class PreviewGuardTests
     {
         private static int checks;
@@ -18,14 +18,10 @@ namespace PSKeyboard
         {
             bool connect; string path, persona;
             DualSensePreview.ParseOptions(new string[0], out connect, out path, out persona);
-            Check(!connect && path == null && persona == "dualsensecombinedaudioduplexv5", "Opening the package does not connect, write a status file, or choose a legacy device.");
-            string[] allowed = { "dualsensecombinedaudioduplexv5", "dualsensegamepadv5", "dualsenseedgecombinedaudioduplexv5", "dualsenseedgegamepadv5" };
-            Check(DualSensePreview.Personas.Length == 4, "Exactly four reviewed choices.");
-            foreach (string choice in allowed)
-            {
-                DualSensePreview.ParseOptions(new string[] { "--persona", choice }, out connect, out path, out persona);
-                Check(persona == choice && !connect && path == null, "Selecting a persona alone cannot attach: " + choice);
-            }
+            Check(!connect && path == null && persona == "dualsensegamepadv5", "Opening defaults to the selected pure gamepad without connecting or writing metadata.");
+            Check(DualSensePreview.Persona == "dualsensegamepadv5", "The sole mode is the user's alpha.9 second choice.");
+            DualSensePreview.ParseOptions(new string[] { "--persona", "dualsensegamepadv5" }, out connect, out path, out persona);
+            Check(persona == "dualsensegamepadv5" && !connect && path == null, "Explicit fixed mode cannot auto-connect.");
             string output = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "guard-example-status.json");
             DualSensePreview.ParseOptions(new string[] { "--status-file", output }, out connect, out path, out persona);
             Check(!connect && path == output && !File.Exists(output), "Metadata argument parsing does not create files.");
@@ -33,8 +29,11 @@ namespace PSKeyboard
                 new string[] { "--connect" }, new string[] { "--controller", "dualsense" },
                 new string[] { "--persona" }, new string[] { "--persona", "dualsense" },
                 new string[] { "--persona", "dualshock4" }, new string[] { "--persona", "dualsenseedge" },
-                new string[] { "--persona", allowed[0].ToUpperInvariant() },
-                new string[] { "--persona", allowed[0], "--persona", allowed[1] },
+                new string[] { "--persona", "dualsensecombinedaudioduplexv5" },
+                new string[] { "--persona", "dualsenseedgecombinedaudioduplexv5" },
+                new string[] { "--persona", "dualsenseedgegamepadv5" },
+                new string[] { "--persona", "DUALSENSEGAMEPADV5" },
+                new string[] { "--persona", "dualsensegamepadv5", "--persona", "dualsensegamepadv5" },
                 new string[] { "--status-file" }, new string[] { "--unknown" },
                 new string[] { "--status-file", "relative.json" },
                 new string[] { "--status-file", @"\\server\share\status.json" },
@@ -80,8 +79,76 @@ namespace PSKeyboard
             Check(!json.Contains("secret-payload") && !json.Contains("secret-account") && !json.Contains("payload"), "Diagnostics do not persist arbitrary input or raw tool text.");
             Check((string)metadata["reportID"] == "0xF0" && (string)metadata["wLength"] == "64", "Only bounded request metadata is retained.");
             Check(!DualSensePreview.SanitizeServerLine("stdout", "private-input").ContainsKey("text"), "No raw-text diagnostic field.");
-            Console.WriteLine("DUALSENSE_PREVIEW_GUARDS_PASS checks=" + checks + "; no GUI, profile, process, driver, keyboard, Sony or network operations");
+            ProfileEditing();
+            Console.WriteLine("DUALSENSE_PREVIEW_GUARDS_PASS checks=" + checks + "; synthetic profile only; no GUI, personal profile, process, driver, keyboard, Sony or network operations");
             return 0;
+        }
+
+        private static void ProfileEditing()
+        {
+            string fixtureRoot = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "guard-profile-" + Guid.NewGuid().ToString("N"));
+            string fixture = Path.Combine(fixtureRoot, "synthetic-bindings.json");
+            // This directory is new, package-local, and contains synthetic data only.
+            if (Directory.Exists(fixtureRoot)) throw new IOException("Fixture must be new.");
+            Directory.CreateDirectory(fixtureRoot);
+            try
+            {
+                BindingProfile original = BindingProfile.Load(fixture);
+                Check(BindingProfile.ActionCount == 22 && !File.Exists(fixture), "Opening absent settings loads all 22 defaults without writing a file.");
+                original.Save(fixture);
+                string previous = File.ReadAllText(fixture);
+                BindingProfile current = BindingProfile.Load(fixture);
+                Check(File.ReadAllText(fixture) == previous, "Opening existing settings does not rewrite them.");
+                BindingProfile draft = current.WithBinding(8, 0x5A).WithRapidFire(8, RapidFireMode.Hold, 20)
+                    .WithRapidFire(9, RapidFireMode.Toggle, 5000).WithRapidFire(10, RapidFireMode.Off, 250);
+                Check(current.KeyForAction(8) == original.KeyForAction(8) && File.ReadAllText(fixture) == previous,
+                    "An edited or discarded draft cannot alter active settings or persisted data.");
+                Reject(delegate { draft.WithRapidFire(8, RapidFireMode.Hold, 19); });
+                Reject(delegate { draft.WithRapidFire(9, RapidFireMode.Toggle, 5001); });
+                Reject(delegate { draft.WithBinding(8, 0x77); });
+
+                KeyboardControlPipeline pipeline = new KeyboardControlPipeline(delegate { return current; });
+                int originalKey = current.KeyForAction(8);
+                pipeline.Process(originalKey, true, false, false, true, 0);
+                Check(pipeline.Evaluate(true, 1) == (1u << 8), "Baseline synthetic input is active before opening settings.");
+                pipeline.Reset();
+                Check(pipeline.Evaluate(false, 2) == 0, "Opening settings clears existing output while editing is paused.");
+                BindingProfile beforeFailure = current; bool failed = false;
+                using (FileStream locked = new FileStream(fixture, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    try { current = DualSensePreview.SaveEditedProfile(draft, fixture); }
+                    catch (IOException) { failed = true; }
+                }
+                Check(failed && Object.ReferenceEquals(current, beforeFailure) && current.KeyForAction(8) == originalKey,
+                    "Failed persistence never publishes the edited mapping.");
+                Check(File.ReadAllText(fixture) == previous && Directory.GetFiles(fixtureRoot).Length == 1,
+                    "Failed save preserves the previous file and cleans its own temporary file.");
+                Check(pipeline.Evaluate(true, 3) == 0, "A save error cannot resume a key held before editing.");
+
+                current = DualSensePreview.SaveEditedProfile(draft, fixture); pipeline.Reset();
+                Check(Object.ReferenceEquals(current, draft), "Only a successful save publishes the immutable edited profile.");
+                BindingProfile restored = BindingProfile.Load(fixture);
+                for (int action = 0; action < BindingProfile.ActionCount; action++)
+                    Check(restored.KeyForAction(action) == draft.KeyForAction(action) &&
+                        restored.RapidFireModeForAction(action) == draft.RapidFireModeForAction(action) &&
+                        restored.IntervalMillisecondsForAction(action) == draft.IntervalMillisecondsForAction(action),
+                        "Saved mapping and independent repeat settings survive reload for action " + action);
+                Check(restored.RapidFireModeForAction(8) == RapidFireMode.Hold && restored.IntervalMillisecondsForAction(8) == 20 &&
+                    restored.RapidFireModeForAction(9) == RapidFireMode.Toggle && restored.IntervalMillisecondsForAction(9) == 5000 &&
+                    restored.RapidFireModeForAction(10) == RapidFireMode.Off, "All three repeat modes and both supported timing limits persist.");
+                Check(pipeline.Evaluate(false, 4) == 0, "A successful save leaves output paused until explicitly enabled.");
+                pipeline.Process(originalKey, false, true, false, false, 5);
+                pipeline.Process(0x5A, true, false, false, true, 6);
+                Check(pipeline.Evaluate(true, 6) == (1u << 8), "A fresh accepted press uses the newly saved mapping.");
+                Check(pipeline.Evaluate(false, 7) == 0 && pipeline.Evaluate(true, 8) == 0,
+                    "Focus loss cancels repeated output and returning cannot resume it.");
+            }
+            finally
+            {
+                // No recursive deletion: remove only this test's exact file and empty directory.
+                if (File.Exists(fixture)) File.Delete(fixture);
+                Directory.Delete(fixtureRoot);
+            }
         }
     }
 }

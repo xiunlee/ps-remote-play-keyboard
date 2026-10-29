@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strings"
 	"testing"
+	"time"
 )
 
 // Pure argument/JSON/reader checks only. No tests call run/main, bind sockets,
@@ -20,13 +21,13 @@ func TestCandidateArguments(t *testing.T) {
 }
 
 func TestCandidateAllowlist(t *testing.T) {
-	for _, persona := range []string{"dualsensecombinedaudioduplexv5", "dualsensegamepadv5", "dualsenseedgecombinedaudioduplexv5", "dualsenseedgegamepadv5"} {
-		if err := validateCandidate(`{"type":"` + persona + `"}`); err != nil {
-			t.Fatalf("selected persona rejected: %s: %v", persona, err)
-		}
+	if err := validateCandidate(`{"type":"dualsensegamepadv5"}`); err != nil {
+		t.Fatalf("selected gamepad persona rejected: %v", err)
 	}
 	for _, payload := range []string{
 		`{}`, `null`, `[]`, `{"type":"dualsense"}`, `{"type":"dualsensegamepad"}`,
+		`{"type":"dualsensecombinedaudioduplexv5"}`, `{"type":"dualsenseedgecombinedaudioduplexv5"}`,
+		`{"type":"dualsenseedgegamepadv5"}`, `{"type":"dualsenseaudioonlyv5"}`,
 		`{"type":"DualSenseGamepadV5"}`, `{"type":"dualsensegamepadv5 "}`,
 		`{"type":"dualsensegamepadv5","autoAttach":true}`,
 		`{"type":"dualsensegamepadv5","serial":"override"}`,
@@ -36,6 +37,49 @@ func TestCandidateAllowlist(t *testing.T) {
 			t.Fatalf("unsafe/noncanonical device request accepted: %s", payload)
 		}
 	}
+}
+
+func TestCandidateShutdownWatchdog(t *testing.T) {
+	t.Run("completed cleanup cancels watchdog and preserves errors", func(t *testing.T) {
+		var order []string
+		forced := make(chan int, 1)
+		closeError := errors.New("USB close failed")
+		err := shutdownServers(func() { order = append(order, "api") }, func() error {
+			order = append(order, "usb")
+			return closeError
+		}, 20*time.Millisecond, func(code int) { forced <- code })
+		if err != closeError || strings.Join(order, ",") != "api,usb" {
+			t.Fatalf("cleanup lost its order or error: %v %v", order, err)
+		}
+		select {
+		case code := <-forced:
+			t.Fatalf("completed cleanup left an active watchdog: %d", code)
+		case <-time.After(50 * time.Millisecond):
+		}
+	})
+	t.Run("a blocked close triggers only the shutdown watchdog", func(t *testing.T) {
+		entered := make(chan struct{})
+		release := make(chan struct{})
+		forced := make(chan int, 1)
+		done := make(chan error, 1)
+		go func() {
+			done <- shutdownServers(func() { close(entered); <-release }, func() error { return nil },
+				20*time.Millisecond, func(code int) { forced <- code })
+		}()
+		<-entered
+		select {
+		case code := <-forced:
+			if code != 3 {
+				t.Errorf("unexpected forced shutdown code: %d", code)
+			}
+		case <-time.After(time.Second):
+			t.Error("blocked shutdown did not trigger its watchdog")
+		}
+		close(release)
+		if err := <-done; err != nil {
+			t.Fatal(err)
+		}
+	})
 }
 
 type failedReader struct{}

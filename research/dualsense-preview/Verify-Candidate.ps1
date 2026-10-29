@@ -10,7 +10,9 @@ if($RequireClean -and ($manifest.workingTreeDirty -ne $false -or $manifest.tests
 foreach($name in @('sonyOperationVerified','commercialReady','driversBundled','defaultConnected','defaultEnabled')) {
     if($manifest.$name -isnot [bool] -or $manifest.$name -ne $false) { throw ('Invalid candidate claim: '+$name) }
 }
-if($manifest.profileReadOnly -ne $true -or $manifest.apiPort -ne 33642 -or $manifest.usbPort -ne 33641) { throw 'Candidate constraints differ from the reviewed design.' }
+if($manifest.profileReadOnly -ne $false -or $manifest.profileSaveRequiresUserAction -ne $true -or
+    $manifest.apiPort -ne 33642 -or $manifest.usbPort -ne 33641 -or $manifest.sessionTimeLimitSeconds -ne 0 -or
+    (@($manifest.controllerModes) -join ',') -cne 'dualsensegamepadv5' -or $manifest.defaultControllerMode -cne 'dualsensegamepadv5') { throw 'Candidate constraints differ from the reviewed design.' }
 $materials=Get-Content -LiteralPath (Join-Path $root 'MATERIALS.json') -Raw | ConvertFrom-Json
 foreach($material in $materials) {
     if($material.license -cnotmatch '\Anotices/[A-Za-z0-9_.-]+\.txt\z' -or
@@ -37,6 +39,8 @@ $info=[Diagnostics.FileVersionInfo]::GetVersionInfo((Join-Path $root $manifest.e
 if($info.FileVersion -cne $manifest.fileVersion -or $info.ProductVersion -cne $manifest.informationalVersion) { throw 'Embedded application version mismatch.' }
 $backend=Get-Content -LiteralPath (Join-Path $root 'BACKEND-BUILD.json') -Raw | ConvertFrom-Json
 if($backend.upstreamCommit -cne 'b78e31e93e84b4cb7c4b4c15b8aace10749106d2' -or
+    $backend.persona -cne 'dualsensegamepadv5' -or $backend.sessionLifetimeLimit -ne $false -or
+    $backend.shutdownTimeoutSeconds -ne 15 -or $backend.pureUnitTestsPassed -ne $true -or
     $backend.materialsManifestSha256 -cne (Get-FileHash -LiteralPath (Join-Path $root 'MATERIALS.json')).Hash -or
     (Get-FileHash -LiteralPath (Join-Path $root 'DualSenseCandidateServer.exe')).Hash -cne $manifest.backendSha256 -or
     $backend.executableSha256 -cne $manifest.backendSha256 -or

@@ -40,7 +40,7 @@ $moduleText = "module github.com/Alia5/VIIPER/pskeyboardcandidate`n`ngo 1.26.2`n
 
 # All Go writes stay in this isolated output. No go env -w, global PATH edits,
 # installation, driver probe, backend launch, or upstream source patch.
-# Only named pure argument/JSON/stdin-reader unit tests execute below.
+# Only named pure argument/JSON/stdin-reader/shutdown-helper tests execute below.
 $environment = @{
     GOENV='off'; GOWORK='off'; GOTOOLCHAIN='local'; CGO_ENABLED='0';
     GOOS='windows'; GOARCH='amd64'; GOFLAGS=''; GOPROXY='https://proxy.golang.org';
@@ -68,7 +68,7 @@ try {
     try {
         & $go build -mod=mod -trimpath -buildvcs=false -o $executable .
         if ($LASTEXITCODE -ne 0) { throw 'Candidate backend build failed.' }
-        $testResults = & $go test -mod=readonly -count=1 -json -run '^TestCandidate(Arguments|Allowlist|StdinStops)$' .
+        $testResults = & $go test -mod=readonly -count=1 -json -run '^TestCandidate(Arguments|Allowlist|StdinStops|ShutdownWatchdog)$' .
         if ($LASTEXITCODE -ne 0) { throw 'Pure candidate backend unit tests failed.' }
         [IO.File]::WriteAllLines((Join-Path $out 'PURE-TESTS.jsonl'), [string[]]$testResults, [Text.UTF8Encoding]::new($false))
         $dependencies = & $go list -m -json all
@@ -104,7 +104,8 @@ try {
     if ((Get-FileHash -LiteralPath $mainSource -Algorithm SHA256).Hash -ne $mainHash -or
         (Get-FileHash -LiteralPath $testSource -Algorithm SHA256).Hash -ne $testHash) { throw 'Backend sources changed during the build.' }
     $record = [ordered]@{
-        artifact='PSKeyboard DualSense V5 candidate backend'; researchVersion='preview.1';
+        artifact='PSKeyboard DualSense V5 selected gamepad backend'; researchVersion='preview.2';
+        protocolVersion='research.preview.1'; persona='dualsensegamepadv5'; sessionLifetimeLimit=$false; shutdownTimeoutSeconds=15;
         upstreamRepository='https://github.com/hbashton/VIIPER'; upstreamCommit=$upstreamCommit;
         upstreamTag='v0.1.9-rc4.6.6'; upstreamArchiveSha256=$expectedArchiveHash;
         backendSourceSha256=$mainHash; pureTestSourceSha256=$testHash; buildScriptSha256=$buildScriptHash;

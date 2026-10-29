@@ -2,21 +2,25 @@
 
 將鍵盤轉成手把輸入，搭配 Sony 官方 PS Remote Play 使用。主要開發方向為**免實體手把**；專案原名為 PS Remote Play 鍵盤手把。
 
-> **專案狀態：2026-10-29 免手把 PS4 模式實機成功。** `0.1.0-alpha.5` 已有重開機後正常回報；新版 `0.1.0-alpha.6` 的 PS4 模式亦由使用者確認可操作。alpha.6 的 PS5 DualSense 模式能接入 Windows，但官方 Remote Play 操作無反應，保留為實驗選項。主捷徑預設可用的 PS4 模式；[實機紀錄](research/controller-free-preview/ALPHA6-TRIAL.md)。長時間使用、各種重連與乾淨電腦安裝仍待驗證，尚未正式發布。
+> **專案狀態：2026-10-29，alpha.9 四種 DualSense 候選均取得使用者透過 Sony 官方 Remote Play 操作 PS5 的成功回報。** 使用者選定第二種 `dualsensegamepadv5`（一般版、純手把）作為日常方向。`0.1.0-alpha.10` 正整合按鍵設定與每鍵連點，尚待交付及新版實機驗收；長時間使用、各種重連與乾淨電腦安裝仍待驗證，尚未完成正式或商業發行。
 
 版本總控：[總進度與換串交接](docs/HANDOFF.md) · [目前版本](VERSION) · [變更紀錄](CHANGELOG.md) · [版本控管與回退](docs/VERSIONING.md)。最新開發內容在 `codex/commercial-preview`，GitHub 預設 `main` 可能落後；請以工作分支的交接文件接續。
 
-`0.1.0-alpha.8` 新增白色 PS 圖示與莓紅介面，統一主畫面、按鍵設定及狀態燈；[查看設計與畫面預覽](docs/VISUAL-DESIGN.md)。保留已使用的按鍵配置與模擬後端，PS5 相容性研究未在本輪變更。
+目前主線入口是 [DualSense 版本說明](research/dualsense-preview/README.md)與 [Build-Candidate.ps1](research/dualsense-preview/Build-Candidate.ps1)。使用者另要求整理本機舊執行版本，只保留 alpha.10；個人設定與備份保留，GitHub 舊標籤與歷史不變。這項整理要求不代表 alpha.10 已完成交付或驗收。
+
+歷史版本 `0.1.0-alpha.8` 新增白色 PS 圖示與莓紅介面，統一主畫面、按鍵設定及狀態燈；[查看設計與畫面預覽](docs/VISUAL-DESIGN.md)。當版保留既有按鍵配置與模擬後端，未變更 PS5 相容性研究。
 
 `0.1.0-alpha.7` 依使用者要求調整[預設鍵位](docs/DEFAULT-KEYS.md)：方向鍵對應 △／□／×／○，E／Q 對應 L1／L2，Delete／Page Down 對應 R1／R2。已有設定會保留，須按「恢復預設」才套用新排列。
 
 ## 主要方向：免手把鍵盤控制
 
-[免手把測試程式](research/controller-free-preview/README.md) 將鍵盤輸入交給免費開源 VIIPER 與既有 usbip-win2 驅動，讓官方 Remote Play 讀取模擬 DS4。使用者不需插入實體手把，也不需交出 PSN 帳號；仍使用 Sony 官方用戶端。完整依賴、證據與限制見[首次成功紀錄](research/controller-free-preview/LIVE-TRIAL.md)。
+[目前的 DualSense 主線](research/dualsense-preview/README.md)將鍵盤輸入交給固定來源的 VIIPER 候選與既有 usbip-win2 0.9.8.1 驅動，讓官方 Remote Play 讀取模擬 DualSense。alpha.9 四種候選的 PS5 操作結果以使用者實機回報為據，並非僅由 Windows 裝置辨識推論。使用者不需插入實體手把，也不需交出 PSN 帳號；仍使用 Sony 官方用戶端。
 
-沿用自訂按鍵、每鍵連點（按住／按一次啟停、可設定毫秒間隔）及 F8 暫停。鍵盤控制只在官方 Remote Play 為前景視窗時生效；切換視窗會停止並清除連點，回來後須重新觸發。滑鼠與腳本錄製尚未實作。
+早期[免手把 PS4 版本](research/controller-free-preview/README.md)已有單機及重開機成功回報；alpha.6 當時的 DualSense 操作失敗保留於[歷史實機紀錄](research/controller-free-preview/ALPHA6-TRIAL.md)，不代表 alpha.9 新候選的現況。完整首次 PS4 成功證據見[首次成功紀錄](research/controller-free-preview/LIVE-TRIAL.md)。
 
-依使用者選定方向，後續優先完善免手把版的穩定性、操作介面與安裝流程；其他實體手把相容性暫不擴充。既有實體中繼程式保留作為備份與研究紀錄，不要求使用者購買或插入手把。
+alpha.10 整合沿用自訂按鍵、每鍵連點（按住／按一次啟停、可設定毫秒間隔）及 F8 暫停。鍵盤控制只在官方 Remote Play 為前景視窗時生效；切換視窗會停止並清除連點，回來後須重新觸發。新版整合仍待實機驗收；滑鼠與腳本錄製尚未實作。
+
+依使用者選定方向，後續優先完成 alpha.10 的設定與連點整合驗收，再完善穩定性、操作介面與安裝流程；其他實體手把相容性暫不擴充。既有 PS4 與實體中繼路線保留於版本歷史、備份與研究紀錄，不要求使用者購買或插入手把。
 
 **操作約束：保留使用者目前的官方 Remote Play 連線，不得為檢查或套用更新自行關閉、重啟它。** 若後續操作確實需要中斷連線，先說明原因並取得使用者同意。
 

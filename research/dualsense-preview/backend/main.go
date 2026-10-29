@@ -22,11 +22,11 @@ import (
 )
 
 const (
-	sourceCommit = "b78e31e93e84b4cb7c4b4c15b8aace10749106d2"
-	labMarker    = "pskeyboard-dualsense-v5-candidate"
-	apiAddress   = "127.0.0.1:33642"
-	usbAddress   = "127.0.0.1:33641"
-	lifetime     = 30 * time.Minute
+	sourceCommit    = "b78e31e93e84b4cb7c4b4c15b8aace10749106d2"
+	labMarker       = "pskeyboard-dualsense-v5-candidate"
+	apiAddress      = "127.0.0.1:33642"
+	usbAddress      = "127.0.0.1:33641"
+	shutdownTimeout = 15 * time.Second
 )
 
 func ping(_ *api.Request, res *api.Response, _ *slog.Logger) error {
@@ -36,7 +36,8 @@ func ping(_ *api.Request, res *api.Response, _ *slog.Logger) error {
 		"labMarker": labMarker, "autoAttach": false,
 		"apiAddress": apiAddress, "usbAddress": usbAddress,
 		"windowsAttachManagedExternally": true, "candidatePreview": true,
-		"sessionLimitSeconds": 1800, "stdinEofStops": true, "sonyTested": false,
+		"sessionLimitSeconds": 0, "sessionLifetimeLimit": false,
+		"shutdownTimeoutSeconds": 15, "stdinEofStops": true, "sonyTested": false,
 	})
 	res.JSON = string(data)
 	return err
@@ -56,8 +57,7 @@ func validateCandidate(payload string) error {
 		return apierror.ErrBadRequest("candidate preview accepts one device request")
 	}
 	switch request.Type {
-	case "dualsensecombinedaudioduplexv5", "dualsensegamepadv5",
-		"dualsenseedgecombinedaudioduplexv5", "dualsenseedgegamepadv5":
+	case "dualsensegamepadv5":
 		return nil
 	default:
 		return apierror.ErrBadRequest("candidate preview accepts only a selected V5 type")
@@ -89,9 +89,17 @@ func stdinStopReason(reader io.Reader) string {
 	return "stdin_eof"
 }
 
-func run() error {
-	sessionTimer := time.NewTimer(lifetime)
-	defer sessionTimer.Stop()
+// The watchdog exists only while shutdown is in progress. A healthy active
+// session has no timer that can disconnect it. Function arguments allow pure
+// tests of cleanup ordering and a stuck close without opening any sockets.
+func shutdownServers(closeAPI func(), closeUSB func() error, timeout time.Duration, forceExit func(int)) error {
+	watchdog := time.AfterFunc(timeout, func() { forceExit(3) })
+	defer watchdog.Stop()
+	closeAPI()
+	return closeUSB()
+}
+
+func run() (runErr error) {
 	stop := make(chan string, 1)
 	go func() { stop <- stdinStopReason(os.Stdin) }()
 	// No environment/config loading, keyfile, tray, installer, driver probes,
@@ -117,14 +125,23 @@ func run() error {
 	router.Register("bus/{id}/add", onlyCandidate(handler.BusDeviceAdd(usbServer, apiServer)))
 	router.RegisterStream("bus/{busId}/{deviceid}", api.DeviceStreamHandler(usbServer))
 
+	reason := "stdin_stop"
+	defer func() {
+		closeErr := shutdownServers(apiServer.Close, usbServer.Close, shutdownTimeout, os.Exit)
+		if runErr == nil {
+			runErr = closeErr
+		}
+		if runErr == nil {
+			fmt.Printf("STOPPED reason=%s driver_cleanup_managed_externally=true sony_tested=false\n", reason)
+		}
+	}()
 	usbDone := make(chan error, 1)
 	go func() { usbDone <- usbServer.ListenAndServe() }()
-	defer func() { apiServer.Close(); _ = usbServer.Close() }()
 	select {
 	case err := <-usbDone:
 		return fmt.Errorf("USB listener failed: %w", err)
 	case <-usbServer.Ready():
-	case <-stop:
+	case reason = <-stop:
 		return nil
 	case <-time.After(5 * time.Second):
 		return errors.New("USB listener readiness timeout")
@@ -132,20 +149,13 @@ func run() error {
 	if err := apiServer.Start(); err != nil {
 		return err
 	}
-	fmt.Printf("READY labMarker=%s sourceCommit=%s api=%s usb=%s autoAttach=false lifetime_seconds=1800\n",
+	fmt.Printf("READY labMarker=%s sourceCommit=%s api=%s usb=%s autoAttach=false session_lifetime_limit=false\n",
 		labMarker, sourceCommit, apiAddress, usbAddress)
-	reason := "session_limit"
 	select {
 	case err := <-usbDone:
 		return fmt.Errorf("USB listener ended: %w", err)
-	case <-sessionTimer.C:
 	case reason = <-stop:
 	}
-	apiServer.Close()
-	if err := usbServer.Close(); err != nil {
-		return err
-	}
-	fmt.Printf("STOPPED reason=%s driver_cleanup_managed_externally=true sony_tested=false\n", reason)
 	return nil
 }
 
@@ -158,9 +168,6 @@ func main() {
 		fmt.Fprintln(os.Stderr, "Usage: DualSenseCandidateBackend.exe --candidate-preview")
 		os.Exit(2)
 	}
-	// Bound this process even if an upstream shutdown unexpectedly stalls.
-	timer := time.AfterFunc(lifetime+15*time.Second, func() { os.Exit(3) })
-	defer timer.Stop()
 	if err := run(); err != nil {
 		fmt.Fprintln(os.Stderr, "FAIL", err)
 		os.Exit(1)
