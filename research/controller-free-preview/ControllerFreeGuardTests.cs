@@ -20,6 +20,16 @@ namespace PSKeyboard
             string output = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "example-status.json");
             ControllerFreeKeyboard.ParseOptions(new string[] { "--connect", "--status-file", output }, out connect, out path);
             Check(connect && path == output && !File.Exists(output), "Explicit args parse without writing a file.");
+            string deviceType;
+            ControllerFreeKeyboard.ParseOptions(new string[0], out connect, out path, out deviceType);
+            Check(deviceType == "dualshock4" && !connect, "Default preserves the working DS4 mode without attaching.");
+            ControllerFreeKeyboard.ParseOptions(new string[] { "--controller", "dualsense" }, out connect, out path, out deviceType);
+            Check(deviceType == "dualsense" && !connect, "DualSense selection alone never attaches a device.");
+            ControllerFreeKeyboard.ParseOptions(new string[] { "--connect", "--controller", "dualshock4" }, out connect, out path, out deviceType);
+            Check(deviceType == "dualshock4" && connect, "Explicit DS4 launch remains supported.");
+            foreach (string[] invalid in new string[][] { new string[] { "--controller" }, new string[] { "--controller", "dualsenseedge" },
+                new string[] { "--controller", "unknown" }, new string[] { "--controller", "dualsense", "--controller", "dualshock4" } })
+                Reject(delegate { bool c; string p, d; ControllerFreeKeyboard.ParseOptions(invalid, out c, out p, out d); });
             string[][] bad = { new string[] { "--connect", "--connect" }, new string[] { "--status-file" },
                 new string[] { "--unknown" }, new string[] { "--status-file", "relative.json" },
                 new string[] { "--status-file", @"\\server\share\status.json" },
@@ -47,6 +57,10 @@ namespace PSKeyboard
             Check(ControllerFreeKeyboard.IsNeutralFrame(ViiperTransport.CreateNeutralFrame()), "Neutral frame classification agrees with transport.");
             byte[] nonNeutral = ViiperTransport.CreateNeutralFrame(); nonNeutral[0] = 1;
             Check(!ControllerFreeKeyboard.IsNeutralFrame(nonNeutral), "Output counter distinguishes changed frames.");
+            byte[] ds5Neutral = ViiperTransport.CreateNeutralFrame("dualsense");
+            Check(ControllerFreeKeyboard.IsNeutralFrame(ds5Neutral), "DualSense neutral report classification.");
+            ds5Neutral[6] = 1;
+            Check(!ControllerFreeKeyboard.IsNeutralFrame(ds5Neutral), "DualSense PS button counted as non-neutral.");
             Dictionary<string, object> sanitized = ControllerFreeKeyboard.SanitizeServerLine("stderr",
                 "WARN unhandled reportType=3 reportID=0xF0 wLength=64 payload=private-payload account=private-account");
             string json = new JavaScriptSerializer().Serialize(sanitized);

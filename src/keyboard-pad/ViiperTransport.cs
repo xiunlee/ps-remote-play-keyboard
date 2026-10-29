@@ -18,9 +18,12 @@ namespace PSKeyboard
     {
         public const int DefaultPort = 33242;
         public const int FrameSize = 31;
+        public const int DualSenseFrameSize = 33;
         const int MaxResponseBytes = 16384;
         readonly object gate = new object();
         readonly int port, timeoutMs, settleMs;
+        readonly string deviceType;
+        readonly int inputFrameSize, feedbackSize;
         readonly UTF8Encoding utf8 = new UTF8Encoding(false, true);
         TcpClient client;
         NetworkStream stream;
@@ -33,14 +36,21 @@ namespace PSKeyboard
         long feedbackPackets;
 
         public ViiperTransport(int port) : this(port, 1500, 200) { }
-        internal ViiperTransport(int port, int timeoutMs, int settleMs)
+        public ViiperTransport(int port, string deviceType) : this(port, 1500, 200, deviceType) { }
+        internal ViiperTransport(int port, int timeoutMs, int settleMs) : this(port, timeoutMs, settleMs, "dualshock4") { }
+        internal ViiperTransport(int port, int timeoutMs, int settleMs, string deviceType)
         {
             if (port < 1 || port > 65535) throw new ArgumentOutOfRangeException("port");
             if (timeoutMs < 50 || timeoutMs > 10000) throw new ArgumentOutOfRangeException("timeoutMs");
             if (settleMs < 0 || settleMs > timeoutMs) throw new ArgumentOutOfRangeException("settleMs");
             this.port = port; this.timeoutMs = timeoutMs; this.settleMs = settleMs;
+            this.deviceType = ValidateDeviceType(deviceType);
+            inputFrameSize = deviceType == "dualsense" ? DualSenseFrameSize : FrameSize;
+            feedbackSize = deviceType == "dualsense" ? 6 : 8;
         }
 
+        public string DeviceType { get { return deviceType; } }
+        public int InputFrameSize { get { return inputFrameSize; } }
         public bool IsConnected { get { return connected; } }
         public string LastFailure { get { return lastFailure; } }
         public string ServerVersion { get { return serverVersion; } }
@@ -54,9 +64,45 @@ namespace PSKeyboard
         }
 
         public static byte[] CreateNeutralFrame()
+        { return CreateNeutralFrame("dualshock4"); }
+
+        public static byte[] CreateNeutralFrame(string deviceType)
         {
-            byte[] result = new byte[FrameSize];
-            result[29] = 0x00; result[30] = 0xE0; // signed AccelZ = -8192
+            ValidateDeviceType(deviceType);
+            byte[] result = new byte[deviceType == "dualsense" ? DualSenseFrameSize : FrameSize];
+            result[result.Length - 1] = 0xE0; // signed AccelZ = -8192
+            return result;
+        }
+
+        public byte[] NeutralFrame() { return CreateNeutralFrame(deviceType); }
+
+        public static string ValidateDeviceType(string deviceType)
+        {
+            if (deviceType != "dualshock4" && deviceType != "dualsense")
+                throw new ArgumentException("Only dualshock4 and dualsense are supported.", "deviceType");
+            return deviceType;
+        }
+
+        // Converts only the keyboard core's neutral-sensor state. This is not a
+        // physical-controller sensor/touch translator: those formats differ.
+        public static byte[] ConvertKeyboardFrame(byte[] ds4Frame, string deviceType)
+        {
+            ValidateDeviceType(deviceType);
+            if (ds4Frame == null) throw new ArgumentNullException("ds4Frame");
+            if (ds4Frame.Length != FrameSize) throw new ArgumentException("Expected 31 keyboard state bytes.", "ds4Frame");
+            if (deviceType == "dualshock4") return (byte[])ds4Frame.Clone();
+            if ((ds4Frame[4] & 0x0C) != 0) throw new ArgumentException("Unsupported DS4 button bits.", "ds4Frame");
+            for (int i = 9; i < 29; i++)
+                if (ds4Frame[i] != 0) throw new ArgumentException("Only neutral touch and motion data can be converted.", "ds4Frame");
+            if (ds4Frame[29] != 0 || ds4Frame[30] != 0xE0)
+                throw new ArgumentException("Expected neutral keyboard gravity.", "ds4Frame");
+            byte[] result = CreateNeutralFrame(deviceType);
+            Buffer.BlockCopy(ds4Frame, 0, result, 0, 4);
+            uint buttons = (uint)(ds4Frame[4] | (ds4Frame[5] << 8));
+            buttons = (buttons & 0xFFF0u) | ((buttons & 3u) << 16);
+            result[4] = (byte)buttons; result[5] = (byte)(buttons >> 8);
+            result[6] = (byte)(buttons >> 16); result[7] = (byte)(buttons >> 24);
+            Buffer.BlockCopy(ds4Frame, 6, result, 8, 25);
             return result;
         }
 
@@ -81,8 +127,8 @@ namespace PSKeyboard
                     Dictionary<string, object> created = Request("bus/create");
                     busId = Number(created, "busId");
                     if (busId == 0) throw new InvalidDataException("VIIPER returned an invalid bus ID.");
-                    Dictionary<string, object> added = Request("bus/" + BusNumber() + "/add {\"type\":\"dualshock4\"}");
-                    if (Number(added, "busId") != busId || Text(added, "type") != "dualshock4")
+                    Dictionary<string, object> added = Request("bus/" + BusNumber() + "/add {\"type\":\"" + deviceType + "\"}");
+                    if (Number(added, "busId") != busId || Text(added, "type") != deviceType)
                         throw new InvalidDataException("VIIPER returned a different bus or device type.");
                     string id = Text(added, "devId");
                     uint numericId;
@@ -95,7 +141,7 @@ namespace PSKeyboard
                     // and keep handshake bytes separate from the first input frame.
                     if (client.Client.Poll(settleMs * 1000, SelectMode.SelectRead))
                         ReadFeedbackPacket(stream, true);
-                    WriteFrame(stream, CreateNeutralFrame());
+                    WriteFrame(stream, NeutralFrame());
                     connected = true;
                     TcpClient activeClient = client;
                     NetworkStream activeStream = stream;
@@ -111,11 +157,11 @@ namespace PSKeyboard
             }
         }
 
-        public void Send(byte[] frame31)
+        public void Send(byte[] frame)
         {
-            if (frame31 == null) throw new ArgumentNullException("frame31");
-            if (frame31.Length != FrameSize) throw new ArgumentException("Expected exactly 31 DS4 state bytes.", "frame31");
-            byte[] stableFrame = (byte[])frame31.Clone();
+            if (frame == null) throw new ArgumentNullException("frame");
+            if (frame.Length != inputFrameSize) throw new ArgumentException("Unexpected state length for " + deviceType + ".", "frame");
+            byte[] stableFrame = (byte[])frame.Clone();
             lock (gate)
             {
                 if (disposed) throw new ObjectDisposedException("ViiperTransport");
@@ -144,7 +190,7 @@ namespace PSKeyboard
         {
             if (sendNeutral && connected && stream != null)
             {
-                try { WriteFrame(stream, CreateNeutralFrame()); }
+                try { WriteFrame(stream, NeutralFrame()); }
                 catch (Exception ex) { RememberFailure("Neutral state delivery was not confirmed: " + ex.Message); }
             }
             connected = false;
@@ -257,7 +303,7 @@ namespace PSKeyboard
 
         void ReadFeedbackPacket(NetworkStream target, bool initial)
         {
-            byte[] packet = new byte[8]; int offset = 0; Stopwatch partial = null;
+            byte[] packet = new byte[feedbackSize]; int offset = 0; Stopwatch partial = null;
             while (offset < packet.Length)
             {
                 target.ReadTimeout = offset == 0 && !initial ? Math.Min(timeoutMs, 500) : timeoutMs;
@@ -267,13 +313,17 @@ namespace PSKeyboard
                     if (count == 0) throw new EndOfStreamException(offset == 0 ? "VIIPER closed the device stream." : "VIIPER truncated a feedback packet.");
                     offset += count;
                     if (partial == null) partial = Stopwatch.StartNew();
-                    if (packet[0] == (byte)'{')
+                    // DualSense feedback has no flags: all six bytes are raw
+                    // 0..255 values, including '{'. Before first input/attach,
+                    // immediate text can still report a rejected handshake.
+                    if (packet[0] == (byte)'{' && (initial || deviceType == "dualshock4"))
                     {
                         byte[] prefix = new byte[offset]; Buffer.BlockCopy(packet, 0, prefix, 0, offset);
                         ParseResponse(ReadUntilEof(target, prefix));
                         throw new InvalidDataException("Unexpected JSON on the VIIPER feedback stream.");
                     }
-                    if ((packet[0] & ~7) != 0) throw new InvalidDataException("Invalid VIIPER feedback flags or authentication response.");
+                    if (deviceType == "dualshock4" && (packet[0] & ~7) != 0)
+                        throw new InvalidDataException("Invalid VIIPER feedback flags or authentication response.");
                     if (partial.ElapsedMilliseconds > timeoutMs) throw new TimeoutException("VIIPER feedback packet timed out.");
                 }
                 catch (IOException ex)

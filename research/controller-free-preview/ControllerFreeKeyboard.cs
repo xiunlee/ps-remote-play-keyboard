@@ -30,6 +30,8 @@ namespace PSKeyboard
         private readonly string usbipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "USBip", "usbip.exe");
         private readonly int ownPid = Process.GetCurrentProcess().Id;
         private readonly Button connect = new Button(), toggle = new Button(), configure = new Button();
+        private readonly ComboBox controllerChoice = new ComboBox();
+        private string controllerType;
         private readonly Label status = new Label(), keyboardStatus = new Label(), notice = new Label();
         private readonly System.Windows.Forms.Timer uiTimer = new System.Windows.Forms.Timer();
         private readonly ManualResetEvent statusStop = new ManualResetEvent(false);
@@ -71,29 +73,39 @@ namespace PSKeyboard
         [STAThread]
         private static int Main(string[] args)
         {
-            bool autoConnect; string statusFile;
-            try { ParseOptions(args, out autoConnect, out statusFile); }
+            bool autoConnect; string statusFile, deviceType;
+            try { ParseOptions(args, out autoConnect, out statusFile, out deviceType); }
             catch (ArgumentException)
             {
-                MessageBox.Show("用法：PSKeyboard-ControllerFree.exe [--connect] [--status-file 本機完整 JSON 路徑]", "上班不要玩 — 免手把實驗版"); return 2;
+                MessageBox.Show("用法：PSKeyboard-ControllerFree.exe [--connect] [--controller dualshock4|dualsense] [--status-file 本機完整 JSON 路徑]", "上班不要玩 " + BuildInfo.Version); return 2;
             }
             bool created;
             using (Mutex mutex = new Mutex(true, "Local\\PSKeyboardControllerFreeExperiment", out created))
             {
                 if (!created) { MessageBox.Show("免手把實驗版已經開啟。", "上班不要玩"); return 1; }
                 Application.EnableVisualStyles(); Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new ControllerFreeKeyboard(autoConnect, statusFile));
+                Application.Run(new ControllerFreeKeyboard(autoConnect, statusFile, deviceType));
             }
             return 0;
         }
 
         internal static void ParseOptions(string[] args, out bool autoConnect, out string statusFile)
         {
-            autoConnect = false; statusFile = null;
+            string ignored; ParseOptions(args, out autoConnect, out statusFile, out ignored);
+        }
+        internal static void ParseOptions(string[] args, out bool autoConnect, out string statusFile, out string deviceType)
+        {
+            autoConnect = false; statusFile = null; deviceType = "dualshock4"; bool typeSet = false;
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] == "--connect" && !autoConnect) autoConnect = true;
                 else if (args[i] == "--status-file" && statusFile == null && i + 1 < args.Length) statusFile = ValidateStatusPath(args[++i]);
+                else if (args[i] == "--controller" && !typeSet && i + 1 < args.Length)
+                {
+                    deviceType = args[++i];
+                    if (deviceType != "dualshock4" && deviceType != "dualsense") throw new ArgumentException("Unknown controller type.");
+                    typeSet = true;
+                }
                 else throw new ArgumentException("Invalid options.");
             }
         }
@@ -108,34 +120,41 @@ namespace PSKeyboard
             return result;
         }
 
-        private ControllerFreeKeyboard(bool autoConnect, string statusFile)
+        private ControllerFreeKeyboard(bool autoConnect, string statusFile, string deviceType)
         {
-            statusPath = statusFile;
+            statusPath = statusFile; controllerType = deviceType;
             profilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PSKeyboard", "bindings.json");
             profile = BindingProfile.Default(); bool badProfile = false;
             try { profile = BindingProfile.Load(profilePath); } catch { badProfile = true; }
             input = new KeyboardControlPipeline(delegate { return profile; });
-            Text = "上班不要玩 — 免手把實驗版"; ClientSize = new Size(790, 470); MinimumSize = new Size(790, 470);
+            Text = "上班不要玩 " + BuildInfo.Version + " — 免手把測試版"; ClientSize = new Size(820, 530); MinimumSize = new Size(820, 570);
             StartPosition = FormStartPosition.CenterScreen; AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = KeyboardUi.Background; ForeColor = KeyboardUi.Ink; Font = KeyboardUi.Font(10, FontStyle.Regular);
-            TableLayoutPanel root = KeyboardUi.Table(1); root.Padding = new Padding(28); root.RowCount = 7;
-            foreach (int height in new int[] { 48, 64, 60, 74, 46, 62, 40 }) root.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
+            TableLayoutPanel root = KeyboardUi.Table(1); root.Padding = new Padding(28); root.RowCount = 8;
+            foreach (int height in new int[] { 48, 60, 46, 60, 74, 46, 62, 52 }) root.RowStyles.Add(new RowStyle(SizeType.Absolute, height));
             Controls.Add(root);
-            Label title = KeyboardUi.Label("上班不要玩 · 免手把實驗版", 23, KeyboardUi.Ink); title.Font = KeyboardUi.Font(23, FontStyle.Bold); title.Dock = DockStyle.Fill;
+            Label title = KeyboardUi.Label("上班不要玩 · " + BuildInfo.Version, 23, KeyboardUi.Ink); title.Font = KeyboardUi.Font(23, FontStyle.Bold); title.Dock = DockStyle.Fill;
             root.Controls.Add(title, 0, 0);
-            Label description = KeyboardUi.Label("這是獨立的 USB 虛擬手把測試。\r\n已能輸出 Windows 手把資料；官方 Remote Play 是否接受仍未確認。", 10, KeyboardUi.Amber); description.Dock = DockStyle.Fill;
+            Label description = KeyboardUi.Label("免實體手把，使用鍵盤控制官方 Remote Play。\r\nPS4 模式已有操作與重開機成功紀錄；PS5 模式仍待實機驗證。", 10, KeyboardUi.Amber); description.Dock = DockStyle.Fill;
             root.Controls.Add(description, 0, 1);
+            FlowLayoutPanel modelRow = new FlowLayoutPanel { Dock = DockStyle.Fill, Margin = Padding.Empty, WrapContents = false };
+            Label modelLabel = KeyboardUi.Label("模擬手把", 10, KeyboardUi.Ink); modelLabel.Size = new Size(95, 32);
+            controllerChoice.DropDownStyle = ComboBoxStyle.DropDownList; controllerChoice.Width = 285;
+            controllerChoice.Items.AddRange(new object[] { "PS4 · DUALSHOCK 4（目前可用）", "PS5 · DualSense（實驗模式）" });
+            controllerChoice.SelectedIndex = deviceType == "dualsense" ? 1 : 0;
+            controllerChoice.SelectedIndexChanged += delegate { controllerType = controllerChoice.SelectedIndex == 1 ? "dualsense" : "dualshock4"; };
+            modelRow.Controls.Add(modelLabel); modelRow.Controls.Add(controllerChoice); root.Controls.Add(modelRow, 0, 2);
             FlowLayoutPanel actions = new FlowLayoutPanel { Dock = DockStyle.Fill, Margin = Padding.Empty, WrapContents = false };
             KeyboardUi.Button(connect, "建立實驗手把", false); KeyboardUi.Button(toggle, "啟用鍵盤 · F8", true); KeyboardUi.Button(configure, "按鍵與連點設定", false);
             toggle.Enabled = false; connect.Click += ConnectClick; toggle.Click += delegate { Toggle(); }; configure.Click += delegate { EditBindings(); };
-            actions.Controls.AddRange(new Control[] { connect, toggle, configure }); root.Controls.Add(actions, 0, 2);
+            actions.Controls.AddRange(new Control[] { connect, toggle, configure }); root.Controls.Add(actions, 0, 3);
             status.Text = "尚未建立虛擬手把。"; status.Dock = DockStyle.Fill; status.TextAlign = ContentAlignment.MiddleLeft; status.BackColor = Color.White; status.Padding = new Padding(14);
-            root.Controls.Add(status, 0, 3);
-            keyboardStatus.Dock = DockStyle.Fill; keyboardStatus.TextAlign = ContentAlignment.MiddleLeft; keyboardStatus.Text = "鍵盤已暫停。"; root.Controls.Add(keyboardStatus, 0, 4);
+            root.Controls.Add(status, 0, 4);
+            keyboardStatus.Dock = DockStyle.Fill; keyboardStatus.TextAlign = ContentAlignment.MiddleLeft; keyboardStatus.Text = "鍵盤已暫停。"; root.Controls.Add(keyboardStatus, 0, 5);
             Label help = KeyboardUi.Label("只接受官方 Remote Play 前景視窗中的按鍵；切換視窗會停止全部連點。\r\n回到 Remote Play 後需重新按鍵。F8 隨時暫停；不會關閉或重開 Sony 程式。", 10, KeyboardUi.Muted); help.Dock = DockStyle.Fill;
-            root.Controls.Add(help, 0, 5);
-            notice.Text = badProfile ? "原設定檔讀取失敗，目前使用預設；尚未覆寫檔案。" : "與 alpha4 共用按鍵設定。此版本仍屬免手把相容性實驗。";
-            notice.ForeColor = badProfile ? KeyboardUi.Amber : KeyboardUi.Muted; notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; root.Controls.Add(notice, 0, 6);
+            root.Controls.Add(help, 0, 6);
+            notice.Text = badProfile ? "原設定檔讀取失敗，目前使用預設；尚未覆寫檔案。" : "共用原有按鍵設定；本版為測試版，尚未正式發布。";
+            notice.ForeColor = badProfile ? KeyboardUi.Amber : KeyboardUi.Muted; notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; root.Controls.Add(notice, 0, 7);
             Shown += delegate {
                 callback = KeyboardHook; hook = SetWindowsHookEx(13, callback, GetModuleHandle(null), 0);
                 hotkeyRegistered = hook != IntPtr.Zero && RegisterHotKey(Handle, ToggleHotkey, 0x4000, 0x77);
@@ -269,10 +288,10 @@ namespace PSKeyboard
             {
                 if (MessageBox.Show(this, "移除這隻實驗手把會中斷它的輸入。確定要移除？", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
                 SetEnabled(false); busy = true; connect.Enabled = toggle.Enabled = configure.Enabled = false;
-                ThreadPool.QueueUserWorkItem(delegate { Cleanup(); UpdateUi(delegate { busy = false; connect.Enabled = configure.Enabled = true; connect.Text = "建立實驗手把"; status.Text = cleanupCode == null ? "實驗手把已移除，鍵盤已暫停。" : "輸出已停止，但 USB 移除狀態未完全確認。"; }); });
+                ThreadPool.QueueUserWorkItem(delegate { Cleanup(); UpdateUi(delegate { busy = false; connect.Enabled = configure.Enabled = true; controllerChoice.Enabled = !attachAttempted && !usbipCommandTerminationUnconfirmed; connect.Text = "建立實驗手把"; status.Text = cleanupCode == null ? "實驗手把已移除，鍵盤已暫停。" : "輸出已停止，但 USB 移除狀態未完全確認。"; }); });
                 return;
             }
-            busy = true; connect.Enabled = configure.Enabled = false; failureCode = cleanupCode = null; SetEnabled(false); status.Text = "正在建立獨立的實驗手把…";
+            busy = true; connect.Enabled = configure.Enabled = controllerChoice.Enabled = false; failureCode = cleanupCode = null; SetEnabled(false); status.Text = "正在建立 " + (controllerType == "dualsense" ? "PS5 DualSense" : "PS4 DUALSHOCK 4") + " 實驗手把…";
             ThreadPool.QueueUserWorkItem(delegate {
                 lock (sessionGate)
                 {
@@ -304,7 +323,7 @@ namespace PSKeyboard
                             Thread.Sleep(100);
                         }
                         if (!ready) throw new ExperimentException("ports_unavailable");
-                        ViiperTransport candidate = new ViiperTransport(ApiPort); transport = candidate; candidate.Connect();
+                        ViiperTransport candidate = new ViiperTransport(ApiPort, controllerType); transport = candidate; candidate.Connect();
                         if (candidate.ServerVersion != "0.9.0") throw new ExperimentException("backend_invalid");
                         CheckClosing(); attachedBusId = candidate.UsbBusId;
                         attachAttempted = true; WriteReceipt("attach_requested", null);
@@ -322,7 +341,7 @@ namespace PSKeyboard
                         ExperimentException expected = ex as ExperimentException;
                         failureCode = expected == null ? "connect_failed" : expected.Code;
                         RecordDiagnostic("connect_failure", ex.GetType().Name); Cleanup();
-                        UpdateUi(delegate { busy = false; connect.Enabled = configure.Enabled = true; connect.Text = "建立實驗手把"; RefreshStatus(); });
+                        UpdateUi(delegate { busy = false; connect.Enabled = configure.Enabled = true; controllerChoice.Enabled = !attachAttempted && !usbipCommandTerminationUnconfirmed; connect.Text = "建立實驗手把"; RefreshStatus(); });
                     }
                 }
             });
@@ -421,7 +440,7 @@ namespace PSKeyboard
                 {
                     UpdateFocus(); bool active = enabled && !editing && usbAttachedVerified && !ModifiersDown() && SonyForeground();
                     uint actions = input.Evaluate(active, clock.ElapsedMilliseconds);
-                    byte[] frame = KeyboardMapping.Frame(actions, active); session.Send(frame);
+                    byte[] frame = ViiperTransport.ConvertKeyboardFrame(KeyboardMapping.Frame(actions, active), session.DeviceType); session.Send(frame);
                     Interlocked.Increment(ref framesSent); if (!IsNeutralFrame(frame)) Interlocked.Increment(ref nonNeutralFramesSent);
                     Thread.Sleep(8);
                 }
@@ -430,14 +449,14 @@ namespace PSKeyboard
             catch (Exception ex)
             {
                 enabled = false; input.Reset();
-                if (session != null && session.IsConnected) try { session.Send(ViiperTransport.CreateNeutralFrame()); } catch { cleanupCode = "neutral_unconfirmed"; }
+                if (session != null && session.IsConnected) try { session.Send(session.NeutralFrame()); } catch { cleanupCode = "neutral_unconfirmed"; }
                 if (!closing && Object.ReferenceEquals(transport, session)) { failureCode = "send_failed"; RecordDiagnostic("send_failure", ex.GetType().Name); }
             }
         }
         internal static bool IsNeutralFrame(byte[] frame)
         {
-            if (frame == null || frame.Length != ViiperTransport.FrameSize) return false;
-            for (int i = 0; i < frame.Length; i++) if (frame[i] != (i == 30 ? 0xE0 : 0)) return false;
+            if (frame == null || (frame.Length != 31 && frame.Length != 33)) return false;
+            for (int i = 0; i < frame.Length; i++) if (frame[i] != (i == frame.Length - 1 ? 0xE0 : 0)) return false;
             return true;
         }
         private void Cleanup()
@@ -530,6 +549,7 @@ namespace PSKeyboard
         {
             if (receiptPath == null) return;
             try { WriteAtomic(receiptPath, new JavaScriptSerializer().Serialize(new Dictionary<string, object> {
+                { "version", BuildInfo.Version }, { "sourceCommit", BuildInfo.SourceCommit }, { "workingTreeDirty", BuildInfo.WorkingTreeDirty }, { "builtUtc", BuildInfo.BuiltUtc }, { "controllerType", controllerType },
                 { "session", sessionId }, { "ownerPid", ownPid }, { "serverPid", serverPid }, { "serverStartedUtc", serverStartedUtc.ToString("o", CultureInfo.InvariantCulture) },
                 { "executable", Path.Combine(baseDir, "viiper.exe") }, { "apiPort", ApiPort }, { "usbPort", UsbPort }, { "busId", attachedBusId },
                 { "attachedPort", attachedPort }, { "attachUnresolved", attachAttempted }, { "usbipCommandTerminationUnconfirmed", usbipCommandTerminationUnconfirmed },
@@ -545,6 +565,7 @@ namespace PSKeyboard
         {
             ViiperTransport current = transport;
             try { WriteAtomic(statusPath, new JavaScriptSerializer().Serialize(new Dictionary<string, object> {
+                { "version", BuildInfo.Version }, { "sourceCommit", BuildInfo.SourceCommit }, { "workingTreeDirty", BuildInfo.WorkingTreeDirty }, { "builtUtc", BuildInfo.BuiltUtc }, { "controllerType", controllerType },
                 { "kind", "controller-free-experiment" }, { "utc", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture) }, { "pid", ownPid }, { "serverPid", serverPid },
                 { "enabled", enabled }, { "editing", editing }, { "usbAttachedVerified", usbAttachedVerified }, { "transportConnected", current != null && current.IsConnected },
                 { "usbipPort", attachedPort }, { "busId", attachedBusId }, { "attachUnresolved", attachAttempted && !usbAttachedVerified }, { "framesSent", Interlocked.Read(ref framesSent) }, { "nonNeutralFramesSent", Interlocked.Read(ref nonNeutralFramesSent) },
