@@ -44,7 +44,7 @@ function Get-ImportUrls {
 }
 function Show-LauncherMessage([string]$message) {
     Add-Type -AssemblyName System.Windows.Forms
-    [void][Windows.Forms.MessageBox]::Show($message,'PS 鍵盤手把')
+    [void][Windows.Forms.MessageBox]::Show($message,'上班不要玩')
 }
 
 try {

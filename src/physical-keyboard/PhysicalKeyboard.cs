@@ -179,7 +179,7 @@ namespace PSKeyboard
 
             TableLayoutPanel header = KeyboardUi.Table(1); header.RowCount = 2;
             header.RowStyles.Add(new RowStyle(SizeType.Absolute, 47)); header.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            Label brand = KeyboardUi.Label("PS Keyboard", 27, KeyboardUi.Ink);
+            Label brand = KeyboardUi.Label(UiText.T("AppTitle"), 27, KeyboardUi.Ink);
             brand.Font = KeyboardUi.Font(27, FontStyle.Bold); brand.Dock = DockStyle.Fill;
             Label subtitle = KeyboardUi.Label(UiText.T("AppSubtitle"), 10, KeyboardUi.Muted);
             subtitle.Dock = DockStyle.Fill;

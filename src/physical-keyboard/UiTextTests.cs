@@ -32,7 +32,7 @@ static class UiTextTests
         }
         UiText.Initialize(null);
         Check(UiText.LanguageTag == "en", "Null culture has an English fallback");
-        Check(UiText.T("AppTitle") == "PS Keyboard", "English fallback has an actual English translation");
+        Check(UiText.T("ControllerDisconnected") == "Not connected", "English fallback has an actual English translation");
     }
 
     private static void FullCatalogueCoverage()
@@ -97,14 +97,14 @@ static class UiTextTests
         try { UiText.ActionName(22); } catch (ArgumentOutOfRangeException) { highRejected = true; }
         Check(lowRejected && highRejected, "Out-of-range action indexes rejected");
         UiText.Initialize(CultureInfo.GetCultureInfo("zh-TW"));
-        Check(UiText.T("AppTitle") == "PS 鍵盤中繼", "Traditional Chinese application title");
+        Check(UiText.T("AppTitle") == "上班不要玩", "Exact brand preserved in Traditional Chinese");
         Check(UiText.KeyName(0x20) == "空白鍵", "Traditional Chinese special key name");
         UiText.Initialize(CultureInfo.GetCultureInfo("zh-CN"));
-        Check(UiText.T("AppTitle") == "PS 键盘中继", "Simplified Chinese application title");
+        Check(UiText.T("AppTitle") == "上班不要玩", "Exact Traditional Chinese brand preserved in Simplified Chinese UI");
         UiText.Initialize(CultureInfo.GetCultureInfo("de-DE"));
         Check(UiText.T("Save") == "Änderungen speichern", "German accented text preserved");
         UiText.Initialize(CultureInfo.GetCultureInfo("ja-JP"));
-        Check(UiText.T("AppTitle") == "PS キーボード", "Japanese text preserved");
+        Check(UiText.T("AppTitle") == "上班不要玩", "Exact Traditional Chinese brand preserved in Japanese UI");
         UiText.Initialize(CultureInfo.GetCultureInfo("fr-FR"));
         Check(UiText.KeyName(0x0d) == "Entrée", "French key name preserved");
     }

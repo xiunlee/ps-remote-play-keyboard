@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)][string]$Zig,
-    [string]$Version='0.1.0-alpha.2',
+    [string]$Version='0.1.0-alpha.3',
     [string]$OutputRoot=(Join-Path $env:USERPROFILE '.pskeyboard-tools\release-candidates')
 )
 # Build/package only: never executes setup, launcher, HID observation or Sony.
@@ -42,13 +42,13 @@ $manifest | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $stage
 $checksums=@(Get-ChildItem -LiteralPath $stage -File -Recurse | Sort-Object FullName | ForEach-Object {
     (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash+'  '+$_.FullName.Substring($stage.Length+1).Replace('\','/')
 })
-$checksums | Set-Content -LiteralPath (Join-Path $stage 'SHA256SUMS.txt') -Encoding ASCII
+$checksums | Set-Content -LiteralPath (Join-Path $stage 'SHA256SUMS.txt') -Encoding UTF8
 $zip=Join-Path $build ('PSKeyboard-'+$Version+'-internal-preview.zip')
 Compress-Archive -LiteralPath $stage -DestinationPath $zip
 $verify=Join-Path $build 'verification'
 Expand-Archive -LiteralPath $zip -DestinationPath $verify
 $unpacked=Join-Path $verify 'PSKeyboard-Preview'
-foreach($line in $checksums) {
+foreach($line in (Get-Content -LiteralPath (Join-Path $unpacked 'SHA256SUMS.txt') -Encoding UTF8)) {
     $hash,$relative=$line -split '  ',2
     if((Get-FileHash -LiteralPath (Join-Path $unpacked $relative) -Algorithm SHA256).Hash -ne $hash){throw 'Archive integrity verification failed.'}
 }
