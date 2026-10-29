@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Web.Script.Serialization;
 
@@ -87,7 +88,9 @@ namespace PSKeyboard
 
         private static void SupportDestinations()
         {
-            const string version = "0.1.0-alpha.11";
+            string version = BuildInfo.Version;
+            string originalLanguage = UiText.LanguageTag;
+            UiText.Initialize(CultureInfo.GetCultureInfo("zh-Hant"));
             string feedback = SupportLinks.FeedbackUrl(version);
             Check(feedback.StartsWith("mailto:xiun1019@gmail.com?subject=", StringComparison.Ordinal) &&
                 Uri.UnescapeDataString(feedback.Substring(feedback.IndexOf("?subject=", StringComparison.Ordinal) + 9)) == "上班不要玩 " + version + " 意見回饋" &&
@@ -108,6 +111,20 @@ namespace PSKeyboard
                 SupportLinks.IsAllowedLaunchUrl(SupportLinks.SponsorUrl, version), "Only the user's latest designated PayPal destination can launch.");
             Check(!SupportLinks.IsAllowedLaunchUrl("https://www.paypal.com/ncp/payment/AAAAAAAAAAAAA", version),
                 "A valid PayPal payment token format does not authorize another payment page.");
+            foreach(string language in UiText.SupportedLanguageTags)
+            {
+                UiText.Initialize(CultureInfo.GetCultureInfo(language));
+                string localized = SupportLinks.FeedbackUrl(version);
+                const string prefix = "mailto:xiun1019@gmail.com?subject=";
+                Check(localized.StartsWith(prefix, StringComparison.Ordinal) && localized.IndexOf('&') < 0 && localized.IndexOf('#') < 0,
+                    "Localized feedback remains a subject-only draft to the fixed recipient: " + language);
+                string subject = Uri.UnescapeDataString(localized.Substring(prefix.Length));
+                Check(subject.Contains(version) && subject.Contains("上班不要玩") && subject.IndexOf('\r') < 0 && subject.IndexOf('\n') < 0,
+                    "Localized subject preserves brand/version without header injection: " + language);
+                Check(SupportLinks.IsAllowedLaunchUrl(localized, version) && !SupportLinks.IsAllowedLaunchUrl(localized + "&body=unapproved", version),
+                    "Only the exact localized draft can launch: " + language);
+            }
+            UiText.Initialize(CultureInfo.GetCultureInfo(originalLanguage));
         }
 
         private static void ProfileEditing()

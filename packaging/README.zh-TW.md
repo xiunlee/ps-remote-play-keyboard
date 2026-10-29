@@ -4,7 +4,9 @@
 
 用鍵盤操作 **Sony 官方 Windows PS Remote Play 裡的 PS5**，提供 22 個動作改鍵、每鍵連點與 F8 暫停。程式建立虛擬 DualSense，不需插入實體手把；PS5 連線、帳號登入與串流仍由 Sony 官方 Remote Play 處理。
 
-**免費開源 · 作者 xiunlee · GPL-3.0-only。** 本手冊對應 **0.1.0-alpha.11 測試版**，不是穩定版。所有功能免費，贊助不影響功能。[下載、更新與對應原始碼](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。
+**免費開源 · 作者 xiunlee · GPL-3.0-only。** 本手冊對應 **0.1.0-alpha.12 測試版**，不是穩定版。所有功能免費，贊助不影響功能。[下載、更新與對應原始碼](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。
+
+程式的執行元件未提供數位簽章；SHA-256 只用於核對檔案完整性，不代表簽章或相容性驗收。
 
 ## 使用前準備
 
@@ -23,7 +25,7 @@
 5. 要調整鍵位，按 **「按鍵與連點設定」**。編輯期間會暫停；關閉設定視窗後也保持暫停，切回 Remote Play 再按 F8。
 6. 結束時使用程式的中斷按鈕或正常關閉視窗。若顯示清理未完全確認，請保留錯誤訊息並回報，不反覆建立裝置。
 
-主畫面目前以繁體中文為主；按鍵設定視窗會依 Windows 顯示語言選擇支援的翻譯，未涵蓋的語言回退英文。這份英文手冊不代表整個程式介面已英文化。
+主畫面、按鍵設定、連線狀態、錯誤提示、贊助及回饋訊息會依 Windows 介面語言顯示繁中、簡中、英文、日文、韓文、德文、法文、西班牙文或巴西葡語；未支援語言回退英文。品牌名稱「上班不要玩」保持原名，技術診斷代碼不隨語言改變。使用手冊目前提供繁中與英文；九語文字及排版檢查不代表已完成母語校閱，歡迎回饋翻譯問題。
 
 ## 預設鍵位
 
@@ -86,7 +88,7 @@
 
 ## 測試範圍
 
-alpha.9 的四種候選已有使用者透過官方 Remote Play 操作 PS5 的成功回報，目前採用一般 DualSense 的純手把模式。**alpha.11 尚未取得該版使用者實機驗收**；Windows 認出裝置、綠燈或離線測試通過，都不等於遊戲已接受操作。長時間使用、各種重連、重新開機與新電腦安裝仍需更多驗證。
+alpha.9 的四種候選已有使用者透過官方 Remote Play 操作 PS5 的成功回報，目前採用一般 DualSense 的純手把模式。**alpha.12 尚未取得該版使用者實機驗收**；Windows 認出裝置、綠燈或離線測試通過，都不等於遊戲已接受操作。長時間使用、各種重連、重新開機與新電腦安裝仍需更多驗證。
 
 此版本沒有 30 分鐘使用期限。音訊、觸覺、自適應扳機、滑鼠、錄製／重播及 macOS 不列為本版已完成的功能。更多資訊見 [支援範圍](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/docs/PRODUCT-SCOPE.md)與 [alpha.9 操作紀錄](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/research/dualsense-preview/ALPHA9-TRIAL.md)。
 

@@ -41,7 +41,7 @@ namespace PSKeyboard
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 58));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 126));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
-            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
+            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             Controls.Add(root);
 
             TableLayoutPanel heading = KeyboardUi.Table(2); heading.RowCount = 2;
@@ -153,7 +153,8 @@ namespace PSKeyboard
             root.Controls.Add(hint, 0, 4);
 
             FlowLayoutPanel footer = new FlowLayoutPanel { Dock = DockStyle.Fill,
-                FlowDirection = FlowDirection.RightToLeft, Margin = Padding.Empty, WrapContents = false };
+                FlowDirection = FlowDirection.RightToLeft, Margin = Padding.Empty, WrapContents = false,
+                AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
             Button save = new Button(), cancel = new Button();
             KeyboardUi.Button(save, UiText.T("Save"), true); KeyboardUi.Button(cancel, UiText.T("Cancel"), false);
             save.Margin = new Padding(12, 7, 0, 0); cancel.Margin = new Padding(0, 7, 0, 0);
@@ -180,7 +181,7 @@ namespace PSKeyboard
         private void BeginCapture()
         {
             if (grid.CurrentCell == null) return;
-            capturing = true; capture.Text = UiText.T("CapturePrompt");
+            capturing = true; capture.Text = UiText.T("CaptureKey");
             hint.Text = UiText.T("CapturePrompt"); hint.ForeColor = KeyboardUi.Accent;
             capture.Focus();
         }

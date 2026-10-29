@@ -4,7 +4,9 @@ English user guide · [繁體中文](README.md)
 
 Use your keyboard to control your PS5 through **Sony's official PS Remote Play for Windows**, with 22 remappable actions, per-action rapid fire and an F8 pause hotkey. The app creates a virtual DualSense, so a physical controller is not required. Sony's official app still handles your PS5 connection, sign-in and streaming.
 
-**Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.0-alpha.11**, an alpha test version, not a stable release. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
+**Free and open source · Author: xiunlee · GPL-3.0-only.** This guide covers **0.1.0-alpha.12**, an alpha test version, not a stable release. All features are free; sponsorship does not affect access. [Downloads, updates and corresponding source](https://github.com/xiunlee/ps-remote-play-keyboard/releases).
+
+The runtime binaries are unsigned. SHA-256 checksums establish file identity, not digital signing or compatibility with your setup.
 
 ## Before you start
 
@@ -17,13 +19,13 @@ Drivers are not bundled. The app does not automatically install, replace, downgr
 ## Start playing
 
 1. Leave Sony Remote Play open. Normally exit any other version of this keyboard app first, so only one instance owns F8 and the controller connection.
-2. Open `PSKeyboard-DualSensePreview.exe` and click **「連接手把」 (Connect controller)**. Starting the app does not attach a controller automatically, and keyboard controls start paused.
+2. Open `PSKeyboard-DualSensePreview.exe` and click **Connect controller**. Starting the app does not attach a controller automatically, and keyboard controls start paused.
 3. Once attached, switch to official Remote Play and press **F8** to enable keyboard controls. Press F8 again to pause.
 4. Keyboard controls and rapid fire work only while official Remote Play is the foreground window. Switching away clears held inputs and rapid fire. On return, press the key again; a previous toggle does not resume by itself. If controls are paused, press F8 to enable them first.
-5. Click **「按鍵與連點設定」 (Key bindings and rapid fire)** to edit controls. Editing pauses input, and it stays paused when the editor closes. Return to Remote Play and press F8 to continue.
-6. Use the app's disconnect button or close its window normally when finished. If cleanup cannot be confirmed, keep the error message and report it instead of repeatedly creating devices.
+5. Click **Keys and auto-repeat** to edit controls. Editing pauses input, and it stays paused when the editor closes. Return to Remote Play and press F8 to continue.
+6. Click **Disconnect controller** or close the app's window normally when finished. If cleanup cannot be confirmed, keep the error message and report it instead of repeatedly creating devices.
 
-The main window currently uses Traditional Chinese. The binding editor selects a supported translation based on the Windows display language, with English as the fallback. An English user guide does not mean the whole interface has been translated.
+The main window, binding editor, connection states, error prompts, sponsorship and feedback text follow the Windows UI language: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish or Brazilian Portuguese. Unsupported languages fall back to English. The brand name 上班不要玩 and technical diagnostic codes remain unchanged. User guides are currently available in English and Traditional Chinese. Resource and layout checks do not establish native-speaker approval; translation feedback is welcome.
 
 ## Default keys
 
@@ -86,14 +88,14 @@ Changes are written and applied only after **Save changes succeeds**. Canceling 
 
 ## What has been tested
 
-All four alpha.9 candidates received user reports of successful PS5 operation through official Remote Play. This release uses the standard DualSense gamepad-only mode. **Alpha.11 has not yet received user acceptance testing on a real PS5 setup.** Windows detecting a device, a green light or passing offline tests does not establish successful gameplay. Long sessions, different reconnection sequences, reboots and installation on another PC still need more testing.
+All four alpha.9 candidates received user reports of successful PS5 operation through official Remote Play. This release uses the standard DualSense gamepad-only mode. **Alpha.12 has not yet received user acceptance testing on a real PS5 setup.** Windows detecting a device, a green light or passing offline tests does not establish successful gameplay. Long sessions, different reconnection sequences, reboots and installation on another PC still need more testing.
 
 There is no 30-minute session limit. Audio, haptics, adaptive triggers, mouse input, recording/replay and macOS are not included as completed features in this version. See the [support scope](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/docs/PRODUCT-SCOPE.md) and [alpha.9 operation record](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/research/dualsense-preview/ALPHA9-TRIAL.md) for details; these records are currently in Traditional Chinese.
 
 ## Feedback, sponsorship and licensing
 
-Send feedback to [xiun1019@gmail.com](mailto:xiun1019@gmail.com), including the application version, displayed error and steps to reproduce it. The app's feedback button opens your email application with only the recipient and version subject filled in. It does not send mail automatically or attach your profile or diagnostics. PSN passwords and payment details are not needed.
+Send feedback to [xiun1019@gmail.com](mailto:xiun1019@gmail.com), including the application version, displayed error and steps to reproduce it. The **Send feedback** button opens your email application with only the recipient and version subject filled in. It does not send mail automatically or attach your profile or diagnostics. PSN passwords and payment details are not needed.
 
-If you find the app useful, you can [contribute US$1 through PayPal to support our three cats](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) and help buy them canned food. Clicking **「贊助貓咪 US$1」 — Support our cats** opens your browser; PayPal handles payment, and this app does not receive or store payment details. Contributions are optional. All features remain free, with no paid unlocks or subscription.
+If you find the app useful, you can [contribute US$1 through PayPal to support our three cats](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) and help buy them canned food. Clicking **Treat the cats · US$1** opens your browser; PayPal handles payment, and this app does not receive or store payment details. Contributions are optional. All features remain free, with no paid unlocks or subscription.
 
 The original program is by **xiunlee**, licensed under [GNU GPL version 3 only](LICENSE). Third-party components retain their own licenses; see [COPYRIGHT.md](COPYRIGHT.md) and the included `notices` folder. The [public repository](https://github.com/xiunlee/ps-remote-play-keyboard/tree/codex/commercial-preview) has project information. Corresponding source and rebuild materials accompany public binaries on the [same release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases). This independent project is not affiliated with or endorsed by Sony, PlayStation or PayPal.

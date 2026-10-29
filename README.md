@@ -8,11 +8,13 @@
 
 ## 下載與目前狀態
 
-目前準備 **0.1.0-alpha.11 公開測試版**，不是穩定版。[alpha.11 下載頁（待發布）](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11)。發布後會在同頁提供執行包、完整對應原始碼與 SHA-256 清單；本次文件更新時尚未完成公開發布或該版使用者實機驗收。
+**0.1.0-alpha.11 已公開發布為免費測試版，不是穩定版。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0-alpha.11/PSKeyboard-0.1.0-alpha.11-windows-x64.zip)，或前往 [alpha.11 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11)取得完整對應原始碼與 SHA-256 清單。四個公開附件下載後均已核對雜湊；該版使用者實機驗收仍待完成。
+
+三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/ALPHA11-TRIAL.md)。Mac 版尚未開發，後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
 
 alpha.9 的四種 DualSense 方案已有使用者透過官方 Remote Play 操作 PS5 的[成功回報](research/dualsense-preview/ALPHA9-TRIAL.md)。目前固定其中第二種「一般 DualSense／純手把」模式；alpha.10 已完成設定與連點整合、本機交付，alpha.11 接續加入免費開源說明、回饋與公開封裝。上述結果不代表所有電腦、遊戲或新版本均已驗收。
 
-**介面語言：** 主畫面目前仍以繁體中文為主，按鍵設定頁依 Windows 系統介面語言選擇語言。另有英文文件可閱讀，不代表整個軟體已完成英文或九語介面。
+**介面語言：** 已發布的 alpha.11 主畫面以繁體中文為主，按鍵設定頁已有九語。**alpha.12 九語介面版正在準備，尚未發布**：將主畫面、連線狀態、錯誤提示、贊助及回饋主旨補齊繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇、未支援語言回退英文。翻譯與離線排版不等於母語校閱或實機驗收；目前下載仍是 alpha.11，既有附件不覆寫。
 
 ## 使用需求
 

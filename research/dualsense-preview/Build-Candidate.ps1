@@ -35,7 +35,7 @@ if ($backendRecord.executableSha256 -cne $backendHash -or $backendRecord.upstrea
 }
 $sourceNames=@(
     'research/dualsense-preview/DualSensePreview.cs','research/dualsense-preview/CandidateTransport.cs',
-    'research/dualsense-preview/SupportLinks.cs',
+    'research/dualsense-preview/SupportLinks.cs','research/dualsense-preview/PreviewText.cs',
     'research/dualsense-v5-test/V5Protocol.cs','src/keyboard-pad/ViiperTransport.cs',
     'src/keyboard-pad/KeyboardMapping.cs','src/keyboard-pad/KeyboardInputState.cs',
     'src/physical-keyboard/BindingProfile.cs','src/physical-keyboard/RapidFireEngine.cs',
@@ -47,12 +47,12 @@ $trackedInputs=$sourceNames+@('VERSION','LICENSE','COPYRIGHT.md','research/duals
     'research/dualsense-preview/Build-Native.ps1','research/native-merge/keyboard_merge.c',
     'research/native-merge/keyboard_merge.h','research/native-merge/keyboard_merge_test.c','research/native-merge/KeyboardMergeInteropTest.cs',
     'research/dualsense-preview/Verify-Candidate.ps1','research/dualsense-preview/README.md',
-    'research/dualsense-preview/PreviewGuardTests.cs','research/dualsense-preview/CandidateTransportTests.cs',
+    'research/dualsense-preview/PreviewGuardTests.cs','research/dualsense-preview/PreviewTextTests.cs','research/dualsense-preview/CandidateTransportTests.cs',
     'research/dualsense-preview/RunTransportTests.ps1','research/dualsense-preview/backend/main.go',
     'research/dualsense-preview/backend/Build-Backend.ps1','research/dualsense-preview/backend/main_test.go',
     'research/dualsense-preview/backend/README.md','assets/branding/app.ico','assets/branding/ps-mark.png',
     'src/physical-keyboard/BindingProfileTests.cs','src/physical-keyboard/RapidFireTests.cs',
-    'src/physical-keyboard/KeyboardControlPipelineTests.cs','src/physical-keyboard/UiInteractionTests.cs')
+    'src/physical-keyboard/KeyboardControlPipelineTests.cs','src/physical-keyboard/UiInteractionTests.cs','src/physical-keyboard/UiTextTests.cs')
 $sourceHashes=@($trackedInputs|Sort-Object -Unique|ForEach-Object{[ordered]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $repo $_)).Hash}})
 New-Item -ItemType Directory -Path $out | Out-Null
 $nativeRoot=Join-Path $out 'native-build'
@@ -123,10 +123,16 @@ if ($RunTests) {
     $lines=@(& $guard); $lines|Write-Output
     if ($LASTEXITCODE -ne 0) { throw 'Candidate guards failed.' }
     $testResults+=@([ordered]@{kind='candidate-guards';passed=$true;output=$lines})
+    $textTest=Join-Path $out 'PreviewTextTests.exe'
+    & $csc @common /target:exe /main:PSKeyboard.PreviewTextTests ('/out:'+$textTest) @sources (Join-Path $PSScriptRoot 'PreviewTextTests.cs')
+    if($LASTEXITCODE -ne 0){throw 'Preview translation tests did not compile.'}
+    $lines=@(& $textTest); $lines|Write-Output
+    if($LASTEXITCODE -ne 0){throw 'Preview translation tests failed.'}
+    $testResults+=@([ordered]@{kind='preview-localization';passed=$true;output=$lines})
     & (Join-Path $PSScriptRoot 'RunTransportTests.ps1') -OutputDirectory (Join-Path $out 'transport-tests')
     if (-not $?) { throw 'Candidate fake transport tests failed.' }
     $testResults+=@([ordered]@{kind='candidate-fake-transport';passed=$true})
-    foreach($testName in @('BindingProfileTests','RapidFireTests','KeyboardControlPipelineTests','UiInteractionTests')) {
+    foreach($testName in @('BindingProfileTests','RapidFireTests','KeyboardControlPipelineTests','UiInteractionTests','UiTextTests')) {
         $testExe=Join-Path $out ($testName+'.exe')
         $testMain=if($testName -eq 'UiInteractionTests'){'PSKeyboard.UiInteractionTests'}else{$testName}
         & $csc @common /target:exe ('/main:'+$testMain) ('/out:'+$testExe) @sources (Join-Path $repo ('src/physical-keyboard/'+$testName+'.cs'))
@@ -153,6 +159,7 @@ $manifest=[ordered]@{
     sessionTimeLimitSeconds=0;
     driverVersion='0.9.8.1';apiPort=33642;usbPort=33641;backendSha256=$backendHash;nativeSha256=$nativeHash;
     controllerModes=@('dualsensegamepadv5');defaultControllerMode='dualsensegamepadv5';
+    uiLanguages=@('en','zh-Hant','zh-Hans','ja','ko','de','fr','es','pt-BR');uiLanguageSelection='windows-ui-culture';uiLanguageFallback='en';
     driverValidationRun='https://github.com/xiunlee/ps-remote-play-keyboard/actions/runs/40838199781';
     testsRun=[bool]$RunTests;testResults=$testResults;sources=$sourceHashes;
     outputs=@($runtimeNames|ForEach-Object{[ordered]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $out $_)).Hash}})

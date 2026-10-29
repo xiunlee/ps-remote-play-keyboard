@@ -2,7 +2,9 @@
 
 **免費開源 · 作者 xiunlee · GPL-3.0-only。** 所有功能免費，贊助完全自願。
 
-目前準備 **alpha.11 公開測試版**，不是穩定版，[下載頁待發布](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11)。alpha.9 四種方案已有使用者透過官方 Remote Play 操作 PS5 的成功回報，指定第二種一般 DualSense／純手把 `dualsensegamepadv5`；alpha.10 已整合 22 動作改鍵及每鍵連點並本機交付。alpha.11 加入贊助、回饋與公開封裝，尚未取得該版使用者實機驗收。
+alpha.11 已發布免費公開測試版；目前準備 **alpha.12 九語介面版**，不是穩定版。[最新發行版本](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。alpha.9 四種方案已有使用者透過官方 Remote Play 操作 PS5 的成功回報，指定第二種一般 DualSense／純手把 `dualsensegamepadv5`；alpha.10 已整合 22 動作改鍵及每鍵連點。alpha.11 加入贊助、回饋與公開封裝；alpha.12 補齊主畫面、連線／錯誤提示及回饋主旨的九語文字，沿用按鍵設定頁的 Windows 介面語言選擇及英文回退。不把前版成功回報當作新版實機驗收。
+
+alpha.12 涵蓋繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語；品牌與診斷代碼不翻譯。使用手冊仍提供繁中／英文，母語校閱、實際高 DPI 及本版實機另驗。最終乾淨建置、公開封裝與交付尚待完成，不能以開發測試代替；alpha.11 固定標籤與附件不覆寫。執行元件目前未簽章，雜湊不是數位簽章。
 
 ## 需求與啟動
 
@@ -33,7 +35,7 @@
 
 ## 保留與限制
 
-- 畫面連線燈表示目前 Windows 輸出通道，不代表自動確認 PS5 接受操作。alpha.9 成功回報不替代 alpha.11 的改鍵、連點、長時間、重連或重開機驗收。
+- 畫面連線燈表示目前 Windows 輸出通道，不代表自動確認 PS5 接受操作。alpha.9 成功回報不替代 alpha.11／12 的改鍵、連點、長時間、重連或重開機驗收。
 - 鍵盤與連點只在官方 Remote Play 前景生效；切窗清除連點，切回不自動恢復，F8 暫停。連線或輸出失敗即停用控制。
 - 開啟只載入既有設定，不重設；僅使用者儲存成功才原子更新 `%LOCALAPPDATA%\PSKeyboard\bindings.json`。取消或失敗不替換現行設定。
 - 每次只接一個本程式建立的裝置，只移除核對過的自有 bus／port。使用 loopback USB/IP 33641、API 33642。

@@ -8,11 +8,13 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 ## Download and status
 
-**0.1.0-alpha.11 is being prepared for public testing. It is not a stable release.** The [alpha.11 download page is not published yet](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11). Once published, it will provide the application package, complete corresponding source and SHA-256 checksums. This version has not yet completed public release or user testing on a real PS5 setup.
+**0.1.0-alpha.11 is available as a free public alpha, not a stable release.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.0-alpha.11/PSKeyboard-0.1.0-alpha.11-windows-x64.zip), or visit the [alpha.11 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.11) for the corresponding source and SHA-256 checksums. All four public assets were downloaded and their hashes verified. User acceptance testing of this build on a real PS5 setup is still pending.
+
+The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/ALPHA11-TRIAL.md). A Mac version has not been developed; the [Mac handoff](docs/MAC-HANDOFF.md) describes the next research stage. Both records are in Traditional Chinese.
 
 For alpha.9, a user [reported successful PS5 control through the official Remote Play app](research/dualsense-preview/ALPHA9-TRIAL.md) with all four DualSense configurations. The current version uses their chosen second configuration: **standard DualSense, gamepad only**. Alpha.10 integrated key bindings and per-key repeat and was delivered locally; alpha.11 adds the free/open-source notice, feedback and public packaging. These results do not establish compatibility with every PC, game or later build.
 
-**Interface language:** the main window is still primarily in Traditional Chinese. The key-binding dialog selects its language from the Windows UI language. This English guide does not mean the entire application has an English or fully multilingual interface. Chinese button labels are included below so you can find them.
+**Interface language:** the published alpha.11 main window is primarily in Traditional Chinese; its binding editor supports nine languages. **Alpha.12 is being prepared and has not been released.** It adds the main window, connection states, errors, sponsorship text and feedback subjects in English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. Translation and offline layout checks do not replace native-speaker review or testing on a real PS5 setup. The current download remains alpha.11; its assets will not be overwritten. Chinese button labels below refer to that published version.
 
 ## Requirements
 
@@ -24,7 +26,7 @@ No physical controller is needed for this mode, but **it is not driver-free or a
 
 ## Getting started
 
-1. Once the release is available, download and extract the entire application package. Keep its EXE, DLL, backend and accompanying files together; do not copy out just one executable.
+1. Download and extract the entire application package. Keep its EXE, DLL, backend and accompanying files together; do not copy out just one executable.
 2. Connect Sony's official PS Remote Play app to your PS5 and leave it running. Exit any other version of this keyboard tool normally; two versions cannot share the F8 hotkey.
 3. Open `PSKeyboard-DualSensePreview.exe` and click **「連接手把」 — Connect controller**. Launching the tool does not attach a controller automatically, and keyboard control starts paused.
 4. Switch to the official Remote Play window and press **F8** to enable keyboard control. Press F8 again to pause. Game input and repeat are sent only while the official Remote Play window is in the foreground.

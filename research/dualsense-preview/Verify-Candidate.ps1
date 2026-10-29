@@ -93,4 +93,17 @@ if($manifest.testsRun) {
     if(@($native.testResults).Count -ne 2 -or $nativeTest.Count -ne 1 -or $interopTest.Count -ne 1 -or
         $nativeTest[0].passed -ne $true -or $nativeTest[0].checks -le 0 -or $interopTest[0].passed -ne $true) { throw 'Native offline tests are incomplete.' }
 }
+if([int]($manifest.version.Split('.')[-1]) -ge 12) {
+    if((@($manifest.uiLanguages) -join ',') -cne 'en,zh-Hant,zh-Hans,ja,ko,de,fr,es,pt-BR' -or
+        $manifest.uiLanguageSelection -cne 'windows-ui-culture' -or $manifest.uiLanguageFallback -cne 'en') { throw 'Unexpected UI language coverage.' }
+    foreach($sourceName in @('research/dualsense-preview/PreviewText.cs','research/dualsense-preview/PreviewTextTests.cs','src/physical-keyboard/UiTextTests.cs')) {
+        if(@($manifest.sources|Where-Object{$_.path -ceq $sourceName}).Count -ne 1){throw 'Missing localization source identity.'}
+    }
+    if($manifest.testsRun) {
+        foreach($testName in @('preview-localization','UiTextTests')) {
+            $result=@($manifest.testResults|Where-Object{$_.kind -ceq $testName})
+            if($result.Count -ne 1 -or $result[0].passed -ne $true){throw 'Localization checks were not completed.'}
+        }
+    }
+}
 Write-Output ('CANDIDATE_ARTIFACT_VERIFIED version='+$manifest.version+' source='+$manifest.sourceCommit+' sony_tested=false')

@@ -23,7 +23,7 @@ out the exact tag or the full commit named in the source asset's `SOURCE.json`:
 ```powershell
 git clone https://github.com/xiunlee/ps-remote-play-keyboard.git
 Set-Location ps-remote-play-keyboard
-git checkout --detach v0.1.0-alpha.11
+git checkout --detach v0.1.0-alpha.12
 ```
 
 Use the supplied `dependencies/VIIPER-source.zip`. It must have SHA-256

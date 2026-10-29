@@ -24,6 +24,7 @@ namespace PSKeyboard
                 VerifyHeldCaptureKey(Keys.Space);
                 VerifyRejectedKeys();
                 VerifyPerActionRepeat();
+                VerifyLocalizedCapturePrompt();
                 Console.WriteLine("UI interaction tests PASS (" + checks + " checks). No live input or devices used.");
                 return 0;
             }
@@ -139,6 +140,30 @@ namespace PSKeyboard
                 Check(!Field<bool>(editor, "capturing"), "Entering the mode list must cancel key capture before using arrows.");
                 Check(!editor.Visible, "Repeat configuration tests must remain unshown.");
             }
+        }
+
+        private static void VerifyLocalizedCapturePrompt()
+        {
+            string originalLanguage = UiText.LanguageTag;
+            try
+            {
+                foreach (string language in UiText.SupportedLanguageTags)
+                {
+                    UiText.Initialize(CultureInfo.GetCultureInfo(language));
+                    BindingProfile original = BindingProfile.Default();
+                    using (BindingEditor editor = new BindingEditor(original))
+                    {
+                        SelectAction(editor, 0);
+                        typeof(BindingEditor).GetMethod("BeginCapture", PrivateInstance).Invoke(editor, new object[0]);
+                        Check(Field<bool>(editor, "capturing"), "Capture must stay active: " + language);
+                        Check(Field<Label>(editor, "hint").Text == UiText.T("CapturePrompt"), "Complete capture instructions must remain in the hint: " + language);
+                        Check(Field<Button>(editor, "capture").Text == UiText.T("CaptureKey"), "Capture button must keep its short label: " + language);
+                        Check(Object.ReferenceEquals(editor.Result, original), "Starting capture must not change the profile: " + language);
+                        Check(editor.DialogResult == DialogResult.None && !editor.Visible, "Capture tests must stay unshown and open: " + language);
+                    }
+                }
+            }
+            finally { UiText.Initialize(CultureInfo.GetCultureInfo(originalLanguage)); }
         }
 
         private static void SelectAction(BindingEditor editor, int action)

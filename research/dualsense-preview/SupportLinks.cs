@@ -16,7 +16,7 @@ namespace PSKeyboard
         {
             if (version == null || version.Length > 40 || !Regex.IsMatch(version, @"\A[0-9]+\.[0-9]+\.[0-9]+-alpha\.[0-9]+\z"))
                 throw new ArgumentException("Expected a product version.", "version");
-            return "mailto:" + FeedbackAddress + "?subject=" + Uri.EscapeDataString("上班不要玩 " + version + " 意見回饋");
+            return "mailto:" + FeedbackAddress + "?subject=" + Uri.EscapeDataString(PreviewText.F("FeedbackSubjectFmt", version));
         }
 
         internal static bool IsAllowedSponsorUrl(string value)
