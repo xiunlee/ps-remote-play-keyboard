@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "product": "上班不要玩",
+  "variant": "controller-free",
+  "version": "0.1.0-alpha.8",
+  "assemblyVersion": "0.1.0.0",
+  "fileVersion": "0.1.0.8",
+  "informationalVersion": "0.1.0-alpha.8+ga6c5c2a99ed3",
+  "channel": "internal-preview",
+  "sourceCommit": "a6c5c2a99ed32709287000319ec0f44f95254847",
+  "workingTreeDirty": false,
+  "builtUtc": "2026-10-29T05:44:44.8789354Z",
+  "entryPoint": "PSKeyboard-ControllerFree.exe",
+  "commercialReady": false,
+  "driversBundled": false,
+  "setupSupported": false,
+  "controllerModes": [
+    "dualshock4",
+    "dualsense"
+  ],
+  "defaultControllerMode": "dualshock4",
+  "branding": {
+    "accent": "#D62355",
+    "iconSource": "assets/branding/app.ico",
+    "markSource": "assets/branding/ps-mark.png",
+    "iconResource": "PSKeyboard.BrandIcon",
+    "markResource": "PSKeyboard.BrandMark",
+    "nativeExecutableIcon": true,
+    "iconSha256": "8F4DC012FF28FA08C6B36892FFB0B4F76C6F54F061B0B2F5BCC7DE2BF1A0C268",
+    "markSha256": "FD8EFE0032AF465C486D322B0D0897F597ECB1A9FAE38CC327E891E80F695831"
+  },
+  "verification": {
+    "controllerFreeGuardsRun": true,
+    "controllerFreeGuardChecks": 36,
+    "fakeTransportTestsPassed": true,
+    "sonyOperationVerifiedByBuild": false
+  },
+  "externalBinaries": [
+    {
+      "name": "VIIPER",
+      "version": "0.9.0",
+      "path": "viiper.exe",
+      "sha256": "142C144F6ABEE8B8A5F6A1ABBC7018683444DE71D2E45102CDE6AAAB9B2223E6",
+      "signatureVerified": true,
+      "localUseOnly": true,
+      "redistributionApproved": false
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/branding/app.ico",
+      "sha256": "8F4DC012FF28FA08C6B36892FFB0B4F76C6F54F061B0B2F5BCC7DE2BF1A0C268"
+    },
+    {
+      "path": "assets/branding/ps-mark.png",
+      "sha256": "FD8EFE0032AF465C486D322B0D0897F597ECB1A9FAE38CC327E891E80F695831"
+    },
+    {
+      "path": "packaging/Test-ControllerFreeVersioning.ps1",
+      "sha256": "B99430D3385330632A26C72E6FD145AB62D86DA166AA03FEDE1D8515731B4947"
+    },
+    {
+      "path": "packaging/Verify-ControllerFreeBuild.ps1",
+      "sha256": "1CBF0A942058838E15ED0A5AC597CB706AD871052095BB1C5E43DC936680C2B6"
+    },
+    {
+      "path": "research/controller-free-preview/Build.ps1",
+      "sha256": "CE81128311304CBF02F51D7C732383FF1AEC0D134C66050C7DDA1BC3FBFA0B26"
+    },
+    {
+      "path": "research/controller-free-preview/ControllerFreeGuardTests.cs",
+      "sha256": "DD94FD3443F2DAC462882D0DD10A660AE0121745B43A0D3A4A1807E992D79543"
+    },
+    {
+      "path": "research/controller-free-preview/ControllerFreeKeyboard.cs",
+      "sha256": "47989A729EAA7F5DE99E27AF4CC6B3D82C3777542337596E6A2EDE691FDDC789"
+    },
+    {
+      "path": "research/native-merge/keyboard_merge.c",
+      "sha256": "35D41918EE30F7053BD475426D009B366BE1D0C96E45F85021EE3F05B2F37A56"
+    },
+    {
+      "path": "research/native-merge/keyboard_merge.h",
+      "sha256": "5F2CCEB5876CBE22A52842010CCA310936122746D1EBD3E8BCA5A95065EED8AF"
+    },
+    {
+      "path": "research/viiper-client-tests/Run.ps1",
+      "sha256": "C7940A76C335B6BA364658F0EFE4B49BB3FFAB8A355B58B0795BFB020EA7848F"
+    },
+    {
+      "path": "research/viiper-client-tests/TransportTests.cs",
+      "sha256": "D115CB689659493E4B0B8FAE56F1CB9C7C7A48012B300C491BF35D21E301C542"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardInputState.cs",
+      "sha256": "61ABCF97408FEA3B11830A946522A135AE3330F88ED879C2FF1BC8E190558A4A"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardMapping.cs",
+      "sha256": "7DAC0D686E376327A1B364B0BABADCF2E2CA3F02B21685CB15DEDE0041DBB472"
+    },
+    {
+      "path": "src/keyboard-pad/ViiperTransport.cs",
+      "sha256": "5C46BE155DA8DA99A00DA6FE93495A823454E614D50C627A0A0ED63B299E5255"
+    },
+    {
+      "path": "src/physical-keyboard/BindingEditor.cs",
+      "sha256": "7EF9AAAD84C036A33D2D9413D41D7C89810F5AEAD3BB29BB2603415FDEE40A6C"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfile.cs",
+      "sha256": "B6BB8C7D6D18599FA95F6D91C1DD0A449FD90DDB61C8AE241DF11EE9E6ECC644"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipeline.cs",
+      "sha256": "CD65A683C6D04EBFBFCFD877E3D02412DA0A70D921A5CF73A5A60B1A1EE8F773"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardUi.cs",
+      "sha256": "D935F13A78D13DE6C082CB379EAEFBB7B3BFFBA219118D974F9C3268AF149060"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireEngine.cs",
+      "sha256": "69667837E44235DB4CFB0D9A93E39372F195BB244EFD24262AD97A132B8F1BF4"
+    },
+    {
+      "path": "src/physical-keyboard/UiText.cs",
+      "sha256": "06F51FA02DA5305F4D9E74BC6E514CE6AF4AAE841CA49D4F223323E5CB6493CA"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "FF0E2B9C5FF893C346C6319931EC8498743AD8E1A38B54E7C55E29F15E7967EE"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "PSKeyboard-ControllerFree.exe",
+      "sha256": "EEEA4A7159FD1B6E3823669E593C5A01D5D66EC488D1CDE8F794D8E5BBB1B8B1"
+    },
+    {
+      "path": "pskb-keyboard-merge.dll",
+      "sha256": "DE1263A6FD34E98D5DAB8DAC5C9EF1B23FC9134ED89CF306A382C6ED83B159AE"
+    },
+    {
+      "path": "viiper.exe",
+      "sha256": "142C144F6ABEE8B8A5F6A1ABBC7018683444DE71D2E45102CDE6AAAB9B2223E6"
+    }
+  ]
+}
