@@ -88,7 +88,7 @@ namespace PSKeyboard
         {
             Dictionary<string, Dictionary<string, string>> tables = new Dictionary<string, Dictionary<string, string>>(StringComparer.Ordinal);
             foreach (string language in Languages) tables.Add(language, new Dictionary<string, string>(StringComparer.Ordinal));
-            Add(tables, "AppTitle", "PS Remote Play Keyboard", "上班不要玩", "上班不要玩", "PS Remote Play Keyboard", "PS Remote Play Keyboard", "PS Remote Play Keyboard", "PS Remote Play Keyboard", "PS Remote Play Keyboard", "PS Remote Play Keyboard");
+            Add(tables, "AppTitle", "Three Cats Keybridge", "上班不要玩", "上班不要玩", "Three Cats Keybridge", "Three Cats Keybridge", "Three Cats Keybridge", "Three Cats Keybridge", "Three Cats Keybridge", "Three Cats Keybridge");
             Add(tables, "AppSubtitle", "Your keyboard. Your controller.", "用鍵盤，操控你的手把。", "用键盘，操控你的手柄。", "キーボードで、コントローラー操作。", "키보드로 컨트롤러를 조작하세요.", "Deine Tastatur. Dein Controller.", "Votre clavier, votre manette.", "Tu teclado, tu mando.", "Seu teclado, seu controle.");
             Add(tables, "ControllerTitle", "Controller data", "手把資料", "手柄数据", "コントローラーデータ", "컨트롤러 데이터", "Controller-Daten", "Données de la manette", "Datos del mando", "Dados do controle");
             Add(tables, "ControllerDisconnected", "Not connected", "尚未連接", "尚未连接", "未接続", "연결되지 않음", "Nicht verbunden", "Non connectée", "Sin conexión", "Não conectado");

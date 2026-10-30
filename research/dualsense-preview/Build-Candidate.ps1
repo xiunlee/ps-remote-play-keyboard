@@ -53,7 +53,7 @@ $trackedInputs=$sourceNames+@('VERSION','LICENSE','COPYRIGHT.md','research/duals
     'research/dualsense-preview/PreviewGuardTests.cs','research/dualsense-preview/PreviewTextTests.cs','research/dualsense-preview/CandidateTransportTests.cs',
     'research/dualsense-preview/RunTransportTests.ps1','research/dualsense-preview/backend/main.go',
     'research/dualsense-preview/backend/Build-Backend.ps1','research/dualsense-preview/backend/main_test.go',
-    'research/dualsense-preview/backend/README.md','assets/branding/app.ico','assets/branding/ps-mark.png',
+    'research/dualsense-preview/backend/README.md','assets/branding/three-cats.ico','assets/branding/three-cats-mark.png',
     'src/physical-keyboard/BindingProfileTests.cs','src/physical-keyboard/RapidFireTests.cs',
     'src/physical-keyboard/KeyboardControlPipelineTests.cs','src/physical-keyboard/UiInteractionTests.cs','src/physical-keyboard/UiTextTests.cs')
 $sourceHashes=@($trackedInputs|Sort-Object -Unique|ForEach-Object{[ordered]@{path=$_;sha256=(Get-FileHash -LiteralPath (Join-Path $repo $_)).Hash}})
@@ -73,8 +73,8 @@ $dirtyLiteral=if($dirty){'true'}else{'false'}
 $generated=Join-Path $out 'BuildInfo.g.cs'
 [IO.File]::WriteAllText($generated,@"
 using System.Reflection;
-[assembly: AssemblyTitle("PS Remote Play Keyboard")]
-[assembly: AssemblyProduct("PS Remote Play Keyboard")]
+[assembly: AssemblyTitle("Three Cats Keybridge")]
+[assembly: AssemblyProduct("Three Cats Keybridge")]
 [assembly: AssemblyVersion("$assemblyVersion")]
 [assembly: AssemblyFileVersion("$fileVersion")]
 [assembly: AssemblyInformationalVersion("$infoVersion")]
@@ -85,8 +85,8 @@ internal const bool WorkingTreeDirty=$dirtyLiteral;
 } }
 "@,$utf8)
 $csc=Join-Path $env:WINDIR 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
-$icon=Join-Path $repo 'assets/branding/app.ico'
-$mark=Join-Path $repo 'assets/branding/ps-mark.png'
+$icon=Join-Path $repo 'assets/branding/three-cats.ico'
+$mark=Join-Path $repo 'assets/branding/three-cats-mark.png'
 $common=@('/nologo','/platform:x64','/optimize+','/warnaserror','/langversion:5','/codepage:65001',
     '/r:System.Windows.Forms.dll','/r:System.Drawing.dll','/r:System.Web.Extensions.dll',
     ('/win32icon:'+$icon),('/resource:'+$icon+',PSKeyboard.BrandIcon'),('/resource:'+$mark+',PSKeyboard.BrandMark'))
@@ -154,7 +154,7 @@ $runtimeNames=@('PSKeyboard-DualSensePreview.exe','DualSenseCandidateServer.exe'
     'BACKEND-BUILD.json','MATERIALS.json','NATIVE-BUILD.json','NATIVE-MATERIALS.json','README.md','README.en.md','LICENSE','COPYRIGHT.md')+
     @($materials|ForEach-Object{$_.license})+@($nativeMaterials|ForEach-Object{$_.license})
 $manifest=[ordered]@{
-    schemaVersion=1;product='PS Remote Play Keyboard';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
+    schemaVersion=1;product='Three Cats Keybridge';variant='dualsense-candidate';version=$version;fileVersion=$fileVersion;
     informationalVersion=$infoVersion;sourceCommit=$commit;workingTreeDirty=$dirty;builtUtc=$builtUtc;
     entryPoint='PSKeyboard-DualSensePreview.exe';channel=$channel;priceModel='free';license='GPL-3.0-only';driversBundled=$false;
     sonyOperationVerified=$false;commercialReady=$false;profileReadOnly=$false;profileSaveRequiresUserAction=$true;defaultConnected=$false;defaultEnabled=$false;

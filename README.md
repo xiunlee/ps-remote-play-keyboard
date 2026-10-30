@@ -2,7 +2,7 @@
 
 **繁體中文** · [English](README.en.md)
 
-**專為 Windows 上 Sony 官方 PS Remote Play 製作的鍵盤映射工具。** 先用官方 Remote Play 連上 PS5，再讓「上班不要玩」把鍵盤輸入轉成模擬 DualSense 手把輸入。本程式不是替代 Remote Play 用戶端，也不直接連線主機。
+**一款讓鍵盤模擬手把操作的 Windows 工具，適用特定遠端遊玩環境。** 本程式為獨立開源專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。支援環境與設定方式請見下方使用說明。
 
 **本版以 2D 遊戲為定位，尤其適合以選單與方向操作為主的 JRPG。** 目前沒有滑鼠瞄準或右搖桿方向映射，不適合需要靈活視角或精細類比控制的 3D 遊戲。是否適用仍取決於個別遊戲的操作需求，不保證所有 JRPG 都適合。
 
@@ -12,11 +12,9 @@
 
 **v0.1.2 已正式發布：美術優化。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip)，或前往 [v0.1.2 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載保留最新版本及[上一版 v0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)；更早的發行版轉為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
 
-中文介面保留「上班不要玩」；英文、日文、韓文、德文、法文、西班牙文與巴西葡語統一使用 **PS Remote Play Keyboard**，包含主畫面、設定頁、說明及回饋主旨。
+目前已發布版本的中文介面使用「上班不要玩」，其他語系使用原有名稱；新版名稱與圖示調整正在準備中。
 
 三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.2.md)。Mac 版尚未提供；[Mac 研究](research/macos-native/README.md)仍在進行，官方 Remote Play 相容性尚未通過。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
-
-alpha.9 的四種 DualSense 方案已有使用者透過官方 Remote Play 操作 PS5 的[成功回報](research/dualsense-preview/ALPHA9-TRIAL.md)。目前固定其中第二種「一般 DualSense／純手把」模式；alpha.10 已完成設定與連點整合、本機交付，alpha.11 接續加入免費開源說明、回饋與公開封裝。上述結果不代表所有電腦、遊戲或新版本均已驗收。
 
 **介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.2/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.2/editor-zh-Hant.png)（均為離線示意）。
 

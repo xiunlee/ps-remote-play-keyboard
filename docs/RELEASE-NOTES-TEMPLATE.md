@@ -1,6 +1,6 @@
 ## 軟體功能
 
-1. 使用鍵盤操作 Sony 官方 Windows PS Remote Play 連線中的 PS5，模擬 DualSense 手把，不需插入實體手把。
+1. 將鍵盤輸入轉換為模擬手把操作，適用特定遠端遊玩環境，不需插入實體手把。
 2. 提供 22 個手把動作的自訂按鍵，以及每個動作獨立的連點設定。
 3. 介面支援繁體中文、簡體中文、英文、日文、韓文、德文、法文、西班牙文及巴西葡萄牙文，依 Windows 介面語言自動選擇。
 4. 免費開源，作者 xiunlee；[自願贊助貓咪罐頭](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)，或寄送[意見回饋](mailto:xiun1019@gmail.com)。
@@ -11,6 +11,7 @@
 2. 適合 2D 遊戲，尤其是以選單和方向操作為主的 JRPG。不提供滑鼠瞄準或右搖桿方向映射，不適合需要靈活視角或精細類比控制的 3D 遊戲。
 3. 程式不會自動安裝或更換驅動。裝置顯示已連接，不代表 PS5 已收到操作；各版本的實機相容性可能不同。
 4. 執行元件目前未提供數位簽章；下載後請先閱讀內附說明。
+5. 本程式為獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。
 
 ## 適合使用系統
 
@@ -27,7 +28,7 @@
 
 ## Features
 
-1. Control a PS5 through Sony's official PS Remote Play for Windows using a keyboard and an emulated DualSense controller. No physical controller is required.
+1. Turn keyboard input into virtual controller actions in supported remote-play environments. No physical controller is required.
 2. Customize keys for 22 controller actions and configure auto-repeat separately for each action.
 3. The interface follows the Windows UI language and supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese.
 4. Free and open source by xiunlee. Optionally [contribute toward food for the cats](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) or [send feedback](mailto:xiun1019@gmail.com).
@@ -38,6 +39,7 @@
 2. Designed for 2D games, especially menu- and direction-based JRPGs. Mouse aiming and right-stick direction mapping are unavailable; it is unsuitable for 3D games that require flexible camera movement or fine analog control.
 3. The app does not automatically install or replace drivers. A connected device indicator does not prove that the PS5 received input; compatibility can vary between releases.
 4. Runtime binaries are currently unsigned. Read the included guide after downloading.
+5. This is an independent project, not an official Sony product, and is not affiliated with or endorsed by Sony.
 
 ## Supported system
 

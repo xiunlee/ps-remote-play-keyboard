@@ -1,8 +1,8 @@
-# PS Remote Play Keyboard V 0.1.2
+# Three Cats Keybridge
 
 [Traditional Chinese](README.md) · **English**
 
-**A Windows keyboard-mapping tool built specifically for Sony's official PS Remote Play app.** Connect the official app to your PS5 first, then use this tool to turn keyboard input into an emulated DualSense controller. It is not a replacement Remote Play client and does not connect directly to your console.
+**A Windows tool that turns keyboard input into virtual controller actions for supported remote-play environments.** This is an independent open-source project, not an official Sony product, and is not affiliated with or endorsed by Sony. See the instructions below for supported software and requirements.
 
 **Designed for 2D games, especially JRPGs that rely on menus and directional input.** There is no mouse aiming or right-stick direction mapping, so this version is not suitable for 3D games that need flexible camera movement or fine analog control. Suitability depends on each game's controls; support is not guaranteed for every JRPG.
 
@@ -12,11 +12,9 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 **PS Remote Play Keyboard V 0.1.2 is available: visual improvements.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip), or visit the [v0.1.2 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2) for the corresponding Windows source and SHA-256 checksums. All four anonymously downloaded asset hashes have been verified. Public downloads include the current release and [previous v0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1); older releases are retained as drafts, while tags and source history remain public. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
 
-All non-Chinese interfaces now use **PS Remote Play Keyboard** consistently in the main window, binding editor, descriptions and feedback subjects. Chinese interfaces retain their Chinese product name.
+The currently published version uses its earlier name; an update with the new name and icon is being prepared.
 
 The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.2.md). A Mac app is not available. [Mac research](research/macos-native/README.md) continues; official Remote Play compatibility has not been demonstrated. See the [Mac handoff](docs/MAC-HANDOFF.md) for next steps. Research records are in Traditional Chinese.
-
-For alpha.9, a user [reported successful PS5 control through the official Remote Play app](research/dualsense-preview/ALPHA9-TRIAL.md) with all four DualSense configurations. The current version uses their chosen second configuration: **standard DualSense, gamepad only**. Alpha.10 integrated key bindings and per-key repeat and was delivered locally; alpha.11 adds the free/open-source notice, feedback and public packaging. These results do not establish compatibility with every PC, game or later build.
 
 **Interface language:** the app supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. Native-speaker review, real high-DPI behavior, multi-monitor use and detailed PS5 acceptance remain unverified. [Main-window preview](assets/previews/0.1.2/main-en.png) · [Binding-editor preview](assets/previews/0.1.2/editor-en.png), both rendered offline.
 

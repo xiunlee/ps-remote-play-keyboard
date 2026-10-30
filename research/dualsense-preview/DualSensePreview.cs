@@ -234,7 +234,7 @@ namespace PSKeyboard
             Label title = WrappedLabel(UiText.T("AppTitle"), 23, MainInk); title.Font = KeyboardUi.Font(23, FontStyle.Bold);
             Label subtitle = WrappedLabel(UiText.T("AppSubtitle"), 10, MainMuted);
             wordmark.Controls.Add(eyebrow, 0, 0); wordmark.Controls.Add(title, 0, 1); wordmark.Controls.Add(subtitle, 0, 2); hero.Controls.Add(wordmark, 1, 0);
-            Label version = WrappedLabel("DUALSENSE\r\nV " + BuildInfo.Version, 10, MainMuted); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
+            Label version = WrappedLabel("V " + BuildInfo.Version, 10, MainMuted); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
             shell.Controls.Add(hero, 0, 0);
             Panel scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(28, 22, 28, 18), Margin = Padding.Empty };
             TableLayoutPanel body = AutoTable(1, 8);
@@ -260,9 +260,10 @@ namespace PSKeyboard
             notice.Text = badProfile ? UiText.T("ProfileLoadWarning") : PreviewText.T("ProfilePreserved");
             notice.ForeColor = badProfile ? KeyboardUi.Amber : MainMuted; notice.Font = KeyboardUi.Font(9, FontStyle.Regular); notice.AutoSize = true; notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; notice.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(notice, 0, 5);
             Label connectionScope = WrappedLabel(PreviewText.T("ConnectionScope"), 9, MainMuted); connectionScope.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(connectionScope, 0, 6);
-            TableLayoutPanel support = AutoTable(1, 3); support.BackColor = MainSurface; support.Padding = new Padding(18, 14, 18, 10); support.Margin = new Padding(0, 8, 0, 0);
+            TableLayoutPanel support = AutoTable(1, 4); support.BackColor = MainSurface; support.Padding = new Padding(18, 14, 18, 10); support.Margin = new Padding(0, 8, 0, 0);
             Label free = WrappedLabel(PreviewText.T("FreeOpenSource"), 10, MainInk); free.Font = KeyboardUi.Font(10, FontStyle.Bold); free.Margin = new Padding(0, 0, 0, 8);
             Label cats = WrappedLabel(PreviewText.T("CatsSupport"), 10, MainMuted); cats.Margin = new Padding(0, 0, 0, 12);
+            Label independent = WrappedLabel(PreviewText.T("IndependentNotice"), 9, MainMuted); independent.Margin = new Padding(0, 0, 0, 12);
             FlowLayoutPanel supportActions = AutoActions();
             Button sponsor = new PillButton(), feedback = new PillButton();
             MainButton(sponsor, PreviewText.T("SponsorButton"), false); MainButton(feedback, PreviewText.T("FeedbackButton"), false);
@@ -273,7 +274,7 @@ namespace PSKeyboard
             {
                 Label pending = WrappedLabel(PreviewText.T("SponsorUnavailable"), 9, MainMuted); pending.Dock = DockStyle.None; pending.Margin = new Padding(0, 12, 0, 0); supportActions.Controls.Add(pending);
             }
-            support.Controls.Add(free, 0, 0); support.Controls.Add(cats, 0, 1); support.Controls.Add(supportActions, 0, 2); body.Controls.Add(support, 0, 7);
+            support.Controls.Add(free, 0, 0); support.Controls.Add(cats, 0, 1); support.Controls.Add(independent, 0, 2); support.Controls.Add(supportActions, 0, 3); body.Controls.Add(support, 0, 7);
         }
 
         private static void MainButton(Button button, string text, bool primary)

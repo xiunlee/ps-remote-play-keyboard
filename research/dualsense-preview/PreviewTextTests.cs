@@ -40,9 +40,13 @@ namespace PSKeyboard
                 {
                     UiText.Initialize(CultureInfo.GetCultureInfo(language));
                     bool chinese = language == "zh-Hant" || language == "zh-Hans";
-                    string brand = chinese ? "上班不要玩" : "PS Remote Play Keyboard";
+                    string brand = chinese ? "上班不要玩" : "Three Cats Keybridge";
                     Check(UiText.T("AppTitle") == brand && DualSensePreview.WindowTitle == brand + " V " + BuildInfo.Version,
                         "Main brand and window title match the language and version: " + language);
+                    Check(!PreviewText.T("ModeLabel").Contains("DualSense") && !PreviewText.T("ModeLabel").Contains("Sony"),
+                        "The visible controller mode describes a virtual controller without a Sony model name: " + language);
+                    Check(PreviewText.T("IndependentNotice").Contains("Sony"),
+                        "The independent-project notice is present: " + language);
                     foreach(string key in keys)
                     {
                         Check(PreviewText.HasTranslation(language, key), "Actual translation: " + language + "/" + key);

@@ -1,6 +1,6 @@
-# Building PS Remote Play Keyboard 0.1.2 from source
+# Building Three Cats Keybridge 0.1.3 from source
 
-Version 0.1.2 updates the Windows main-window design. Earlier tags and assets remain unchanged.
+Version 0.1.3 updates the Windows main-window design. Earlier tags and assets remain unchanged.
 A visual or version-name update does not expand
 the verified gameplay scope or remove the unsigned-binary and external-driver
 limitations. Runtime operation requires the complete matching usbip-win2 0.9.8.1
@@ -31,7 +31,7 @@ out the exact tag or the full commit named in the source asset's `SOURCE.json`:
 ```powershell
 git clone https://github.com/xiunlee/ps-remote-play-keyboard.git
 Set-Location ps-remote-play-keyboard
-git checkout --detach v0.1.2
+git checkout --detach v0.1.3
 ```
 
 Use the supplied `dependencies/VIIPER-source.zip`. It must have SHA-256

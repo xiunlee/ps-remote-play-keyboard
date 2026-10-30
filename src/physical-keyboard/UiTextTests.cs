@@ -60,7 +60,7 @@ static class UiTextTests
             UiText.Initialize(CultureInfo.GetCultureInfo(tag));
             Check(UiText.LanguageTag == tag, "Each advertised language can be selected: " + tag);
                 bool chinese = tag == "zh-Hant" || tag == "zh-Hans";
-                Check(UiText.T("AppTitle") == (chinese ? "上班不要玩" : "PS Remote Play Keyboard"),
+                Check(UiText.T("AppTitle") == (chinese ? "上班不要玩" : "Three Cats Keybridge"),
                     "Brand follows the selected UI language: " + tag);
             foreach (string key in keys)
             {
@@ -110,7 +110,7 @@ static class UiTextTests
         UiText.Initialize(CultureInfo.GetCultureInfo("de-DE"));
         Check(UiText.T("Save") == "Änderungen speichern", "German accented text preserved");
         UiText.Initialize(CultureInfo.GetCultureInfo("ja-JP"));
-        Check(UiText.T("AppTitle") == "PS Remote Play Keyboard", "Japanese UI uses the shared international brand");
+        Check(UiText.T("AppTitle") == "Three Cats Keybridge", "Japanese UI uses the shared international brand");
         UiText.Initialize(CultureInfo.GetCultureInfo("fr-FR"));
         Check(UiText.KeyName(0x0d) == "Entrée", "French key name preserved");
     }

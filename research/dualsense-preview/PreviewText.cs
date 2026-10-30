@@ -61,9 +61,20 @@ namespace PSKeyboard
             const string command = "PSKeyboard-DualSensePreview.exe [--persona dualsensegamepadv5] [--status-file FULL_JSON_PATH_INSIDE_THIS_PACKAGE]";
 
             Add(tables, "ModeLabel",
-                "DualSense · Standard · Gamepad only", "DualSense 一般版 · 純手把", "DualSense 标准版 · 仅手柄",
-                "DualSense 通常版 · ゲームパッドのみ", "DualSense 일반형 · 게임패드 전용", "DualSense · Standard · Nur Gamepad",
-                "DualSense · Standard · Manette seule", "DualSense · Estándar · Solo mando", "DualSense · Padrão · Somente controle");
+                "Virtual controller", "模擬手把", "模拟手柄",
+                "仮想コントローラー", "가상 컨트롤러", "Virtueller Controller",
+                "Manette virtuelle", "Mando virtual", "Controle virtual");
+
+            Add(tables, "IndependentNotice",
+                "Independent project. Not an official Sony product and not affiliated with Sony.",
+                "獨立開源專案，非 Sony 官方產品，與 Sony 無隸屬關係。",
+                "独立开源项目，非 Sony 官方产品，与 Sony 无隶属关系。",
+                "独立したプロジェクトです。Sony の公式製品ではなく、Sony との提携はありません。",
+                "독립 프로젝트입니다. Sony 공식 제품이 아니며 Sony와 제휴 관계가 없습니다.",
+                "Unabhängiges Projekt. Kein offizielles Sony-Produkt; keine Verbindung zu Sony.",
+                "Projet indépendant, non officiel et sans affiliation avec Sony.",
+                "Proyecto independiente, no oficial y sin afiliación con Sony.",
+                "Projeto independente, não oficial e sem vínculo com a Sony.");
 
             Add(tables, "Usage",
                 "Usage: " + command + "\r\nConnect the controller after opening the app, then press F8 to enable the keyboard.",
@@ -77,20 +88,20 @@ namespace PSKeyboard
                 "Uso: " + command + "\r\nAbra o aplicativo, conecte o controle e pressione F8 para ativar o teclado.");
 
             Add(tables, "AlreadyRunning",
-                "Another version of PS Remote Play Keyboard is still running.\r\nClose it normally before opening this version. Keep Sony Remote Play open.",
+                "Another version of Three Cats Keybridge is still running.\r\nClose it normally before opening this version. Keep Sony Remote Play open.",
                 "另一版「上班不要玩」仍在執行。\r\n請先正常關閉它，再開本版本；Sony Remote Play 請保持開啟。",
                 "另一个版本的“上班不要玩”仍在运行。\r\n请先正常关闭它，再打开本版本；请保持 Sony Remote Play 开启。",
-                "別のバージョンの PS Remote Play Keyboard が起動中です。\r\n先に通常の手順で終了してください。Sony Remote Play は開いたままにしてください。",
-                "다른 버전의 PS Remote Play Keyboard가 실행 중입니다.\r\n먼저 정상 종료한 뒤 이 버전을 여세요. Sony Remote Play는 계속 켜 두세요.",
-                "Eine andere Version von PS Remote Play Keyboard läuft noch.\r\nBeende sie regulär, bevor du diese Version öffnest. Lass Sony Remote Play geöffnet.",
-                "Une autre version de PS Remote Play Keyboard est encore ouverte.\r\nFermez-la normalement avant d’ouvrir celle-ci. Gardez Sony Remote Play ouvert.",
-                "Otra versión de PS Remote Play Keyboard sigue abierta.\r\nCiérrala normalmente antes de abrir esta versión. Mantén Sony Remote Play abierto.",
-                "Outra versão de PS Remote Play Keyboard ainda está aberta.\r\nFeche-a normalmente antes de abrir esta versão. Mantenha o Sony Remote Play aberto.");
+                "別のバージョンの Three Cats Keybridge が起動中です。\r\n先に通常の手順で終了してください。Sony Remote Play は開いたままにしてください。",
+                "다른 버전의 Three Cats Keybridge가 실행 중입니다.\r\n먼저 정상 종료한 뒤 이 버전을 여세요. Sony Remote Play는 계속 켜 두세요.",
+                "Eine andere Version von Three Cats Keybridge läuft noch.\r\nBeende sie regulär, bevor du diese Version öffnest. Lass Sony Remote Play geöffnet.",
+                "Une autre version de Three Cats Keybridge est encore ouverte.\r\nFermez-la normalement avant d’ouvrir celle-ci. Gardez Sony Remote Play ouvert.",
+                "Otra versión de Three Cats Keybridge sigue abierta.\r\nCiérrala normalmente antes de abrir esta versión. Mantén Sony Remote Play abierto.",
+                "Outra versão de Three Cats Keybridge ainda está aberta.\r\nFeche-a normalmente antes de abrir esta versão. Mantenha o Sony Remote Play aberto.");
 
             Add(tables, "Eyebrow",
-                "KEYBOARD / REMOTE PLAY", "鍵盤 / REMOTE PLAY", "键盘 / REMOTE PLAY",
-                "キーボード / REMOTE PLAY", "키보드 / REMOTE PLAY", "TASTATUR / REMOTE PLAY",
-                "CLAVIER / REMOTE PLAY", "TECLADO / REMOTE PLAY", "TECLADO / REMOTE PLAY");
+                "KEYBOARD / CONTROLLER", "鍵盤 / 模擬手把", "键盘 / 模拟手柄",
+                "キーボード / コントローラー", "키보드 / 컨트롤러", "TASTATUR / CONTROLLER",
+                "CLAVIER / MANETTE", "TECLADO / MANDO", "TECLADO / CONTROLE");
 
             Add(tables, "ModeHeading",
                 "Controller mode", "手把模式", "手柄模式",
@@ -273,15 +284,15 @@ namespace PSKeyboard
                 "Manette connectée à Windows\r\n{0}", "Mando conectado en Windows\r\n{0}", "Controle conectado no Windows\r\n{0}");
 
             Add(tables, "ConnectionScope",
-                "The connection indicator shows the local Windows device state. It does not confirm that PS5 has received input.",
-                "連線燈號只表示本機 Windows 裝置狀態，不代表 PS5 已收到操作。",
-                "连接指示灯仅表示本机 Windows 设备状态，不代表 PS5 已收到操作。",
-                "接続ランプは Windows 上のデバイスの状態を示します。PS5 が入力を受け取ったことを確認するものではありません。",
-                "연결 표시는 이 Windows 장치의 상태만 나타냅니다. PS5가 입력을 받았다는 뜻은 아닙니다.",
-                "Die Anzeige zeigt den lokalen Windows-Gerätestatus. Sie bestätigt nicht, dass die PS5 Eingaben empfangen hat.",
-                "Le voyant indique l’état du périphérique Windows local. Il ne confirme pas que la PS5 a reçu une commande.",
-                "El indicador muestra el estado del dispositivo en Windows. No confirma que PS5 haya recibido una entrada.",
-                "O indicador mostra o estado do dispositivo no Windows. Ele não confirma que o PS5 recebeu um comando.");
+                "The connection indicator shows the local Windows device state. It does not confirm that the game has received input.",
+                "連線燈號只表示本機 Windows 裝置狀態，不代表遊戲已收到操作。",
+                "连接指示灯仅表示本机 Windows 设备状态，不代表游戏已收到操作。",
+                "接続ランプは Windows 上のデバイスの状態を示します。ゲームが入力を受け取ったことを確認するものではありません。",
+                "연결 표시는 이 Windows 장치의 상태만 나타냅니다. 게임이 입력을 받았다는 뜻은 아닙니다.",
+                "Die Anzeige zeigt den lokalen Windows-Gerätestatus. Sie bestätigt nicht, dass das Spiel Eingaben empfangen hat.",
+                "Le voyant indique l’état du périphérique Windows local. Il ne confirme pas que le jeu a reçu une commande.",
+                "El indicador muestra el estado del dispositivo en Windows. No confirma que el juego haya recibido una entrada.",
+                "O indicador mostra o estado do dispositivo no Windows. Ele não confirma que o jogo recebeu um comando.");
 
             Add(tables, "FailureKeyboardSetup",
                 "F8 or keyboard capture could not start. Close other versions of this keyboard app, and keep Sony Remote Play open.",
@@ -366,9 +377,9 @@ namespace PSKeyboard
                 "Impossible de créer la manette virtuelle. Consultez l’état des diagnostics locaux.", "No se pudo crear el mando virtual. Consulta el estado de los diagnósticos locales.", "Não foi possível criar o controle virtual. Confira o estado dos diagnósticos locais.");
 
             Add(tables, "FeedbackSubjectFmt",
-                "PS Remote Play Keyboard V {0} feedback", "上班不要玩 V {0} 意見回饋", "上班不要玩 V {0} 意见反馈",
-                "PS Remote Play Keyboard V {0} フィードバック", "PS Remote Play Keyboard V {0} 의견", "PS Remote Play Keyboard V {0} Feedback",
-                "PS Remote Play Keyboard V {0} — avis", "PS Remote Play Keyboard V {0} — comentarios", "PS Remote Play Keyboard V {0} — feedback");
+                "Three Cats Keybridge V {0} feedback", "上班不要玩 V {0} 意見回饋", "上班不要玩 V {0} 意见反馈",
+                "Three Cats Keybridge V {0} フィードバック", "Three Cats Keybridge V {0} 의견", "Three Cats Keybridge V {0} Feedback",
+                "Three Cats Keybridge V {0} — avis", "Three Cats Keybridge V {0} — comentarios", "Three Cats Keybridge V {0} — feedback");
 
             return tables;
         }
