@@ -10,7 +10,7 @@
 
 ## 下載與目前狀態
 
-**v0.1.2 已正式發布：美術優化。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip)，或前往 [v0.1.2 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對，歷史標籤與附件保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
+**v0.1.2 已正式發布：美術優化。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip)，或前往 [v0.1.2 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載保留最新版本及[上一版 v0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)；更早的發行版轉為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
 
 中文介面保留「上班不要玩」；英文、日文、韓文、德文、法文、西班牙文與巴西葡語統一使用 **PS Remote Play Keyboard**，包含主畫面、設定頁、說明及回饋主旨。
 

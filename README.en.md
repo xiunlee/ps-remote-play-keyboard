@@ -10,7 +10,7 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 ## Download and status
 
-**PS Remote Play Keyboard V 0.1.2 is available: visual improvements.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip), or visit the [v0.1.2 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2) for the corresponding Windows source and SHA-256 checksums. All four anonymously downloaded asset hashes have been verified. Earlier tags and assets remain available. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
+**PS Remote Play Keyboard V 0.1.2 is available: visual improvements.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip), or visit the [v0.1.2 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2) for the corresponding Windows source and SHA-256 checksums. All four anonymously downloaded asset hashes have been verified. Public downloads include the current release and [previous v0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1); older releases are retained as drafts, while tags and source history remain public. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
 
 All non-Chinese interfaces now use **PS Remote Play Keyboard** consistently in the main window, binding editor, descriptions and feedback subjects. Chinese interfaces retain their Chinese product name.
 
