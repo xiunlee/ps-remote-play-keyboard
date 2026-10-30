@@ -1,0 +1,22 @@
+{
+  "version": "0.1.0-alpha.1",
+  "buildNumber": "1",
+  "bundleIdentifier": "com.xiunlee.pskeyboard.mac-dualsense",
+  "runtimeLocation": "~/Applications/PSKeyboardMacDualSense.app",
+  "architecture": "arm64",
+  "minimumMacOS": "15.0",
+  "sources": {
+    "ControlCore.swift": "51a9690e62fc40a2c2f503a7adc86f7d18bc11dfa5774234eeb90cc4a4e8eb5b",
+    "DualSenseV5Protocol.swift": "0e285b4a51ee03f91ac1d5bc2968902c32507d8ed70de558f9e4b7c64714246f",
+    "DualSenseRelaySocket.swift": "efacbcf5e5dc8c43033e85fb981fa48f3f4f9b082770cab14abb310923152785",
+    "DualSensePreviewApp.swift": "c896615777a4db4f2bdeac14e8c33278b66cb45655987b101ae39ccfebc5ec36"
+  },
+  "versionManifestSHA256": "ca64d8ff28ce6d0bbf956c41680319320f72fbe1d18d1b5fed9a3f12084b68b8",
+  "binarySHA256": "8cfbe9228ee6eaa985ac28254f4b414b63e1899c00156fad923883042853f699",
+  "signature": "stable local self-signed certificate; no restricted entitlement",
+  "designatedRequirement": "designated => identifier \"com.xiunlee.pskeyboard.mac-dualsense\" and certificate leaf = H\"959304332510d4fcc638da0944b4797b1fdc699d\"",
+  "installed": true,
+  "baseCommit": "0d31270ac24edce808891833c75632fb87ebe718",
+  "sonyCompatibility": "unverified",
+  "sourcePIDFilter": "reject own process only; not a physical-input guarantee"
+}

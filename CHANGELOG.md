@@ -1,12 +1,29 @@
 # 版本紀錄
 
-所有日期採 Asia/Taipei。alpha.10 以前為內部測試交付，alpha.11／12 為免費開源的公開測試版；最新已發布為 **v0.1.2**。Git 標籤只固定原始碼；公開下載與實機驗收分開記錄。
+所有日期採 Asia/Taipei。alpha.10 以前為內部測試交付，alpha.11／12 為免費開源的公開測試版；最新已發布為 **Windows v0.1.3**；Mac 0.1.3 使用獨立 `mac-v0.1.3` 標籤，實際發布狀態以該發行頁為準。Git 標籤只固定原始碼；公開下載與實機驗收分開記錄。
 
-## 0.1.2 — 美術優化（2026-10-30）
+## Mac 0.1.3 — 美術優化
 
 - 美術優化。
 
-## Mac 研究補記 — 2026-10-30（成品仍為 Windows 0.1.1）
+## Windows 0.1.3 — 名稱與圖示更新（2026-10-30）
+
+- 中文名稱保留「上班不要玩」，其他語系改為 Three Cats Keybridge，更新貓咪與按鍵圖示。
+- 固定來源 `8f1918e48bfadc1b8d7120b1991b497d060fc764`；[v0.1.3 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3)發布時間為 2026-10-30 17:15:32（台北）。Windows 與 Mac 產物及驗證分開記錄。
+
+## Windows 0.1.2 — 美術優化（2026-10-30）
+
+- 美術優化。
+
+## 0.1.2 — Mac 介面整理（本機開發候選，尚未發布）
+
+- 前一份 Mac 0.1.0-alpha.1 固定簽章測試版已取得官方 Remote Play 遊戲操作成功回報：按鍵放開停止、Enter／Options 有效；中斷後自有虛擬手把移除也已核對。[實測紀錄](research/macos-native/DUALSENSE-TRIAL-2.json)。本版控制核心／協定／socket 原始碼相同，未另進行遊戲試驗。
+- 新增 Mac 四面鍵位置圖：△ I、□ J、○ L、× K，明示 Enter／Options 與 Esc 控制暫停／啟用；補上其餘固定鍵位的圖示說明。
+- 沿用原品牌圖，加入 Mac App 圖示與視窗品牌區；輔助使用授權狀態會更新，彙總診斷收進展開區。
+- 保持同一個 App、bundle identifier、安裝路徑與本機簽章憑證。0.1.2 尚無公開附件；Windows v0.1.1 與其標籤不變。自動啟停、首次安裝、依賴取得和發行封裝仍待完成，見 [Mac 發佈缺項](docs/MAC-RELEASE-READINESS.md)。
+- 已完成 Swift 6 嚴格編譯、簽章驗證及本機替換安裝；本次更新後 App 自行確認輔助使用仍已允許，沒有要求重新授權。主畫面與診斷展開已目視確認。[建置收據](packaging/build-records/macos/0.1.2.json)、[介面與更新驗證](research/macos-native/inspection/MAC-0.1.2-UI.json)。
+
+## Mac 首輪研究歷史 — 2026-10-30（當時成品為 Windows 0.1.1）
 
 - 在 macOS 26.6.2 arm64 完成首輪交接，唯讀確認官方 PS Remote Play 9.5.0 及簽章，核對 GitHub 最新正式版與固定來源。見 [Mac 首輪紀錄](research/macos-handoff/README.md)。
 - 原 native C 核心在 Mac 編譯並通過 5743 項既有合成檢查；另有 124 項 native dylib／Python 協定參考檢查與 22 動作向量，清楚區分原碼與參考模型。未執行原 C#／Go 測試、鍵盤擷取、虛擬裝置或 Sony／PS5 操作。

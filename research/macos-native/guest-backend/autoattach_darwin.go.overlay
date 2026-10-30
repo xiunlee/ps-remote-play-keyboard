@@ -1,0 +1,18 @@
+//go:build darwin
+
+// Copyright (C) 2026 xiunlee. SPDX-License-Identifier: GPL-3.0-only
+// Local build overlay only: the fixed upstream has no Darwin attach backend.
+// Explicit failure permits native offline tests without host USB operations.
+package api
+
+import (
+	"context"
+	"errors"
+	"log/slog"
+
+	"github.com/Alia5/VIIPER/usbip"
+)
+
+func attachLocalhostClientImpl(_ context.Context, _ *usbip.ExportMeta, _ uint16, _ bool, _ *slog.Logger) (AutoAttachResult, error) {
+	return AutoAttachResult{}, errors.New("host USB attach is unavailable in the isolated guest candidate")
+}

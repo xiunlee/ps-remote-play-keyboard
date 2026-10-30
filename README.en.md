@@ -1,8 +1,8 @@
-# PS Remote Play Keyboard V 0.1.2
+# Three Cats Keybridge
 
 [Traditional Chinese](README.md) · **English**
 
-**A Windows keyboard-mapping tool built specifically for Sony's official PS Remote Play app.** Connect the official app to your PS5 first, then use this tool to turn keyboard input into an emulated DualSense controller. It is not a replacement Remote Play client and does not connect directly to your console.
+**A Windows tool that turns keyboard input into virtual controller actions for supported remote-play environments.** This is an independent open-source project, not an official Sony product, and is not affiliated with or endorsed by Sony. See the instructions below for supported software and requirements.
 
 **Designed for 2D games, especially JRPGs that rely on menus and directional input.** There is no mouse aiming or right-stick direction mapping, so this version is not suitable for 3D games that need flexible camera movement or fine analog control. Suitability depends on each game's controls; support is not guaranteed for every JRPG.
 
@@ -10,17 +10,23 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 ## Download and status
 
-**PS Remote Play Keyboard V 0.1.2 is available: visual improvements.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip), or visit the [v0.1.2 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2) for the corresponding Windows source and SHA-256 checksums. All four anonymously downloaded asset hashes have been verified. Public downloads include the current release and [previous v0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1); older releases are retained as drafts, while tags and source history remain public. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
+**Three Cats Keybridge V 0.1.3 is available: name and icon update.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.3/PSKeyboard-0.1.3-windows-x64.zip), or visit the [v0.1.3 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3) for the corresponding Windows source and SHA-256 checksums. The Windows release record documents successful anonymous download checks for all four assets. See [Versioning](docs/VERSIONING.md) for the retention policy and current public status; historical tags and source remain intact. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
 
-All non-Chinese interfaces now use **PS Remote Play Keyboard** consistently in the main window, binding editor, descriptions and feedback subjects. Chinese interfaces retain their Chinese product name.
+In published Windows v0.1.3, Chinese interfaces retain “上班不要玩”; all other supported interfaces use **Three Cats Keybridge**.
 
-The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.2.md). A Mac app is not available. [Mac research](research/macos-native/README.md) continues; official Remote Play compatibility has not been demonstrated. See the [Mac handoff](docs/MAC-HANDOFF.md) for next steps. Research records are in Traditional Chinese.
+The three runtime binaries in the public Windows package are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](https://github.com/xiunlee/ps-remote-play-keyboard/blob/v0.1.3/research/dualsense-preview/RELEASE-0.1.3.md).
+
+**Three Cats Keybridge for Mac** (“上班不要玩” in Chinese) is a keyboard-control and virtual-controller tool for Apple Silicon Macs running macOS 15 or later, using **Sony's official PS Remote Play** connected to a PS5. It does not claim support for every game or application. Version 0.1.3 integrates remapping, repeat modes, saved settings, nine languages, donations and feedback, with native runtime management and verified vendor downloads. The existing App filename and installation identity are retained. See the [Mac 0.1.3 release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3) for availability and attachments. Its release source branch is `codex/mac-0.1.3-release`. The separate `mac-v0.1.3` tag does not replace or archive public Windows releases.
+
+In Mac alpha.1 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json), a user confirmed game control, movement stopping when W was released, and Enter opening Options. Mac 0.1.3 build 9 passed complete-App neutral connection, disconnection, reconnection and cleanup on quit, with Light and Dark main-window and settings review. Later branding changes are checked separately and do not establish gameplay success for this version. Gameplay, fresh-Mac installation, sleep and crash scenarios remain unverified. The App is self-signed, without Apple Developer ID or notarization. See the [Mac installation guide](docs/MAC-INSTALL.en.md), [release-readiness checklist](docs/MAC-RELEASE-READINESS.md) and [handoff](docs/MAC-HANDOFF.md); the latter two are in Traditional Chinese.
+
+The Mac App is an independent project, not an official Sony product. It is not affiliated with or endorsed by Sony.
 
 For alpha.9, a user [reported successful PS5 control through the official Remote Play app](research/dualsense-preview/ALPHA9-TRIAL.md) with all four DualSense configurations. The current version uses their chosen second configuration: **standard DualSense, gamepad only**. Alpha.10 integrated key bindings and per-key repeat and was delivered locally; alpha.11 adds the free/open-source notice, feedback and public packaging. These results do not establish compatibility with every PC, game or later build.
 
-**Interface language:** the app supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. Native-speaker review, real high-DPI behavior, multi-monitor use and detailed PS5 acceptance remain unverified. [Main-window preview](assets/previews/0.1.2/main-en.png) · [Binding-editor preview](assets/previews/0.1.2/editor-en.png), both rendered offline.
+**Interface language:** the app supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. The Windows v0.1.3 release record includes offline UI checks for all nine languages. Native-speaker review, real high-DPI behavior, multi-monitor use and detailed PS5 acceptance remain unverified. [Main-window preview](https://github.com/xiunlee/ps-remote-play-keyboard/blob/v0.1.3/assets/previews/0.1.3/main-en.png) · [Binding-editor preview](https://github.com/xiunlee/ps-remote-play-keyboard/blob/v0.1.3/assets/previews/0.1.3/editor-en.png), both rendered offline.
 
-**User game report:** On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The report did not identify the tool's build, so it does not establish v0.1.2 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
+**User game report:** On 2026-10-29, the user reported that *Final Fantasy Resonance* could be controlled normally. The report did not identify the tool's build, so it does not establish v0.1.3 acceptance for individual actions or auto-repeat, nor compatibility with all JRPGs.
 
 ## Requirements
 
@@ -69,7 +75,7 @@ Your profile is stored separately from the application at `%LOCALAPPDATA%\PSKeyb
 
 **Does repeat keep running when I switch windows?** No. Switching away stops and clears repeat; returning does not restart it. You must trigger it again with a fresh key press. F8, editing, disconnection and exit also stop output.
 
-**Can I aim with a mouse, record macros or use this on a Mac?** Not currently. Mouse-to-right-stick input, recording/replay and macOS are unsupported. Full audio, haptics and adaptive-trigger support are not claimed.
+**Can I aim with a mouse, record macros or use this on a Mac?** Mouse-to-right-stick input and recording/replay are unsupported. Full audio, haptics and adaptive-trigger support are not claimed. See the [Mac installation guide](docs/MAC-INSTALL.en.md) and [release-readiness checklist](docs/MAC-RELEASE-READINESS.md) for Mac requirements, availability and known limits.
 
 Long sessions, reboots, repeated reconnections, installation on a second PC and all actions in the latest build still need further testing. See the [support scope](docs/PRODUCT-SCOPE.md) and [DualSense notes](research/dualsense-preview/README.md), currently in Traditional Chinese. This is an independent project, not official Sony software.
 

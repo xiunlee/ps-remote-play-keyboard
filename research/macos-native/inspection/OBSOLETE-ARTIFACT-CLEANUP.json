@@ -1,0 +1,63 @@
+{
+  "scope": "only task-created obsolete binaries, apps and caches; current runtime/source/receipts preserved",
+  "entries": [
+    {
+      "path": "<repository>/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app",
+      "status": "removed",
+      "logicalBytes": 97737294
+    },
+    {
+      "path": "<repository>/.local/ojd-runtime-0.6.0-alpha.1/ojd",
+      "status": "removed",
+      "logicalBytes": 56
+    },
+    {
+      "path": "<repository>/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg",
+      "status": "removed",
+      "logicalBytes": 29419483
+    },
+    {
+      "path": "<repository>/.local/mac-keyboard-preview-6/PSKeyboardMacResearch.app",
+      "status": "removed",
+      "logicalBytes": 381401
+    },
+    {
+      "path": "<repository>/.local/mac-dualsense-preview-1",
+      "status": "removed",
+      "logicalBytes": 213551620
+    },
+    {
+      "path": "<repository>/.local/mac-dualsense-preview-final/module-cache",
+      "status": "removed",
+      "logicalBytes": 213273204
+    },
+    {
+      "path": "<repository>/.local/mac-dualsense-preview-final/PSKeyboardMacDualSense.app",
+      "status": "removed",
+      "logicalBytes": 307176
+    },
+    {
+      "path": "<repository>/.local/virtualhere-runtime-6.0.3/VirtualHereUniversal.dmg",
+      "status": "removed",
+      "logicalBytes": 10733679
+    },
+    {
+      "path": "<repository>/.local/mac-vz-runner-1/VZUSBGuest",
+      "status": "removed",
+      "logicalBytes": 172256
+    },
+    {
+      "path": "<repository>/.local/mac-vz-runner-1/VZUSBGuest-final",
+      "status": "removed",
+      "logicalBytes": 171296
+    },
+    {
+      "path": "~/Library/Application Support/OpenJoystickDriver",
+      "status": "removed",
+      "logicalBytes": 126
+    }
+  ],
+  "uniqueLogicalBytesRemoved": 565747591,
+  "date": "2026-10-30",
+  "oldPermissionReset": "tccutil reset of old bundle identifiers failed because removed bundles were no longer registered; no TCC database or current-app permission changes"
+}

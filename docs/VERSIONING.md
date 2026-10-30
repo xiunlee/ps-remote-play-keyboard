@@ -2,19 +2,33 @@
 
 ## 版本與來源
 
-- **公開下載保留最新及上一個正式版本。** 2026-10-30 起公開 v0.1.2／v0.1.1，較早的 v0.1.0、alpha.12、alpha.11 Release 轉為草稿；附件與 Release 保留，舊 tag 不刪、不移動，公開原始碼歷史仍存在。後續發布並確認新版後，以相同方式維持兩個公開正式版本；草稿中的下載連結不對外，歷史紀錄不能誤稱現仍公開。
-- **最新 Windows v0.1.2 已發布（美術優化）**：固定來源 `da12240649df74dc4e2846404317e8a91b231a05`，四附件匿名下載通過，40／40 公開包稽核通過；[發行紀錄](../research/dualsense-preview/RELEASE-0.1.2.md)。本版實機驗收仍待完成。下一個程式變更版本為 **0.1.3**；以下 0.1.1 的 Latest／本機狀態為當時歷史。
+- **Windows 先前指定的公開保留政策為最新及上一個正式版本。** 2026-10-30 v0.1.3 發布時，該政策對應 v0.1.3／v0.1.2；較早的 v0.1.1、v0.1.0、alpha.12、alpha.11 Release 保留為草稿；附件與 Release 保留，舊 tag 不刪、不移動，公開原始碼歷史仍存在。後續發布並確認新版後，以相同方式維持兩個公開正式版本；草稿中的下載連結不對外，歷史紀錄不能誤稱現仍公開。Mac 另按平台管理，首次 `mac-v0.1.3` 發布不將任何 Windows Release 轉為草稿，不改變 Windows 最新及上一版的保留範圍。
+- **最新 Windows v0.1.3 已發布（名稱與圖示更新）**：固定來源 `8f1918e48bfadc1b8d7120b1991b497d060fc764`，[發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3)以 API 核對為 `draft=false`、`prerelease=false`，`published_at=2026-10-30T09:15:32Z`（台北 17:15:32）。中文名稱「上班不要玩」、其他語系 **Three Cats Keybridge**；此為 Windows 成品，不能當作 Mac 建置或實機驗收。公開紀錄來源分支已到 `6007809`；Mac 凍結版本仍以已審閱的 `71aca9c` 為基底，不為同步文件而合入後續 Windows 程式碼。
+- **2026-10-30 09:22:20Z 後的公開狀態核對**：API 顯示 v0.1.3 為公開，v0.1.2 與 v0.1.1 均為草稿；因此當下不能將 v0.1.2 連結描述成可公開下載。這是當下實際狀態，與前述政策分開記錄；後續保留安排由 Windows 發行流程處理，本次 Mac 文件更新未修改任何 Windows Release。
+- **歷史 Windows v0.1.2 發布（美術優化）**：固定來源 `da12240649df74dc4e2846404317e8a91b231a05`，四附件匿名下載通過，40／40 公開包稽核通過；[發行紀錄](../research/dualsense-preview/RELEASE-0.1.2.md)。本版實機驗收仍待完成。Release ID `428778947`，本輪以 GitHub API 核對 `draft=false`、`prerelease=false` 及 latest，發布時間為 `2026-10-30T08:05:42Z`（台北 16:05）。目前 Mac 開發版本為 **0.1.3**；以下 0.1.1 的 Latest／本機狀態為當時歷史。
 - 根目錄 `VERSION` 是建置版本號的唯一來源。依使用者最新要求，**首個正式發行版 `v0.1.0` 已發布**，固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`；之後使用 `主版.次版.修訂`，不再讓對外版號附帶 alpha 序號。歷史 `主版.次版.修訂-alpha.序號` 標籤與附件保留，不能重新命名或移動。命名調整不等於實機驗收或穩定性改善。
-- **歷史 v0.1.1 國際化品牌修正版已正式發布**：固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。中文保留「上班不要玩」，七個非中文語系統一為 **PS Remote Play Keyboard**，包含標題、說明、設定頁、回饋主旨及英文文件；獨立建置、公開封裝、四附件匿名下載核對與本機交付完成，沒有覆寫 v0.1.0。
+- **目前 Mac 交付版本為 0.1.3，發行狀態以獨立 Mac 發行頁為準**：根目錄 `VERSION` 與 [Mac manifest](../packaging/macos/version.json)為 `0.1.3 / build 3`。Mac 公開標籤固定為 `mac-v0.1.3`，與 Windows 已發布的 `v0.1.3` 分開。中文名稱為「上班不要玩」，其他語系為 **Three Cats Keybridge**；公開附件以 `ThreeCatsKeybridge-Mac-0.1.3-…` 命名。這是接回 Windows 功能與整合安裝的 Mac 版本；保留同一 App／路徑／憑證，設定及輔助使用在本機替換後保留。自動啟動與最終包的驗證狀態見 [Mac 發佈清單](MAC-RELEASE-READINESS.md)。Mac 0.1.2 為已交付的歷史介面候選，不覆寫其收據；同版號的 **Windows v0.1.2 已於 2026-10-30 16:05（台北）正式公開發布**，不能混為同一產物。
+- **歷史 Windows v0.1.1 國際化品牌修正版**：固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。中文保留「上班不要玩」，七個非中文語系統一為 **PS Remote Play Keyboard**，包含標題、說明、設定頁、回饋主旨及英文文件；獨立建置、公開封裝、四附件匿名下載核對與本機交付完成，沒有覆寫 v0.1.0。
 - **0.1.0-alpha.12 九語介面版保留為歷史公開 alpha**，標籤固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`；當版乾淨建置、公開封裝、四附件匿名下載雜湊核對及本機交付均已完成，沒有代使用者啟動一般模式。其測試結果不取代 0.1.0 的獨立結果。
-- alpha.11 固定來源 `6dbc154a6a887398796d442fd34b73455672aba3` 與附件保持不變；根目錄 README 的現行公開下載已更新至 v0.1.2。發布後的證據與文件可另作提交，不改寫任何已發布版本的建置來源。
+- alpha.11 固定來源 `6dbc154a6a887398796d442fd34b73455672aba3` 與附件保持不變；根目錄 README 的現行 Windows 公開下載已更新至 v0.1.3。發布後的證據與文件可另作提交，不改寫任何已發布版本的建置來源。
 - alpha.10 來源固定於 `8359c1ded5cf3310ad85ed3b42e0f47fd55da586`；alpha.10／11 標籤均已推送並核對，歷史標籤不變。見 [alpha.10 紀錄](../research/dualsense-preview/ALPHA10-TRIAL.md)與 [alpha.11 紀錄](../research/dualsense-preview/ALPHA11-TRIAL.md)。
-- 每次交付有應用程式碼變更的新版，就依使用者慣例增加版號並更新 [CHANGELOG.md](../CHANGELOG.md)：**V0.1.0 → V0.1.1 → … → V0.1.9 → V0.2.0**，之後不再使用 alpha。根目錄 `VERSION` 保存不含前綴的數字；UI 顯示 **PS Remote Play Keyboard V 0.1.1**，中文語系顯示 **上班不要玩 V 0.1.1**，Git 標籤使用小寫 `v0.1.1`。不要自行改成 `0.1.10`，也不預設尚未指定的更高位進位規則。不能改寫已發布版本的二進位、來源或標籤。
+- 每次交付有應用程式碼變更的新版，就依使用者慣例增加版號並更新 [CHANGELOG.md](../CHANGELOG.md)：**V0.1.0 → V0.1.1 → V0.1.2 → … → V0.1.9 → V0.2.0**，之後不再使用 alpha。根目錄 `VERSION` 保存不含前綴的數字；UI 應依該建置版本顯示，Mac 例如 **Three Cats Keybridge V 0.1.3**，中文語系為 **上班不要玩 V 0.1.3**；已發布 Windows 0.1.2 的歷史顯示名稱不改寫。Windows Git 標籤使用 `v<版本號>`，Mac 使用 `mac-v<版本號>`；只有實際建立及發布後才能記為已發布。不要自行改成 `0.1.10`，也不預設尚未指定的更高位進位規則。不能改寫已發布版本的二進位、來源或標籤。
 - 尚未建立版本標籤、交付或公開發布的候選可在同一版號下提交修正，但每次仍建置到全新目錄，保留各自來源提交與雜湊；不得覆寫舊候選產物或把未發布建置說成已交付。
-- `v<版本號>` 為附註 Git 標籤，固定經測試的原始碼提交。禁止強制移動、刪除重建或強制覆寫遠端標籤。
+- Windows `v<版本號>` 與 Mac `mac-v<版本號>` 均為附註 Git 標籤，固定經測試的原始碼提交。禁止強制移動、刪除重建或強制覆寫遠端標籤。
 - 編譯檔的 ProductVersion 包含版本與 Git 短碼；未提交工作區另有 `.dirty`。視窗顯示版本，狀態／啟動紀錄保存來源提交及 dirty 狀態。
-- 驗收文件與建置清單可於交付後另作提交，不因此移動版本標籤。alpha.9 的 PS5 操作成功回報不等於新版每個 session 已獲 Sony 接受。2026-10-29《Final Fantasy Resonance》的使用者正常操作回報未指定工具 build，也不能算作 v0.1.1 逐鍵或連點驗收。下一個程式變更版本為 **0.1.3**。
+- 驗收文件與建置清單可於交付後另作提交，不因此移動版本標籤。alpha.9 的 PS5 操作成功回報不等於新版每個 session 已獲 Sony 接受。2026-10-29《Final Fantasy Resonance》的使用者正常操作回報未指定工具 build，也不能算作 v0.1.1 逐鍵或連點驗收。目前 **Mac 0.1.3** 的公開範圍保留已知限制；其完整 App 連接／中斷／重連／退出清理已測，仍沒有因先前 Mac alpha.1 的操作成功而取得新版遊戲驗收。
+- Mac 候選沿用同一個 `~/Applications/PSKeyboardMacDualSense.app`、bundle identifier 與固定簽章身分，透過版號區分迭代，不為每次測試新增不同名稱的 App。Mac 鍵位說明見 [Mac 預設鍵位](MAC-DEFAULT-KEYS.md)；0.1.3 由 App 管理 guest／relay／官方元件，建置 9 已核對中立連接與清理、更新後 AX 及設定保留；最終封裝、新機與遊戲驗收分別記錄。
 - `alpha.5` 是事後命名的成功基準，原檔沒有內嵌版本。歷史校驗與來源保留；本機副本可依清理授權移除，事後重建不能宣稱就是當初原檔。
+
+## 發行頁固定格式
+
+使用者於 2026-10-30 指定以已公開的 [Windows v0.1.2 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)為固定格式。後續沿用相同基礎內容、段落順序及編號清單，不自行重寫介紹或增加設計來源說明。
+
+1. 繁中順序固定為「軟體功能」「注意事項」「適合使用系統」「此版本更新」，最後是 `**發布時間：**`。
+2. 分隔線後保留英文相同順序：`Features`、`Important notes`、`Supported system`、`What's new in this version`，最後是 `**Published:**`。
+3. Mac 首次套用修正品牌及必要的平台事實：上班不要玩／Three Cats Keybridge、鍵盤控制與模擬手把的中性介紹、獨立且與 Sony 無隸屬或背書關係的中英文段落、Apple Silicon／macOS 15+、Esc、App 管理的官方 VirtualHere 下載、輔助使用及實際自簽／未公證狀態，不複製 Windows 的 F8、.NET 或 usbip-win2 安裝要求。[Mac 固定草稿](MAC-RELEASE-NOTES.md)是後續 Mac 發行頁基底。
+4. **未來只更新「此版本更新／What's new in this version」及實際發布時間**，沿用已確認的平台基礎內容；實際品牌、功能或系統需求改變時，必須同步更正固定段落，不能為保持範本而留錯誤。0.1.3 更新欄僅寫「美術優化」及 `Visual improvements`，不列外部設計名稱、技能名稱或參考來源。
+5. GitHub 發行頁的實際時間只按 `published_at` 換算台北時間，不預填預定或本機建置時間。不可變的隨包發行稿以該版本 GitHub 發行頁連結取代時間，避免在附件永久留下「未發布」或事後改動附件。詳盡驗證與未驗範圍保留在同版安裝手冊、驗證文件及產物收據，不塞入更新項目。
 
 ## 建置與驗證
 
@@ -51,7 +65,7 @@
 
 ## 免費公開發布
 
-- 原始碼使用 [GPL-3.0-only](../LICENSE)，作者 **xiunlee**；詳見 [COPYRIGHT.md](../COPYRIGHT.md)。儲存庫維持公開，預設及工作分支均為 `codex/commercial-preview`；因使用者指出公開首頁仍舊資訊而調整預設顯示，`main` 保留歷史，沒有合併。分支名稱不代表收費計畫。
+- 原始碼使用 [GPL-3.0-only](../LICENSE)，作者 **xiunlee**；詳見 [COPYRIGHT.md](../COPYRIGHT.md)。儲存庫維持公開，預設／Windows 工作分支為 `codex/commercial-preview`，本次 Mac 發行工作分支為 `codex/mac-0.1.3-release`；因使用者指出公開首頁仍舊資訊而調整預設顯示，`main` 保留歷史，沒有合併。分支名稱不代表收費計畫。
 - 測試通過後，以附註標籤固定來源並推送指定分支／標籤，再核對遠端；不移動既有 tag。歷史 alpha 測試版使用 GitHub **pre-release**；0.1.0 作為首個正式發行版，只有完成自身建置、封裝與下載核對後才記為已發布，仍明示未簽章及待實機驗收項目。
 - 公開執行包與完整對應原始碼包須在同一 Release 提供。來源包含本專案精確來源、固定 VIIPER 與實際 Go 依賴來源、native 來源、建置腳本及重建說明；執行包保留各元件 notices、材料清單與 SHA-256。
 - 發布前檢查來源包是否足以重建所交付元件，並核對第三方授權、公開檔案白名單及個人路徑排除；不要只附本專案 source ZIP 就宣稱後端對應原始碼完整。
@@ -61,7 +75,7 @@
 - [alpha.12 已發布頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.12)：Release ID `427756025`，固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`；Windows ZIP、完整對應原始碼 ZIP、RELEASE.json 與 SHA256SUMS.txt 四附件匿名下載後雜湊全數吻合。
 - [v0.1.0 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0)：Release ID `427775269`，`prerelease=false`，發布時以 `make_latest=true` 設為最新；當時 GitHub latest API 與四附件匿名下載的 bytes／SHA-256 已核對。本機程式、封存及桌面入口已交付，沒有啟動一般模式。固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`，執行包 6,283,796 bytes、SHA-256 `9C28E917B8343C18591BB4A37142EBA32ACA5EEC57F2914A31889DB147F1552F`；完整來源包 12,416,180 bytes、SHA-256 `B29C57B0C7628ADAE8B9DBCB149D788C9D4BE2489CC7A07BCD293742ECD2F939`。公開附件雜湊另見[清單](../packaging/build-records/0.1.0-archives.json)。
 
-- [v0.1.1 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)：Release ID `427807747`，`prerelease=false`，發布時核對為 GitHub latest。四個公開附件匿名下載的 bytes／SHA-256 全部通過，本機獨立程式、封存與桌面入口已交付；固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。本版附件雜湊見[清單](../packaging/build-records/0.1.1-archives.json)。
+- [v0.1.1 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)：Release ID `427807747`，`prerelease=false`，發布當時已核對為 GitHub latest。四個公開附件匿名下載的 bytes／SHA-256 全部通過，本機獨立程式、封存與桌面入口已交付；固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。本版附件雜湊見[清單](../packaging/build-records/0.1.1-archives.json)。
 
 ## 更新、本機清理與回退
 

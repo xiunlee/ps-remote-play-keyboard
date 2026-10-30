@@ -1,21 +1,27 @@
 # macOS USB DualSense 輸出路線查證
 
-檢查日期：2026-10-30；本機 macOS 26.6.2 / arm64。這輪只讀公開 source、SDK header、官方文件與發布檔簽章。未啟動下載的程式、未建立 USB/HID 裝置、未安裝 driver／system extension、未改安全性、未存取帳號或操作 Sony Remote Play／實體手把。
+檢查日期：2026-10-30；本機 macOS 26.6.2 / arm64。初輪只讀公開 source、SDK header、官方文件與發布檔簽章，當時未執行下載程式或建立裝置。後續已完成下述 guest／Mac USB 實驗；兩階段分開記錄，沒有安裝 host driver／system extension、改安全性、存取帳號或操作 Sony Remote Play／實體手把。
 
-**結論：本輪檢查的方案中，尚無可以現在接上本專案 VIIPER server、保留原系統安全設定、免費且已驗證有效的 Mac DualSense 接入端。** USB 路線在技術上存在，VirtualHere 的發布檔甚至已取得所需 Apple entitlement；缺的是可供本專案使用的公開裝置建立／資料輸入接口及協定互通證據。不能把有簽章、支援 USB、或帶 Sony VID/PID，直接當成 Sony Remote Play 已接受真正 DualSense 的證明。
+**後續實測已取代初輪「尚無接入路線」的結論：guest VIIPER → VHCI／usbfs → 官方 VirtualHere Server 4.8.8 → VSOCK → 已簽章 Mac client 6.0.3，已在 Mac 建立 USB `054c:0ce6` DualSense，neutral 後核對移除。** `STOP USING` 回覆並非精確 `OK`，成功依據是 guest `UNBOUND` 及 Mac entry 消失；Sony／PS5 遊戲仍未測。見 [Mac neutral 收據](inspection/MAC-USB-DUALSENSE-NEUTRAL.json)及 [guest 實驗](VIRTUALHERE-GUEST-SPIKE.md)。
 
-## 已查證的候選
+此路線不要求 VirtualHere 提供新的 synthetic API，也不把標準 USB/IP 直接接到它的 client；由 Linux 既有 VHCI／usbfs 橋接到官方 server。免費模式維持一台 server 一個裝置、預設 host／guest TCP **7575**，guest 固定識別及設定保留。
 
-| 候選 | 可以確認 | 目前判定 |
+後續 [relay neutral smoke](inspection/DUALSENSE-RELAY-SMOKE.json)也已通過：125 幀輸入、8 幀 feedback，frontend EOF 後清理，Mac 自有 entry 在 0.123 秒後消失。[專用 socket](inspection/DUALSENSE-RELAY-SOCKET-TESTS.json)另有 57 項檢查通過。新 App 已建置、驗簽並從 `~/Applications/PSKeyboardMacDualSense.app` 啟動，本人已確認 Accessibility。user trial 1 已重新建立 neutral 裝置，等待使用者遊戲測試回報；這不是獨立 App 或遊戲已可用的宣告。[目前前端狀態](README.md)
+
+## 初輪結論與候選（歷史）
+
+初輪當時的結論是「尚無可直接接上本專案 VIIPER server、保留原系統安全設定、免費且已驗證有效的 Mac DualSense 接入端」。當時缺少公開輸入接口及互通證據；後續 guest 轉接已補上 neutral 證據。以下保留各直接接入候選的查證，不把有簽章、支援 USB 或 Sony VID/PID 當成 Sony 遊戲已接受。
+
+| 候選 | 可以確認 | 初輪判定及後續更新 |
 |---|---|---|
 | Apple IOUSBHostControllerInterface | SDK 明確支援遠端及 synthetic USB；要求 `com.apple.developer.usb.host-controller-interface` | 可設計 backend，但自行 ad-hoc 簽章不等於取得該 entitlement；不能當本機現成免費輸出端 |
 | `karstx/usbip-macos`（原 `carlossless`） | 標準 USB/IP client，昨天加入可選 Developer ID/profile 包裝流程 | **最接近 VIIPER 協定的後續候選；目前沒有可驗證的正式簽章 release**。本輪最新 CI 的 signing 步驟明確 skipped，不應下載其 artifact 便直接當可運作 |
 | SagerNet `sing-usbip` / sing-box | 有 macOS IOUSBHostControllerInterface client 原碼；1.14 文件列出支援 | Apple app 已查的全部 entitlement 檔未見 host-controller key；client 又要求 sing 專有控制擴充。未證實可直接用已發布 app 接 VIIPER |
 | `calibrae/extender` | 開源 USB/IP、作者聲稱 Mac bundle 有簽章及 notarization | 作者明載其目前 Mac 26 路線需 MDM 或 Reduced Security；不符合本次環境，不執行 |
-| VirtualHere 6.0.3 | 本機驗證 arm64、Developer ID、notarization、binary/profile 均有 USB host-controller entitlement；Generic Linux Server 單裝置可免費使用 | **可合法作單一實體 USB 的 end-user 遠端接線工具，但不是已證實可餵入我們 DualSense 狀態的 helper**。公開 API 只控制它自己的 Server 裝置，沒有建立 synthetic USB／送任意 input report 的公開接口 |
+| VirtualHere 6.0.3 | 本機驗證 arm64、Developer ID、notarization、binary/profile 均有 USB host-controller entitlement；Generic Linux Server 單裝置可免費使用 | 初輪沒有 synthetic feed API／互通證據；後續經 Linux guest VHCI 與官方 server 完成 Mac USB neutral 建立／移除，無須直接 feed API。[實驗](VIRTUALHERE-GUEST-SPIKE.md) |
 | `usbipd-mac` | 是 Mac USB export server | 方向相反，不能讓 Mac Sony 收到 VIIPER 裝置 |
 
-上述「尚無」限於這次核對的版本及接口，不宣稱所有免費方案都不可能，也不把未來上游簽章發布視為永遠不會發生。
+上述初輪「尚無」只描述當時核對的直接接口，已由 guest 實驗補充；不是所有免費方案不可能，也不把未來上游簽章發布視為永遠不會發生。
 
 ## Apple API 的授權邊界
 
@@ -38,7 +44,7 @@ SagerNet 固定版本：[`sing-usbip@28bd42667ecac597d3e19492b9e81ee04e22792f`](
 
 [Extender README 固定版本](https://github.com/calibrae/extender/blob/52eeb5a84fa0c9e99fe178848c98bf2021a07512/README.md) 自行列出 Mac 端目前載入限制、MDM／Recovery 設定需求。本紀錄只採用它對自己產品現況的說明，不把作者的系統政策解釋當成所有 DriverKit app 都成立的 Apple 官方規則。[usbipd-mac](https://github.com/beriberikix/usbipd-mac) 則是 export server，不能解決本案的 import 方向。
 
-## VirtualHere：簽章可用，不等於自製 DualSense 可接
+## VirtualHere：初輪驗簽及直接 API 邊界
 
 官方 [下載頁](https://www.virtualhere.com/usb_client_software) 提供 6.0.3、Intel/Apple Silicon、macOS 12+。本輪從該頁下載官方 DMG，以 `hdiutil attach -readonly -nobrowse -noautoopen` 掛載，再使用系統工具唯讀檢查：
 
@@ -56,7 +62,7 @@ SagerNet 固定版本：[`sing-usbip@28bd42667ecac597d3e19492b9e81ee04e22792f`](
 | binary entitlement | `com.apple.developer.usb.host-controller-interface = true` |
 | embedded profile | 同 key = true；Team `N8C8ZTN347`；有效期至 `2040-10-03T01:56:10Z` |
 
-完整去識別收據：`inspection/VIRTUALHERE-6.0.3-VERIFY.json`。這些結果確認簽章及靜態授權，**未確認執行後能建立裝置，更未確認 Sony 相容性**。官方論壇有 [macOS 26.5.1 discovery regression 與 6.0.0 修正](https://www.virtualhere.com/node/4831)；它不是 DualSense 或本機 26.6.2 的驗證紀錄。
+完整去識別收據：`inspection/VIRTUALHERE-6.0.3-VERIFY.json`。這份收據本身只確認簽章及靜態授權；後續裝置建立／移除的證據另見 Mac neutral 收據，仍未確認 Sony 相容性。官方論壇有 [macOS 26.5.1 discovery regression 與 6.0.0 修正](https://www.virtualhere.com/node/4831)；它不是 DualSense 或本機 26.6.2 的驗證紀錄。
 
 ### 協定與狀態輸入
 
@@ -64,21 +70,23 @@ SagerNet 固定版本：[`sing-usbip@28bd42667ecac597d3e19492b9e81ee04e22792f`](
 
 官方下載頁也限定來源為 VirtualHere USB Server。它的 Linux client 使用 kernel USB/IP driver，只說明 client 與本機 driver 之間的實作，**不能據此斷言 wire protocol 與 VIIPER 相容**。另一標準 USB/IP server 作者在 [trackpad-over-ip 的 Windows client 文件](https://github.com/mushhzz/trackpad-over-ip/blob/37af05e449085988e23a92312ea36d995ac60262/docs/windows-client.md) 明確記錄 VirtualHere proprietary protocol 不能接其 daemon。這是該 server 作者的一手相容性說明，並非本輪封包互通測試。
 
-所以現在不能把 VIIPER port 改給 VirtualHere 就宣稱成功，也不應只重用它的簽章去載入自製程式。這輪沒有逆向 VirtualHere、修改其 binary 或借其權限執行其他 code。
+因此不能把 VIIPER port 改給 VirtualHere 就宣稱成功，也不應重用它的簽章去載入自製程式。後續採 guest VHCI／usbfs 到官方 server 的正常 USB 通路，沒有逆向 VirtualHere、修改其 binary 或借其權限載入自製 code。
 
 ### 免費範圍及轉接構想
 
 [官方 Generic Linux Server license](https://www.virtualhere.com/embedded_server_license) 允許每台 server 同時分享一個 USB 裝置而不用付款；optimized build、多裝置另有付費條件。這讓一般使用者單裝置透傳具有免費選項，但不是開源授權，亦不代表可以改包或隨產品轉售。沒有把「商用軟體」誤判成「所有用途都一定付費」。
 
-仍缺少它能接收自製 synthetic DualSense 的公開入口。把實體手把透傳回 Mac 不會使本程式的鍵盤狀態變成該手把的 input。另一個構想是 Linux VM 先 attach VIIPER，再由 VirtualHere Server 重新 export；但 [官方 FAQ](https://www.virtualhere.com/oem_faq) 的原問為 “Can VirtualHere Server run in a VM or Container?”，回答 “No, it may not function correctly.”，接著說明 Server 需要沒有 hypervisor 隔層的實體硬體存取，另註 Client 可在 VM 執行。本輪亦未找到 Server 支援重新 export `vhci_hcd` 虛擬裝置的官方證據，因此不列為可執行方案。
+初輪缺少 synthetic DualSense 的公開入口；把實體手把透傳回 Mac 也不會使鍵盤狀態變成它的 input。當時另提出 Linux VM 先 attach VIIPER，再由 VirtualHere Server 重新 export，但 [官方 FAQ](https://www.virtualhere.com/oem_faq) 的原問為 “Can VirtualHere Server run in a VM or Container?”，回答 “No, it may not function correctly.”，接著說明 Server 需要沒有 hypervisor 隔層的實體硬體存取，另註 Client 可在 VM 執行。初輪因此未將它列為已可執行方案。
+
+後續 [作者對 VM 問題的解釋](https://www.virtualhere.com/node/4829)明確指向實體 USB passthrough。guest 內部 VHCI 不經該通路，不能僅由 FAQ 判定必敗；本機後續測試已通過 neutral 建立／移除，但這不等於官方承諾支援此組合。早期非預設 host relay 33757 曾觸發 license 提示，改用預設 7575 後成功；[作者說明](https://www.virtualhere.com/node/4784)與 [設定文件](https://www.virtualhere.com/configuration_faq)均支持維持標準埠及免費基本設定的界線。失敗及修正詳見 [guest 實驗](VIRTUALHERE-GUEST-SPIKE.md)。
 
 ### DualSense feature 支援不能推論
 
-沒有找到這些 Mac 接入端對本專案 emulated DualSense 的 descriptor、interrupt input、控制端 GET_REPORT／SET_REPORT、取消／斷線、Sony Remote Play 接受度的完整測試。單有 input encoder 及 Sony VID/PID 不足；缺少的 feature 不能回假的成功。本 repo 已有純報告 encoder 可留作日後 adapter，但在接入端通過前不建立裝置。VirtualHere 下載頁亦明說 Mac 不支援 microphones/webcams，因此不能承諾完整 DualSense composite/audio 功能。
+目前沒有對此組合的 descriptor、interrupt input、控制端 GET_REPORT／SET_REPORT、取消／斷線、Sony Remote Play 接受度完成全面測試。guest neutral 讀回、Mac USB 建立／移除及有限回程資料是已知證據；單有 encoder、Sony VID/PID 或一次 neutral 成功仍不足。缺少的 feature 不能回假的成功。VirtualHere 下載頁亦明說 Mac 不支援 microphones/webcams，因此不能承諾完整 DualSense composite/audio 功能。
 
-## 可接續的具體工作與本輪清理
+## 目前接續工作與初輪清理紀錄
 
-1. 可立即繼續純碼工作：保留既有 DualSense encoder／fixtures，以及 VIIPER control/feature 協定測試；這不會解決簽章，應清楚分開報告。
-2. 標準 USB/IP 最小外部前提：`usbip-macos` 上游發布可驗證的授權 bundle/profile。先查簽章和 CI，符合才準備單裝置、neutral、可清理的測試，不把 ad-hoc CI 產物當正式版。
-3. VirtualHere 若要採用，需要官方提供可用的 custom/synthetic server 接口或明確互通支援及授權；目前未有，不能排定真機 DualSense 測試。也未聯絡作者或送出訊息。
-4. 唯讀映像於檢查後卸載；僅保留收據，移除本輪 DMG 與暫存解碼 profile。未將 app 複製到 Applications、未註冊服務、未執行第三方程式。沒有觸碰 Sony 或其他 agent 的裝置 session。
+1. guest／Mac USB 及 relay neutral／EOF 清理已通過，新 App 已啟動且本人確認 Accessibility；接續 user trial 1 的單鍵按放、前景／F8、Sony／PS5 回報及停止核對，再測重連。純碼、neutral 與真人操作證據分開報告，不提前宣稱獨立 App 可用。
+2. 維持固定 guest 識別與設定、預設 TCP 7575、Generic 單裝置限制；只清理本 session 的裝置。STOP USING 或程序退出都不能代替 guest UNBOUND／Mac entry 消失的獨立核對。
+3. 標準 USB/IP 仍可保留為備案：若 `usbip-macos` 上游發布可驗證的授權 bundle/profile，先唯讀驗簽；不把 ad-hoc CI 產物當正式版。新 guest 路線不再以等待 custom/synthetic server API 為前提，也沒有聯絡作者或送出訊息。
+4. 初輪唯讀映像檢查後已卸載，DMG 與暫存解碼 profile 回收並保留收據；該階段未執行第三方程式。後續官方 server／client 的 neutral 執行另有上述收據，未安裝為服務，沒有操作 Sony。

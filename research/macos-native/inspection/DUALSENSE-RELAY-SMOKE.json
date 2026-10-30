@@ -1,0 +1,51 @@
+{
+  "relay": {
+    "schema": 1,
+    "status": "stopped",
+    "sourceCommit": "b78e31e93e84b4cb7c4b4c15b8aace10749106d2",
+    "relaySourceSha256": "77afce7d85c5e8fb12308000d10e422b7aa4845bf4f507150f452f48625f5198",
+    "startedAtUTC": "2026-10-30T04:45:41.582916+00:00",
+    "api": "127.0.0.1:33742",
+    "frontend": "127.0.0.1:33743",
+    "greeting": "PSKeyboard-DualSenseV5-Relay/1\n",
+    "busId": 1,
+    "devId": 1,
+    "cleanup": "removed",
+    "outputFrames": 3373,
+    "inputFrames": 125,
+    "feedbackFrames": 8,
+    "waitSeconds": 120,
+    "sessionSeconds": 30,
+    "inputStaleMilliseconds": 250,
+    "outputIntervalMilliseconds": 8,
+    "guestIdentityVerified": true,
+    "ownerStreamOpened": true,
+    "frontendConnected": true,
+    "keyboardLogging": false,
+    "usbAttachManagedExternally": true,
+    "sonyTested": false,
+    "reason": "frontend_eof",
+    "cleanupConfirmed": true,
+    "stoppedAtUTC": "2026-10-30T04:46:08.567368+00:00"
+  },
+  "mac": {
+    "neutralOnly": true,
+    "frontendFrames": 125,
+    "frontendEOF": true,
+    "attached": [
+      {
+        "PrimaryUsage": 5,
+        "PrimaryUsagePage": 1,
+        "Product": "DualSense Wireless Controller",
+        "ProductID": 3302,
+        "registryEntry": 4296400223,
+        "Transport": "USB",
+        "VendorID": 1356
+      }
+    ],
+    "ownedMacHIDRemoved": true,
+    "removalObservedSeconds": 0.123,
+    "after": [],
+    "sonyGameplay": "not tested"
+  }
+}

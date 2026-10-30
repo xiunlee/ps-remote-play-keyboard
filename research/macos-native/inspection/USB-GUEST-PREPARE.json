@@ -1,0 +1,168 @@
+{
+  "rootfs": {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/aarch64/alpine-minirootfs-3.22.7-aarch64.tar.gz",
+    "sha256": "7e9b34ff3304381909e566e2c93de450664ccc724191261423974fc121c11623"
+  },
+  "architecture": "aarch64",
+  "kernel_release": "6.12.114-0-lts",
+  "packages": [
+    {
+      "name": "linux-lts",
+      "version": "6.12.114-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/linux-lts-6.12.114-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1Fx2++0Y+XULf66xthEOZ1pweD3s=",
+      "payload_sha256": "1c2fd2419c4bd24ae0409e78da4a1b612f51e6d7a6988cf208d00af04d358c7f",
+      "sha256": "183ee1eec6913ff6c150b9ca08024ba1edc189c4da08bf6f1b68b86c7cb34242"
+    },
+    {
+      "name": "linux-tools-usbip",
+      "version": "6.15.0-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/community/aarch64/linux-tools-usbip-6.15.0-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q17C/Ph+HNYUKy7Zlt2TLQRIfIYg8=",
+      "payload_sha256": "10f3319522635a83f139d966e4ac3387f0fb9ffd287db3a9cc512011cc3cb856",
+      "sha256": "c43931bcdea215d8061c3a5f031610f080ef38bc2ca8be69ed981ed14162b4e6"
+    },
+    {
+      "name": "eudev-libs",
+      "version": "3.2.14-r5",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/eudev-libs-3.2.14-r5.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q14bEQv7WjEqhidq6Kq12o3GPUZjk=",
+      "payload_sha256": "16ab2c9999fbe4620ce198fbdf7e1c1af9452c68d4a4d38f154d412b41fa928d",
+      "sha256": "395c832a65081563b82cd52776afe16ac3de483c776753bae376280caf8bb0cd"
+    },
+    {
+      "name": "socat",
+      "version": "1.8.1.3-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/socat-1.8.1.3-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1jxIY0Tt+yPK1b26wdfkeVhJgpDg=",
+      "payload_sha256": "fd1263affb423753fb1b753b0c8455dc2865edaa82fd3cc4ac2735c24c487ae3",
+      "sha256": "6b9c824b429e2727af62e4433de3979e7985fd7aea9c26f1f7f85aab0fbbf5aa"
+    },
+    {
+      "name": "libcrypto3",
+      "version": "3.5.9-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/libcrypto3-3.5.9-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1Zp4sXyU0mSuWZ2JfwbJEUtstLN8=",
+      "payload_sha256": "9d4445887a5e0b64ec276038cab7b44db6c1a3b1281c578f59a29c25414e3ab3",
+      "sha256": "ede2ef7eca3b65a42e902aaf7890f9c5647dca0c55123a817179ad9f3bc6ef24"
+    },
+    {
+      "name": "libssl3",
+      "version": "3.5.9-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/libssl3-3.5.9-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1TmET5Txc34/gM7tK2OnG7wp7aOg=",
+      "payload_sha256": "486d31369f36fe2b41cad39e5d57961ed3ad72e6c1a50547abec5f4714d3d1e3",
+      "sha256": "338c9f6154582b4b76455a59f95538bcea8df039c5c72916dd2d8d0d844c9583"
+    },
+    {
+      "name": "readline",
+      "version": "8.2.13-r1",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/readline-8.2.13-r1.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q11P7g/8LJDb/cao/Qy5MSOuLJMss=",
+      "payload_sha256": "8ed4b079c50c321b2372c4ff79842141fbf0ab5ae42d6c1598d9a9638ce8cfad",
+      "sha256": "334af29dbf6b5a71a87af4d6a58e2967a8f711a51d00093de0e1498daf83ceb2"
+    },
+    {
+      "name": "libncursesw",
+      "version": "6.5_p20250503-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/libncursesw-6.5_p20250503-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1eN0aix+QSEdxEBdhzpINhIYfU34=",
+      "payload_sha256": "d27125d1b509ab1d695fc65a128e31e94245b7a5cc9703e3aa5ca913ba9f5aa1",
+      "sha256": "419b375e8a4345e7172b1f0f3a3c57db61374f5408cdb875d9e860bd4c243aca"
+    },
+    {
+      "name": "ncurses-terminfo-base",
+      "version": "6.5_p20250503-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/ncurses-terminfo-base-6.5_p20250503-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q11Yrfe1KShgLsmr6BN7B/JKdEVBg=",
+      "payload_sha256": "4f087ed4d1bee890461f98eca44c61144278ca106eddc201873af4ca22909f79",
+      "sha256": "3d37403e0b5ab9eb0c1ce269444e4a385faec9fe6af452c1c6956806b13d2bd6"
+    },
+    {
+      "name": "usbutils",
+      "version": "018-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/usbutils-018-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1YIB28y90iPq5ZMOrVMxmGfEqqEw=",
+      "payload_sha256": "3595aab984adede5d3a341d4131f82cfb51e5ad357e2211f0cb4c9e459a10c72",
+      "sha256": "748ba2822da48f0defc3e63fc7e3e4b7be90535aa14dbe7d36e650bc599b7bcd"
+    },
+    {
+      "name": "libusb",
+      "version": "1.0.28-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/libusb-1.0.28-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1s2JzFhHGNa24o9ArNwN3lXv+NOY=",
+      "payload_sha256": "28ff6a05a39a04bd0b42efcd42a00c5db1c9e6d392292bacc97cc5c7e9bce69e",
+      "sha256": "aa86b69e30a127fe0662a00a15e9eecaa0056aae08a208b0d1e105d62dbab2e5"
+    },
+    {
+      "name": "hwdata-usb",
+      "version": "0.395-r0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/hwdata-usb-0.395-r0.apk",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
+      "index_control_checksum": "Q1oqkUwL4FrHc7eDwxI/Y102DDw3A=",
+      "payload_sha256": "7f02a9f609a73c09c33405cb3aa58bd76943a192947f26bcbafe90891a1dd6f5",
+      "sha256": "803866c2bf218a9862c07be9f12a185f9a8c860e87eb0eb3c81c51f2ef87c094"
+    }
+  ],
+  "indexes": [
+    {
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/APKINDEX.tar.gz",
+      "sha256": "31e5b83b9205704156674d9594afac100ba8822658c45e0404c8b206c84e38a5",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub"
+    },
+    {
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/community/aarch64/APKINDEX.tar.gz",
+      "sha256": "9a85631b579b4da6f2cc9ec880211d11437fb3862662eb85326b52a424f730cc",
+      "signer": "alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub"
+    }
+  ],
+  "executed_guest_code": false,
+  "Image": {
+    "sha256": "d6763ecc91a9b614898148642572f7f10b44377b888185816a63a7a2c76c511b",
+    "size": 37683200,
+    "source": "signed APK EFI zboot gzip payload"
+  },
+  "initrd": {
+    "sha256": "1356a076d56df8d0596e5a7ccebaba12d6d139a4e373536667c2777f2eeda97f",
+    "size": 5430435,
+    "entries": 625
+  },
+  "modules": [
+    "kernel/drivers/virtio/virtio_pci_legacy_dev.ko.gz",
+    "kernel/drivers/virtio/virtio_pci_modern_dev.ko.gz",
+    "kernel/drivers/virtio/virtio_ring.ko.gz",
+    "kernel/drivers/virtio/virtio.ko.gz",
+    "kernel/drivers/virtio/virtio_pci.ko.gz",
+    "kernel/drivers/virtio/virtio_mmio.ko.gz",
+    "kernel/drivers/char/virtio_console.ko.gz",
+    "kernel/drivers/usb/usbip/usbip-core.ko.gz",
+    "kernel/drivers/usb/core/usbcore.ko.gz",
+    "kernel/drivers/usb/usbip/vhci-hcd.ko.gz",
+    "kernel/net/vmw_vsock/vsock.ko.gz",
+    "kernel/net/vmw_vsock/vmw_vsock_virtio_transport_common.ko.gz",
+    "kernel/net/vmw_vsock/vmw_vsock_virtio_transport.ko.gz",
+    "kernel/fs/fuse/fuse.ko.gz",
+    "kernel/fs/fuse/virtiofs.ko.gz"
+  ],
+  "boot": {
+    "command_line": "console=hvc0 rdinit=/init panic=-1",
+    "cpus": 2,
+    "memory_mib": 768,
+    "network_devices": [],
+    "storage_devices": [],
+    "vsock": true,
+    "virtiofs_tag": "psusb-spike",
+    "share_read_only": true
+  }
+}

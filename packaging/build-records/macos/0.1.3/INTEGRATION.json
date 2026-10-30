@@ -1,0 +1,218 @@
+{
+  "version": "0.1.3",
+  "status": "local_candidate_delivered",
+  "ui": {
+    "all22ActionsVisible": true,
+    "cancelAfterRemapKeptDefaults": true,
+    "cancelDidNotCreateSettingsFile": true,
+    "holdModeSavedAndReloaded": true,
+    "restoreDefaultsFixedAndVerified": true,
+    "savedProfileSurvivedAppReplacement": true,
+    "settingsRestoredToDefaultKeysRepeatOff": true,
+    "sameAppAccessibilityStillGranted": true,
+    "donationAndFeedbackVisible": true
+  },
+  "support": {
+    "paypalPageReadOnlyVerified": true,
+    "paypalAmount": "USD 1.00",
+    "paymentAttempted": false,
+    "emailSent": false
+  },
+  "startupAttempts": [
+    {
+      "build": "mac-build-0.1.3-integrated-1",
+      "result": "guest_command_failed",
+      "officialClientDownloadedAndSignatureVerified": true,
+      "cleanupIndependentlyConfirmed": true
+    },
+    {
+      "build": "mac-build-0.1.3-integrated-2",
+      "result": "usbip_attach_unconfirmed",
+      "runtimeProcessesRemaining": [],
+      "cleanupJournalPresent": false,
+      "hidEntriesRemaining": []
+    },
+    {
+      "build": "mac-build-0.1.3-integrated-3",
+      "result": "guest_usbip_verify_startup_deadline",
+      "runtimeProcessesRemaining": [],
+      "hidEntriesRemaining": [],
+      "cleanupJournalPresent": false,
+      "cleanupIndependentlyConfirmed": true
+    },
+    {
+      "build": "mac-build-0.1.3-integrated-4",
+      "result": "guest_usbip_verify_vhci_no_match_used_0",
+      "safeDiagnostic": {
+        "expectedRemoteID": "00010001",
+        "matched": false,
+        "vhciRows": []
+      },
+      "runtimeProcessesRemaining": [],
+      "hidEntriesRemaining": [],
+      "cleanupJournalPresent": false,
+      "cleanupIndependentlyConfirmed": true
+    },
+    {
+      "build": "mac-build-0.1.3-integrated-5",
+      "result": "startup_deadline",
+      "usbipKernelImportVerified": true,
+      "guestVIDPID": "054c:0ce6",
+      "guestOwnedVHCIAncestry": true,
+      "runtimeProcessesRemaining": [],
+      "hidEntriesRemaining": [],
+      "cleanupJournalPresent": false,
+      "cleanupIndependentlyConfirmed": true
+    }
+  ],
+  "newGameTrial": false,
+  "nativeRuntime": {
+    "offlineChecksPassed": 231,
+    "neutralStartup": {
+      "kind": "neutral-runtime-integration",
+      "keyboardCapture": false,
+      "sonyOperated": false,
+      "events": [
+        {
+          "event": "progress",
+          "value": "Checking components…"
+        },
+        {
+          "event": "progress",
+          "value": "Starting controller services…"
+        },
+        {
+          "event": "progress",
+          "value": "Connecting the controller…"
+        },
+        {
+          "event": "progress",
+          "value": "Creating the DualSense controller…"
+        },
+        {
+          "event": "progress",
+          "value": "Connecting the controller…"
+        },
+        {
+          "event": "ready",
+          "value": "Controller ready"
+        },
+        {
+          "event": "cleanup",
+          "value": "confirmed"
+        },
+        {
+          "event": "stopped",
+          "value": "Stopped"
+        }
+      ],
+      "ready": true,
+      "readyGamepadCount": 1,
+      "exitCode": 0,
+      "finalGamepadCount": 0,
+      "finalRuntimeProcessCount": 0,
+      "cleanupJournalPresent": false,
+      "passed": true
+    },
+    "neutralReconnect": {
+      "kind": "neutral-runtime-integration",
+      "keyboardCapture": false,
+      "sonyOperated": false,
+      "events": [
+        {
+          "event": "progress",
+          "value": "Checking components…"
+        },
+        {
+          "event": "progress",
+          "value": "Starting controller services…"
+        },
+        {
+          "event": "progress",
+          "value": "Connecting the controller…"
+        },
+        {
+          "event": "progress",
+          "value": "Creating the DualSense controller…"
+        },
+        {
+          "event": "progress",
+          "value": "Connecting the controller…"
+        },
+        {
+          "event": "ready",
+          "value": "Controller ready"
+        },
+        {
+          "event": "cleanup",
+          "value": "confirmed"
+        },
+        {
+          "event": "stopped",
+          "value": "Stopped"
+        }
+      ],
+      "ready": true,
+      "readyGamepadCount": 1,
+      "exitCode": 0,
+      "finalGamepadCount": 0,
+      "finalRuntimeProcessCount": 0,
+      "cleanupJournalPresent": false,
+      "passed": true
+    }
+  },
+  "presentation": {
+    "status": "light_dark_main_and_settings_reviewed",
+    "catalogueKeys": 195,
+    "languages": 9,
+    "releaseNote": "美術優化"
+  },
+  "fullApp": {
+    "version": "0.1.3",
+    "buildCandidate": 9,
+    "timestamp": "2026-10-30T08:35:34.261508+00:00",
+    "lightAndDarkMainReviewed": true,
+    "lightAndDarkSettingsReviewed": true,
+    "remapAndRepeatDraftCancelPreservesSavedProfile": true,
+    "appearanceRestoredToSystem": true,
+    "accessibilityStillAllowed": true,
+    "connectUI": "等待輸入",
+    "connectGamepadCount": 1,
+    "connectRuntimeProcesses": [
+      "PSKeyboardRuntime",
+      "PSKeyboardGuest",
+      "VirtualHereUniversal"
+    ],
+    "sonyOperated": false,
+    "gameplayRetested": false,
+    "stopGamepadCount": 0,
+    "stopRuntimeProcessCount": 0,
+    "stopCleanupJournalPresent": false,
+    "reconnectGamepadCount": 1,
+    "reconnectUI": "等待輸入",
+    "quitGamepadCount": 0,
+    "quitRuntimeProcessCount": 0,
+    "quitCleanupJournalPresent": false,
+    "passed": true
+  },
+  "package": {
+    "status": "verified",
+    "dmgMountedAppVerified": true,
+    "all14ChecksumEntriesPassed": true,
+    "published": false,
+    "artifacts": {
+      "PSKeyboard-Mac-0.1.3-arm64.dmg": {
+        "sha256": "b75da668c9b08e3ffe4b490d97d076d06b95a5c856da1400c335393979189357",
+        "size": 28336403
+      },
+      "PSKeyboard-Mac-0.1.3-arm64.zip": {
+        "sha256": "0c45a572e9ffe8d1acc748bac0f1f479293e573cc3cbb659e41990b8d472f383",
+        "size": 25893029
+      },
+      "PSKeyboard-Mac-0.1.3-source.zip": {
+        "sha256": "fc5b7099ff3ae52a31c9ebee860c7cf73ba98812824f65bf8d1c902a3dc1c03b",
+        "size": 1786032
+      }
+    }
+  }
+}

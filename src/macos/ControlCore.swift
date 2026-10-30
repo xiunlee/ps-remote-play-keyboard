@@ -41,7 +41,7 @@ public struct MacBindingProfile: Equatable, Sendable {
     // 1/2 cannot be passed in as Mac hardware codes, even where numbers overlap.
     public static let platform = "macOS-hardware-keycode"
     public static let schemaVersion = 1
-    public static let pauseKeyCode: UInt16 = 0x64 // kVK_F8
+    public static let pauseKeyCode: UInt16 = 0x35 // kVK_Escape
     public static let minInterval: UInt64 = 20
     public static let maxInterval: UInt64 = 5000
     public let bindings: [MacBinding]
@@ -65,28 +65,29 @@ public struct MacBindingProfile: Equatable, Sendable {
     }
 
     public static let `default`: MacBindingProfile = {
-        // Local macOS SDK Events.h constants. Positions follow the existing
-        // product layout, but these integers are deliberately Mac-specific.
+        // Local macOS SDK Events.h constants. Compact Mac keyboard defaults:
+        // every action and Escape uses one ordinary key, without Fn/navigation
+        // substitutions. These integers are deliberately not Windows VK codes.
         let keys: [UInt16] = [
             0x0D, 0x01, 0x00, 0x02, // W S A D
-            0x73, 0x77, 0x72, 0x74, // Home End Help/Insert PageUp
-            0x7D, 0x7C, 0x7B, 0x7E, // Down Right Left Up arrows
-            0x0E, 0x75, 0x0C, 0x79, // E ForwardDelete Q PageDown
+            0x7E, 0x7D, 0x7B, 0x7C, // Up Down Left Right arrows: D-pad
+            0x28, 0x25, 0x26, 0x22, // K L J I: Cross Circle Square Triangle
+            0x0C, 0x0E, 0x06, 0x08, // Q E Z C: L1 R1 L2 R2
             0x30, 0x24, 0x03, 0x31, // Tab Return F Space
-            0x7A, 0x0F              // F1 R
+            0x23, 0x11              // P T: PS Touch click
         ]
         return try! MacBindingProfile(bindings: keys.map { MacBinding(keyCode: $0) })
     }()
 
     public static func isAllowedKey(_ key: UInt16) -> Bool {
-        // Explicit physical-key whitelist from the SDK's Events.h. F8,
+        // Explicit physical-key whitelist from the SDK's Events.h. Escape,
         // modifiers, media keys and undefined codes cannot be game bindings.
         if key <= 0x33 { return true } // ANSI/ISO characters + Return/Tab/Space/Delete
         return [UInt16](arrayLiteral:
-            0x35, 0x40, 0x41, 0x43, 0x45, 0x47, 0x4B, 0x4C, 0x4E,
+            0x40, 0x41, 0x43, 0x45, 0x47, 0x4B, 0x4C, 0x4E,
             0x4F, 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57,
             0x58, 0x59, 0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F,
-            0x60, 0x61, 0x62, 0x63, 0x65, 0x66, 0x67, 0x68, 0x69,
+            0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69,
             0x6A, 0x6B, 0x6D, 0x6F, 0x71, 0x72, 0x73, 0x74, 0x75,
             0x76, 0x77, 0x78, 0x79, 0x7A, 0x7B, 0x7C, 0x7D, 0x7E
         ).contains(key)
@@ -137,7 +138,8 @@ public struct MacControlCore: Sendable {
 
     // Call on actual foreground, connection, modifier or editing changes, and
     // before sampling output. Fn alone must not be treated as a forbidden
-    // modifier: it can be required to generate F8/Home/etc. on compact Macs.
+    // modifier: custom bindings can use function/navigation keys even though
+    // the compact defaults require none of them.
     public mutating func updateEnvironment(foreground: Bool, connected: Bool,
                                            modifiersDown: Bool = false, editing: Bool = false) {
         self.foreground = foreground

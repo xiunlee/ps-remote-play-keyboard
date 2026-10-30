@@ -1,0 +1,48 @@
+{
+  "recordedAtUTC": "2026-10-30T05:28:32.680770+00:00",
+  "action": "root-authorized temporary search-list isolation",
+  "certificateSHA1": "959304332510D4FCC638DA0944B4797B1FDC699D",
+  "temporarilyAppendedOnlyProjectKeychain": true,
+  "ownEntryRemovedAfterwards": true,
+  "exactOriginalSearchListRestored": true,
+  "concurrentSearchListChangesObserved": false,
+  "otherConcurrentChangesPreserved": true,
+  "stateComparison": {
+    "defaultKeychain": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "searchList": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "userTrust": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "adminTrust": {
+      "unchanged": true,
+      "readReturnCodeBefore": 1,
+      "readReturnCodeAfter": 1
+    }
+  },
+  "exactExportedUserTrustUnchanged": true,
+  "test": {
+    "binariesRanWithExit0": 2,
+    "differentExecutableHashes": true,
+    "identicalDesignatedRequirements": true,
+    "mutualRequirementChecksPassed": true,
+    "designatedRequirement": "identifier \"com.xiunlee.pskeyboard.signing-smoke\" and certificate leaf = H\"959304332510d4fcc638da0944b4797b1fdc699d\"",
+    "binarySHA256": [
+      "7988441e891a20a3973223661f8b3de194da3a8b37ce2c21278778b208f4a5a3",
+      "764b8ff473e71b4e95e1873705a3e173a781aea11c28dc287d657df6844c1509"
+    ],
+    "temporaryBinariesRemoved": true,
+    "accessibilityPersistenceTested": false
+  },
+  "failure": null,
+  "formalAppModified": false
+}

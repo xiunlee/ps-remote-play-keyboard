@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-30",
+  "backendCommit": "b78e31e93e84b4cb7c4b4c15b8aace10749106d2",
+  "virtualHereClient": "6.0.3",
+  "virtualHereServer": "4.8.8",
+  "license": "unlicensed max_devices=1;default forward TCP7575;client not service",
+  "transport": "VZ vsock; no external guest network",
+  "neutralOnly": true,
+  "beforeConnect": [],
+  "attached": [
+    {
+      "VendorID": 1356,
+      "ProductID": 3302,
+      "Product": "DualSense Wireless Controller",
+      "Transport": "USB",
+      "PrimaryUsagePage": 1,
+      "PrimaryUsage": 5,
+      "registryEntry": 4296400129
+    }
+  ],
+  "stopUsing": "Issued; response was not exact OK. Independently confirmed guest UNBOUND and Mac HID entry absent.",
+  "ownedEntryRemoved": true,
+  "afterDisconnect": [],
+  "sonyGameplay": "not tested"
+}

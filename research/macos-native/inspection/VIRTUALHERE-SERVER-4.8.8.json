@@ -1,0 +1,12 @@
+{
+  "downloaded_at": "2026-10-30",
+  "source": "https://www.virtualhere.com/sites/default/files/usbserver/vhusbdarm64",
+  "announced_version": "4.8.8",
+  "architecture": "Linux aarch64",
+  "sha1": "f000ef0aa8306d62a109a235e7830f7d9b52f214",
+  "sha1_matches_official": true,
+  "sha256": "09deced5586ed37b8b3db7a6187d84029f65d487c3c2b24a949b993b3d582077",
+  "size": 445924,
+  "executed": false,
+  "variant": "Generic; single-device free use; no license modifications"
+}

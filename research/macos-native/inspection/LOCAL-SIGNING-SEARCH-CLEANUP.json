@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "test": "finally restores project temporary search entry after local failure",
+  "exactOriginalSearchListRestored": true,
+  "details": {
+    "temporarilyAppendedProjectKeychain": true,
+    "projectKeychainAlreadyPresent": false,
+    "concurrentSearchListChangesObserved": false,
+    "exactOriginalSearchListRestored": true,
+    "ownTemporaryEntryRemoved": true,
+    "concurrentOtherEntriesPreserved": true
+  },
+  "noAppOrDeviceAccess": true
+}

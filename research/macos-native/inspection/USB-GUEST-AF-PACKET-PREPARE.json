@@ -1,0 +1,23 @@
+{
+  "prepared_at": "2026-10-30",
+  "kernel_release": "6.12.114-0-lts",
+  "source_apk": {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/linux-lts-6.12.114-r0.apk",
+    "sha256": "183ee1eec6913ff6c150b9ca08024ba1edc189c4da08bf6f1b68b86c7cb34242",
+    "signature_verified": true
+  },
+  "load_order": [
+    "af_packet.ko"
+  ],
+  "modules": [
+    {
+      "source": "kernel/net/packet/af_packet.ko.gz",
+      "share_file": "af_packet.ko",
+      "size": 108271,
+      "sha256": "db354c5ec5cfa1ad11d3e826c84fd68d7579c7eba0b7752dd6915f74507f6f18",
+      "dependencies": []
+    }
+  ],
+  "purpose": "Enable AF_PACKET for normal guest network-interface configuration using the already persisted stable guest MAC. No identity rotation or license changes.",
+  "scope": "Only extracted into read-only guest share; no VM or module execution performed by this child agent."
+}

@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-30",
+  "inspector": "inspect_gamecontroller.swift",
+  "inputValuesRead": false,
+  "wirelessDiscoveryRequested": false,
+  "manualDeviceOpenRequested": false,
+  "baseline": {
+    "controllerCount": 1,
+    "ownVirtualUSBPresent": false,
+    "physicalUSBDualSensePresent": true
+  },
+  "withOwnedNeutralUSB": {
+    "controllerCount": 2,
+    "eachProductCategory": "DualSense",
+    "eachHasExtendedGamepad": true,
+    "ownedHIDRegistryEntry": 4296400820
+  },
+  "afterOwnedRemoval": {
+    "controllerCount": 1,
+    "ownedHIDRegistryEntryAbsent": true,
+    "physicalUSBRegistryEntryRetained": 4296400524
+  },
+  "limits": [
+    "Names/category alone do not uniquely identify devices; the before/during/after count and USB ancestry distinguish this candidate.",
+    "Only neutral input was sent. Sony gameplay acceptance is not established.",
+    "Physical USB controller was reconnected by this observation; previous unplug confirmation is not a persistent state."
+  ]
+}
