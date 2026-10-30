@@ -1,0 +1,388 @@
+{
+  "schemaVersion": 1,
+  "product": "Three Cats Keybridge",
+  "variant": "dualsense-candidate",
+  "version": "0.1.4",
+  "fileVersion": "0.1.4.0",
+  "informationalVersion": "0.1.4+gc0de54e964ae",
+  "sourceCommit": "c0de54e964ae85b50c4fb0fdb1d4b89de7fc7699",
+  "workingTreeDirty": false,
+  "builtUtc": "2026-10-30T09:28:22.0481794Z",
+  "entryPoint": "PSKeyboard-DualSensePreview.exe",
+  "channel": "public-release",
+  "priceModel": "free",
+  "license": "GPL-3.0-only",
+  "driversBundled": false,
+  "sonyOperationVerified": false,
+  "commercialReady": false,
+  "profileReadOnly": false,
+  "profileSaveRequiresUserAction": true,
+  "defaultConnected": false,
+  "defaultEnabled": false,
+  "sonyBaselineEvidence": {
+    "version": "0.1.0-alpha.9",
+    "date": "2026-10-29",
+    "source": "user-report",
+    "persona": "dualsensegamepadv5",
+    "operationPassed": true
+  },
+  "sessionTimeLimitSeconds": 0,
+  "driverVersion": "0.9.8.1",
+  "apiPort": 33642,
+  "usbPort": 33641,
+  "backendSha256": "9CFF2F8BF15DA8C4807BD631A24909FC9EF9820E5F7914F8742B839A981C2A61",
+  "nativeSha256": "A0381E99A10968B55249134CD74EC5EE563DD5308F9EEDD552E28617D2006C2E",
+  "controllerModes": [
+    "dualsensegamepadv5"
+  ],
+  "defaultControllerMode": "dualsensegamepadv5",
+  "uiLanguages": [
+    "en",
+    "zh-Hant",
+    "zh-Hans",
+    "ja",
+    "ko",
+    "de",
+    "fr",
+    "es",
+    "pt-BR"
+  ],
+  "uiLanguageSelection": "windows-ui-culture",
+  "uiLanguageFallback": "en",
+  "driverValidationRun": "https://github.com/xiunlee/ps-remote-play-keyboard/actions/runs/40838199781",
+  "testsRun": true,
+  "testResults": [
+    {
+      "kind": "native-synthetic-reports",
+      "passed": true,
+      "checks": 5743,
+      "output": [
+        "KEYBOARD_MERGE_TEST checks=5743 failures=0; synthetic reports only; no device or Remote Play access"
+      ]
+    },
+    {
+      "kind": "native-csharp-interop",
+      "passed": true,
+      "output": [
+        "KEYBOARD_MERGE_INTEROP_PASS x64 cdecl struct_size=8 cross=0x20 release=physical right_stick=preserved"
+      ]
+    },
+    {
+      "kind": "candidate-guards",
+      "passed": true,
+      "output": [
+        "DUALSENSE_PREVIEW_GUARDS_PASS checks=162; synthetic profile only; no GUI, personal profile, process, driver, keyboard, Sony or network operations"
+      ]
+    },
+    {
+      "kind": "preview-localization",
+      "passed": true,
+      "output": [
+        "PREVIEW_TEXT_PASS checks=2962; languages=9; resources=51; no UI or device access"
+      ]
+    },
+    {
+      "kind": "candidate-fake-transport",
+      "passed": true
+    },
+    {
+      "kind": "BindingProfileTests",
+      "passed": true,
+      "output": [
+        "BINDING_PROFILE_PASS checks=276; isolated temporary files and pure key events only"
+      ]
+    },
+    {
+      "kind": "RapidFireTests",
+      "passed": true,
+      "output": [
+        "RAPID_FIRE_PASS checks=101; fake clocks and pure key/action events only"
+      ]
+    },
+    {
+      "kind": "KeyboardControlPipelineTests",
+      "passed": true,
+      "output": [
+        "KEYBOARD_PIPELINE_PASS checks=36; fake clock, native merge only; no live input or devices"
+      ]
+    },
+    {
+      "kind": "UiInteractionTests",
+      "passed": true,
+      "output": [
+        "UI interaction tests PASS (167 checks). No live input or devices used."
+      ]
+    },
+    {
+      "kind": "UiTextTests",
+      "passed": true,
+      "output": [
+        "UI_TEXT_PASS checks=3131; languages=9; resources=93; actions=22; no UI or device access"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "assets/branding/three-cats-mark.png",
+      "sha256": "217791803793E0F18B5B4BECA093CCBC61451029113015DE05104099A6818F7F"
+    },
+    {
+      "path": "assets/branding/three-cats.ico",
+      "sha256": "B81BB293322D72C9314426A33D6A47475A269CC2F19590E202EEEAB78F0DCE1F"
+    },
+    {
+      "path": "COPYRIGHT.md",
+      "sha256": "1344FA5E9A74221E6D64617C56CD986C361FDA55A6AF2378D5A3885F59A34ABA"
+    },
+    {
+      "path": "docs/REBUILD.md",
+      "sha256": "6D696C78B7BC0E1CC3A87132FCFC4BEC876D505CDD49C01E60CE51DEA97BB3B9"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "F24EE094842DC3347A7A06B71373573CE18F6DCB935C81E95623723EE22E6CA6"
+    },
+    {
+      "path": "packaging/Build-PublicRelease.ps1",
+      "sha256": "1C2153E4A4065F825BE0C5EF3A155C218C2EFB305356D0FC272569E240969D6D"
+    },
+    {
+      "path": "packaging/README.en.md",
+      "sha256": "72D5D493E43F59FB19D346C9D7E6C040061C359C48EE16CA8BA0F22DFCECA009"
+    },
+    {
+      "path": "packaging/README.zh-TW.md",
+      "sha256": "CCF67F8420A09EC027C18178D905E3F48691A835B2ECC84B5A049464CC30B153"
+    },
+    {
+      "path": "research/dualsense-preview/backend/Build-Backend.ps1",
+      "sha256": "B03C7C2641C9B8AA0661D62A8C134640FB72FC12496E6F63715B7B2C2F1D29B2"
+    },
+    {
+      "path": "research/dualsense-preview/backend/main_test.go",
+      "sha256": "B7B8597062E200659A8CC49F30D84AE4DCB0D12E672F7A21D91B21B9091F06AA"
+    },
+    {
+      "path": "research/dualsense-preview/backend/main.go",
+      "sha256": "B75DDB7A8B86336736716D38E1E7C012B5515E3085E32A05A7E01491FE61F305"
+    },
+    {
+      "path": "research/dualsense-preview/backend/README.md",
+      "sha256": "2F45985E5581778054319C625A77FDBD6DF936CDBF2A27EDB49FE11696C03225"
+    },
+    {
+      "path": "research/dualsense-preview/Build-Candidate.ps1",
+      "sha256": "2286EE806C67B986E4AA8D87330F1C749A27F56FE440DCECF3C029D9801EE627"
+    },
+    {
+      "path": "research/dualsense-preview/Build-Native.ps1",
+      "sha256": "12A328732687337CFDA58C4A77407F50F6F1DCA82FC222AD65F4927903060CBB"
+    },
+    {
+      "path": "research/dualsense-preview/CandidateTransport.cs",
+      "sha256": "E0C7559580C6684A3EC484FB111A47B3F44C5BE497F0FC4D7B98F9DC3A94A37C"
+    },
+    {
+      "path": "research/dualsense-preview/CandidateTransportTests.cs",
+      "sha256": "D796AFA9B0E099DB6166033BFEE71B12E4DD48E4BD66C3B37268D8D89FAFF09D"
+    },
+    {
+      "path": "research/dualsense-preview/DualSensePreview.cs",
+      "sha256": "A51B236F81F7BF2C17EC433D57AA413857D2EC663E5C47FBEB76476D57166AE2"
+    },
+    {
+      "path": "research/dualsense-preview/PreviewGuardTests.cs",
+      "sha256": "57351A5241783BDC8822216AF87BDEC7CBBBE33FF07AA9B1920CB1786270F5ED"
+    },
+    {
+      "path": "research/dualsense-preview/PreviewText.cs",
+      "sha256": "A5CC07AA351E639FF8ABC786D96D9F3EB6D4D12591C76BA3BE9ACCBC17034986"
+    },
+    {
+      "path": "research/dualsense-preview/PreviewTextTests.cs",
+      "sha256": "BFB145CB07561B92AB91B8158E108C04FCA54FAC6E0EBA9DCA3ACBE608786C8A"
+    },
+    {
+      "path": "research/dualsense-preview/README.md",
+      "sha256": "9A0C14D7C3F2DB4B349A8DF9A27FFA8672CA4A79E2C98AE01B199992AE74ED70"
+    },
+    {
+      "path": "research/dualsense-preview/RunTransportTests.ps1",
+      "sha256": "81637E73A54EBB93F06DBA9AE55CC03D8D82A82A562420187271D0E05B877002"
+    },
+    {
+      "path": "research/dualsense-preview/SupportLinks.cs",
+      "sha256": "6B7DE31AF44E304DD70A541F88B38F5BBEDAE0C443A098FE664541AB2ED9870F"
+    },
+    {
+      "path": "research/dualsense-preview/Verify-Candidate.ps1",
+      "sha256": "BD346AC4E2AC9E366B13C0D53D0E1CE7906DC82218FA570DD813E6D5CC8544E2"
+    },
+    {
+      "path": "research/dualsense-v5-test/V5Protocol.cs",
+      "sha256": "6242D3DAF3157C2C839BCE735F6CEDD2BB7F261EBB72C6AADBED5426062014EE"
+    },
+    {
+      "path": "research/native-merge/keyboard_merge_test.c",
+      "sha256": "5F305CC3131AF413057A00528364CE4116BF3763F189E3061048DCF561D7E040"
+    },
+    {
+      "path": "research/native-merge/keyboard_merge.c",
+      "sha256": "35D41918EE30F7053BD475426D009B366BE1D0C96E45F85021EE3F05B2F37A56"
+    },
+    {
+      "path": "research/native-merge/keyboard_merge.h",
+      "sha256": "5F2CCEB5876CBE22A52842010CCA310936122746D1EBD3E8BCA5A95065EED8AF"
+    },
+    {
+      "path": "research/native-merge/KeyboardMergeInteropTest.cs",
+      "sha256": "D29E5D563D35B61F2561BF3A1AE2F78DDC2DBE3F3A590BD916C106495C8B92CD"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardInputState.cs",
+      "sha256": "61ABCF97408FEA3B11830A946522A135AE3330F88ED879C2FF1BC8E190558A4A"
+    },
+    {
+      "path": "src/keyboard-pad/KeyboardMapping.cs",
+      "sha256": "7DAC0D686E376327A1B364B0BABADCF2E2CA3F02B21685CB15DEDE0041DBB472"
+    },
+    {
+      "path": "src/keyboard-pad/ViiperTransport.cs",
+      "sha256": "5C46BE155DA8DA99A00DA6FE93495A823454E614D50C627A0A0ED63B299E5255"
+    },
+    {
+      "path": "src/physical-keyboard/BindingEditor.cs",
+      "sha256": "266C613359F26C7ACE4711F7393BB03C0DDDBBBAB0F14031154D06F0932A3624"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfile.cs",
+      "sha256": "B6BB8C7D6D18599FA95F6D91C1DD0A449FD90DDB61C8AE241DF11EE9E6ECC644"
+    },
+    {
+      "path": "src/physical-keyboard/BindingProfileTests.cs",
+      "sha256": "3821F24573F82D5DE6199C364DA6AD6E9E32CCB18DF96FAC319F4DC1E8D9EABC"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipeline.cs",
+      "sha256": "CD65A683C6D04EBFBFCFD877E3D02412DA0A70D921A5CF73A5A60B1A1EE8F773"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardControlPipelineTests.cs",
+      "sha256": "7FABB1FB5F6279C25C8A24CBDCF44E461DBCE54E3467A73D80DB5338E6A0D46F"
+    },
+    {
+      "path": "src/physical-keyboard/KeyboardUi.cs",
+      "sha256": "D935F13A78D13DE6C082CB379EAEFBB7B3BFFBA219118D974F9C3268AF149060"
+    },
+    {
+      "path": "src/physical-keyboard/PhysicalReportMerge.cs",
+      "sha256": "2F29143BFC521E20102D8B786E35D84EF84A52AF49EA6546ABF650F7988BC0AE"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireEngine.cs",
+      "sha256": "69667837E44235DB4CFB0D9A93E39372F195BB244EFD24262AD97A132B8F1BF4"
+    },
+    {
+      "path": "src/physical-keyboard/RapidFireTests.cs",
+      "sha256": "0752B38A861C5B9B567AB793AECFCAD78D17B0550A3AF62A406F0C298C713E87"
+    },
+    {
+      "path": "src/physical-keyboard/UiInteractionTests.cs",
+      "sha256": "8CC91C09C35FEDD9FE1F53BEE02E2C48FBB3E90B1907A8DDE561136C02E8B964"
+    },
+    {
+      "path": "src/physical-keyboard/UiText.cs",
+      "sha256": "C8AF6A9E183B44E3A96920177D643E19A9C1AE1C9BB92027962C20F020603C24"
+    },
+    {
+      "path": "src/physical-keyboard/UiTextTests.cs",
+      "sha256": "0CE56BA437CD4561C7D362F96FAE6D6C0E1EB95C0F1E37C3CAA5A31EFEC737E3"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "8A3DAD16D348C163566A456FCF650D85D7AEEDA5E53D01EE1FA8DC15212915A7"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "PSKeyboard-DualSensePreview.exe",
+      "sha256": "ACFC3C53837B94A8A592E9E6742D0A0A433C55CEE729F27131BE431A4629CCDB"
+    },
+    {
+      "path": "DualSenseCandidateServer.exe",
+      "sha256": "9CFF2F8BF15DA8C4807BD631A24909FC9EF9820E5F7914F8742B839A981C2A61"
+    },
+    {
+      "path": "pskb-keyboard-merge.dll",
+      "sha256": "A0381E99A10968B55249134CD74EC5EE563DD5308F9EEDD552E28617D2006C2E"
+    },
+    {
+      "path": "BACKEND-BUILD.json",
+      "sha256": "CFE333FFBC38B3669D422D2AD3170699FEFA8B9FDB44F0D20050994DCBD61C64"
+    },
+    {
+      "path": "MATERIALS.json",
+      "sha256": "5817AE16E149590074FB69B286D12BC2AE14401FFC32D36C942E13A2BDD83C16"
+    },
+    {
+      "path": "NATIVE-BUILD.json",
+      "sha256": "B8FC939932CFC4A220A3CFE111C9DC9837A98F23CEA3E1BA5882D7D0745E3CF4"
+    },
+    {
+      "path": "NATIVE-MATERIALS.json",
+      "sha256": "81A1EF14B0A728A1AE0BCE62FA9C30FA4929683208E8D39BF996D0BB8C3A52C7"
+    },
+    {
+      "path": "README.md",
+      "sha256": "CCF67F8420A09EC027C18178D905E3F48691A835B2ECC84B5A049464CC30B153"
+    },
+    {
+      "path": "README.en.md",
+      "sha256": "72D5D493E43F59FB19D346C9D7E6C040061C359C48EE16CA8BA0F22DFCECA009"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "F24EE094842DC3347A7A06B71373573CE18F6DCB935C81E95623723EE22E6CA6"
+    },
+    {
+      "path": "COPYRIGHT.md",
+      "sha256": "1344FA5E9A74221E6D64617C56CD986C361FDA55A6AF2378D5A3885F59A34ABA"
+    },
+    {
+      "path": "notices/github.com_Alia5_VIIPER-LICENSE.txt",
+      "sha256": "F24EE094842DC3347A7A06B71373573CE18F6DCB935C81E95623723EE22E6CA6"
+    },
+    {
+      "path": "notices/golang.org_x_crypto-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/golang.org_x_exp-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/golang.org_x_sys-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/Go-LICENSE.txt",
+      "sha256": "911F8F5782931320F5B8D1160A76365B83AEA6447EE6C04FA6D5591467DB9DAD"
+    },
+    {
+      "path": "notices/Native-Zig-LICENSE.txt",
+      "sha256": "5C537D6853E005298A285D508CFF9AC7192CEA23576C840D485B2B586A7FF177"
+    },
+    {
+      "path": "notices/Native-MinGW-COPYING.txt",
+      "sha256": "99A69660981156C21336FDB5661F89341B013C94E4BF9E1C7467B4745718397F"
+    },
+    {
+      "path": "notices/Native-LLVM-LICENSE.txt",
+      "sha256": "539DD7AED86E8A4F12CBDD0E6C50C189C7D74847E4FECC64CE2C6EE3A01DA38B"
+    },
+    {
+      "path": "notices/Native-MinGW-pseudo-reloc-NOTICE.txt",
+      "sha256": "DBBFB94FFAF8485105D420393F75108D3C14E6DD68A2DCF2ED7D9EA657E66737"
+    }
+  ]
+}
