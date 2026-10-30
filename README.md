@@ -10,7 +10,7 @@
 
 ## 下載與目前狀態
 
-**v0.1.3 已正式發布：名稱與圖示更新。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.3/PSKeyboard-0.1.3-windows-x64.zip)，或前往 [v0.1.3 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載保留最新版本及[上一版 v0.1.2](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)；更早的發行版轉為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
+**v0.1.3 已正式發布：名稱與圖示更新。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.3/PSKeyboard-0.1.3-windows-x64.zip)，或前往 [v0.1.3 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載僅保留目前版本；較早的發行版為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
 
 中文介面使用「上班不要玩」，其他語系使用 **Three Cats Keybridge**。
 

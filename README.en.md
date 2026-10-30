@@ -10,7 +10,7 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 ## Download and status
 
-**Three Cats Keybridge V 0.1.3 is available: name and icon update.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.3/PSKeyboard-0.1.3-windows-x64.zip), or visit the [v0.1.3 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3) for the corresponding Windows source and SHA-256 checksums. All four anonymously downloaded asset hashes have been verified. Public downloads include the current release and [previous v0.1.2](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2); older releases are retained as drafts, while tags and source history remain public. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
+**Three Cats Keybridge V 0.1.3 is available: name and icon update.** [Download the Windows x64 package](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.3/PSKeyboard-0.1.3-windows-x64.zip), or visit the [v0.1.3 release page](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3) for the corresponding Windows source and SHA-256 checksums. All four anonymously downloaded asset hashes have been verified. Only the current release is public; older releases are retained as drafts, while tags and source history remain public. Detailed PS5 acceptance, long sessions and installation on a new PC still need testing.
 
 The Chinese interfaces retain their Chinese product name; all other supported interfaces use **Three Cats Keybridge**.
 

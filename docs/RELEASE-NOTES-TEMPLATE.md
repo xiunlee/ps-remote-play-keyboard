@@ -7,9 +7,9 @@
 
 ## 注意事項
 
-1. 鍵盤與連點只在官方 PS Remote Play 位於前景時作用；切換視窗會停止連點，F8 可啟用或暫停。
+1. 鍵盤與連點只在支援的遠端遊玩程式位於前景時作用；切換視窗會停止連點，F8 可啟用或暫停。
 2. 適合 2D 遊戲，尤其是以選單和方向操作為主的 JRPG。不提供滑鼠瞄準或右搖桿方向映射，不適合需要靈活視角或精細類比控制的 3D 遊戲。
-3. 程式不會自動安裝或更換驅動。裝置顯示已連接，不代表 PS5 已收到操作；各版本的實機相容性可能不同。
+3. 程式不會自動安裝或更換驅動。裝置顯示已連接，不代表遊戲已收到操作；各版本的實機相容性可能不同。
 4. 執行元件目前未提供數位簽章；下載後請先閱讀內附說明。
 5. 本程式為獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。
 
@@ -35,9 +35,9 @@
 
 ## Important notes
 
-1. Keyboard input and auto-repeat work only while official PS Remote Play is in the foreground. Switching windows stops auto-repeat; F8 enables or pauses control.
+1. Keyboard input and auto-repeat work only while the supported remote-play app is in the foreground. Switching windows stops auto-repeat; F8 enables or pauses control.
 2. Designed for 2D games, especially menu- and direction-based JRPGs. Mouse aiming and right-stick direction mapping are unavailable; it is unsuitable for 3D games that require flexible camera movement or fine analog control.
-3. The app does not automatically install or replace drivers. A connected device indicator does not prove that the PS5 received input; compatibility can vary between releases.
+3. The app does not automatically install or replace drivers. A connected device indicator does not prove that the game received input; compatibility can vary between releases.
 4. Runtime binaries are currently unsigned. Read the included guide after downloading.
 5. This is an independent project, not an official Sony product, and is not affiliated with or endorsed by Sony.
 
