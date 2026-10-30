@@ -10,8 +10,9 @@ The source asset on the same GitHub Release page contains the corresponding Wind
 project snapshot from the recorded commit, a pinned upstream VIIPER source ZIP, the backend wrapper's module files,
 and the complete source of the three Go modules linked into the backend. See
 `SOURCE.json` and `SHA256SUMS.txt` in that asset for identities. Unrelated Mac
-research and Mac source are excluded from this Windows source asset; the full
-repository remains available at the recorded commit. This is not an
+research, Mac source, legacy prototype binaries and artwork, and preview images
+are excluded from this Windows source asset; the full repository remains
+available at the recorded commit. This is not an
 offline toolchain bundle: compiler downloads and Go module resolution may need
 network access. No Sony account, controller, driver operation or payment is needed
 to compile or run the offline tests.

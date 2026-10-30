@@ -57,7 +57,7 @@ $projectArchive=Join-Path $source 'project.zip'
 # The Windows source package includes all corresponding Windows source, build
 # scripts and notices. Separate Mac research is available in the repository; it
 # is not part of this Windows binary and may contain platform-local audit paths.
-& git -C $repo archive --format=zip ('--output='+$projectArchive) $manifest.sourceCommit -- . ':(exclude)research/macos-handoff' ':(exclude)research/macos-native' ':(exclude)src/macos' ':(exclude)ViGEmClient.dll' ':(exclude)assets/branding/app.ico' ':(exclude)assets/branding/ps-mark.png'
+& git -C $repo archive --format=zip ('--output='+$projectArchive) $manifest.sourceCommit -- . ':(exclude)research/macos-handoff' ':(exclude)research/macos-native' ':(exclude)src/macos' ':(exclude)ViGEmClient.dll' ':(exclude)assets/branding/app.ico' ':(exclude)assets/branding/ps-mark.png' ':(exclude)assets/previews'
 if($LASTEXITCODE -ne 0){throw 'Cannot archive exact release source.'}
 Expand-Archive -LiteralPath $projectArchive -DestinationPath (Join-Path $source 'project')
 foreach($entry in $manifest.sources){
@@ -105,7 +105,7 @@ $sourceInfo=[ordered]@{
     version=$version;sourceCommit=$manifest.sourceCommit;
     upstreamCommit=$backendRecord.upstreamCommit;upstreamArchiveSha256=$backendRecord.upstreamArchiveSha256;
     linkedGoModules=$moduleRecords;offlineBuildClaim=$false;
-    note='Windows project snapshot excludes unrelated Mac research, Mac source and legacy prototype binary and artwork; the full repository remains available at the recorded commit. Windows/.NET and compiler toolchains are prerequisites; see REBUILD.md. No personal settings or diagnostics included.'
+    note='Windows project snapshot excludes unrelated Mac research, Mac source, legacy prototype binary and artwork, and preview screenshots; the full repository remains available at the recorded commit. Windows/.NET and compiler toolchains are prerequisites; see REBUILD.md. No personal settings or diagnostics included.'
 }
 [IO.File]::WriteAllText((Join-Path $source 'SOURCE.json'),($sourceInfo|ConvertTo-Json -Depth 5),$utf8)
 $sourceChecksums=@(Get-ChildItem -LiteralPath $source -Recurse -File | Sort-Object FullName | ForEach-Object {
