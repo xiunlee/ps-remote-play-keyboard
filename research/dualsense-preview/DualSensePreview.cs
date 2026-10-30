@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -22,6 +23,13 @@ namespace PSKeyboard
         private const string UsbipHash = "817DA219FA153B4B37C3BC1AA8FCC63F33E046188C57CC3DD2C60A6EF0883C56";
         private const string UsbipDllHash = "F123EF5D288B817A890CBE39A3C2D212B3D8B1765C691C8703CCB76C7337986C";
         internal const string Persona = "dualsensegamepadv5";
+        // The neutral main-window palette is local to this preview. The older PS4
+        // interface and the shared binding editor keep their existing styling.
+        private static readonly Color Canvas = Color.FromArgb(248, 248, 246);
+        private static readonly Color MainInk = Color.FromArgb(38, 38, 38);
+        private static readonly Color MainMuted = Color.FromArgb(96, 96, 96);
+        private static readonly Color MainBorder = Color.FromArgb(215, 215, 212);
+        private static readonly Color MainSurface = Color.White;
         private static string ModeLabel { get { return PreviewText.T("ModeLabel"); } }
         internal static string WindowTitle { get { return UiText.T("AppTitle") + " V " + BuildInfo.Version; } }
         private readonly object sessionGate = new object(), logGate = new object(), focusGate = new object();
@@ -33,7 +41,7 @@ namespace PSKeyboard
         private readonly string sonyPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Sony", "PS Remote Play", "RemotePlay.exe");
         private readonly string usbipPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "USBip", "usbip.exe");
         private readonly int ownPid = Process.GetCurrentProcess().Id;
-        private readonly Button connect = new Button(), toggle = new Button(), configure = new Button();
+        private readonly Button connect = new PillButton(), toggle = new PillButton(), configure = new PillButton();
         private readonly bool preview;
         private readonly StatusDot connectionDot = new StatusDot(), keyboardDot = new StatusDot();
         private readonly Label[] keySummaries = new Label[4];
@@ -181,7 +189,7 @@ namespace PSKeyboard
             input = new KeyboardControlPipeline(delegate { return profile; });
             Text = WindowTitle; ClientSize = new Size(960, 840); MinimumSize = new Size(900, 720);
             StartPosition = FormStartPosition.CenterScreen; AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = KeyboardUi.Background; ForeColor = KeyboardUi.Ink; Font = KeyboardUi.Font(10, FontStyle.Regular);
+            BackColor = Canvas; ForeColor = MainInk; Font = KeyboardUi.Font(10, FontStyle.Regular);
             Icon brandIcon = KeyboardUi.LoadAppIcon(); if (brandIcon != null) { Icon = brandIcon; Disposed += delegate { brandIcon.Dispose(); }; }
             BuildInterface(badProfile);
             if (preview)
@@ -215,64 +223,106 @@ namespace PSKeyboard
             TableLayoutPanel shell = KeyboardUi.Table(1); shell.RowCount = 2;
             shell.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             shell.RowStyles.Add(new RowStyle(SizeType.AutoSize)); shell.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); Controls.Add(shell);
-            TableLayoutPanel hero = AutoTable(3, 1); hero.BackColor = KeyboardUi.Accent; hero.Padding = new Padding(28, 20, 28, 20); hero.MinimumSize = new Size(0, 140);
-            hero.Paint += delegate(object sender, PaintEventArgs e) {
-                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                using (Pen line = new Pen(Color.FromArgb(24, Color.White), 1))
-                    for (int i = 0; i < 4; i++) e.Graphics.DrawLines(line, new Point[] {
-                        new Point(hero.Width - 340 + i * 42, 0), new Point(hero.Width - 430 + i * 42, hero.Height),
-                        new Point(hero.Width - 180 + i * 42, hero.Height) });
-            };
-            hero.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 112)); hero.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100)); hero.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160));
+            TableLayoutPanel hero = AutoTable(3, 1); hero.BackColor = Canvas; hero.Padding = new Padding(28, 20, 28, 12); hero.MinimumSize = new Size(0, 120);
+            hero.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90)); hero.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100)); hero.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 130));
             Image mark = KeyboardUi.LoadBrandMark();
-            PictureBox brand = new PictureBox { Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = mark, MinimumSize = new Size(0, 90), Margin = new Padding(0, 0, 18, 0) };
+            PictureBox brand = new PictureBox { Dock = DockStyle.Fill, SizeMode = PictureBoxSizeMode.Zoom, Image = mark, BackColor = KeyboardUi.Accent, MinimumSize = new Size(0, 70), Margin = new Padding(0, 0, 18, 0), Padding = new Padding(7) };
             if (mark != null) brand.Disposed += delegate { mark.Dispose(); };
             hero.Controls.Add(brand, 0, 0);
             TableLayoutPanel wordmark = AutoTable(1, 3);
-            Label eyebrow = WrappedLabel(PreviewText.T("Eyebrow"), 9, Color.FromArgb(255, 216, 229));
-            Label title = WrappedLabel(UiText.T("AppTitle"), 27, Color.White); title.Font = KeyboardUi.Font(27, FontStyle.Bold);
-            Label subtitle = WrappedLabel(UiText.T("AppSubtitle"), 10, Color.White);
+            Label eyebrow = WrappedLabel(PreviewText.T("Eyebrow"), 9, MainMuted);
+            Label title = WrappedLabel(UiText.T("AppTitle"), 23, MainInk); title.Font = KeyboardUi.Font(23, FontStyle.Bold);
+            Label subtitle = WrappedLabel(UiText.T("AppSubtitle"), 10, MainMuted);
             wordmark.Controls.Add(eyebrow, 0, 0); wordmark.Controls.Add(title, 0, 1); wordmark.Controls.Add(subtitle, 0, 2); hero.Controls.Add(wordmark, 1, 0);
-            Label version = WrappedLabel("DUALSENSE\r\nV " + BuildInfo.Version, 10, Color.White); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
+            Label version = WrappedLabel("DUALSENSE\r\nV " + BuildInfo.Version, 10, MainMuted); version.Font = KeyboardUi.CodeFont(10, FontStyle.Regular); version.TextAlign = ContentAlignment.MiddleRight; hero.Controls.Add(version, 2, 0);
             shell.Controls.Add(hero, 0, 0);
             Panel scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(28, 22, 28, 18), Margin = Padding.Empty };
             TableLayoutPanel body = AutoTable(1, 8);
             scroll.Controls.Add(body); shell.Controls.Add(scroll, 0, 1);
             TableLayoutPanel mode = AutoTable(2, 1); mode.Margin = new Padding(0, 0, 0, 18); mode.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25)); mode.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 75));
-            Label modeTitle = WrappedLabel(PreviewText.T("ModeHeading"), 12, KeyboardUi.Ink); modeTitle.Font = KeyboardUi.Font(12, FontStyle.Bold); modeTitle.Margin = new Padding(0, 0, 12, 0);
-            Label fixedMode = WrappedLabel(ModeLabel, 12, KeyboardUi.Ink);
+            Label modeTitle = WrappedLabel(PreviewText.T("ModeHeading"), 12, MainInk); modeTitle.Font = KeyboardUi.Font(12, FontStyle.Bold); modeTitle.Margin = new Padding(0, 0, 12, 0);
+            Label fixedMode = WrappedLabel(ModeLabel, 12, MainInk);
             mode.Controls.Add(modeTitle, 0, 0); mode.Controls.Add(fixedMode, 1, 0); body.Controls.Add(mode, 0, 0);
             TableLayoutPanel states = AutoTable(2, 1); states.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 56)); states.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44));
             states.Controls.Add(StatusCard(PreviewText.T("ConnectionHeading"), status, connectionDot, new Padding(0, 0, 12, 12)), 0, 0);
             states.Controls.Add(StatusCard(UiText.T("KeyboardTitle"), keyboardStatus, keyboardDot, new Padding(0, 0, 0, 12)), 1, 0); body.Controls.Add(states, 0, 1);
             status.Text = PreviewText.T("Disconnected"); keyboardStatus.Text = PreviewText.T("InitiallyPaused");
             FlowLayoutPanel actions = AutoActions(); actions.Margin = new Padding(0, 0, 0, 12);
-            KeyboardUi.Button(toggle, UiText.T("EnableKeyboard"), true); KeyboardUi.Button(configure, PreviewText.T("SettingsButton"), false); KeyboardUi.Button(connect, PreviewText.T("ConnectButton"), false);
+            MainButton(toggle, UiText.T("EnableKeyboard"), false); MainButton(configure, PreviewText.T("SettingsButton"), false); MainButton(connect, PreviewText.T("ConnectButton"), true);
             toggle.Enabled = false; connect.Click += ConnectClick; toggle.Click += delegate { Toggle(); }; configure.Click += delegate { EditBindings(); };
             actions.Controls.AddRange(new Control[] { toggle, configure, connect }); body.Controls.Add(actions, 0, 2);
-            TableLayoutPanel guide = AutoTable(4, 2); guide.BackColor = KeyboardUi.Surface; guide.Padding = new Padding(18, 12, 18, 12); guide.Margin = new Padding(0, 0, 0, 12);
-            Label guideTitle = WrappedLabel(PreviewText.T("BindingsHeading"), 11, KeyboardUi.Ink); guideTitle.Font = KeyboardUi.Font(11, FontStyle.Bold); guideTitle.Margin = new Padding(0, 0, 0, 12);
+            TableLayoutPanel guide = AutoTable(4, 2); guide.BackColor = MainSurface; guide.Padding = new Padding(18, 12, 18, 12); guide.Margin = new Padding(0, 0, 0, 12);
+            Label guideTitle = WrappedLabel(PreviewText.T("BindingsHeading"), 11, MainInk); guideTitle.Font = KeyboardUi.Font(11, FontStyle.Bold); guideTitle.Margin = new Padding(0, 0, 0, 12);
             guide.Controls.Add(guideTitle, 0, 0); guide.SetColumnSpan(guideTitle, 4);
-            for (int i = 0; i < 4; i++) { guide.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25)); keySummaries[i] = WrappedLabel("", 10, KeyboardUi.Ink); keySummaries[i].Margin = new Padding(0, 0, 12, 0); guide.Controls.Add(keySummaries[i], i, 1); }
+            for (int i = 0; i < 4; i++) { guide.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25)); keySummaries[i] = WrappedLabel("", 10, MainInk); keySummaries[i].Margin = new Padding(0, 0, 12, 0); guide.Controls.Add(keySummaries[i], i, 1); }
             UpdateBindingSummary(); body.Controls.Add(guide, 0, 3);
-            Label help = WrappedLabel(PreviewText.T("ControlsHelp") + "\r\n" + PreviewText.T("GameSuitability"), 9, KeyboardUi.Muted); help.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(help, 0, 4);
+            Label help = WrappedLabel(PreviewText.T("ControlsHelp") + "\r\n" + PreviewText.T("GameSuitability"), 9, MainMuted); help.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(help, 0, 4);
             notice.Text = badProfile ? UiText.T("ProfileLoadWarning") : PreviewText.T("ProfilePreserved");
-            notice.ForeColor = badProfile ? KeyboardUi.Amber : KeyboardUi.Muted; notice.Font = KeyboardUi.Font(9, FontStyle.Regular); notice.AutoSize = true; notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; notice.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(notice, 0, 5);
-            Label connectionScope = WrappedLabel(PreviewText.T("ConnectionScope"), 9, KeyboardUi.Muted); connectionScope.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(connectionScope, 0, 6);
-            TableLayoutPanel support = AutoTable(1, 3); support.BackColor = KeyboardUi.Surface; support.Padding = new Padding(18, 14, 18, 10); support.Margin = new Padding(0, 8, 0, 0);
-            Label free = WrappedLabel(PreviewText.T("FreeOpenSource"), 10, KeyboardUi.Ink); free.Font = KeyboardUi.Font(10, FontStyle.Bold); free.Margin = new Padding(0, 0, 0, 8);
-            Label cats = WrappedLabel(PreviewText.T("CatsSupport"), 10, KeyboardUi.Muted); cats.Margin = new Padding(0, 0, 0, 12);
+            notice.ForeColor = badProfile ? KeyboardUi.Amber : MainMuted; notice.Font = KeyboardUi.Font(9, FontStyle.Regular); notice.AutoSize = true; notice.Dock = DockStyle.Fill; notice.TextAlign = ContentAlignment.MiddleLeft; notice.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(notice, 0, 5);
+            Label connectionScope = WrappedLabel(PreviewText.T("ConnectionScope"), 9, MainMuted); connectionScope.Margin = new Padding(0, 0, 0, 12); body.Controls.Add(connectionScope, 0, 6);
+            TableLayoutPanel support = AutoTable(1, 3); support.BackColor = MainSurface; support.Padding = new Padding(18, 14, 18, 10); support.Margin = new Padding(0, 8, 0, 0);
+            Label free = WrappedLabel(PreviewText.T("FreeOpenSource"), 10, MainInk); free.Font = KeyboardUi.Font(10, FontStyle.Bold); free.Margin = new Padding(0, 0, 0, 8);
+            Label cats = WrappedLabel(PreviewText.T("CatsSupport"), 10, MainMuted); cats.Margin = new Padding(0, 0, 0, 12);
             FlowLayoutPanel supportActions = AutoActions();
-            Button sponsor = new Button(), feedback = new Button();
-            KeyboardUi.Button(sponsor, PreviewText.T("SponsorButton"), false); KeyboardUi.Button(feedback, PreviewText.T("FeedbackButton"), false);
+            Button sponsor = new PillButton(), feedback = new PillButton();
+            MainButton(sponsor, PreviewText.T("SponsorButton"), false); MainButton(feedback, PreviewText.T("FeedbackButton"), false);
             sponsor.Click += delegate { OpenSupportLink(true); }; feedback.Click += delegate { OpenSupportLink(false); };
             if (SupportLinks.SponsorAvailable) supportActions.Controls.Add(sponsor); else sponsor.Dispose();
             supportActions.Controls.Add(feedback);
             if (!SupportLinks.SponsorAvailable)
             {
-                Label pending = WrappedLabel(PreviewText.T("SponsorUnavailable"), 9, KeyboardUi.Muted); pending.Dock = DockStyle.None; pending.Margin = new Padding(0, 12, 0, 0); supportActions.Controls.Add(pending);
+                Label pending = WrappedLabel(PreviewText.T("SponsorUnavailable"), 9, MainMuted); pending.Dock = DockStyle.None; pending.Margin = new Padding(0, 12, 0, 0); supportActions.Controls.Add(pending);
             }
             support.Controls.Add(free, 0, 0); support.Controls.Add(cats, 0, 1); support.Controls.Add(supportActions, 0, 2); body.Controls.Add(support, 0, 7);
+        }
+
+        private static void MainButton(Button button, string text, bool primary)
+        {
+            KeyboardUi.Button(button, text, primary);
+            Action colors = delegate {
+                button.BackColor = !button.Enabled ? Color.FromArgb(229, 229, 229) : primary ? MainInk : MainSurface;
+                button.ForeColor = !button.Enabled ? Color.FromArgb(110, 110, 110) : primary ? Color.White : MainInk;
+                button.FlatAppearance.BorderColor = !button.Enabled ? Color.FromArgb(229, 229, 229) : primary ? MainInk : MainBorder;
+            };
+            button.FlatAppearance.MouseOverBackColor = primary ? Color.FromArgb(65, 65, 65) : Color.FromArgb(238, 238, 236);
+            button.FlatAppearance.MouseDownBackColor = primary ? Color.Black : Color.FromArgb(225, 225, 223);
+            button.EnabledChanged += delegate { colors(); };
+            colors();
+        }
+
+        private sealed class PillButton : Button
+        {
+            private bool hovered, pressed;
+            internal PillButton()
+            {
+                SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            }
+            protected override void OnMouseEnter(EventArgs e) { hovered = true; Invalidate(); base.OnMouseEnter(e); }
+            protected override void OnMouseLeave(EventArgs e) { hovered = false; pressed = false; Invalidate(); base.OnMouseLeave(e); }
+            protected override void OnMouseDown(MouseEventArgs e) { pressed = true; Invalidate(); base.OnMouseDown(e); }
+            protected override void OnMouseUp(MouseEventArgs e) { pressed = false; Invalidate(); base.OnMouseUp(e); }
+            protected override void OnGotFocus(EventArgs e) { base.OnGotFocus(e); Invalidate(); }
+            protected override void OnLostFocus(EventArgs e) { base.OnLostFocus(e); Invalidate(); }
+            protected override void OnPaint(PaintEventArgs e)
+            {
+                Control parent = Parent;
+                while (parent != null && parent.BackColor == Color.Transparent) parent = parent.Parent;
+                e.Graphics.Clear(parent == null ? Canvas : parent.BackColor);
+                if (Width <= 2 || Height <= 2) return;
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                int diameter = Math.Min(Height - 2, Width - 2);
+                using (GraphicsPath path = new GraphicsPath()) {
+                    path.AddArc(1, 1, diameter, diameter, 90, 180);
+                    path.AddArc(Width - diameter - 1, 1, diameter, diameter, 270, 180);
+                    path.CloseFigure();
+                    Color fill = Enabled && pressed ? FlatAppearance.MouseDownBackColor : Enabled && hovered ? FlatAppearance.MouseOverBackColor : BackColor;
+                    using (Brush brush = new SolidBrush(fill)) e.Graphics.FillPath(brush, path);
+                    using (Pen border = new Pen(FlatAppearance.BorderColor)) e.Graphics.DrawPath(border, path);
+                }
+                TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, ForeColor,
+                    TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix | TextFormatFlags.EndEllipsis);
+                if (Focused && ShowFocusCues) ControlPaint.DrawFocusRectangle(e.Graphics, Rectangle.Inflate(ClientRectangle, -8, -7));
+            }
         }
 
         private static TableLayoutPanel AutoTable(int columns, int rows)
@@ -314,10 +364,10 @@ namespace PSKeyboard
 
         private static Control StatusCard(string heading, Label value, StatusDot dot, Padding margin)
         {
-            TableLayoutPanel card = AutoTable(2, 2); card.BackColor = KeyboardUi.Surface; card.Padding = new Padding(16, 10, 14, 14); card.Margin = margin;
+            TableLayoutPanel card = AutoTable(2, 2); card.BackColor = MainSurface; card.Padding = new Padding(16, 10, 14, 14); card.Margin = margin;
             card.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 28)); card.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             dot.Margin = new Padding(0, 3, 0, 0); card.Controls.Add(dot, 0, 0);
-            Label title = WrappedLabel(heading, 9, KeyboardUi.Muted); title.Margin = new Padding(0, 0, 0, 8); card.Controls.Add(title, 1, 0);
+            Label title = WrappedLabel(heading, 9, MainMuted); title.Margin = new Padding(0, 0, 0, 8); card.Controls.Add(title, 1, 0);
             value.AutoSize = true; value.Dock = DockStyle.Fill; value.Font = KeyboardUi.Font(10, FontStyle.Regular); value.TextAlign = ContentAlignment.MiddleLeft; value.Margin = Padding.Empty;
             card.Controls.Add(value, 1, 1); return card;
         }

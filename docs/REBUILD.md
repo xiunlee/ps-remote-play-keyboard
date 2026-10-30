@@ -1,16 +1,17 @@
-# Building PS Remote Play Keyboard 0.1.1 from source
+# Building PS Remote Play Keyboard 0.1.2 from source
 
-Version 0.1.1 standardizes the PS Remote Play Keyboard name in all non-Chinese
-interfaces. Version 0.1.0 and historical alpha tags and assets remain unchanged.
-A branding or version-name update does not expand
+Version 0.1.2 updates the Windows main-window design. Earlier tags and assets remain unchanged.
+A visual or version-name update does not expand
 the verified gameplay scope or remove the unsigned-binary and external-driver
 limitations. Runtime operation requires the complete matching usbip-win2 0.9.8.1
 driver, CLI and DLL; building the program does not install or operate them.
 
-The source asset on the same GitHub Release page contains the exact project
-snapshot, a pinned upstream VIIPER source ZIP, the backend wrapper's module files,
+The source asset on the same GitHub Release page contains the corresponding Windows
+project snapshot from the recorded commit, a pinned upstream VIIPER source ZIP, the backend wrapper's module files,
 and the complete source of the three Go modules linked into the backend. See
-`SOURCE.json` and `SHA256SUMS.txt` in that asset for identities. This is not an
+`SOURCE.json` and `SHA256SUMS.txt` in that asset for identities. Unrelated Mac
+research and Mac source are excluded from this Windows source asset; the full
+repository remains available at the recorded commit. This is not an
 offline toolchain bundle: compiler downloads and Go module resolution may need
 network access. No Sony account, controller, driver operation or payment is needed
 to compile or run the offline tests.
@@ -30,7 +31,7 @@ out the exact tag or the full commit named in the source asset's `SOURCE.json`:
 ```powershell
 git clone https://github.com/xiunlee/ps-remote-play-keyboard.git
 Set-Location ps-remote-play-keyboard
-git checkout --detach v0.1.1
+git checkout --detach v0.1.2
 ```
 
 Use the supplied `dependencies/VIIPER-source.zip`. It must have SHA-256

@@ -6,7 +6,7 @@
 
 **本版以 2D 遊戲為定位，尤其適合以選單與方向操作為主的 JRPG。** 目前沒有滑鼠瞄準或右搖桿方向映射，不適合需要靈活視角或精細類比控制的 3D 遊戲。是否適用仍取決於個別遊戲的操作需求，不保證所有 JRPG 都適合。
 
-**免費開源 · 作者 xiunlee · GPL-3.0-only。** 本手冊對應 **0.1.1 國際化品牌修正版**，中文名稱保留「上班不要玩」，非中文語系統一使用 **PS Remote Play Keyboard**。版本名稱不再附加 alpha 序號，也不代表已完成全部實機或長時間驗收；限制見下方測試範圍。所有功能免費，贊助不影響功能。[下載、更新與對應原始碼](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。
+**免費開源 · 作者 xiunlee · GPL-3.0-only。** 本手冊對應 **0.1.2 主介面更新版**，中文名稱保留「上班不要玩」，非中文語系使用 **PS Remote Play Keyboard**。版本名稱不代表已完成全部實機或長時間驗收；限制見下方測試範圍。所有功能免費，贊助不影響功能。[下載、更新與對應原始碼](https://github.com/xiunlee/ps-remote-play-keyboard/releases)。
 
 程式的執行元件未提供數位簽章；SHA-256 只用於核對檔案完整性，不代表簽章或相容性驗收。
 
@@ -90,9 +90,9 @@
 
 ## 測試範圍
 
-alpha.9 的四種候選已有使用者透過官方 Remote Play 操作 PS5 的成功回報，目前採用一般 DualSense 的純手把模式。**0.1.1 尚未取得該版逐項使用者實機驗收**；Windows 認出裝置、綠燈或離線測試通過，都不等於遊戲已接受操作。長時間使用、各種重連、重新開機與新電腦安裝仍需更多驗證。
+alpha.9 的四種候選已有使用者透過官方 Remote Play 操作 PS5 的成功回報，目前採用一般 DualSense 的純手把模式。**0.1.2 尚未取得該版逐項使用者實機驗收**；Windows 認出裝置、綠燈或離線測試通過，都不等於遊戲已接受操作。長時間使用、各種重連、重新開機與新電腦安裝仍需更多驗證。
 
-2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作；未指定本工具的建置版本，因此不視為 0.1.1 逐鍵或連點驗收，也不代表所有 JRPG 都相容。
+2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作；未指定本工具的建置版本，因此不視為 0.1.2 逐鍵或連點驗收，也不代表所有 JRPG 都相容。
 
 此版本沒有 30 分鐘使用期限。音訊、觸覺、自適應扳機、滑鼠、錄製／重播及 macOS 不列為本版已完成的功能。更多資訊見 [支援範圍](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/docs/PRODUCT-SCOPE.md)與 [alpha.9 操作紀錄](https://github.com/xiunlee/ps-remote-play-keyboard/blob/codex/commercial-preview/research/dualsense-preview/ALPHA9-TRIAL.md)。
 
