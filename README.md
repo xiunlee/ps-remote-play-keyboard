@@ -14,7 +14,7 @@
 
 中文介面保留「上班不要玩」；英文、日文、韓文、德文、法文、西班牙文與巴西葡語統一使用 **PS Remote Play Keyboard**，包含主畫面、設定頁、說明及回饋主旨。
 
-三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.1.md)。Mac 版尚未開發，後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
+三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.1.md)。Mac 版尚未提供；已完成[首輪 Mac 環境與離線研究](research/macos-handoff/README.md)，虛擬裝置與官方 Remote Play 相容性仍待驗證。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
 
 alpha.9 的四種 DualSense 方案已有使用者透過官方 Remote Play 操作 PS5 的[成功回報](research/dualsense-preview/ALPHA9-TRIAL.md)。目前固定其中第二種「一般 DualSense／純手把」模式；alpha.10 已完成設定與連點整合、本機交付，alpha.11 接續加入免費開源說明、回饋與公開封裝。上述結果不代表所有電腦、遊戲或新版本均已驗收。
 

@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "research_run": "mac-offline.1",
+  "success": true,
+  "time_utc": "2026-10-30T02:54:27.532011+00:00",
+  "timezone_for_report": "Asia/Taipei",
+  "repository_head": "1e46bd0bf5774a724910621ec4d648df27c146ae",
+  "product_version_unchanged": "0.1.1",
+  "macos": "26.6.2",
+  "macos_build": "25G83",
+  "architecture": "arm64",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "sdk": "26.5",
+  "python": "3.9.6",
+  "native_original_suite": {
+    "checks": 5743,
+    "failures": 0,
+    "stdout": "KEYBOARD_MERGE_TEST checks=5743 failures=0; synthetic reports only; no device or Remote Play access"
+  },
+  "native_ctypes_and_python_reference": {
+    "checks": 124,
+    "action_vectors": 22,
+    "original_csharp_executed": false,
+    "original_go_executed": false
+  },
+  "scope": {
+    "synthetic_only": true,
+    "devices_created": false,
+    "network_listeners": false,
+    "keyboard_captured": false,
+    "sony_accessed": false,
+    "temporary_build_directory_removed": true,
+    "production_socket_bus_device_cleanup_tested": false
+  },
+  "source_sha256": {
+    "research/native-merge/keyboard_merge.c": "35d41918ee30f7053bd475426d009b366be1d0c96e45f85021ee3f05b2f37a56",
+    "research/native-merge/keyboard_merge.h": "5f2cceb5876cbe22a52842010cca310936122746d1ebd3e8bca5a95065eed8af",
+    "research/native-merge/keyboard_merge_test.c": "5f305cc3131af413057a00528364ce4116bf3763f189e3061048dcf561d7e040",
+    "research/dualsense-v5-test/V5Protocol.cs": "6242d3daf3157c2c839bce735f6cedd2bb7f261ebb72c6aadbed5426062014ee",
+    "research/dualsense-v5-test/V5ProtocolTests.cs": "940dec7ebd4b7d0580e4d623c83115edc6c2ad82f1c1f4d31afc6b26627a9ccc",
+    "research/dualsense-preview/CandidateTransport.cs": "e0c7559580c6684a3ec484fb111a47b3f44c5be497f0fc4d7b98f9dc3a94a37c",
+    "research/dualsense-preview/backend/main.go": "b75ddb7a8b86336736716d38e1e7c012b5515e3085e32a05a7e01491fe61f305",
+    "research/dualsense-preview/backend/main_test.go": "b7b8597062e200659a8cc49f30d84ae4dcb0d12e672f7a21d91b21b9091f06aa",
+    "src/keyboard-pad/KeyboardMapping.cs": "7dac0d686e376327a1b364b0babadcf2e2ca3f02b21685cb15dede0041dbb472",
+    "src/keyboard-pad/ViiperTransport.cs": "5c46be155da8da99a00da6fe93495a823454e614d50c627a0a0ed63b299e5255",
+    "research/macos-handoff/run_offline.py": "4c25cfff22f774617f296d47974809aca272b591bacc832eef131d97e5b0ec31"
+  },
+  "temporary_artifact_sha256": {
+    "native_suite": "35cb8b31668636c624795866fe6aacae7a3333042bf594adbe7ca4cb363a20e2",
+    "native_dylib": "81e499f84fabf1e06e619e977027053448380432de640b4d6af7073a31507d15"
+  },
+  "limitations": [
+    "Python reference is not the original C# codec or transport.",
+    "Memory-buffer EOF/cleanup is not network, backend, HID or Sony acceptance.",
+    "Original C#/Go tests were not run; no Mac keyboard key codes are mapped."
+  ]
+}

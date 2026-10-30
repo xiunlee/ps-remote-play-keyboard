@@ -1,6 +1,6 @@
 # 上班不要玩：總進度與換串交接
 
-更新日期：2026-10-29（Asia/Taipei）。這份文件是下一串的入口，將已實測、離線驗證與尚未完成的工作分開記錄。閱讀後可直接繼續已授權的開發與隔離研究，不必重新詢問已決定的產品方向。
+更新日期：2026-10-30（Asia/Taipei）。這份文件是下一串的入口，將已實測、離線驗證與尚未完成的工作分開記錄。閱讀後可直接繼續已授權的開發與隔離研究，不必重新詢問已決定的產品方向。
 
 ## 1. 目前結論與接續目標
 
@@ -18,7 +18,7 @@
 - 中文語系保留「上班不要玩」，其餘七個語系統一為 **PS Remote Play Keyboard**，涵蓋主畫面、設定頁、說明、回饋主旨及英文文件；不覆寫 v0.1.0。
 - **單款遊戲回報**：2026-10-29，使用者確認《Final Fantasy Resonance》可正常操作；未指定本工具 build，不視為 v0.1.1 逐鍵、改鍵或連點驗收，不擴張為所有 JRPG 相容性保證。
 - 最新唯一贊助入口為 [PayPal](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)，自願 US$1 幫三隻貓咪買罐頭；僅點擊後開瀏覽器，本程式不接收付款資料。公開頁設定已唯讀核對為啟用、USD 1.00，未實付驗收入帳。回饋固定 `xiun1019@gmail.com`，不自動寄信。
-- **Windows v0.1.1 發布、交付與清理已完成，可接續 Mac 交接**：由使用者切換到 Mac 後，按 [MAC-HANDOFF.md](MAC-HANDOFF.md)唯讀核對環境並隔離研究。Mac 版尚未開發，不承諾免實體手把可行，不在目前 Windows 電腦先改平台；Windows 逐項實機待驗仍獨立保留。
+- **Windows v0.1.1 收尾完成；Mac 首輪交接已於 2026-10-30 執行**：macOS 26.6.2 arm64／官方 Remote Play 9.5.0 完成唯讀盤點；原 native 核心 5743 項及另列的 124 項參考協定檢查通過。見 [Mac 首輪紀錄](../research/macos-handoff/README.md)。尚無 Mac App，未建立虛擬裝置或操作 Sony；接續 CoreHID entitlement／簽章與裝置層驗證，Windows 實機待驗仍獨立保留。
 - 使用者因空間有限授權「舊版本在本地端都清除吧，就留下最新版本」，取代先前本機保留多版本的規則。歷史 v0.1.0 清理累計 118 項、5,589,691,996 logical bytes；本輪 **v0.1.1 另完成 9 項、753,491,748 logical bytes，失敗 0 項**。這些包含重建暫存，均不是淨磁碟差；本輪 101 項略過中，99 項原已不存在、2 份小型 log 刻意保留。`versions` 與 `versioned-archives` 都只剩 0.1.1，個人設定／備份、驅動、Sony 及 Git 標籤前後比對通過。
 - **隔離研究已完成兩階段**：[V5 使用者空間驗證](../research/dualsense-v5-test/RESULTS-20261029.md) 通過並修正觸控 inactive 差異；後續[四方案的 0.9.8.1 hosted Windows HID 驗證](../research/dualsense-driver-test/RESULTS-20261029.md) 亦全部通過。原候選正式 EXE 的啟動限制與舊 native ABI 未改，候選程式使用另寫的受限入口及匹配 CLI。**Windows Server HID 成功不等於本機 Windows 11／Sony 操作成功。**
 - 使用者進一步明確要求：**沿用目前 0.9.8.1，不降級，不影響能用的 PS4 與 Remote Play**。新增 [獨立 Windows 驅動研究](../research/dualsense-driver-test/README.md)，把接入測試安排在一次性的 GitHub hosted Windows VM；不得把該安裝／接入流程搬到使用者電腦執行。
@@ -68,7 +68,7 @@ GitHub 保存自製原始碼、研究／實機紀錄、設計素材、版本標�
 | 錄製／重播 | 僅有設計，尚未實作 | 動作序列、計時、儲存、單次／循環播放、停止測試 |
 | 滑鼠控制右搖桿 | 本主線未實作，依使用者要求暫緩 | 日後另排，不從舊 ViGEm 原型推論已支援 |
 | 其他實體手把 | 暫緩；舊有線第一代 DS4 中繼保留備援 | 不作首版必要條件；任意手把尚未支援 |
-| macOS | 尚未開發；使用者決定下一串換到 Mac 研究 | 先按 [Mac 交接](MAC-HANDOFF.md)唯讀確認機器與官方 Remote Play，再隔離驗證輸出可行性 |
+| macOS | 首輪環境／候選研究及 native 離線測試完成；無 Mac App | 見 [首輪紀錄](../research/macos-handoff/README.md)；待權限／簽章、自有 HID 建立與讀回／移除、Sony 接受驗證 |
 | 免費開源發布 | GPL-3.0-only、作者 xiunlee；v0.1.1 已正式公開且為 latest，完整來源／notices／雜湊及匿名下載核對完成 | 三個 runtime 二進位未簽章；乾淨安裝、長期相容性及本版逐項實機另驗 |
 | 贊助與回饋 | PayPal 自願贊助 US$1 幫三隻貓咪買罐頭；mailto 固定回饋信箱，僅版本主旨 | 唯一現行公開連結 GET 回應 200、設定啟用、金額 USD 1.00；HTTP GET 不等於實付款，尚未驗收入帳，不使用已撤回連結 |
 

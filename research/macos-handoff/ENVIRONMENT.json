@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-30T10:54:12+08:00",
+  "stage": "read-only environment inventory; no virtual device created",
+  "repository": {
+    "url": "https://github.com/xiunlee/ps-remote-play-keyboard",
+    "relativeCheckout": "ps-remote-play-keyboard",
+    "branch": "codex/commercial-preview",
+    "initialHead": "1e46bd0bf5774a724910621ec4d648df27c146ae",
+    "initialWorktreeClean": true,
+    "initialParentWorkspace": "empty repository with unborn main and no remotes; preserved",
+    "remoteBranchVerifiedEqual": true,
+    "defaultBranchVerified": "codex/commercial-preview",
+    "publicRepositoryVerified": true
+  },
+  "windowsRelease": {
+    "latestTag": "v0.1.1",
+    "releaseId": 427807747,
+    "prerelease": false,
+    "sourceCommit": "3eab9678afe6ea1eddcd35080f2c7e15c1051629",
+    "tagObject": "4a9f43c062d94152040cc4c0eedc605767744bb2",
+    "apiLatestCheckedOn": "2026-10-30",
+    "releaseAssetsDownloadedThisRound": false,
+    "sourceManifestEntries": 45,
+    "exactGitBlobMatches": 44,
+    "lineEndingDifferences": [
+      {
+        "path": "LICENSE",
+        "gitBlobSha256": "cc6429af71d99d103dd5adb2f85aa4da69f0ff5ba19e69fbc5f948c9116ce080",
+        "recordedWindowsSha256": "f24ee094842dc3347a7a06b71373573ce18f6dcb935c81e95623723ee22e6ca6",
+        "crlfNormalizedMatches": true
+      }
+    ]
+  },
+  "macOS": {
+    "version": "26.6.2",
+    "build": "25G83",
+    "architecture": "arm64"
+  },
+  "tools": {
+    "developerDirectory": "/Library/Developer/CommandLineTools",
+    "sdkVersion": "26.5",
+    "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "swift": [
+      "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)",
+      "Target: arm64-apple-macosx26.0"
+    ],
+    "python": "Python 3.9.6",
+    "git": "git version 2.50.1 (Apple Git-155)",
+    "notFoundOnPATH": [
+      "go",
+      "dotnet",
+      "cargo",
+      "rustc",
+      "node",
+      "npm",
+      "brew",
+      "cmake"
+    ]
+  },
+  "sony": {
+    "installation": "/Applications/RemotePlay.app",
+    "bundleId": "com.playstation.RemotePlay",
+    "version": "9.5.0",
+    "build": "9.5.0",
+    "architectures": [
+      "x86_64",
+      "arm64"
+    ],
+    "teamId": "8UT4NVUACP",
+    "codesignStrictDeepVerified": true,
+    "runningAtSnapshot": false,
+    "launchedByThisWork": false,
+    "accountDataRead": false,
+    "finalProcessObservation": {
+      "observedAt": "2026-10-30T11:00:40+08:00",
+      "running": true,
+      "causeOfStateChange": "not determined; no launch or stop command issued by this work"
+    }
+  },
+  "constraints": {
+    "installedSystemComponents": false,
+    "requestedPermissions": false,
+    "createdVirtualDevices": false,
+    "capturedKeyboard": false,
+    "sonyInteraction": false,
+    "PS5Tested": false
+  },
+  "sourceDocuments": {
+    "docs/HANDOFF.md": "a9ee618c6d1093108006bca6cbe46a5b0437d37bd30fe882740feed2e01e1b28",
+    "docs/MAC-HANDOFF.md": "2fc739f03b99cb802fbad6511c5e4426e5b48beced2e110c12c915bf59377661",
+    "docs/VERSIONING.md": "b615d62fe587aed046d3a2198e6bdfbba9027b449b2d62da144176b18e2100e7",
+    "CHANGELOG.md": "6cf6b6346bf398280b86be0dd75645628fe05eb1e34997383a0a821b3eb74761",
+    "packaging/build-records/0.1.1.json": "27834f583fa44d9b8511f2edf1c42fecdcfdfee4b2369e4bd622c1a2e89b7e92",
+    "packaging/build-records/0.1.1-archives.json": "24a91b10893b274025fd765170ab5dab68f60d03d24c891db5a07d0e8f372926"
+  }
+}

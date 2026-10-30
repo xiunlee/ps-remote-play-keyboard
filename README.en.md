@@ -14,7 +14,7 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 All non-Chinese interfaces now use **PS Remote Play Keyboard** consistently in the main window, binding editor, descriptions and feedback subjects. Chinese interfaces retain their Chinese product name.
 
-The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.1.md). A Mac version has not been developed; the [Mac handoff](docs/MAC-HANDOFF.md) describes the next research stage. Both records are in Traditional Chinese.
+The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.1.md). A Mac app is not available. The [first Mac research round](research/macos-handoff/README.md) covers environment checks and offline tests; virtual-device and official Remote Play compatibility remain unverified. See the [Mac handoff](docs/MAC-HANDOFF.md) for next steps. Research records are in Traditional Chinese.
 
 For alpha.9, a user [reported successful PS5 control through the official Remote Play app](research/dualsense-preview/ALPHA9-TRIAL.md) with all four DualSense configurations. The current version uses their chosen second configuration: **standard DualSense, gamepad only**. Alpha.10 integrated key bindings and per-key repeat and was delivered locally; alpha.11 adds the free/open-source notice, feedback and public packaging. These results do not establish compatibility with every PC, game or later build.
 
