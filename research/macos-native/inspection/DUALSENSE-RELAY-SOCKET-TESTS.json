@@ -1,0 +1,54 @@
+{
+  "recordedAtUTC": "2026-10-30T04:50:30.128549+00:00",
+  "scope": "Local fake TCP relay tests and read-only AppKit source review; no app, Sony, HID, guest, or real relay accessed",
+  "sourcesSHA256": {
+    "src/macos/DualSenseRelaySocket.swift": "efacbcf5e5dc8c43033e85fb981fa48f3f4f9b082770cab14abb310923152785",
+    "src/macos/DualSenseRelaySocketTests.swift": "809543bee3e05ed3d2088f2011ad5eb08c1d63691a1b33a6fa95b8cd6da95a81",
+    "src/macos/DualSensePreviewApp.swift": "40c801e23edb42170690a2d120095559f8ae59f75e53f83dce3ba30a740e1132"
+  },
+  "build": {
+    "swiftVersion": "6",
+    "warningsAsErrors": true,
+    "target": "arm64-apple-macos15.0",
+    "exitCode": 0,
+    "binary": "~/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/dualsense-relay-socket-tests-1/tests"
+  },
+  "test": {
+    "exitCode": 0,
+    "checksPassed": 57,
+    "bind": "127.0.0.1 with OS-assigned ephemeral ports",
+    "port33743Used": false,
+    "allFakePeersClosed": true,
+    "coverage": [
+      "fragmented, malformed, truncated and silent greetings",
+      "invalid frame lengths fail closed",
+      "remote EOF and unexpected data fail closed",
+      "250ms exact timeout and late write cannot revive session",
+      "near UInt64 maximum and regressed clock",
+      "watchdog independently closes while main thread is blocked",
+      "watchdog weak lifetime and deinit EOF",
+      "16 concurrent writers remain frame-aligned",
+      "real nonblocking TCP backpressure and final EOF"
+    ],
+    "backpressure": {
+      "acceptedFrames": 9668,
+      "receivedBytes": 473732,
+      "partialBytesObserved": 0,
+      "elapsedNanoseconds": 36807958,
+      "note": "This run exercised would-block failure. Positive partial-write behavior is enforced by count != frame.count fail-close but was not separately induced."
+    }
+  },
+  "review": {
+    "remainingP1Findings": [],
+    "socketFixes": [
+      "TCP_NODELAY",
+      "check heartbeat expiry before any write so delayed watchdog cannot be bypassed by late input"
+    ],
+    "uiChanged": false,
+    "focusStop": "MacControlCore clears state on foreground/modifier changes; next 8ms tick sends neutral. Sleep/session resign, secure input, disabled tap, and stop close the output; no auto reconnect.",
+    "limits": "These tests do not establish Sony game compatibility or actual USB device removal. Those are covered by separate parent-run receipts."
+  },
+  "cleanup": {
+    "removedOwnModuleCacheLogicalBytes": 93408936
+  }
+}

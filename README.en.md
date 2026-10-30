@@ -14,7 +14,13 @@ Free and open source · Author: **xiunlee** · **GPL-3.0-only**. Every feature i
 
 The Chinese interfaces retain their Chinese product name; all other supported interfaces use **Three Cats Keybridge**.
 
-The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.4.md). A Mac app is not available. [Mac research](research/macos-native/README.md) continues; official Remote Play compatibility has not been demonstrated. See the [Mac handoff](docs/MAC-HANDOFF.md) for next steps. Research records are in Traditional Chinese.
+The three runtime binaries are currently **unsigned**. Checksums establish file identity, not digital signing or compatibility with every setup. See the [release and verification record](research/dualsense-preview/RELEASE-0.1.4.md).
+
+**Three Cats Keybridge for Mac** (“上班不要玩” in Chinese) is a keyboard-control and virtual-controller tool for Apple Silicon Macs running macOS 15 or later, using **Sony's official PS Remote Play** connected to a PS5. It does not claim support for every game or application. Version 0.1.3 integrates remapping, repeat modes, saved settings, nine languages, donations and feedback, with native runtime management and verified vendor downloads. The existing App filename and installation identity are retained. Mac 0.1.3 uses its own version manifest and is now build 4. Mac uses **Esc** to enable/pause control; Windows retains **F8**. See the [Mac verification record](docs/MAC-RELEASE-READINESS.md) for final branding build and source evidence. Public release and asset downloads are still pending; Windows 0.1.4 downloads remain available.
+
+In Mac alpha.1 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json), a user confirmed game control, movement stopping when W was released, and Enter opening Options. Mac 0.1.3 build 9 passed complete-App neutral connection, disconnection, reconnection and cleanup on quit, with Light and Dark main-window and settings review. Later branding changes are checked separately and do not establish gameplay success for this version. Gameplay, fresh-Mac installation, sleep and crash scenarios remain unverified. The App is self-signed, without Apple Developer ID or notarization. See the [Mac installation guide](docs/MAC-INSTALL.en.md), [release-readiness checklist](docs/MAC-RELEASE-READINESS.md) and [handoff](docs/MAC-HANDOFF.md); the latter two are in Traditional Chinese.
+
+The Mac App is an independent project, not an official Sony product. It is not affiliated with or endorsed by Sony.
 
 **Interface language:** the app supports English, Traditional Chinese, Simplified Chinese, Japanese, Korean, German, French, Spanish and Brazilian Portuguese. Language follows the Windows UI language, with English as the fallback. Native-speaker review, real high-DPI behavior, multi-monitor use and detailed PS5 acceptance remain unverified. [Main-window preview](assets/previews/0.1.4/main-en.png) · [Binding-editor preview](assets/previews/0.1.4/editor-en.png), both rendered offline.
 
@@ -67,7 +73,7 @@ Your profile is stored separately from the application at `%LOCALAPPDATA%\PSKeyb
 
 **Does repeat keep running when I switch windows?** No. Switching away stops and clears repeat; returning does not restart it. You must trigger it again with a fresh key press. F8, editing, disconnection and exit also stop output.
 
-**Can I aim with a mouse, record macros or use this on a Mac?** Not currently. Mouse-to-right-stick input, recording/replay and macOS are unsupported. Full audio, haptics and adaptive-trigger support are not claimed.
+**Can I aim with a mouse, record macros or use this on a Mac?** Mouse-to-right-stick input and recording/replay are unsupported. Full audio, haptics and adaptive-trigger support are not claimed. Mac has a separate Apple Silicon version; see the Mac section above and the [Mac installation guide](docs/MAC-INSTALL.en.md) for its supported environment and verification limits.
 
 Long sessions, reboots, repeated reconnections, installation on a second PC and all actions in the latest build still need further testing. See the [support scope](docs/PRODUCT-SCOPE.md) and [DualSense notes](research/dualsense-preview/README.md), currently in Traditional Chinese. This is an independent project, not official Sony software.
 

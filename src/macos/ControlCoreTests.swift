@@ -23,16 +23,32 @@ struct MacControlCoreTests {
         check(MacAction.touchClick.mask == 1 << 21 && MacAction.cross.mask == 1 << 8, "native action positions")
         check(defaults[.leftStickLeft].keyCode == 0, "Mac A is key code zero")
         check(defaults[.leftStickUp].keyCode == 0x0D, "Mac W differs from Windows W")
-        check(defaults[.cross].keyCode == 0x7D && defaults[.triangle].keyCode == 0x7E, "arrows are face buttons")
-        check(defaults[.dpadUp].keyCode == 0x73 && defaults[.dpadDown].keyCode == 0x77, "Home End are dpad")
-        check(defaults[.r1].keyCode == 0x75, "ForwardDelete, not Mac Backspace")
-        check(defaults[.dpadLeft].keyCode == 0x72, "Help/Insert explicit Mac mapping")
+        let compactDefaults: [(MacAction, UInt16)] = [
+            (.leftStickUp, 0x0D), (.leftStickDown, 0x01), (.leftStickLeft, 0x00), (.leftStickRight, 0x02),
+            (.dpadUp, 0x7E), (.dpadDown, 0x7D), (.dpadLeft, 0x7B), (.dpadRight, 0x7C),
+            (.triangle, 0x22), (.square, 0x26), (.cross, 0x28), (.circle, 0x25),
+            (.l1, 0x0C), (.r1, 0x0E), (.l2, 0x06), (.r2, 0x08),
+            (.create, 0x30), (.options, 0x24), (.l3, 0x03), (.r3, 0x31), (.ps, 0x23), (.touchClick, 0x11)
+        ]
+        for (action, key) in compactDefaults {
+            check(defaults[action].keyCode == key && defaults.action(forKeyCode: key) == action,
+                  "compact default maps the requested action and key in both directions")
+        }
+        let compactKeys = defaults.bindings.compactMap(\.keyCode)
+        check(compactKeys.count == 22 && Set(compactKeys + [MacBindingProfile.pauseKeyCode]).count == 23,
+              "22 mapped actions plus pause use 23 distinct keys")
+        check(compactKeys.allSatisfy { $0 <= 0x33 || (0x7B...0x7E).contains($0) },
+              "no default needs Fn, function keys, Home, End, Insert or Page keys")
+        check(compactKeys.allSatisfy(MacBindingProfile.isAllowedKey), "all compact defaults are assignable")
+        check(MacBindingProfile.pauseKeyCode == 0x35 && !MacBindingProfile.isAllowedKey(0x35), "Escape is the reserved pause key")
         check(defaults.bindings.allSatisfy { $0.repeatMode == .off && $0.intervalMilliseconds == 100 }, "default repeats off")
         rejects("Windows profile rejected") { _ = try MacBindingProfile(platform: "windows-vk", bindings: defaults.bindings) }
         rejects("other schema rejected") { _ = try MacBindingProfile(version: 2, bindings: defaults.bindings) }
         rejects("missing binding rejected") { _ = try MacBindingProfile(bindings: Array(defaults.bindings.dropLast())) }
         rejects("duplicate binding rejected") { _ = try defaults.withBinding(.cross, keyCode: defaults[.circle].keyCode) }
-        rejects("F8 reserved") { _ = try defaults.withBinding(.cross, keyCode: 0x64) }
+        rejects("Escape reserved") { _ = try defaults.withBinding(.cross, keyCode: 0x35) }
+        check(try defaults.withBinding(.cross, keyCode: 0x64)[.cross].keyCode == 0x64,
+              "F8 is no longer reserved and can be explicitly rebound")
         for key: UInt16 in [0x34, 0x36, 0x37, 0x38, 0x39, 0x3A, 0x3B, 0x3F, 0x48, 0x7F, 0xFFFF] {
             rejects("reserved/unsupported key") { _ = try defaults.withBinding(.cross, keyCode: key) }
         }
@@ -127,44 +143,67 @@ struct MacControlCoreTests {
         core.setEnabled(true)
         check(core.evaluate(atMilliseconds: 5) == 0, "enable while held requires new presses")
 
-        // F8 only handles one real fresh down, and never outside Sony.
+        // A UI button can arm in the settings window without a function key.
+        core = MacControlCore()
+        core.updateEnvironment(foreground: false, connected: true)
+        check(core.setEnabled(true) && core.enabled && !core.active, "UI enables standby outside Sony")
+        check(core.evaluate(atMilliseconds: 0) == 0, "standby remains neutral")
+        check(!core.process(keyCode: crossKey, isDown: true, atMilliseconds: 1), "outside game key passes through while armed")
+        core.updateEnvironment(foreground: true, connected: true)
+        check(core.active && !core.process(keyCode: crossKey, isDown: true, isRepeat: true, atMilliseconds: 2),
+              "focus entry is active but does not capture a key already held")
+        check(core.evaluate(atMilliseconds: 2) == 0, "held outside key stays neutral after UI arming")
+        check(!core.process(keyCode: crossKey, isDown: false, atMilliseconds: 3), "old outside release passes through")
+        check(core.process(keyCode: crossKey, isDown: true, atMilliseconds: 4) && core.evaluate(atMilliseconds: 4) == cross,
+              "UI arming plus fresh Sony keydown produces output")
+        core.updateEnvironment(foreground: false, connected: true)
+        check(core.enabled && !core.active && core.evaluate(atMilliseconds: 5) == 0,
+              "focus loss clears output but preserves standby enable state")
+
         core = MacControlCore()
         core.updateEnvironment(foreground: true, connected: true)
-        check(core.process(keyCode: 0x64, isDown: true, atMilliseconds: 0) && core.enabled, "F8 enables")
-        check(core.process(keyCode: 0x64, isDown: true, isRepeat: true, atMilliseconds: 1) && core.enabled, "F8 repeat ignored")
-        check(core.process(keyCode: 0x64, isDown: false, atMilliseconds: 2), "F8 release paired")
+        check(!core.process(keyCode: 0x64, isDown: true, atMilliseconds: 0) && !core.enabled,
+              "old F8 shortcut no longer toggles default enable state")
+        check(!core.process(keyCode: 0x64, isDown: false, atMilliseconds: 1), "unbound F8 release passes through")
+
+        // Escape only handles one real fresh down, and never outside Sony.
+        core = MacControlCore()
+        core.updateEnvironment(foreground: true, connected: true)
+        check(core.process(keyCode: 0x35, isDown: true, atMilliseconds: 0) && core.enabled, "Escape enables")
+        check(core.process(keyCode: 0x35, isDown: true, isRepeat: true, atMilliseconds: 1) && core.enabled, "Escape repeat ignored")
+        check(core.process(keyCode: 0x35, isDown: false, atMilliseconds: 2), "Escape release paired")
         core.process(keyCode: crossKey, isDown: true, atMilliseconds: 3)
-        check(core.evaluate(atMilliseconds: 3) == cross, "F8 enabled capture")
-        core.process(keyCode: 0x64, isDown: true, atMilliseconds: 4)
-        check(!core.enabled && core.evaluate(atMilliseconds: 4) == 0, "F8 pauses immediately")
-        core.process(keyCode: 0x64, isDown: false, atMilliseconds: 5)
-        core.process(keyCode: 0x64, isDown: true, atMilliseconds: 6)
-        check(core.enabled && core.evaluate(atMilliseconds: 6) == 0, "F8 resume does not resurrect held action")
-        core.process(keyCode: 0x64, isDown: false, atMilliseconds: 7)
+        check(core.evaluate(atMilliseconds: 3) == cross, "Escape enabled capture")
+        core.process(keyCode: 0x35, isDown: true, atMilliseconds: 4)
+        check(!core.enabled && core.evaluate(atMilliseconds: 4) == 0, "Escape pauses immediately")
+        core.process(keyCode: 0x35, isDown: false, atMilliseconds: 5)
+        core.process(keyCode: 0x35, isDown: true, atMilliseconds: 6)
+        check(core.enabled && core.evaluate(atMilliseconds: 6) == 0, "Escape resume does not resurrect held action")
+        core.process(keyCode: 0x35, isDown: false, atMilliseconds: 7)
         core.updateEnvironment(foreground: false, connected: true)
-        check(!core.process(keyCode: 0x64, isDown: true, atMilliseconds: 8), "outside F8 passes through")
+        check(!core.process(keyCode: 0x35, isDown: true, atMilliseconds: 8), "outside Escape passes through")
         core.updateEnvironment(foreground: true, connected: true)
-        check(!core.process(keyCode: 0x64, isDown: true, isRepeat: true, atMilliseconds: 9) && core.enabled, "outside F8 cannot toggle on return")
-        check(!core.process(keyCode: 0x64, isDown: false, atMilliseconds: 10), "outside F8 release remains paired")
+        check(!core.process(keyCode: 0x35, isDown: true, isRepeat: true, atMilliseconds: 9) && core.enabled, "outside Escape cannot toggle on return")
+        check(!core.process(keyCode: 0x35, isDown: false, atMilliseconds: 10), "outside Escape release remains paired")
         core.updateEnvironment(foreground: true, connected: true, modifiersDown: true)
-        check(!core.process(keyCode: 0x64, isDown: true, atMilliseconds: 11) && core.enabled,
-              "modified F8 cannot change enable state")
-        core.process(keyCode: 0x64, isDown: false, atMilliseconds: 12)
+        check(!core.process(keyCode: 0x35, isDown: true, atMilliseconds: 11) && core.enabled,
+              "modified Escape cannot change enable state")
+        core.process(keyCode: 0x35, isDown: false, atMilliseconds: 12)
         core.updateEnvironment(foreground: true, connected: true)
-        check(!core.process(keyCode: 0x64, isDown: true, injected: true, atMilliseconds: 13) && core.enabled,
-              "injected F8 cannot change enable state")
+        check(!core.process(keyCode: 0x35, isDown: true, injected: true, atMilliseconds: 13) && core.enabled,
+              "injected Escape cannot change enable state")
 
         // Profile edits retain old key ownership until release and pause.
         core = armed(toggle)
         core.process(keyCode: crossKey, isDown: true, atMilliseconds: 0)
-        let remapped = try toggle.withBinding(.cross, keyCode: 0x28) // ANSI K
+        let remapped = try toggle.withBinding(.cross, keyCode: 0x0F) // ANSI R
         core.applyProfile(remapped)
         check(!core.enabled && core.evaluate(atMilliseconds: 1) == 0, "profile publish pauses and clears")
         core.setEnabled(true)
         check(core.process(keyCode: crossKey, isDown: true, isRepeat: true, atMilliseconds: 2), "old captured key repeat stays consumed")
         check(core.process(keyCode: crossKey, isDown: false, atMilliseconds: 3), "old captured key release stays consumed")
         check(core.evaluate(atMilliseconds: 3) == 0, "old binding does not produce new output")
-        core.process(keyCode: 0x28, isDown: true, atMilliseconds: 4)
+        core.process(keyCode: 0x0F, isDown: true, atMilliseconds: 4)
         check(core.evaluate(atMilliseconds: 4) == cross, "new binding works on fresh press")
         core.updateEnvironment(foreground: true, connected: true, editing: true)
         check(!core.enabled && core.evaluate(atMilliseconds: 5) == 0, "editing pauses")
@@ -172,14 +211,14 @@ struct MacControlCoreTests {
         check(!core.enabled, "leaving editor does not resume")
 
         core = armed()
-        check(!core.process(keyCode: 0x28, isDown: true, atMilliseconds: 0), "unmapped down passes through")
+        check(!core.process(keyCode: 0x0F, isDown: true, atMilliseconds: 0), "unmapped down passes through")
         core.applyProfile(remapped)
         core.setEnabled(true)
-        check(!core.process(keyCode: 0x28, isDown: true, isRepeat: true, atMilliseconds: 1),
+        check(!core.process(keyCode: 0x0F, isDown: true, isRepeat: true, atMilliseconds: 1),
               "new mapping cannot capture an already passed down")
         check(core.evaluate(atMilliseconds: 1) == 0, "profile change cannot claim held outside typing")
-        check(!core.process(keyCode: 0x28, isDown: false, atMilliseconds: 2), "new mapping still passes old release")
-        check(core.process(keyCode: 0x28, isDown: true, atMilliseconds: 3), "new mapping captures a fresh press")
+        check(!core.process(keyCode: 0x0F, isDown: false, atMilliseconds: 2), "new mapping still passes old release")
+        check(core.process(keyCode: 0x0F, isDown: true, atMilliseconds: 3), "new mapping captures a fresh press")
         check(core.evaluate(atMilliseconds: 3) == cross, "new mapped toggle begins only on fresh press")
 
         // Boundaries, independent phases and monotonic sampling.

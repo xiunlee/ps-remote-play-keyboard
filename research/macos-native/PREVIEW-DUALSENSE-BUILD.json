@@ -1,0 +1,22 @@
+{
+  "candidate": "mac-dualsense.1",
+  "architecture": "arm64",
+  "minimumMacOS": "15.0",
+  "swift": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "baseCommit": "0d31270ac24edce808891833c75632fb87ebe718",
+  "sources": {
+    "ControlCore.swift": "39863f3efec47506866fc533496a93a38cc3805853f64079d039c06be3747614",
+    "DualSenseV5Protocol.swift": "0e285b4a51ee03f91ac1d5bc2968902c32507d8ed70de558f9e4b7c64714246f",
+    "DualSenseRelaySocket.swift": "efacbcf5e5dc8c43033e85fb981fa48f3f4f9b082770cab14abb310923152785",
+    "DualSensePreviewApp.swift": "40c801e23edb42170690a2d120095559f8ae59f75e53f83dce3ba30a740e1132"
+  },
+  "binarySHA256": "d6fda81b262e6b469bf10ed303e4f42afc936709bef0b24823bcb1448ae484a1",
+  "signature": "ad-hoc; no restricted entitlement",
+  "started": true,
+  "sonyCompatibility": "unverified",
+  "runtimeLocation": "~/Applications/PSKeyboardMacDualSense.app",
+  "runtimeBinarySHA256": "d6fda81b262e6b469bf10ed303e4f42afc936709bef0b24823bcb1448ae484a1",
+  "accessibility": "user confirmed allowed for new DualSense App on2026-10-30",
+  "neutralUSB": "verified create/remove separately; no game input sent",
+  "uiVisualInspection": "not performed; computer-use access to prior research app was not granted"
+}

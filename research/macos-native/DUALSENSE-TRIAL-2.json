@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "recordedAtUTC": "2026-10-30T06:23:23.848798+00:00",
+  "version": "0.1.0-alpha.1",
+  "buildReceipt": "packaging/build-records/macos/0.1.0-alpha.1.json",
+  "appBinarySha256": "8cfbe9228ee6eaa985ac28254f4b414b63e1899c00156fad923883042853f699",
+  "sourceCommit": "b78e31e93e84b4cb7c4b4c15b8aace10749106d2",
+  "relaySourceSha256": "77afce7d85c5e8fb12308000d10e422b7aa4845bf4f507150f452f48625f5198",
+  "outcome": "user_confirmed_game_control",
+  "userReport": "喔 可以了",
+  "firstAttempt": {
+    "reason": "frontend_wait_timeout",
+    "inputFrames": 0,
+    "cleanup": "removed",
+    "macRemovalIndependentlyVerified": true,
+    "gameplayAttempted": false
+  },
+  "successfulAttempt": {
+    "startedAtUTC": "2026-10-30T06:20:38.439032+00:00",
+    "frontendConnected": true,
+    "busId": 1,
+    "devId": 1,
+    "virtualHereAddress": "(none).11",
+    "candidateHIDRegistryEntry": 4296402422,
+    "onlyCandidateGamepadObserved": true,
+    "priorPhysicalHIDRegistryEntryAbsent": 4296400524
+  },
+  "applicationDiagnosticsSnapshot": {
+    "acceptedGamePresses": 130,
+    "accessibilityGranted": true,
+    "armed": true,
+    "connected": true,
+    "ended": false,
+    "failure": "",
+    "hadSonyForeground": true,
+    "nonneutralFrames": 958,
+    "observedGamePresses": 130,
+    "rawKeyLogging": false,
+    "version": "0.1.0-alpha.1"
+  },
+  "runtimeStateAtRecord": "stopped; relay owner removed; Mac gamepad list empty",
+  "inputPrivacy": {
+    "rawKeysLogged": false,
+    "rawReportsLogged": false,
+    "diagnosticsAreAggregateCounters": true
+  },
+  "validationBoundaries": [
+    "User confirmed gameplay response, not a complete per-button acceptance test.",
+    "Foreground changes, Esc, long duration and cold startup not yet verified in this trial.",
+    "The helper stack remains separately orchestrated; this is not a standalone packaged application.",
+    "Accessibility migration succeeded; permission persistence across later application updates is not yet verified.",
+    "Relay receipt counters are updated on state transitions/finalization, not live."
+  ],
+  "additionalUserReport": "放開會停止，Enter 也有效",
+  "verifiedByUser": {
+    "gameplayResponse": true,
+    "wReleaseStopsMovement": true,
+    "returnOpensOptions": true
+  },
+  "updatedAtUTC": "2026-10-30T06:30:58.739863+00:00",
+  "finalRelayResult": {
+    "reason": "frontend_eof",
+    "cleanup": "removed",
+    "cleanupConfirmed": true,
+    "inputFrames": 51066,
+    "outputFrames": 59729,
+    "feedbackFrames": 20,
+    "stoppedAtUTC": "2026-10-30T06:28:36.461481+00:00"
+  },
+  "finalAppDiagnostics": {
+    "acceptedGamePresses": 144,
+    "accessibilityGranted": true,
+    "armed": false,
+    "connected": false,
+    "ended": true,
+    "failure": "",
+    "hadSonyForeground": true,
+    "nonneutralFrames": 1157,
+    "observedGamePresses": 150,
+    "rawKeyLogging": false,
+    "version": "0.1.0-alpha.1"
+  },
+  "macOwnedDeviceRemovalIndependentlyVerified": true,
+  "macGamepadListAfterStop": []
+}

@@ -1,0 +1,11 @@
+{
+  "version": "0.1.3",
+  "candidate": 10,
+  "sourceOnlyCompilerPathHygiene": true,
+  "mainAndHelpersContainNoPersonalHomePath": true,
+  "accessibilityRetained": true,
+  "connectGamepadCount": 1,
+  "stopGamepadCount": 0,
+  "sonyOperated": false,
+  "gameplayRetested": false
+}

@@ -1,0 +1,14 @@
+{
+  "prepared_at": "2026-10-30",
+  "kernel_release": "6.12.114-0-lts",
+  "source_apk": {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/v3.22/main/aarch64/linux-lts-6.12.114-r0.apk",
+    "sha256": "183ee1eec6913ff6c150b9ca08024ba1edc189c4da08bf6f1b68b86c7cb34242",
+    "signature_verified": true
+  },
+  "module": "kernel/drivers/net/dummy.ko",
+  "module_size": 16527,
+  "module_sha256": "89573074aefe730879cd6d977c5e9f5531812c65a8f7f2701f898f2dd6f3951e",
+  "dependencies": [],
+  "scope": "Extracted into read-only guest share; this child agent did not load the module or operate the VM."
+}

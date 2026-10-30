@@ -14,7 +14,13 @@
 
 中文介面使用「上班不要玩」，其他語系使用 **Three Cats Keybridge**。
 
-三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.4.md)。Mac 版尚未提供；[Mac 研究](research/macos-native/README.md)仍在進行，官方 Remote Play 相容性尚未通過。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
+三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.4.md)。
+
+Mac 版「**上班不要玩／Three Cats Keybridge**」是鍵盤控制與模擬手把工具，目前支援 Apple Silicon／macOS 15+ 與 **Sony 官方 PS Remote Play** 連線 PS5 的環境，不宣稱所有遊戲或程式通用。0.1.3 整合改鍵、連點、設定保存、九語、贊助與回饋，以及原生執行管理與官方元件取得；固定 App 檔名與安裝身分不變。Mac 0.1.3 由獨立 manifest 管理，目前為 build 4；Mac 使用 **Esc** 啟用／暫停，Windows 維持 **F8**。最終品牌建置與來源收據見 [Mac 驗證紀錄](docs/MAC-RELEASE-READINESS.md)。正式公開與附件下載仍待完成，Windows 0.1.4 下載保持可用。
+
+Mac alpha.1 的 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json) 已由使用者確認遊戲可操作、W 放開停止與 Enter／Options 有效。0.1.3 建置 9 已核對完整 App 中立連接、中斷、重連與退出清理，以及淺／深色主畫面和設定；後續品牌調整另記驗證，不能當作本版遊戲成功。本版遊戲、全新 Mac 與睡眠／崩潰仍未驗證，且採自簽而非 Apple Developer ID／公證；詳見 [Mac 安裝說明](docs/MAC-INSTALL.md)、[發布準備清單](docs/MAC-RELEASE-READINESS.md)及 [交接文件](docs/MAC-HANDOFF.md)。
+
+Mac 版是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。
 
 **介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.4/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.4/editor-zh-Hant.png)（均為離線示意）。
 
@@ -67,7 +73,7 @@
 
 **切到其他視窗，連點會繼續嗎？** 不會。切窗會停止並清除連點，切回不自動恢復，需重新按鍵觸發。F8、編輯、斷線或退出也會停止輸出。
 
-**能用滑鼠轉視角、錄製腳本，或在 Mac 上使用嗎？** 目前不支援滑鼠右搖桿、錄製／重播或 macOS，也不承諾完整音訊、觸覺與自適應扳機功能。
+**能用滑鼠轉視角、錄製腳本，或在 Mac 上使用嗎？** 目前不支援滑鼠右搖桿或錄製／重播，也不承諾完整音訊、觸覺與自適應扳機功能。Mac 是獨立的 Apple Silicon 版本，支援範圍與驗證限制見上方 Mac 段落及 [Mac 安裝手冊](docs/MAC-INSTALL.md)。
 
 長時間、重開機、反覆重連、第二台電腦安裝與新版逐鍵操作仍需驗收。詳見 [支援範圍](docs/PRODUCT-SCOPE.md)及 [DualSense 使用說明](research/dualsense-preview/README.md)。本專案不是 Sony 官方軟體。
 

@@ -1,0 +1,85 @@
+{
+  "ok": true,
+  "action": "check",
+  "identity": {
+    "schemaVersion": 1,
+    "label": "PSKeyboard Local Development",
+    "keychain": "~/Library/Application Support/PSKeyboard/Signing/PSKeyboard-Local.keychain-db",
+    "certificate": "~/Library/Application Support/PSKeyboard/Signing/certificate.pem",
+    "certificateSHA1": "959304332510D4FCC638DA0944B4797B1FDC699D",
+    "certificateSHA256": "aa6c3f13349dfb16028d1951d9e42aec6ae1e30283604dff3cf4ed6bf73b3a9e",
+    "bundleIdentifier": "com.xiunlee.pskeyboard.mac-dualsense",
+    "createdAtUTC": "2026-10-30T05:13:00.450315+00:00",
+    "privateKeyImportedNonExtractable": true,
+    "observedKeyAttributes": {
+      "kSecAttrIsExtractable": false,
+      "kSecAttrIsSensitive": true,
+      "kSecAttrIsPermanent": true,
+      "kSecAttrCanSign": true
+    },
+    "trustedApplicationACL": [
+      "/usr/bin/codesign"
+    ],
+    "partitionList": [
+      "apple:"
+    ],
+    "appleDeveloperIdentity": false,
+    "trustSettingsChangedByIdentityCreation": false,
+    "localCodeSigningTrust": {
+      "domain": "user",
+      "policy": "codeSign",
+      "applicationConstraint": null,
+      "keyUsageConstraint": null,
+      "explicitlyApprovedByUser": true,
+      "applied": true,
+      "verifiedByExactCertificateTrustExport": true,
+      "systemDomainChanged": false
+    }
+  },
+  "test": {
+    "binariesRanWithExit0": 2,
+    "differentExecutableHashes": true,
+    "identicalDesignatedRequirements": true,
+    "mutualRequirementChecksPassed": true,
+    "designatedRequirement": "identifier \"com.xiunlee.pskeyboard.signing-smoke\" and certificate leaf = H\"959304332510d4fcc638da0944b4797b1fdc699d\"",
+    "binarySHA256": [
+      "b8c5aff53336a734792191dbb103c0941c2f8fea6cbae1f04b083d44bb5edea6",
+      "3cab5b011c4a9e454bf0782fa9c6d23fb2a9a96e39fb446968d35711fef05a4b"
+    ],
+    "temporaryBinariesRemoved": true,
+    "accessibilityPersistenceTested": false
+  },
+  "formalAppModified": false,
+  "existingKeysExported": false,
+  "privateBootstrapFilesRemoved": true,
+  "systemState": {
+    "defaultKeychain": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "searchList": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "userTrust": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "adminTrust": {
+      "unchanged": true,
+      "readReturnCodeBefore": 1,
+      "readReturnCodeAfter": 1
+    }
+  },
+  "searchListIsolation": {
+    "temporarilyAppendedProjectKeychain": true,
+    "projectKeychainAlreadyPresent": false,
+    "concurrentSearchListChangesObserved": false,
+    "exactOriginalSearchListRestored": true,
+    "ownTemporaryEntryRemoved": true,
+    "concurrentOtherEntriesPreserved": true
+  }
+}

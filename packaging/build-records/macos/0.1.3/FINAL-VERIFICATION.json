@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "createdAtUTC": "2026-10-30T10:15:47.049452+00:00",
+  "version": "0.1.3",
+  "buildNumber": "4",
+  "buildReceipt": "FINAL-BUILD.json",
+  "buildReceiptSHA256": "95bb04491aa282b968b6f1f6d675a936917630996ba69c0b4b2c4337f833ef1a",
+  "offlineOnly": true,
+  "results": {
+    "controlCore": 459,
+    "profile": 79,
+    "v5Protocol": 22958,
+    "relaySocket": 57,
+    "runtime": 231,
+    "installer": "repair, rollback, symlink scope, hash bounds, output bounds, cancellation, owned TERM/KILL and cleanup passed",
+    "platformVersioning": {
+      "testMethods": 3,
+      "scenarios": 9,
+      "windowsVersion": "0.1.4",
+      "macVersion": "0.1.3",
+      "macPauseKey": "Esc",
+      "windowsPauseKey": "F8"
+    },
+    "catalogue": {
+      "keys": 197,
+      "languages": [
+        "en",
+        "zh-Hant",
+        "zh-Hans",
+        "ja",
+        "ko",
+        "de",
+        "fr",
+        "es",
+        "pt-BR"
+      ],
+      "literalReferencesChecked": 94,
+      "missingLiteralReferences": [],
+      "brandAndIndependentNoticeAllLanguages": true
+    },
+    "sourceAllowlistFiles": 70,
+    "sourceInputsMatchBuild": true,
+    "strictSwiftCompilation": true,
+    "runtimeGuestCompilationAndControllerTypecheck": true
+  },
+  "testSourceSHA256": {
+    "src/macos/ControlCoreTests.swift": "312a9b366d47a98bc53b2a8a50e5cacaafa1148fc3805c6e4c445d9fded80cb5",
+    "src/macos/DualSenseRelaySocketTests.swift": "809543bee3e05ed3d2088f2011ad5eb08c1d63691a1b33a6fa95b8cd6da95a81",
+    "src/macos/DualSenseV5ProtocolTests.swift": "283a81da8eb3b6132c8a415a424a7fef54aa31eafb8104c347cf49f0d767cde7",
+    "src/macos/MacDependencyInstallerTests.swift": "cb8f8206e67a26bf4236b45c9319975260c99815c547e86c9a5db5969f84777e",
+    "src/macos/MacProfileStoreTests.swift": "b1356fb195f18a4e57a9bc45643987cafe74b07e8380f11c6387aa267a26de0b",
+    "src/macos/runtime/RuntimeTests.swift": "6be861096f605644fefa6d620c65137a40810d560c2f22c49291ddcc3aac5449"
+  },
+  "actionsNotPerformed": [
+    "App install or launch",
+    "keyboard capture",
+    "virtual device creation",
+    "Sony Remote Play operation",
+    "user profile writes"
+  ],
+  "unverified": [
+    "final-package gameplay",
+    "final-package in-game remapping and repeat",
+    "fresh-Mac install and permissions",
+    "final-package update retaining permissions and settings",
+    "sleep/crash cleanup",
+    "nine-language visual layout and native-speaker review"
+  ],
+  "previousWindowsResearchChecks": {
+    "reported": 20,
+    "rerunInThisRecord": false
+  }
+}

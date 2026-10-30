@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Taipei",
+  "app": {
+    "version": "0.1.0-alpha.1",
+    "bundleIdentifier": "com.xiunlee.pskeyboard.mac-dualsense",
+    "runtimeLocation": "~/Applications/PSKeyboardMacDualSense.app",
+    "binarySHA256": "8cfbe9228ee6eaa985ac28254f4b414b63e1899c00156fad923883042853f699",
+    "strictSignatureVerification": "passed"
+  },
+  "problem": {
+    "systemSettingsToggle": "on",
+    "appAXIsProcessTrusted": false,
+    "toggleOffOnAndSameAppRelaunchDidNotFix": true
+  },
+  "evidence": {
+    "source": "macOS unified log, tccd; predicate restricted to this app",
+    "observedAt": "2026-10-30T13:56:03+08:00",
+    "service": "kTCCServiceAccessibility",
+    "message": "Failed to match existing code requirement",
+    "storedRequirement": "cdhash H\"9bad4301dc8ffc0e4b6ea44256b9d80d10b48e91\"",
+    "currentRequirement": "identifier \"com.xiunlee.pskeyboard.mac-dualsense\" and certificate leaf = H\"959304332510d4fcc638da0944b4797b1fdc699d\"",
+    "rawLogDumpIncluded": false
+  },
+  "remedy": {
+    "method": "System Settings Accessibility: remove only the stale app entry, reselect the same installed app, user clicks Open and grants access",
+    "appRebuilt": false,
+    "appRenamed": false,
+    "signerChanged": false,
+    "tccDatabaseDirectlyModified": false
+  },
+  "result": {
+    "source": "same app aggregate Diagnostics/latest.json",
+    "accessibilityGranted": true,
+    "armed": false,
+    "connected": false,
+    "observedGamePresses": 0,
+    "acceptedGamePresses": 0,
+    "nonneutralFrames": 0,
+    "rawKeyLogging": false
+  },
+  "limits": [
+    "This verifies one migration from a stale ad-hoc grant to the existing fixed-signature app.",
+    "Accessibility retention across a later signed app update remains untested.",
+    "Trial 2 is being prepared; this receipt contains no gameplay result."
+  ]
+}

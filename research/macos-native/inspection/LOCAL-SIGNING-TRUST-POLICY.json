@@ -1,0 +1,44 @@
+{
+  "recordedAtUTC": "2026-10-30T05:26:03.481860+00:00",
+  "action": "previously authorized codeSign policy; removed additional app/usage constraints",
+  "certificateSHA256": "AA6C3F13349DFB16028D1951D9E42AEC6AE1E30283604DFF3CF4ED6BF73B3A9E",
+  "certificateSHA1": "959304332510D4FCC638DA0944B4797B1FDC699D",
+  "trustDomain": "user",
+  "policy": "codeSign",
+  "applicationConstraint": null,
+  "keyUsageConstraint": null,
+  "returncode": 0,
+  "systemState": {
+    "defaultKeychain": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "searchList": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0
+    },
+    "userTrust": {
+      "unchanged": true,
+      "readReturnCodeBefore": 0,
+      "readReturnCodeAfter": 0,
+      "note": "Text equality from dump-trust-settings is not a complete trust-state comparison; exact certificate entry verified through export"
+    },
+    "adminTrust": {
+      "unchanged": true,
+      "readReturnCodeBefore": 1,
+      "readReturnCodeAfter": 1
+    }
+  },
+  "systemDomainTrustChanged": false,
+  "allTrustOrSSLRequested": false,
+  "formalAppModified": false,
+  "exactCertificateEntryVerifiedByExport": true,
+  "targetEntry": {
+    "policyName": "CodeSigning",
+    "policyOIDDERHex": "2a864886f763640110",
+    "numberOfTrustSettings": 1,
+    "extraApplicationOrUsageConstraints": false
+  }
+}

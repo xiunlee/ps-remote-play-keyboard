@@ -1,0 +1,110 @@
+{
+  "dateUTC": "2026-10-30T08:46:37.537244+00:00",
+  "removed": [
+    {
+      "path": ".local/mac-build-0.1.3-integrated-1/PSKeyboard-Mac-0.1.3-arm64.zip",
+      "bytes": 24625879
+    },
+    {
+      "path": ".local/mac-build-0.1.3-integrated-2/PSKeyboard-Mac-0.1.3-arm64.zip",
+      "bytes": 24632480
+    },
+    {
+      "path": ".local/mac-build-0.1.3-integrated-3/PSKeyboard-Mac-0.1.3-arm64.zip",
+      "bytes": 25297970
+    },
+    {
+      "path": ".local/mac-build-0.1.3-integrated-4/PSKeyboard-Mac-0.1.3-arm64.zip",
+      "bytes": 25305994
+    },
+    {
+      "path": ".local/mac-build-0.1.3-integrated-5/PSKeyboard-Mac-0.1.3-arm64.zip",
+      "bytes": 25305975
+    },
+    {
+      "path": ".local/mac-signing-smoke-1/baseline.app",
+      "bytes": 54186
+    },
+    {
+      "path": ".local/mac-signing-smoke-1/hid-entitlement.app",
+      "bytes": 54657
+    },
+    {
+      "path": ".local/PSKeyboardRuntime-client-api-6",
+      "bytes": 417120
+    },
+    {
+      "path": ".local/PSKeyboardRuntime-vendor-diag-7",
+      "bytes": 438192
+    },
+    {
+      "path": ".local/PSKeyboardRuntime-monitor-ready-8",
+      "bytes": 439120
+    },
+    {
+      "path": ".local/PSKeyboardRuntime-monitor-ready-8b",
+      "bytes": 439120
+    },
+    {
+      "path": ".local/mac-vz-runner-2/VZUSBGuest",
+      "bytes": 143264
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/PSKeyboard-Mac-0.1.3-arm64.dmg",
+      "bytes": 28336293
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/PSKeyboard-Mac-0.1.3-arm64.zip",
+      "bytes": 25892928
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/PSKeyboard-Mac-0.1.3-build-inputs.tar.gz",
+      "bytes": 115775397
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/PSKeyboard-Mac-0.1.3-runtime-sources.tar.gz",
+      "bytes": 450919582
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/PSKeyboard-Mac-0.1.3-source.zip",
+      "bytes": 1785928
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/README.txt",
+      "bytes": 1958
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-DEFAULT-KEYS.md",
+      "bytes": 1714
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-INSTALL.en.md",
+      "bytes": 12731
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-INSTALL.md",
+      "bytes": 10661
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-PARITY-CHECKLIST.md",
+      "bytes": 14837
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-RELEASE-NOTES.md",
+      "bytes": 4016
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-RELEASE-READINESS.md",
+      "bytes": 11871
+    },
+    {
+      "path": ".local/mac-release-0.1.3-package-check-1/docs/MAC-RUNTIME-MATERIALS.md",
+      "bytes": 13443
+    }
+  ],
+  "logicalBytesRemoved": 749935316,
+  "keptCurrentInstalledApp": true,
+  "keptCurrentPackage": true,
+  "keptBuildVerificationReceipts": true,
+  "keptUserSettingsAndSigningState": true
+}

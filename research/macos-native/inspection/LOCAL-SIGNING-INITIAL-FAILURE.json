@@ -1,0 +1,19 @@
+{
+  "recordedAtUTC": "2026-10-30T05:08:34.362187+00:00",
+  "attempt": "initial API create",
+  "keychain": "~/Library/Application Support/PSKeyboard/Signing/PSKeyboard-Local.keychain-db",
+  "createReturnedSuccess": true,
+  "nextSecurityCommandFailed": true,
+  "importedIdentities": 0,
+  "apiUnlockOSStatus": -25293,
+  "showKeychainInfoDiagnostic": "User canceled the operation",
+  "cause": "Not established; does not imply a user account password problem",
+  "formalAppModified": false,
+  "existingKeysTouched": false,
+  "onlyFailedEmptyProjectKeychainRemoved": true,
+  "nextAttempt": "Nonempty encrypted P12; SecItemImport with in-memory password and process UI disabled",
+  "initialFailingSecuritySubcommand": "Not captured; later direct settings check succeeded",
+  "subsequentPTYCreationAndUnlockSucceeded": true,
+  "emptyPasswordP12ImportFailure": "The user name or passphrase you entered is not correct",
+  "onlyOwnIncompleteZeroIdentityKeychainsRemoved": 3
+}

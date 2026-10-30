@@ -1,0 +1,65 @@
+{
+  "recordedAtUTC": "2026-10-30T06:44:28.636807+00:00",
+  "version": "0.1.2",
+  "status": "locally installed development candidate; not publicly released",
+  "buildReceipt": "packaging/build-records/macos/0.1.2.json",
+  "compile": "Swift 6, arm64 macOS 15 target, warnings-as-errors passed",
+  "strictCodeSignatureVerified": true,
+  "postUpdateInstallationCheck": {
+    "primaryPSKeyboardAppCount": 1,
+    "temporaryBuildDirectoryCount": 0,
+    "rollbackBundleRemains": false
+  },
+  "accessibilityUpdate": {
+    "fromVersion": "0.1.0-alpha.1",
+    "toVersion": "0.1.2",
+    "sameAppPath": true,
+    "sameBundleIdentifier": true,
+    "sameCertificate": true,
+    "sameDesignatedRequirement": true,
+    "newPermissionGrantRequested": false,
+    "ownAppReportedGranted": true,
+    "scope": "one update on this Mac; no universal persistence claim"
+  },
+  "visualInspection": {
+    "method": "live native Computer Use screenshot and accessibility tree",
+    "appearance": "light",
+    "faceDiamond": {
+      "top": "I / triangle",
+      "left": "J / square",
+      "bottom": "K / cross",
+      "right": "L / circle"
+    },
+    "allDefaultKeysVisible": true,
+    "returnOptionsAndEscPauseExplicit": true,
+    "brandImageVisible": true,
+    "diagnosticsExpandedAndCollapsed": true,
+    "noClippingObserved": true,
+    "dockFinderIconAppearanceVerified": false,
+    "darkAppearanceVerified": false
+  },
+  "controlSourcesUnchangedFromGameplayBuild": {
+    "ControlCore.swift": true,
+    "DualSenseV5Protocol.swift": true,
+    "DualSenseRelaySocket.swift": true
+  },
+  "ownAppDiagnostics": {
+    "acceptedGamePresses": 0,
+    "accessibilityGranted": true,
+    "armed": false,
+    "connected": false,
+    "ended": false,
+    "failure": "",
+    "hadSonyForeground": false,
+    "nonneutralFrames": 0,
+    "observedGamePresses": 0,
+    "rawKeyLogging": false,
+    "version": "0.1.2"
+  },
+  "gameplayTestedThisBuild": false,
+  "limitations": [
+    "Research services must be prepared separately; automatic startup/shutdown supervisor not implemented.",
+    "No standalone public Mac installer.",
+    "No new device created or Sony gameplay exercised during UI verification."
+  ]
+}

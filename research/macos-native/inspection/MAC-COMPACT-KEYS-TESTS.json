@@ -1,0 +1,51 @@
+{
+  "core": {
+    "recordedAtUTC": "2026-10-30T04:59:51.737834+00:00",
+    "baseCommit": "0d31270ac24edce808891833c75632fb87ebe718",
+    "result": "PASS",
+    "checks": 459,
+    "defaultActions": 22,
+    "distinctKeysIncludingPause": 23,
+    "pauseKey": "Escape",
+    "pauseKeyCode": "0x35",
+    "sha256": {
+      "src/macos/ControlCore.swift": "51a9690e62fc40a2c2f503a7adc86f7d18bc11dfa5774234eeb90cc4a4e8eb5b",
+      "src/macos/ControlCoreTests.swift": "312a9b366d47a98bc53b2a8a50e5cacaafa1148fc3805c6e4c445d9fded80cb5",
+      ".local/mac-core-build-3/ControlCoreTests": "3139df32667650a2511f27393e0c6358ac0d165fbfb35218bc9f79ee8622ef35"
+    },
+    "swiftVersion": "Apple Swift 6.3.3, Swift language 6, warnings-as-errors, arm64",
+    "syntheticOnly": true,
+    "keyboardCaptured": false,
+    "deviceCreated": false,
+    "sonyAccessed": false,
+    "removedOwnModuleCacheLogicalBytes": 16213876,
+    "v5BoundaryReceipt": ".local/mac-v5-protocol-2/RESULT.json",
+    "v5BoundaryChecks": 22958
+  },
+  "v5": {
+    "verifiedAtUTC": "2026-10-30T04:59:00.552232+00:00",
+    "sourceSha256": {
+      "src/macos/ControlCore.swift": "51a9690e62fc40a2c2f503a7adc86f7d18bc11dfa5774234eeb90cc4a4e8eb5b",
+      "src/macos/DualSenseV5Protocol.swift": "0e285b4a51ee03f91ac1d5bc2968902c32507d8ed70de558f9e4b7c64714246f",
+      "src/macos/DualSenseV5ProtocolTests.swift": "283a81da8eb3b6132c8a415a424a7fef54aa31eafb8104c347cf49f0d767cde7",
+      "src/macos/test-dualsense-v5.py": "fd6e7201b8214e9bec49db0e18bc96d02d9b96de52d6100525d454637e898129",
+      "research/native-merge/keyboard_merge.c": "35d41918ee30f7053bd475426d009b366be1d0c96e45f85021ee3f05b2f37a56",
+      "research/native-merge/keyboard_merge.h": "5f2cceb5876cbe22a52842010cca310936122746d1ebd3e8bca5a95065eed8af",
+      "src/keyboard-pad/KeyboardMapping.cs": "7dac0d686e376327a1b364b0babadcf2e2ca3f02b21685cb15dede0041dbb472",
+      "src/keyboard-pad/ViiperTransport.cs": "5c46be155da8da99a00da6fe93495a823454e614d50c627a0a0ed63b299e5255",
+      "research/dualsense-v5-test/V5Protocol.cs": "6242d3daf3157c2c839bce735f6cedd2bb7f261ebb72c6aadbed5426062014ee",
+      "research/dualsense-v5-test/V5ProtocolTests.cs": "940dec7ebd4b7d0580e4d623c83115edc6c2ad82f1c1f4d31afc6b26627a9ccc"
+    },
+    "testExecutableSha256": "c3a27843b0967bd9d29fdbd8aeb65409f47b81a4ff5a45f61411680044be5fd6",
+    "result": "DUALSENSE_V5_PROTOCOL_PASS checks=22958 state_bytes=33 frame_bytes=49 synthetic_only=true sockets_opened=false devices_created=false sony_accessed=false",
+    "swiftVersion": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+    "clangVersion": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+    "syntheticOnly": true,
+    "socketsOpened": false,
+    "devicesCreated": false,
+    "sonyAccessed": false,
+    "removedOwnModuleCacheLogicalBytes": 19742892
+  },
+  "realKeyboardTested": false,
+  "sonyGameplayAccepted": false
+}

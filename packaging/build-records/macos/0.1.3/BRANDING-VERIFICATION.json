@@ -1,0 +1,19 @@
+{
+  "version": "0.1.3",
+  "buildCandidate": 11,
+  "brandingSourceCommit": "71aca9c",
+  "iconSourceSHA256": "217791803793e0f18b5b4beca093ccbc61451029113015de05104099a6818f7f",
+  "controlAndRuntimeSourcesUnchangedFromVerifiedBuild9": true,
+  "swift6CompilePassed": true,
+  "catalogueKeys": 196,
+  "languages": 9,
+  "mainAndAboutNeutralCopyAndIndependentStatementReviewed": true,
+  "accessibilityRetained": true,
+  "profilePreserved": true,
+  "gameplayRetested": false,
+  "virtualDeviceStartedForBrandingCheck": false,
+  "freshMacInstallVerified": false,
+  "selfSigned": true,
+  "notarized": false,
+  "mainAndHelpersPersonalPathScanPassed": true
+}

@@ -1,0 +1,28 @@
+{
+  "version": "0.1.2",
+  "buildNumber": "2",
+  "bundleIdentifier": "com.xiunlee.pskeyboard.mac-dualsense",
+  "runtimeLocation": "~/Applications/PSKeyboardMacDualSense.app",
+  "architecture": "arm64",
+  "minimumMacOS": "15.0",
+  "sources": {
+    "ControlCore.swift": "51a9690e62fc40a2c2f503a7adc86f7d18bc11dfa5774234eeb90cc4a4e8eb5b",
+    "DualSenseV5Protocol.swift": "0e285b4a51ee03f91ac1d5bc2968902c32507d8ed70de558f9e4b7c64714246f",
+    "DualSenseRelaySocket.swift": "efacbcf5e5dc8c43033e85fb981fa48f3f4f9b082770cab14abb310923152785",
+    "MacControlGuideView.swift": "bdc88ca63590d2149fb78e5cd223ed7dbcfae267d8286189db71baaf6fc6b436",
+    "DualSensePreviewApp.swift": "f262a3249abd2a9ac9bb96070fdd4fdee17d71f7596e436a9892578a7aa453b2"
+  },
+  "versionManifestSHA256": "7314f8f2ab2c487a758db3cca7436c0fd52cdb6918c36f3b8fc7cae3f28eceb5",
+  "binarySHA256": "8821bf8c9f352997c21ee0ba330647dfdc9c540b7e17d535adc95f4f54e6270d",
+  "resources": {
+    "ps-mark.png": "fd8efe0032af465c486d322b0d0897f597ecb1a9fae38cc327e891e80f695831",
+    "app.icns": "be108e7725c30816a13c472853d3c6d08b775b7919c00909c64c17341ee839dc"
+  },
+  "iconBuilderSHA256": "5f7b8355847d35da87966f0afd3afe0d745662546fa2688982e5fc41a52f60ae",
+  "signature": "stable local self-signed certificate; no restricted entitlement",
+  "designatedRequirement": "designated => identifier \"com.xiunlee.pskeyboard.mac-dualsense\" and certificate leaf = H\"959304332510d4fcc638da0944b4797b1fdc699d\"",
+  "installed": true,
+  "baseCommit": "0d31270ac24edce808891833c75632fb87ebe718",
+  "sonyCompatibility": "unverified",
+  "sourcePIDFilter": "reject own process only; not a physical-input guarantee"
+}
