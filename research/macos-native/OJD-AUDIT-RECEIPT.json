@@ -1,0 +1,242 @@
+{
+  "observedAt": "2026-10-30T03:20:59.424882+00:00",
+  "release": "https://github.com/xsyetopz/OpenJoystickDriver/releases/tag/0.6.0-alpha.1",
+  "sourceCommit": "3552be925d7dacef3fd895ac0c6cbf39e9d3cd70",
+  "assetId": 669916104,
+  "assetSize": 29419483,
+  "releaseSha256": "d2b771ffe4382b7bfd218932c7003227216d334a14154e95976c4f114b1c2056",
+  "downloadSha256": "d2b771ffe4382b7bfd218932c7003227216d334a14154e95976c4f114b1c2056",
+  "dmgLicenseAgreement": false,
+  "mountedReadOnly": true,
+  "applicationExecuted": false,
+  "installed": false,
+  "systemExtensionInstalled": false,
+  "sonyOperation": false,
+  "infoPlist": {
+    "CFBundleIdentifier": "com.openjoystickdriver",
+    "CFBundleExecutable": "OpenJoystickDriver",
+    "CFBundleShortVersionString": "0.6.0-alpha.1",
+    "CFBundleVersion": "1.19.64",
+    "LSMinimumSystemVersion": "12.0"
+  },
+  "checks": {
+    "app-signature-verify": {
+      "arguments": [
+        "/usr/bin/codesign",
+        "--verify",
+        "--deep",
+        "--strict",
+        "--verbose=2",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app: valid on disk\n/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app: satisfies its Designated Requirement\n"
+    },
+    "app-signature-info": {
+      "arguments": [
+        "/usr/bin/codesign",
+        "-d",
+        "--verbose=4",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Executable=/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app/Contents/MacOS/OpenJoystickDriver\nIdentifier=com.openjoystickdriver\nFormat=app bundle with Mach-O universal (x86_64 arm64)\nCodeDirectory v=20500 size=73314 flags=0x10000(runtime) hashes=2280+7 location=embedded\nVersionPlatform=1\nVersionMin=786432\nVersionSDK=1769472\nHash type=sha256 size=32\nCandidateCDHash sha256=f5fa712d176002381f255515e93b74368910de00\nCandidateCDHashFull sha256=f5fa712d176002381f255515e93b74368910de0054b9d87a8085abad7cf3df28\nHash choices=sha256\nCMSDigest=f5fa712d176002381f255515e93b74368910de0054b9d87a8085abad7cf3df28\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=13434880\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=f5fa712d176002381f255515e93b74368910de00\nSignature size=8991\nAuthority=Developer ID Application: Krystian J\u00e4rve\u00e4\u00e4r (9PQP6CDMQT)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Oct 24, 2026 at 1:50:23\u202fAM\nNotarization Ticket=stapled\nInfo.plist entries=28\nTeamIdentifier=9PQP6CDMQT\nRuntime Version=27.0.0\nSealed Resources version=2 rules=13 files=944\nInternal requirements count=1 size=184\n"
+    },
+    "app-entitlements": {
+      "arguments": [
+        "/usr/bin/codesign",
+        "-d",
+        "--entitlements",
+        ":-",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app"
+      ],
+      "exitCode": 0,
+      "stdout": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"https://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><dict><key>com.apple.application-identifier</key><string>9PQP6CDMQT.com.openjoystickdriver</string><key>com.apple.developer.driverkit.userclient-access</key><array><string>com.openjoystickdriver.XboxUSBDevice</string></array><key>com.apple.developer.hid.virtual.device</key><true/><key>com.apple.developer.system-extension.install</key><true/><key>com.apple.developer.team-identifier</key><string>9PQP6CDMQT</string><key>com.apple.security.app-sandbox</key><false/></dict></plist>\n",
+      "stderr": "Executable=/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app/Contents/MacOS/OpenJoystickDriver\nwarning: Specifying ':' in the path is deprecated and will not work in a future release\n"
+    },
+    "app-gatekeeper": {
+      "arguments": [
+        "/usr/sbin/spctl",
+        "--assess",
+        "--type",
+        "execute",
+        "--verbose=4",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app: accepted\nsource=Notarized Developer ID\n"
+    },
+    "dmg-gatekeeper": {
+      "arguments": [
+        "/usr/sbin/spctl",
+        "--assess",
+        "--type",
+        "open",
+        "--context",
+        "context:primary-signature",
+        "--verbose=4",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg"
+      ],
+      "exitCode": 3,
+      "stdout": "",
+      "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg: rejected\nsource=Unnotarized Developer ID\n"
+    },
+    "app-staple": {
+      "arguments": [
+        "/usr/bin/xcrun",
+        "stapler",
+        "validate",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app"
+      ],
+      "exitCode": 0,
+      "stdout": "Processing: /Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app\nThe validate action worked!\n",
+      "stderr": ""
+    },
+    "dmg-staple": {
+      "arguments": [
+        "/usr/bin/xcrun",
+        "stapler",
+        "validate",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg"
+      ],
+      "exitCode": 65,
+      "stdout": "Processing: /Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg\nOpenJoystickDriver-0.6.0-alpha.1-macOS.dmg does not have a ticket stapled to it.\n",
+      "stderr": ""
+    },
+    "embedded-profile": {
+      "arguments": [
+        "/usr/bin/security",
+        "cms",
+        "-D",
+        "-i",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app/Contents/embedded.provisionprofile"
+      ],
+      "exitCode": 0,
+      "stdout": "[Decoded profile kept locally; selected public fields recorded below]",
+      "stderr": "",
+      "profile": {
+        "AppIDName": "OpenJoystickDriver",
+        "Name": "OpenJoystickDriver DevID",
+        "CreationDate": "2026-08-25 11:11:40",
+        "ExpirationDate": "2044-08-20 11:11:40",
+        "ProvisionsAllDevices": true,
+        "TeamIdentifier": [
+          "9PQP6CDMQT"
+        ],
+        "Entitlements": {
+          "com.apple.developer.system-extension.install": true,
+          "com.apple.application-identifier": "9PQP6CDMQT.com.openjoystickdriver",
+          "keychain-access-groups": [
+            "9PQP6CDMQT.*"
+          ],
+          "com.apple.developer.hid.virtual.device": true,
+          "com.apple.developer.team-identifier": "9PQP6CDMQT",
+          "com.apple.developer.driverkit.userclient-access": [
+            "com.openjoystickdriver.XboxUSBDevice"
+          ]
+        }
+      }
+    },
+    "dmg-signature-verify": {
+      "arguments": [
+        "/usr/bin/codesign",
+        "--verify",
+        "--strict",
+        "--verbose=2",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg: valid on disk\n/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg: satisfies its Designated Requirement\n"
+    },
+    "dmg-signature-info": {
+      "arguments": [
+        "/usr/bin/codesign",
+        "-d",
+        "--verbose=4",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Executable=/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/OpenJoystickDriver-0.6.0-alpha.1-macOS.dmg\nIdentifier=OpenJoystickDriver-0.6.0-alpha.1-macOS\nFormat=disk image\nCodeDirectory v=20200 size=326 flags=0x0(none) hashes=1+6 location=embedded\nHash type=sha256 size=32\nCandidateCDHash sha256=2b7c17ac6d19afb6d59e7f2caf89eec346b25f9b\nCandidateCDHashFull sha256=2b7c17ac6d19afb6d59e7f2caf89eec346b25f9b5854a035233516b4d3d725ea\nHash choices=sha256\nCMSDigest=2b7c17ac6d19afb6d59e7f2caf89eec346b25f9b5854a035233516b4d3d725ea\nCMSDigestType=2\nPage size=none\nCDHash=2b7c17ac6d19afb6d59e7f2caf89eec346b25f9b\nSignature size=8990\nAuthority=Developer ID Application: Krystian J\u00e4rve\u00e4\u00e4r (9PQP6CDMQT)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Oct 24, 2026 at 1:51:18\u202fAM\nInfo.plist=not bound\nTeamIdentifier=9PQP6CDMQT\nSealed Resources=none\nInternal requirements count=1 size=200\n"
+    },
+    "app-all-architectures": {
+      "arguments": [
+        "/usr/bin/codesign",
+        "--verify",
+        "--deep",
+        "--strict",
+        "--all-architectures",
+        "--verbose=2",
+        "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app: valid on disk\n/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-audit-20261030/mount/OpenJoystickDriver.app: satisfies its Designated Requirement\n"
+    }
+  },
+  "preExistingInstalledApp": false,
+  "preExistingAppSupportDirectory": false,
+  "dmgInternalChecksumValid": true,
+  "applicationEntitlements": {
+    "com.apple.application-identifier": "9PQP6CDMQT.com.openjoystickdriver",
+    "com.apple.developer.driverkit.userclient-access": [
+      "com.openjoystickdriver.XboxUSBDevice"
+    ],
+    "com.apple.developer.hid.virtual.device": true,
+    "com.apple.developer.system-extension.install": true,
+    "com.apple.developer.team-identifier": "9PQP6CDMQT",
+    "com.apple.security.app-sandbox": false
+  },
+  "restrictedClaimsMatchEmbeddedProfile": {
+    "com.apple.application-identifier": true,
+    "com.apple.developer.team-identifier": true,
+    "com.apple.developer.hid.virtual.device": true,
+    "com.apple.developer.system-extension.install": true,
+    "com.apple.developer.driverkit.userclient-access": true
+  },
+  "detach": {
+    "exitCode": 0,
+    "stdout": "\"disk4\" ejected.\n",
+    "stderr": ""
+  },
+  "mountedAtEnd": false,
+  "runtimeCopy": {
+    "path": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app",
+    "overwroteExisting": false,
+    "appExecuted": false,
+    "symlink": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/ojd",
+    "symlinkTarget": "OpenJoystickDriver.app/Contents/MacOS/OpenJoystickDriver",
+    "initialStrictVerifyFailure": "Disallowed xattr com.apple.FinderInfo on copied root app",
+    "targetedMetadataRemoval": {
+      "attribute": "com.apple.FinderInfo",
+      "priorHex": "0000000000000000200000000000000000000000000000000000000000000000",
+      "path": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app",
+      "otherAttributesRemoved": false
+    },
+    "checks": {
+      "copy-codesign-clean": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app: valid on disk\n/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app: satisfies its Designated Requirement\n"
+      },
+      "copy-gatekeeper-clean": {
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "/Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app: accepted\nsource=Notarized Developer ID\n"
+      },
+      "copy-staple-clean": {
+        "exitCode": 0,
+        "stdout": "Processing: /Users/xiun/Documents/ChatGPT/PS/ps-remote-play-keyboard/.local/ojd-runtime-0.6.0-alpha.1/OpenJoystickDriver.app\nThe validate action worked!\n",
+        "stderr": ""
+      }
+    }
+  },
+  "finalDetach": {
+    "exitCode": 0,
+    "confirmedNoAuditImageInHdiutilInfo": true
+  }
+}

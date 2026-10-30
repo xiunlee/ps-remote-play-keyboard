@@ -1,0 +1,27 @@
+{
+  "observedAtUTC": "2026-10-30T03:36:51.955859+00:00",
+  "profile": "generic",
+  "neutralOnly": true,
+  "before": [],
+  "during": [
+    {
+      "PrimaryUsage": 5,
+      "PrimaryUsagePage": 1,
+      "Product": "OpenJoystickDriver Generic HID Gamepad",
+      "ProductID": 19023,
+      "Transport": "Virtual",
+      "VendorID": 4617
+    }
+  ],
+  "after": [],
+  "exitCode": 0,
+  "forcedOwnChildTermination": false,
+  "stdout": "",
+  "stderr": "",
+  "creationObserved": true,
+  "absenceAfterTrialConfirmed": true,
+  "removalObserved": true,
+  "sonyOperated": false,
+  "keyboardCaptured": false,
+  "redaction": "Only ephemeral registryEntry IDs omitted; other trial fields unchanged."
+}

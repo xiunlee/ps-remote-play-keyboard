@@ -1,0 +1,33 @@
+{
+  "candidate": "mac-native.1 / mac-keyboard-preview-6",
+  "profile": "generic",
+  "binarySHA256": "b7deb06fe08bc19f1433eda20e852cdd9743772110ce5ef71a640c51abcb66cc",
+  "accessibilityGrantedByUser": true,
+  "deviceObservations": [
+    {
+      "atUTC": "2026-10-30T03:49:45.376031+00:00",
+      "devices": [
+        {
+          "PrimaryUsage": 5,
+          "PrimaryUsagePage": 1,
+          "Product": "OpenJoystickDriver Generic HID Gamepad",
+          "ProductID": 19023,
+          "Transport": "Virtual",
+          "VendorID": 4617
+        }
+      ]
+    }
+  ],
+  "requestedManualTest": [
+    "F8 enable",
+    "W/S left stick",
+    "Enter Options",
+    "F8 pause"
+  ],
+  "userReportedResult": "無反應",
+  "interpretation": "Manual attempt unsuccessful; no keyboard-event or submitted-report trace was collected, so this alone does not isolate the failing layer. Generic is not DualSense and is not pursued further.",
+  "userPressedDisconnect": true,
+  "afterDisconnect": [],
+  "removalConfirmedAtUTC": "2026-10-30T03:54:46.646013+00:00",
+  "nextTarget": "Actual DualSense identity, descriptor and reports through a free authorized macOS output backend; no more Generic/Xbox trials."
+}

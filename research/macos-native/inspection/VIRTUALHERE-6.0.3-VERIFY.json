@@ -1,0 +1,54 @@
+{
+  "inspected_at": "2026-10-30",
+  "host": {
+    "macOS": "26.6.2",
+    "architecture": "arm64"
+  },
+  "scope": "Read-only artifact signature assessment; application never executed; no driver/service/device installed or started.",
+  "source": "https://www.virtualhere.com/sites/default/files/usbclient/VirtualHereUniversal.dmg",
+  "dmg_sha256": "edfbba188187711a3707929aefff68a9b0c260224f28831d1103aa4c325aa437",
+  "binary_version": "6.0.3",
+  "bundle_id": "com.virtualhere.client",
+  "signing_identity": "Developer ID Application: VirtualHere Pty. Ltd. (N8C8ZTN347)",
+  "team_id": "N8C8ZTN347",
+  "architectures": [
+    "x86_64",
+    "arm64"
+  ],
+  "profile": {
+    "name": "virtualhere_22",
+    "creation_utc": "2022-10-08T01:56:10Z",
+    "expiration_utc": "2040-10-03T01:56:10Z",
+    "platform": [
+      "OSX"
+    ],
+    "host_controller_interface": true
+  },
+  "checks": [
+    {
+      "check": "codesign -dvvv --entitlements :-",
+      "exit_code": 0,
+      "output": "Executable=VirtualHereUniversal.app/Contents/MacOS/VirtualHereUniversal\nIdentifier=com.virtualhere.client\nFormat=app bundle with Mach-O universal (x86_64 arm64)\nCodeDirectory v=20500 size=23490 flags=0x10000(runtime) hashes=723+7 location=embedded\nHash type=sha256 size=32\nCandidateCDHash sha256=7f4c6e416148893b836b6dfc0d40efa56f583823\nCandidateCDHashFull sha256=7f4c6e416148893b836b6dfc0d40efa56f5838237163efd30c5aa1776c978d0e\nHash choices=sha256\nCMSDigest=7f4c6e416148893b836b6dfc0d40efa56f5838237163efd30c5aa1776c978d0e\nCMSDigestType=2\nCDHash=7f4c6e416148893b836b6dfc0d40efa56f583823\nSignature size=9012\nAuthority=Developer ID Application: VirtualHere Pty. Ltd. (N8C8ZTN347)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Oct 1, 2026 at 5:16:35 AM\nInfo.plist entries=12\nTeamIdentifier=N8C8ZTN347\nRuntime Version=27.0.0\nSealed Resources version=2 rules=13 files=2\nInternal requirements count=1 size=184\nwarning: Specifying ':' in the path is deprecated and will not work in a future release\n<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"https://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><dict><key>com.apple.application-identifier</key><string>N8C8ZTN347.com.virtualhere.client</string><key>com.apple.developer.team-identifier</key><string>N8C8ZTN347</string><key>com.apple.developer.usb.host-controller-interface</key><true/><key>com.apple.security.device.camera</key><true/></dict></plist>\n"
+    },
+    {
+      "check": "codesign --verify --deep --strict --verbose=2",
+      "exit_code": 0,
+      "output": "VirtualHereUniversal.app: valid on disk\nVirtualHereUniversal.app: satisfies its Designated Requirement\n"
+    },
+    {
+      "check": "spctl --assess --type execute --verbose=4",
+      "exit_code": 0,
+      "output": "VirtualHereUniversal.app: accepted\nsource=Notarized Developer ID\n"
+    },
+    {
+      "check": "file, plutil, shasum -a 256",
+      "exit_code": 0,
+      "output": "VirtualHereUniversal.app/Contents/MacOS/VirtualHereUniversal: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64]\nVirtualHereUniversal.app/Contents/MacOS/VirtualHereUniversal (for architecture x86_64):\tMach-O 64-bit executable x86_64\nVirtualHereUniversal.app/Contents/MacOS/VirtualHereUniversal (for architecture arm64):\tMach-O 64-bit executable arm64\n{\n  \"CFBundleDevelopmentRegion\" => \"English\"\n  \"CFBundleExecutable\" => \"VirtualHereUniversal\"\n  \"CFBundleIconFile\" => \"usb\"\n  \"CFBundleIdentifier\" => \"com.virtualhere.client\"\n  \"CFBundleInfoDictionaryVersion\" => \"6.0\"\n  \"CFBundleName\" => \"VirtualHere Client\"\n  \"CFBundlePackageType\" => \"APPL\"\n  \"CFBundleShortVersionString\" => \"6.0.3\"\n  \"CFBundleVersion\" => \"6.0.3\"\n  \"LSUIElement\" => \"1\"\n  \"NSCameraUsageDescription\" => \"VirtualHere may require access to your Video capture device\"\n  \"NSPrincipalClass\" => \"NSApplication\"\n}\nedfbba188187711a3707929aefff68a9b0c260224f28831d1103aa4c325aa437  .local/mac-usb-route-audit-1/VirtualHereUniversal.dmg\n"
+    }
+  ],
+  "limitations": [
+    "Gatekeeper assessment and signature validity do not establish actual IOUSBHost activation or Sony Remote Play compatibility.",
+    "No custom synthetic-device feed or standard USB/IP interoperability was tested."
+  ],
+  "cleanup": "Read-only image detached and task-owned DMG/profile removed after receipt creation."
+}

@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "observedAtTaipei": "2026-10-30T11:07:30+08:00",
+  "sourceBaseCommit": "7e198f7c0f1408de97cdedb10009e0da9e24c5d3",
+  "scope": {
+    "metadataOnly": true,
+    "deviceOpened": false,
+    "inputReportsRead": false,
+    "featureReportsRead": false,
+    "outputSent": false,
+    "permissionRequested": false,
+    "sonyOperated": false,
+    "personalIdentifiersRead": false
+  },
+  "device": {
+    "descriptor_bytes": 289,
+    "descriptor_hex": "05010905a1018501093009310932093509330934150026ff007508950681020600ff09209501810205010939150025073500463b016514750495018142650005091901290f150025017501950f81020600ff0921950d81020600ff0922150026ff0075089534810285020923952f9102850509339528b10285080934952fb102850909249513b102850a0925951ab102850b09419529b102850c09429529b10285200926953fb102852109279504b10285220940953fb10285800928953fb10285810929953fb1028582092a9509b1028583092b953fb1028584092c953fb1028585092d9502b10285a0092e9501b10285e0092f953fb10285f00930953fb10285f10931953fb10285f20932950fb10285f40935953fb10285f509369503b102c0",
+    "MaxFeatureReportSize": 64,
+    "MaxInputReportSize": 64,
+    "MaxOutputReportSize": 48,
+    "PrimaryUsage": 5,
+    "PrimaryUsagePage": 1,
+    "Product": "DualSense Wireless Controller",
+    "ProductID": 3302,
+    "Transport": "USB",
+    "VendorID": 1356
+  },
+  "descriptorSHA256": "4f48767516627510521512af13c20a064877465122b7bcc7cac1f3b608d37994",
+  "descriptorLayout": {
+    "reports": [
+      {
+        "type": "feature",
+        "report_id": 5,
+        "payload_bits": 320,
+        "payload_bytes": 40,
+        "bytes_including_report_id": 41
+      },
+      {
+        "type": "feature",
+        "report_id": 8,
+        "payload_bits": 376,
+        "payload_bytes": 47,
+        "bytes_including_report_id": 48
+      },
+      {
+        "type": "feature",
+        "report_id": 9,
+        "payload_bits": 152,
+        "payload_bytes": 19,
+        "bytes_including_report_id": 20
+      },
+      {
+        "type": "feature",
+        "report_id": 10,
+        "payload_bits": 208,
+        "payload_bytes": 26,
+        "bytes_including_report_id": 27
+      },
+      {
+        "type": "feature",
+        "report_id": 11,
+        "payload_bits": 328,
+        "payload_bytes": 41,
+        "bytes_including_report_id": 42
+      },
+      {
+        "type": "feature",
+        "report_id": 12,
+        "payload_bits": 328,
+        "payload_bytes": 41,
+        "bytes_including_report_id": 42
+      },
+      {
+        "type": "feature",
+        "report_id": 32,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 33,
+        "payload_bits": 32,
+        "payload_bytes": 4,
+        "bytes_including_report_id": 5
+      },
+      {
+        "type": "feature",
+        "report_id": 34,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 128,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 129,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 130,
+        "payload_bits": 72,
+        "payload_bytes": 9,
+        "bytes_including_report_id": 10
+      },
+      {
+        "type": "feature",
+        "report_id": 131,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 132,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 133,
+        "payload_bits": 16,
+        "payload_bytes": 2,
+        "bytes_including_report_id": 3
+      },
+      {
+        "type": "feature",
+        "report_id": 160,
+        "payload_bits": 8,
+        "payload_bytes": 1,
+        "bytes_including_report_id": 2
+      },
+      {
+        "type": "feature",
+        "report_id": 224,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 240,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 241,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 242,
+        "payload_bits": 120,
+        "payload_bytes": 15,
+        "bytes_including_report_id": 16
+      },
+      {
+        "type": "feature",
+        "report_id": 244,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "feature",
+        "report_id": 245,
+        "payload_bits": 24,
+        "payload_bytes": 3,
+        "bytes_including_report_id": 4
+      },
+      {
+        "type": "input",
+        "report_id": 1,
+        "payload_bits": 504,
+        "payload_bytes": 63,
+        "bytes_including_report_id": 64
+      },
+      {
+        "type": "output",
+        "report_id": 2,
+        "payload_bits": 376,
+        "payload_bytes": 47,
+        "bytes_including_report_id": 48
+      }
+    ],
+    "fields": [
+      {
+        "type": "input",
+        "usage_page": 1,
+        "report_id": 1,
+        "size": 8,
+        "count": 6,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          48,
+          49,
+          50,
+          53,
+          51,
+          52
+        ]
+      },
+      {
+        "type": "input",
+        "usage_page": 65280,
+        "report_id": 1,
+        "size": 8,
+        "count": 1,
+        "payload_bit_offset": 48,
+        "flags": 2,
+        "usages": [
+          32
+        ]
+      },
+      {
+        "type": "input",
+        "usage_page": 1,
+        "report_id": 1,
+        "size": 4,
+        "count": 1,
+        "payload_bit_offset": 56,
+        "flags": 66,
+        "usages": [
+          57
+        ]
+      },
+      {
+        "type": "input",
+        "usage_page": 9,
+        "report_id": 1,
+        "size": 1,
+        "count": 15,
+        "payload_bit_offset": 60,
+        "flags": 2,
+        "usage_min": 1,
+        "usage_max": 15
+      },
+      {
+        "type": "input",
+        "usage_page": 65280,
+        "report_id": 1,
+        "size": 1,
+        "count": 13,
+        "payload_bit_offset": 75,
+        "flags": 2,
+        "usages": [
+          33
+        ]
+      },
+      {
+        "type": "input",
+        "usage_page": 65280,
+        "report_id": 1,
+        "size": 8,
+        "count": 52,
+        "payload_bit_offset": 88,
+        "flags": 2,
+        "usages": [
+          34
+        ]
+      },
+      {
+        "type": "output",
+        "usage_page": 65280,
+        "report_id": 2,
+        "size": 8,
+        "count": 47,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          35
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 5,
+        "size": 8,
+        "count": 40,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          51
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 8,
+        "size": 8,
+        "count": 47,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          52
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 9,
+        "size": 8,
+        "count": 19,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          36
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 10,
+        "size": 8,
+        "count": 26,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          37
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 11,
+        "size": 8,
+        "count": 41,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          65
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 12,
+        "size": 8,
+        "count": 41,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          66
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 32,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          38
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 33,
+        "size": 8,
+        "count": 4,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          39
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 34,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          64
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 128,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          40
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 129,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          41
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 130,
+        "size": 8,
+        "count": 9,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          42
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 131,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          43
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 132,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          44
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 133,
+        "size": 8,
+        "count": 2,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          45
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 160,
+        "size": 8,
+        "count": 1,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          46
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 224,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          47
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 240,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          48
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 241,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          49
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 242,
+        "size": 8,
+        "count": 15,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          50
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 244,
+        "size": 8,
+        "count": 63,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          53
+        ]
+      },
+      {
+        "type": "feature",
+        "usage_page": 65280,
+        "report_id": 245,
+        "size": 8,
+        "count": 3,
+        "payload_bit_offset": 0,
+        "flags": 2,
+        "usages": [
+          54
+        ]
+      }
+    ]
+  },
+  "build": {
+    "compiler": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "sdkVersion": "26.5",
+    "command": "clang -fobjc-arc -Wall -Wextra -Werror research/macos-native/inspection/inspect_sony_hid.m -framework Foundation -framework IOKit -o <new-local-build>/inspect_sony_hid",
+    "sources": {
+      "inspect_sony_hid.m": "230c8bbe756dbf7788e38aaf552fe783b3e3d1e89f8c5a45d1e38fb760ce27ad",
+      "decode_descriptor.py": "2519f5e53a6a3ef4f56243299be2ff71525c239539f1247cda94027a1cb7afad"
+    },
+    "executableSHA256": "a9563f7eca387f2e0ed2d68c97a9a82001744f47d468ac28780ab7e5431f281d"
+  },
+  "limitations": [
+    "Report descriptor metadata only; no actual input, feature or output report contents were read.",
+    "No Sony controller identity or acceptance test was performed.",
+    "This physical USB descriptor is not proof a virtual HID or GameController framework accepts the same descriptor."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "observedAtTaipei": "2026-10-30T11:08:44+08:00",
+  "sourceBaseCommit": "7e198f7c0f1408de97cdedb10009e0da9e24c5d3",
+  "macOS": "26.6.2",
+  "architecture": "arm64",
+  "validCodeSigningIdentities": 0,
+  "sourceSha256": "8b156452c514f223baacacda7ef4aab2413cef588d1655a038beaa2d496e2193",
+  "tests": [
+    {
+      "variant": "baseline",
+      "returnCode": 0,
+      "stdout": "SIGNING_SMOKE_MAIN_REACHED no_hid_calls=true",
+      "stderr": "",
+      "mainReached": true,
+      "binarySha256": "62259389d59f7452c3a95a5fb3b779c68bd1e7fde441b284737f7fff581773db"
+    },
+    {
+      "variant": "hid-entitlement",
+      "returnCode": -9,
+      "stdout": "",
+      "stderr": "",
+      "mainReached": false,
+      "binarySha256": "48fe8c14f04106e0cea956644ddb70a5995fd5ed274261833ffe4ee8e0d5cf53"
+    }
+  ],
+  "hidCalls": false,
+  "permissionRequests": false,
+  "sonyOperation": false,
+  "systemSecuritySettingsChanged": false,
+  "note": "Local ad-hoc capability-claim experiment only; does not grant Apple entitlement approval.",
+  "filteredSystemDiagnostic": {
+    "process": "amfid",
+    "errorDomain": "AppleMobileFileIntegrityError",
+    "code": -424,
+    "message": "The file is adhoc signed but contains restricted entitlements",
+    "scope": "Matched only PSKeyboardSigningSmoke / com.xiunlee.pskeyboard.research.signing entries after test; personal path and PID omitted"
+  }
+}

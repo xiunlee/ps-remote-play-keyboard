@@ -1,0 +1,50 @@
+{
+  "url": "https://github.com/TinkerNorth/satellite/releases/download/2.1.9/satellite-macos-stub-2.1.9-unsigned.zip",
+  "sha256": "1c505978fd96cb6f4ce96cdb5aa640a8967f86d5b859c0de52d338b84965d5d5",
+  "matchesGitHubReleaseDigest": true,
+  "size": 838380,
+  "executed": false,
+  "installed": false,
+  "fileCount": 113,
+  "bundles": [
+    "satellite.app/Contents/Info.plist"
+  ],
+  "bundleID": "com.tinkernorth.satellite",
+  "embeddedProfilePresent": false,
+  "checks": {
+    "signature": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Executable=.local/satellite-audit-2.1.9/extracted/satellite.app/Contents/MacOS/satellite\nIdentifier=satellite\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20400 size=12674 flags=0x20002(adhoc,linker-signed) hashes=393+0 location=embedded\nVersionPlatform=1\nVersionMin=917504\nVersionSDK=918784\nHash type=sha256 size=32\nCandidateCDHash sha256=3d79a7d4a3be704f3c9db4dec1c7511ce0a64256\nCandidateCDHashFull sha256=3d79a7d4a3be704f3c9db4dec1c7511ce0a642566d8dc05ebf5e519ff90567b0\nHash choices=sha256\nCMSDigest=3d79a7d4a3be704f3c9db4dec1c7511ce0a642566d8dc05ebf5e519ff90567b0\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=871584\nExecutable Segment flags=0x1\nPage size=4096\nCDHash=3d79a7d4a3be704f3c9db4dec1c7511ce0a64256\nSignature=adhoc\nInfo.plist=not bound\nTeamIdentifier=not set\nSealed Resources=none\nInternal requirements=none\n"
+    },
+    "entitlements": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "Executable=.local/satellite-audit-2.1.9/extracted/satellite.app/Contents/MacOS/satellite\nwarning: Specifying ':' in the path is deprecated and will not work in a future release\n"
+    },
+    "verify": {
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": ".local/satellite-audit-2.1.9/extracted/satellite.app: code has no resources but signature indicates they must be present\n"
+    }
+  },
+  "observedDate": "2026-10-30",
+  "sourceCommit": "453292c704538d8bd48cdd0d95e12704353dfeba",
+  "inspectionOnly": true,
+  "sonyOperated": false,
+  "cleanup": {
+    "observedAt": "2026-10-30T04:00:19.454722+00:00",
+    "reason": "Unusable candidate; preserve verification receipts, recover storage",
+    "executableProcessesFound": [],
+    "openFilePIDsFound": [],
+    "lsofExitCode": 1,
+    "removedPaths": [
+      ".local/satellite-audit-2.1.9/satellite-macos-stub-2.1.9-unsigned.zip",
+      ".local/satellite-audit-2.1.9/extracted"
+    ],
+    "removedFileCount": 105,
+    "logicalBytes": 3134983,
+    "executed": false,
+    "installed": false
+  }
+}

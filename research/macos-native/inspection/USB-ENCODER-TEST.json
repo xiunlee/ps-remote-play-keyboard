@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "observedAtTaipei": "2026-10-30T11:17:12+08:00",
+  "sourceBaseCommit": "7e198f7c0f1408de97cdedb10009e0da9e24c5d3",
+  "sourceWorkingTreeDirty": true,
+  "kind": "pure-USB-report-encoder-with-original-C-oracle",
+  "checks": 4294,
+  "success": true,
+  "output": "DUALSENSE_USB_REPORT_PASS checks=4294 original_native_oracle=true synthetic_only=true device_created=false sony_tested=false",
+  "compiler": [
+    "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)",
+    "Target: arm64-apple-macosx26.0"
+  ],
+  "clang": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+  "sdk": "26.5",
+  "sourceSHA256": {
+    "src/macos/DualSenseUSBReport.swift": "bd0957211879a0c062849475772f3863c9ba214bdaf692e190107c301784b82d",
+    "src/macos/DualSenseUSBReportTests.swift": "549a7919f916b1cc4c1747dc272942fbfdaca9d080f1a705f42b6235fab926b4",
+    "research/native-merge/keyboard_merge.c": "35d41918ee30f7053bd475426d009b366be1d0c96e45f85021ee3f05b2f37a56",
+    "research/native-merge/keyboard_merge.h": "5f2cceb5876cbe22a52842010cca310936122746d1ebd3e8bca5a95065eed8af"
+  },
+  "binarySHA256": "8e6396e601c5e3784be8ee39db3c9a9a30405ad62033b028a0f9d04dd857cc3c",
+  "sourceContract": "hbashton/VIIPER@b78e31e93e84b4cb7c4b4c15b8aace10749106d2 device/dualsense/input_scheduler.go",
+  "scope": {
+    "actions": 22,
+    "pairCombinations": 484,
+    "deterministicCombinedMasks": 512,
+    "originalNativeCOracle": true,
+    "clockAndCounterWrap": true,
+    "inputCaptured": false,
+    "HIDCreated": false,
+    "sonyOperated": false,
+    "featureReportsImplemented": false
+  },
+  "cleanup": {
+    "removed": ".local/mac-usb-report-build-1/module-cache",
+    "logicalBytes": 19743232,
+    "notDiskSpaceDelta": true
+  },
+  "limitations": [
+    "Pure byte generation; not a CoreHID or GameController acceptance test.",
+    "No physical report, battery, sensor, identity or feature contents were captured.",
+    "Session counters remain caller-owned; adapter send failure and lifecycle remain unimplemented."
+  ]
+}

@@ -4,7 +4,9 @@
 
 歷史首發版 **0.1.0** 固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`，Release ID `427775269`；歷史 **0.1.0-alpha.12** 固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`，Release ID `427756025`。兩版當時的交付與四附件下載核對均通過；目前下載以 0.1.1 為準，不能把歷史 Latest 狀態當成現況。
 
-**2026-10-30 已在 Mac 完成首輪環境盤點、輸出候選研究與 native 核心離線編譯／合成測試**，詳見 [Mac 首輪紀錄](../research/macos-handoff/README.md)。尚無可交付的 Mac App，未安裝系統元件、建立虛擬裝置或操作 Sony；Windows 成功與 Mac 純測試都不能外推為 macOS 免實體手把可行。下列 Windows 證據保留原範圍，Mac 後續由首輪紀錄接續。
+**2026-10-30 Mac 最新進度：OJD Generic 可建立／移除，但使用者遊戲內實測回報「無反應」。已停止 Generic／Xbox 路線並確認裝置移除、OJD service 停止，後續目標為真正 DualSense／虛擬 USB 免費輸出；本輪已查候選仍缺可直接運行的合格後端，詳見新紀錄。** 固定鍵位研究前端已建置並啟動，目前候選目標 `.local/mac-keyboard-preview-6/PSKeyboardMacResearch.app`，不是已驗收的 Mac 成品。詳見 [Mac 原生研究最新紀錄](../research/macos-native/README.md)。
+
+同日較早的 [Mac 首輪紀錄](../research/macos-handoff/README.md)保留環境盤點、輸出候選研究與 native 核心離線編譯／合成測試；首輪當時尚未建立虛擬裝置或操作 Sony。後續進展按上述新紀錄接續，不把 Windows 成功、Mac 純測試或單次中立裝置建立外推為 macOS 免實體手把遊戲可用。
 
 ## 來源與閱讀順序
 
@@ -19,6 +21,17 @@
 5. 原始碼先讀 [V5Protocol.cs](../research/dualsense-v5-test/V5Protocol.cs)、[CandidateTransport.cs](../research/dualsense-preview/CandidateTransport.cs)、[backend/main.go](../research/dualsense-preview/backend/main.go)及其測試，再讀 [DualSensePreview.cs](../research/dualsense-preview/DualSensePreview.cs)的 Windows 平台依賴與生命週期。
 6. 需移植功能時才讀 [BindingProfile.cs](../src/physical-keyboard/BindingProfile.cs)、[RapidFireEngine.cs](../src/physical-keyboard/RapidFireEngine.cs)、[KeyboardControlPipeline.cs](../src/physical-keyboard/KeyboardControlPipeline.cs)、[KeyboardInputState.cs](../src/keyboard-pad/KeyboardInputState.cs)、[native 映射核心](../research/native-merge/keyboard_merge.c)與對應測試。接著讀設定頁、翻譯和 [SupportLinks.cs](../research/dualsense-preview/SupportLinks.cs)。
 7. 開始封裝前讀 [REBUILD.md](REBUILD.md)、[LICENSE](../LICENSE)、[COPYRIGHT.md](../COPYRIGHT.md)與 [發行工作表](../packaging/RELEASE-CHECKLIST.md)。舊 PS4 成功或失敗原因需要追查時，再讀 [首次免手把回報](../research/controller-free-preview/LIVE-TRIAL.md)及 [alpha.6 結果](../research/controller-free-preview/ALPHA6-TRIAL.md)。
+8. Mac 目前從 [原生研究總覽](../research/macos-native/README.md) → [OJD 發布檔與啟動 audit](../research/macos-native/OJD-AUDIT.md) → [feed adapter](../research/macos-native/OJD-FEED.md) → [Swift 核心契約](../research/macos-native/CONTROL-CORE.md)接續。首輪紀錄與 Windows 協定資料作歷史及行為參考，不取代本機最新試驗。
+
+## Mac 原生研究與 OJD 失敗試驗
+
+使用者沒有 Apple Developer 帳號，已授權繼續免費路線，並自行允許 OJD 輸入監控。供唯讀規格研究的 USB DualSense 已由使用者拔除，Sony 官方 Remote Play 的既有連線持續保留；不要為接手重啟 Sony，後續手把與權限狀態須重新核對。
+
+- 自行 ad-hoc 加 `com.apple.developer.hid.virtual.device` 的最小無 HID app 在 main 前遭 AMFI `-424` 拒絕。免費替代候選為作者已簽章的 **OpenJoystickDriver 0.6.0-alpha.1**，固定 commit `3552be925d7dacef3fd895ac0c6cbf39e9d3cd70`；app 簽章、公證、HID entitlement 與 all-devices profile 已核對，沒有購買或引入付費依賴。DMG 包裝本身未附公證 ticket，與 app 的通過結果分開記錄。
+- `.local/ojd-neutral-2/RESULT.json`（2026-10-30 台北 11:36:51）：試驗前 `[]`，試驗中觀測 `1209:4a4f`／`OpenJoystickDriver Generic HID Gamepad`／Virtual，EOF 後 child exit `0`，試驗後 `[]`，未強制終止 child。只送 neutral，沒有擷取鍵盤或操作 Sony；建立與移除成立，Sony 相容與遊戲操作仍待驗。
+- Swift 動作核心 **426**、USB report 純編碼 **4294**、OJD feed adapter **205**、PreviewPipe 本地 pipe **32** 項檢查通過。這些各自有純測試邊界，不能算作鍵盤、Sony 或 PS5 實機驗收。
+- 研究前端是固定鍵位、連點關閉；`TouchpadClick` 不支援，`Guide` 是否對應 Sony PS 鍵待驗。包含前景限制、F8／失焦清狀態與 `PreviewPipe` 獨立 watchdog（50 ms 檢查、250 ms 無主執行緒 pulse 時關 stdin）。stdin EOF 與 child 退出仍不能替代裝置移除核對，未確認清理時不重新接入。
+- 使用者已授予前端 Accessibility；Generic 遊戲試驗回報「無反應」，已按中斷並核對裝置移除，OJD service 已停止。不再安排 Generic／Xbox 試驗。真實 Fn／F8、按下／放開與失焦尚未分層驗收；原生 DualSense encoder 為純碼研究，沒有因此變成 OJD 已支援的 DualSense 輸出。
 
 ## 現有證據與尚未完成的事
 
@@ -33,7 +46,8 @@
 | Windows 0.1.1 | 固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`，Release `427807747`；正式版且為 Latest，國際品牌修正、四附件匿名下載及本機交付通過 | 代理未啟動交付版；三個執行元件仍未簽章，未取得本版實機逐項驗收 |
 | 單款遊戲回報 | 使用者回報 Final Fantasy Resonance 可正常操作，但未指明當時工具 build | 不能歸屬為 alpha.12、0.1.0 或 0.1.1 驗收，也不代表其他 JRPG、3D 遊戲或所有操作情境適用 |
 | 舊檔清理 | 0.1.1 收尾 Apply 完成：刪除 9 項、753,491,748 邏輯 bytes，失敗 0；版本與封存目錄均只剩 0.1.1，保護狀態核對通過 | 另保留設定、備份及小型驗證紀錄；邏輯檔案大小不是實際磁碟回收量 |
-| Mac | 2026-10-30 完成環境盤點、公開 API 研究；arm64 原 native 5743 項及另列的 124 項參考協定檢查通過 | 未建立虛擬裝置；未驗證 Sony／PS5 接受；原 C#／Go 未在 Mac 執行 |
+| Mac 首輪（歷史） | 2026-10-30 完成環境盤點、公開 API 研究；arm64 原 native 5743 項及另列的 124 項參考協定檢查通過 | 首輪當時未建立虛擬裝置；原 C#／Go 未在 Mac 執行 |
+| Mac 原生／OJD（目前） | Swift core 426、USB encoder 4294、OJD adapter 205、pipe 32 項通過；免費已簽章 OJD Generic 全中立裝置建立及 EOF 後移除已觀測 | 未證明 Sony 接受、鍵盤或 PS5 遊戲操作；固定鍵位研究 App 已建置並啟動，不是正式 Mac 交付版 |
 
 0.1.1 最終乾淨建置通過 **6912 項 C#**（162+2890+149+276+101+36+167+3131）、**5743 項 native** 與 C# ABI；公開包 **39／39 項稽核**通過。後端沿用固定 r4 執行檔，從已核對的 0.1.0 原始碼及交付包恢復來源與授權材料，沒有重編或啟動；Go 4 個頂層測試及 2 個子情境是既有證據，本次未重跑。這些沒有擷取真實鍵盤、建立使用者電腦裝置或操作 Sony，不是 macOS 或 PS5 實機測試。
 
@@ -76,7 +90,7 @@ Windows 現有路徑是：鍵盤擷取 → 前景／F8 → 設定與連點 → 3
 
 `research/dualsense-driver-test` 的 fixture 只供一次性 GitHub hosted Windows VM；不可偽造環境、拿掉 guard 或移作 Mac／使用者電腦的安裝工具。
 
-## 分階段工作（首輪紀錄已另存）
+## 分階段工作（首輪與後續中立試驗已另存）
 
 1. **唯讀確認來源與 Mac 環境。** 核對工作目錄、remote、分支、HEAD、未提交變更及最新 Windows 收尾證據；記錄 macOS 版本、CPU 架構、現有編譯工具與 Sony 官方 Remote Play 的實際版本／安裝位置／執行狀態。不要啟動、終止或更新 Sony，不讀帳號資料；本機序號及個人完整路徑不要放進公開報告。
 2. **先寫輸出可行性問題清單。** 根據該 macOS 與 Sony 版本查 Apple／Sony 官方文件及候選原始碼：虛擬手把輸出是否有可用公開介面、所需權限與簽章條件、是否需額外系統元件、是否能讓官方 Remote Play 接受。將已知事實、推測與待測項分開；未解決的輸出問題不能用完成 UI 代替。
@@ -85,11 +99,11 @@ Windows 現有路徑是：鍵盤擷取 → 前景／F8 → 設定與連點 → 3
 5. **最後安排官方 Remote Play 實機。** 由使用者保有連線控制，先做一個按鈕按下／放開，再測方向、其餘動作、前景／F8、改鍵／連點、重連與長時間；分別記錄協定、Mac HID、Sony 程序與 PS5 實際反應。需要中斷連線的項目另行協調，不隱含在研究授權內。
 6. **輸出路線有證據後才完整做 UI／封裝。** 沿用品牌與已確認語言需求，但先檢查文字在該平台的真實顯示。若免費且不干擾官方用戶端的免實體手把路線不可行，如實記錄阻礙與可選方向，不能改用付費依賴或第三方用戶端冒充完成。
 
-第一階段可交付的是 Mac 環境盤點、候選比較、純測試紀錄與下一個具體試驗，不是先承諾可用的 Mac App。既有授權內的唯讀與隔離工作直接推進；只有新出現、確實需要本人處理的系統權限或連線中斷才提出具體說明。
+上述階段保留作驗證順序：首輪環境／研究與純測試已完成，目前第四階段只有 OJD Generic 中立裝置建立／移除得到證據，尚非完整讀回、Sony 接受或第五階段鍵盤驗收。固定鍵位研究前端用來安排下一個具體試驗，不先承諾可用的 Mac 成品。既有授權內的唯讀與隔離工作直接推進；只有新出現、確實需要本人處理的系統權限或連線中斷才提出具體說明。
 
 ## 收尾紀錄與下一串仍待驗的項目
 
 - 0.1.1 的建置、固定提交、交付、正式發布與四附件匿名下載核對已完成；0.1.0 及 alpha.12 作為歷史版本保留。Mac 下一串先核對最新版交接與各固定來源，不將 Windows 執行包拿到 Mac 當成原生程式。
 - 逐鍵、設定、連點、失焦／F8、重連、長時間／重開機仍待相應版本的實機逐項回報。Final Fantasy Resonance 的單款正常操作回報因工具 build 未指明，獨立記錄，不補猜版本。
 - **本機舊檔清理已完成。** 0.1.1 最後一輪確認刪除 9 項、753,491,748 邏輯 bytes，失敗 0；略過 101 項中，99 項本已不存在，2 項為刻意保留的小型 log。`versions` 與 `versioned-archives` 均只剩 `0.1.1`，個人設定及備份、安裝中的 0.9.8.1 CLI／DLL、Sony 程序與舊 tag 前後核對一致；最新捷徑、GitHub 歷史、追蹤中的研究／PS4 原始碼及小型私人證據保留。先前中斷段已確認的 92 項／4,006,258,013 bytes，以及後續 0.1.0 收尾 26 項／1,583,433,983 bytes，分段留存收據；不加算未記錄的部分刪除，也不把邏輯檔案大小當成實際磁碟回收量。
-- Mac 首輪已完成唯讀盤點與純測試，見 [首輪紀錄](../research/macos-handoff/README.md)。接續確認 CoreHID entitlement／簽章與本人權限操作，再安排自有裝置建立／讀回／完全移除；虛擬輸出與 Sony 接受仍未驗證。
+- Mac 首輪歷史見 [首輪紀錄](../research/macos-handoff/README.md)，現況接續 [原生研究總覽](../research/macos-native/README.md)。免費 OJD Generic 中立裝置建立與 EOF 後移除已確認；研究前端已建置並獲本人 Accessibility 授權，Generic 試驗回報無反應且已清理；後續先解決真正 DualSense／虛擬 USB 免費輸出元件，再安排實測。Sony／PS5 接受仍未驗證，不能將此進度寫成 Mac 正式版交付或 Windows 新版驗收。
