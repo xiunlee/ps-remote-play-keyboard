@@ -22,7 +22,7 @@
 
 1. 美術優化
 
-**發布時間：** 見 [GitHub 發布頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)
+**發布時間：** 2026-10-30 18:52（台灣時間）
 
 ---
 
@@ -50,4 +50,4 @@
 
 1. Visual improvements
 
-**Published:** See [GitHub release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)
+**Published:** 2026-10-30 18:52 (Taipei time, UTC+8)

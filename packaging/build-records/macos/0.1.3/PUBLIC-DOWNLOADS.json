@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUTC": "2026-10-30T10:54:06.624482+00:00",
+  "version": "0.1.3",
+  "buildNumber": "4",
+  "tag": "mac-v0.1.3",
+  "sourceCommit": "28084359384b11d43272ad17f4207ae58b27f933",
+  "releaseID": 428908748,
+  "releaseURL": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3",
+  "publishedAtUTC": "2026-10-30T10:52:08Z",
+  "draft": false,
+  "prerelease": false,
+  "authenticationUsedForDownloads": false,
+  "tagResolvesToSource": true,
+  "releaseMetadataSource": "GitHub connector; unauthenticated REST API was rate limited",
+  "tagRefObjectType": "commit",
+  "windowsLatestPreserved": "v0.1.4",
+  "releaseManifestAndChecksumsMatch": true,
+  "archivedDocumentationChecksumsVerified": 7,
+  "artifacts": [
+    {
+      "name": "README.txt",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/README.txt",
+      "size": 2343,
+      "sha256": "6eab1a37604a5787de574f8bdeadc2c9463f0d3fcec6707d389b11f1f9f117b7",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "RELEASE.json",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/RELEASE.json",
+      "size": 27012,
+      "sha256": "817b012cd00b223cacaf421ee5506b123befd682bc38e8b43dc8d9ec0163889b",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/SHA256SUMS",
+      "size": 1350,
+      "sha256": "fd1b058aa58b767da030df2ca944fe5713751bf02d1531a7dbefeeccce2f54a3",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.3-arm64.dmg",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-arm64.dmg",
+      "size": 26080197,
+      "sha256": "227d381862734e64490b8d53eb12fe6513d27972c43095ecd75917ff7a859e32",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.3-arm64.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-arm64.zip",
+      "size": 23620792,
+      "sha256": "969fa3f972b3c2286828483cb8a21e68e09927f31ba7947d535ffa5b3ebe53e0",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.3-build-inputs.tar.gz",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-build-inputs.tar.gz",
+      "size": 115775397,
+      "sha256": "35b81b04bcfee79fe0a0a5b17b1cf3ee03a48b2838d6f1c231c2120bd37cb433",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.3-runtime-sources.tar.gz",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-runtime-sources.tar.gz",
+      "size": 450919582,
+      "sha256": "7f15544b93960b4d31bfd42d7413cbae057af3e81d7ee613f11f74bf19403218",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.3-source.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-source.zip",
+      "size": 813631,
+      "sha256": "5ed4e9ca6da49755279c60574b2496720d165410fb847cd5c914856b580dccf0",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    }
+  ],
+  "unverified": [
+    "final-package gameplay/remapping/repeat",
+    "fresh-Mac install and permissions",
+    "final-package update retaining settings and permissions",
+    "sleep/crash cleanup"
+  ],
+  "releaseNotesMatchPublishedTemplate": true,
+  "releaseNotesNormalizedSHA256": "dd06b6f6789705acebb68512f12079e8331f9345194154dbc554cf7e909d50b7"
+}

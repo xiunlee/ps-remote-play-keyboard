@@ -2,7 +2,7 @@
 
 **繁體中文** · [English](README.en.md)
 
-**一款讓鍵盤模擬手把操作的 Windows 工具，適用特定遠端遊玩環境。** 本程式為獨立開源專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。支援環境與設定方式請見下方使用說明。
+**讓鍵盤模擬手把操作的工具，提供獨立的 Windows 與 Mac 版本，適用特定遠端遊玩環境。** 本程式為獨立開源專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。支援環境與設定方式請見下方使用說明。
 
 **本版以 2D 遊戲為定位，尤其適合以選單與方向操作為主的 JRPG。** 目前沒有滑鼠瞄準或右搖桿方向映射，不適合需要靈活視角或精細類比控制的 3D 遊戲。是否適用仍取決於個別遊戲的操作需求，不保證所有 JRPG 都適合。
 
@@ -10,23 +10,25 @@
 
 ## 下載與目前狀態
 
-**v0.1.4 已正式發布：檔案整理。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/PSKeyboard-0.1.4-windows-x64.zip)，或前往 [v0.1.4 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.4)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載僅保留目前版本；較早的發行版為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
+**Windows v0.1.4 已正式發布：檔案整理。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/PSKeyboard-0.1.4-windows-x64.zip)，或前往 [v0.1.4 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.4)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。各平台公開下載僅保留該平台目前版本；較早的發行版為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
 
 中文介面使用「上班不要玩」，其他語系使用 **Three Cats Keybridge**。
 
-三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.4.md)。
+Windows 的三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.4.md)。
 
-Mac 版「**上班不要玩／Three Cats Keybridge**」是鍵盤控制與模擬手把工具，目前支援 Apple Silicon／macOS 15+ 與 **Sony 官方 PS Remote Play** 連線 PS5 的環境，不宣稱所有遊戲或程式通用。0.1.3 整合改鍵、連點、設定保存、九語、贊助與回饋，以及原生執行管理與官方元件取得；固定 App 檔名與安裝身分不變。Mac 0.1.3 由獨立 manifest 管理，目前為 build 4；Mac 使用 **Esc** 啟用／暫停，Windows 維持 **F8**。最終品牌建置與來源收據見 [Mac 驗證紀錄](docs/MAC-RELEASE-READINESS.md)。正式公開與附件下載仍待完成，Windows 0.1.4 下載保持可用。
+Mac 版「**上班不要玩／Three Cats Keybridge**」是鍵盤控制與模擬手把工具，目前支援 Apple Silicon／macOS 15+ 與 **Sony 官方 PS Remote Play** 連線 PS5 的環境，不宣稱所有遊戲或程式通用。0.1.3 整合改鍵、連點、設定保存、九語、贊助與回饋，以及原生執行管理與官方元件取得；固定 App 檔名與安裝身分不變。Mac 0.1.3 由獨立 manifest 管理，目前為 build 4；Mac 使用 **Esc** 啟用／暫停，Windows 維持 **F8**。最終品牌版已重新封裝、解壓 ZIP 及唯讀掛載 DMG 驗證簽章與內容；獨立稽核 151 項通過，來源 70 檔對應固定提交 `2808435`。收據見 [Mac 驗證紀錄](docs/MAC-RELEASE-READINESS.md)。
 
-Mac alpha.1 的 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json) 已由使用者確認遊戲可操作、W 放開停止與 Enter／Options 有效。0.1.3 建置 9 已核對完整 App 中立連接、中斷、重連與退出清理，以及淺／深色主畫面和設定；後續品牌調整另記驗證，不能當作本版遊戲成功。本版遊戲、全新 Mac 與睡眠／崩潰仍未驗證，且採自簽而非 Apple Developer ID／公證；詳見 [Mac 安裝說明](docs/MAC-INSTALL.md)、[發布準備清單](docs/MAC-RELEASE-READINESS.md)及 [交接文件](docs/MAC-HANDOFF.md)。
+**Mac 0.1.3 已正式發布：美術優化。** [下載 Mac DMG](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-arm64.dmg) · [下載 Mac ZIP](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-arm64.zip) · [Mac 發行頁與對應來源](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)。發布時間：2026-10-30 18:52（台灣時間）。八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)；Windows 0.1.4 下載保持可用。
+
+Mac alpha.1 的 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json) 已由使用者確認遊戲可操作、W 放開停止與 Enter／Options 有效。0.1.3 建置 9 已核對完整 App 中立連接、中斷、重連與退出清理，以及淺／深色主畫面和設定；最終品牌包的封裝核對另記，不能當作本版遊戲成功。本版遊戲、全新 Mac 與睡眠／崩潰仍未驗證，且採自簽而非 Apple Developer ID／公證；詳見 [Mac 安裝說明](docs/MAC-INSTALL.md)、[發布準備清單](docs/MAC-RELEASE-READINESS.md)及 [交接文件](docs/MAC-HANDOFF.md)。
 
 Mac 版是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。
 
-**介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.4/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.4/editor-zh-Hant.png)（均為離線示意）。
+**Windows 介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.4/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.4/editor-zh-Hant.png)（均為離線示意）。
 
-**使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 v0.1.4 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
+**Windows 使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 v0.1.4 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
 
-## 使用需求
+## Windows 使用需求
 
 - Windows x64 桌面環境與 .NET Framework。
 - **Sony 官方 PS Remote Play 已安裝，並先連線到 PS5。** 本程式不代管 PSN 帳號、不取代官方用戶端。
@@ -34,7 +36,7 @@ Mac 版是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關�
 
 本模式不需插入實體手把，但**不是免驅動或一鍵安裝程式**。驅動原始套件與說明見 [usbip-win2 0.9.8.1 官方版本頁](https://github.com/vadimgrn/usbip-win2/releases/tag/v.0.9.8.1)。尚未備妥相依環境時，請先閱讀上游說明；不要為本程式的測試中斷目前的 Remote Play 連線。
 
-## 開始使用
+## Windows 開始使用
 
 1. 下載執行包並完整解壓縮，保留 EXE、DLL、後端與其他隨附檔案，不要只取出單一 EXE。
 2. 用官方 PS Remote Play 連上 PS5，保持該程式開啟；正常退出其他版本的「上班不要玩」。兩版不能同時接管 F8。
@@ -43,7 +45,7 @@ Mac 版是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關�
 5. 要改鍵或連點，按「按鍵與連點設定」。只有按「儲存」且成功時才會套用；取消保留原設定。編輯後保持暫停，切回 Remote Play 再按 F8。
 6. 結束時按「中斷手把」或正常關閉本程式。若清理未確認而鎖住重新接入，保留訊息回報，不反覆建立裝置或重啟 Sony。
 
-## 按鍵、連點與設定保存
+## Windows 按鍵、連點與設定保存
 
 22 個手把動作可各自指定單一按鍵，並選擇關閉連點、按住連點或按一下啟停；每鍵間隔 20–5000 毫秒，預設 100 毫秒。F8 保留為控制開關，不能指派成遊戲按鍵。遊戲可能忽略很短的連點脈衝。
 
@@ -66,6 +68,8 @@ Mac 版是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關�
 個人設定在 `%LOCALAPPDATA%\PSKeyboard\bindings.json`，與程式版本分開。更新、開啟或取消編輯都不重設設定；儲存失敗也不套用新草稿。「恢復預設」會先修改草稿，連點全關、間隔回到 100 毫秒，儲存後才生效。
 
 ## 常見問題
+
+以下連線與 F8 操作說明適用 Windows；Mac 使用 Esc，請依 [Mac 安裝手冊](docs/MAC-INSTALL.md)及 [Mac 鍵位](docs/MAC-DEFAULT-KEYS.md)操作。
 
 **顯示手把已接入，但 PS5 沒反應？** 連線燈只表示 Windows 輸出通道，不是 Sony 接受輸入的證明。先確認官方 Remote Play 已連上 PS5、視窗在前景、F8 已啟用，以及使用的按鍵符合目前設定。若有驅動或清理錯誤，先保留訊息回報，不要反覆接入、更換驅動或為此重啟 Sony。
 

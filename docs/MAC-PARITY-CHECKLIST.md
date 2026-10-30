@@ -2,7 +2,7 @@
 
 更新：2026-10-30（Asia/Taipei）。「上班不要玩／Three Cats Keybridge」是鍵盤控制與模擬手把工具；目標是將 Windows 現行使用者功能帶到 Mac，並交付可自行完成準備、連接、停止與重連的單一 App。**Mac 0.1.3 的原生 helper 與完整 App 建置 9 已通過連接／停止／重連／退出清理，淺深色主畫面與設定已查看；本版遊戲、新機、睡眠及崩潰仍未驗證。公開交付明示這些限制，發行狀態以 GitHub 實際頁面為準。** 首版範圍為 Apple Silicon／macOS 15 以上、Sony 官方 Remote Play、單一模擬手把、免費使用。下表分開記錄程式、離線測試與實機驗收，不能互相替代。
 
-Windows 比對基準為 [0.1.1 使用手冊](../packaging/README.zh-TW.md)、[現行主程式](../research/dualsense-preview/DualSensePreview.cs)、[設定編輯器](../src/physical-keyboard/BindingEditor.cs)、[BindingProfile](../src/physical-keyboard/BindingProfile.cs) 與九語 [UiText](../src/physical-keyboard/UiText.cs)／[PreviewText](../research/dualsense-preview/PreviewText.cs)。不以舊 physical relay 內部測試包或早期 prototype 當作目前產品。
+Windows 比對基準為 [0.1.4 使用手冊](../packaging/README.zh-TW.md)、[現行主程式](../research/dualsense-preview/DualSensePreview.cs)、[設定編輯器](../src/physical-keyboard/BindingEditor.cs)、[BindingProfile](../src/physical-keyboard/BindingProfile.cs) 與九語 [UiText](../src/physical-keyboard/UiText.cs)／[PreviewText](../research/dualsense-preview/PreviewText.cs)。不以舊 physical relay 內部測試包或早期 prototype 當作目前產品。
 
 本程式是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。新名稱及貓咪圖示的核對與建置 9 的既有證據分開記錄；不改寫歷史協定識別或試驗結果。
 
@@ -60,8 +60,8 @@ Windows 沒有的右搖桿方向／滑鼠視角、觸控滑動、音訊、震動
 
 本次公開不以補完遊戲、新機及異常情境為前置條件；以下保留實際未驗項目，不因公開而改寫為通過。
 
-1. **固定公開產物與封裝證據。** 建置 9 的 App 連接、中斷、重連、退出清理及淺深色介面已核對；封裝後再驗同版 App／簽章及啟動流程。維持擁有權界線，不把中立連線成功當作本版遊戲驗收。
+1. **固定公開產物與封裝證據。** 建置 9 的 App 連接、中斷、重連、退出清理及淺深色介面已核對；最終品牌包的 ZIP／DMG 簽章、內容及來源對應已另驗通過；交付包啟動流程仍待實測。維持擁有權界線，不把中立連線成功當作本版遊戲驗收。
 2. **持續補實機驗證。** 同一 App 正常退出後重開、連接、中斷再連接；基本遊戲、放開停止、Options、改鍵及連點；在有裝置的情況核對退出／失敗／睡眠清理，不重啟 Sony。
 3. **追蹤新機安裝與更新。** 新 Mac 或新使用者環境的首次開啟、Gatekeeper、AX、官方元件取得及無開發目錄自啟；以最終包覆核 AX、profile／備份與固定 RuntimeState 保留。目前只有本機設定更新保留及歷史 AX 更新證據。
 4. **定稿文件與視覺。** 核對圖示、深色及九語長文字，補最終截圖與真實驗證範圍；對外 README、手冊與版本資訊一致。母語校閱與更多顯示環境可持續追蹤，不把尚未查看的畫面標為已驗。
-5. **固定產物再交付。** 建置 9 已產生 App ZIP／DMG、同版專案來源、runtime 對應來源與建置輸入，白名單、簽章與 SHA-256 已核對；DMG 已唯讀掛載比對內部 App。本次以 `mac-v0.1.3` 的獨立 Mac 發行頁及 `ThreeCatsKeybridge-Mac-0.1.3-…` 附件交付，不覆寫 Windows 附件；Mac 首發不將任何 Windows Release 轉為草稿；實際公開時間與下載核對另外記錄。細項見 [Mac 發佈準備清單](MAC-RELEASE-READINESS.md)。
+5. **固定產物再交付。** 最終品牌版 0.1.3／build 4 已重新產生 App ZIP／DMG、70 檔白名單專案來源、runtime 對應來源與建置輸入，簽章、版本、完整內容及 SHA-256 已核對；ZIP 已重解、DMG 已唯讀掛載比對內部 App，另有 151 項獨立稽核通過。最終來源固定為 `28084359384b11d43272ad17f4207ae58b27f933`，建置 9 收據保留為歷史。已於 **2026-10-30 18:52（台灣時間）**透過獨立 [mac-v0.1.3 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)交付八個附件，Windows 0.1.4 及既有標籤／附件保持不變；八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。細項見 [Mac 發佈準備清單](MAC-RELEASE-READINESS.md)。

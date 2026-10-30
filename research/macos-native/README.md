@@ -1,6 +1,6 @@
 # Mac 原生研究：USB DualSense 輸出路線
 
-更新：2026-10-30（Asia/Taipei）。目前版本為 **Mac 0.1.3／build 4**，中文名稱「上班不要玩」、非中文名稱 **Three Cats Keybridge**；定位為鍵盤控制與模擬手把工具，實際支援 Sony 官方 PS Remote Play。同一 App 已加入 Windows 對應的改鍵、連點、持久化、九語與支持功能，並將 guest／relay 管理移入原生 helper。固定 App／路徑／簽章更新後，設定與輔助使用權限均保留。建置 9 已確認 App 中立連接、中斷、再次連接與退出清理，並檢視淺／深色主畫面及設定；本版遊戲、新機、睡眠／崩潰仍待驗；後續品牌調整另記核對，不將建置 9 的畫面當成新品牌證據。Mac 公開標籤為 `mac-v0.1.3`，不與 Windows `v0.1.3` 衝突；實際公開狀態以發行頁為準。請以 [功能對齊清單](../../docs/MAC-PARITY-CHECKLIST.md)及[發佈驗證](../../docs/MAC-RELEASE-READINESS.md)區分實作、離線檢查與實機結果。
+更新：2026-10-30（Asia/Taipei）。目前版本為 **Mac 0.1.3／build 4**，中文名稱「上班不要玩」、非中文名稱 **Three Cats Keybridge**；定位為鍵盤控制與模擬手把工具，實際支援 Sony 官方 PS Remote Play。同一 App 已加入 Windows 對應的改鍵、連點、持久化、九語與支持功能，並將 guest／relay 管理移入原生 helper。先前固定 App／路徑／簽章的本機更新曾保留設定與輔助使用權限；最終交付包仍未做這項更新實測。建置 9 已確認 App 中立連接、中斷、再次連接與退出清理，並檢視淺／深色主畫面及設定；本版遊戲、新機、睡眠／崩潰仍待驗；最終品牌包已重解 ZIP、唯讀掛載 DMG 核對簽章與內容，並通過 151 項獨立封裝稽核；[收據](../../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)固定來源為 `28084359384b11d43272ad17f4207ae58b27f933`。不將建置 9 的畫面當成最終品牌版視覺驗收。Mac 使用獨立標籤 `mac-v0.1.3`，Windows 最新仍為 `v0.1.4`；已於 **2026-10-30 18:52（台灣時間）**公開 [mac-v0.1.3](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`，八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。請以 [功能對齊清單](../../docs/MAC-PARITY-CHECKLIST.md)及[發佈驗證](../../docs/MAC-RELEASE-READINESS.md)區分實作、離線檢查與實機結果。
 
 本程式是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。以下歷史名稱、協定識別與試驗記錄保留原樣。
 

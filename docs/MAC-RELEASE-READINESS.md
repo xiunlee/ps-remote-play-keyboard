@@ -10,7 +10,7 @@ Mac manifest 為 **0.1.3／build 4**，根目錄 Windows `VERSION` 維持 **0.1.
 
 [FINAL-VERIFICATION](../packaging/build-records/macos/0.1.3/FINAL-VERIFICATION.json) 記錄本輪實際重跑：控制核心 459、profile 79、V5 22958、relay socket 57、runtime 231 項全部通過；另通過依賴修復／回復／取消／自有程序清理檢查，以及平台版號 3 個測試方法、9 種情境。九語共 197 keys、94 個介面字串引用、各語品牌及非官方聲明均通過。來源白名單由 69 檔增為 70 檔，新增的是平台版本隔離測試；所有建置輸入雜湊與目前來源一致。Windows 端先前回報的 20 項研究檢查保持為外部既有證據，未計入本輪重跑。
 
-本輪未安裝或啟動 App，未建立虛擬裝置、擷取按鍵、修改個人設定或操作 Sony。最終 ZIP／DMG 必須以這份新建置重新產生並重新驗證；建置 9 的 PACKAGE 不是這份最終包的證據。公開附件及匿名下載只在實際完成後記錄。
+本輪未安裝或啟動 App，未建立虛擬裝置、擷取按鍵、修改個人設定或操作 Sony。最終 ZIP／DMG 已依這份新建置重新產生並驗證，來源固定為 `28084359384b11d43272ad17f4207ae58b27f933`；[FINAL-PACKAGE](../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)記錄 ZIP 重解、DMG 唯讀掛載與全部 App 檔案雜湊及簽章核對。[FINAL-PACKAGE-AUDIT](../packaging/build-records/macos/0.1.3/FINAL-PACKAGE-AUDIT.json)另有 151／151 項獨立核對通過，涵蓋八個附件、70 檔來源、117 檔 App、版本、授權及 Finder 可見性。建置 9 的 PACKAGE 保留為歷史。已於 **2026-10-30 18:52（台灣時間）**發布 [mac-v0.1.3](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`；八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。
 
 ## 範圍與現有證據
 
@@ -46,7 +46,7 @@ Mac manifest 為 **0.1.3／build 4**，根目錄 Windows `VERSION` 維持 **0.1.
 
 - [x] 完整對應來源、第三方 notices、固定版本／patch／設定及重建腳本已整理；runtime source archive 為 450,919,582 bytes，另有 115,775,397 bytes 的固定 build-input archive。詳細內容與 SHA-256 見 [runtime 發佈材料](MAC-RUNTIME-MATERIALS.md)。這些是分開交付的開發材料，不重複放入 App。
 - [x] 公開 runtime 材料取得腳本已提供固定官方輸入下載或固定 archive 重用；不依賴作者原本的 cache。固定 rootfs／APK 到 Image／initrd 的重現與來源完整性已核對，並非宣稱全部 Alpine 套件均已重新編譯。
-- [x] [封裝程式](../packaging/macos/package_release.py) 已建立 ZIP／DMG、白名單專案來源 ZIP、獨立 runtime source archive、選配 build-input archive、SHA256SUMS 與 RELEASE.json 的流程，包含重新取出 ZIP 與實際唯讀掛載 DMG 後的 App 簽章／內容比對。**已以建置 9 完成封裝驗證；ZIP 解壓及唯讀掛載 DMG 後的 App 簽章與全部檔案雜湊均通過。** 來源 ZIP、runtime／build-input archive、版本與白名單也已核對；各交付檔的大小與 SHA-256 以同包 `RELEASE.json`／`SHA256SUMS` 為準。後續品牌建置與最終附件須重新核對簽章、來源對應及雜湊，公開下載狀態另由發行頁記錄。
+- [x] [封裝程式](../packaging/macos/package_release.py) 已建立 ZIP／DMG、白名單專案來源 ZIP、獨立 runtime source archive、選配 build-input archive、SHA256SUMS 與 RELEASE.json 的流程，包含重新取出 ZIP 與實際唯讀掛載 DMG 後的 App 簽章／內容比對。**最終品牌版 0.1.3／build 4 已完成封裝驗證；ZIP 重解及唯讀掛載 DMG 後的 App 簽章與全部檔案雜湊均通過。** 來源 ZIP、runtime／build-input archive、版本與白名單也已核對；各交付檔的大小與 SHA-256 以同包 `RELEASE.json`／`SHA256SUMS` 為準。最終品牌版簽章、來源對應及八個附件雜湊已核對；建置 9 舊收據保持原樣，公開下載狀態另記。
 - [x] [繁中安裝手冊](MAC-INSTALL.md)與[英文安裝手冊](MAC-INSTALL.en.md)涵蓋固定路徑、權限、使用、更新與移除，標示未公證、已驗證範圍與未完成新機／遊戲驗收的限制。使用者流程不要求匯入作者憑證或執行作者簽章設定。
 - [x] 封裝白名單排除作者私鑰、keychain、私人簽章設定、個人 runtime 識別、vendor 設定與原始研究紀錄；VirtualHere 二進位不內附，仍向官方取得。輸出已依白名單核對；不將個人設定、簽章私鑰或元件設定加入來源／App 封裝。
 
@@ -68,19 +68,21 @@ Mac manifest 為 **0.1.3／build 4**，根目錄 Windows `VERSION` 維持 **0.1.
 - [ ] 在全新 Mac 或新使用者環境驗證最終包首次開啟與正常 Gatekeeper 流程、AX 權限引導、官方元件取得及首次連線；不要求關閉 SIP／AMFI、刪除 quarantine 或修改 TCC。
 - [ ] 核對缺件、下載／驗證失敗、權限未授予與元件損壞時的可恢復指引；隔離測試通過不代替一般使用者的安裝流程。
 - [ ] 以最終交付包覆核固定身分更新、AX、profile／備份與 RuntimeState 保留。歷史 AX 更新和目前 profile 更新證據分開保留，不合併宣稱已完成最終包驗收。
-- [x] 已完成建置 9 封裝驗證，核對 App／ZIP／唯讀掛載 DMG 的簽章、內容、版本、大小、SHA-256 與來源材料對應；不含私密資料或 Sony／VH 二進位，來源 tar 獨立交付。
+- [x] 已完成最終品牌版 0.1.3／build 4 封裝驗證，核對 App／ZIP／唯讀掛載 DMG 的簽章、內容、版本、大小、SHA-256 與來源材料對應；不含私密資料或 Sony／VH 二進位，來源 tar 獨立交付。
 - [ ] 用實際最終產物驗證安裝／更新／移除手冊，關閉並等清理完成才替換 App；移除僅處理自有 App／資料，設定保留有清楚選擇。
 
 ### 介面與公開資料
 
 - [x] 建置 9 已實際查看淺／深色主畫面及設定；改鍵與 Hold 草稿取消保留原設定，外觀已恢復跟隨系統。
 - [ ] 核對 Dock／Finder 圖示、長文案與九語關鍵操作布局。其他 Retina／字體／顯示設定及母語校閱須保留未驗範圍，不把翻譯缺鍵檢查當作視覺驗收。
-- [ ] 產生最終主畫面與設定頁截圖，定稿中英文 README、支援系統／Remote Play 版本、限制、依賴與發行說明，移除過時的 Mac 尚未開發描述。App 內手冊按鈕不是既有 Windows 功能，不阻擋本輪對齊；安裝包必須附手冊。
-- [ ] 使用獨立標籤 `mac-v0.1.3` 與 `ThreeCatsKeybridge-Mac-0.1.3-…` 附件名稱封版；建立本機版號不等於已公開發佈。**不得重用或移動 Windows 已有 `v0.1.0`／`v0.1.1`／`v0.1.2` 標籤，也不得覆寫其附件，或與 Windows 已發布的 `v0.1.4` 衝突。** Mac 與 Windows 分平台保留版本，Mac 首次發布不將 Windows Release 轉為草稿。
-- [ ] 來源與產物固定、已知限制明示後建立 Release、上傳附件，並以公開下載重新核對大小及 SHA-256；只有實際完成才標記已發布。
+- [x] 中英文 README、手冊及發行說明已區分 Windows／Mac 的支援環境、按鍵、依賴與未驗限制，移除過時的 macOS 不支援描述；安裝包附中英文手冊。
+- [ ] 補最終主畫面與設定頁截圖；建置 9 畫面不代替最終品牌版視覺驗收。App 內手冊按鈕不是既有 Windows 功能，不阻擋本輪對齊。
+- [x] 已使用獨立輕量標籤 `mac-v0.1.3` 與 `ThreeCatsKeybridge-Mac-0.1.3-…` 附件名稱封版；該標籤固定指向來源 `28084359384b11d43272ad17f4207ae58b27f933`，已公開發布。**不得重用或移動 Windows 已有 `v0.1.0`／`v0.1.1`／`v0.1.2` 標籤，也不得覆寫其附件，或與 Windows 已發布的 `v0.1.4` 衝突。** Mac 與 Windows 分平台保留版本，Mac 首次發布不將 Windows Release 轉為草稿。
+- [x] 來源與產物固定、已知限制明示後建立 Release 並上傳八個附件；Windows 0.1.4 保持公開。
+- [x] 八個公開附件已匿名重新下載，大小及 SHA-256 全部符合最終包與 GitHub digest；公開 RELEASE.json、SHA256SUMS、70 檔來源對應及 ZIP 內七份文件的雜湊一致。見 [PUBLIC-DOWNLOADS](../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。
 
 ## 後續項目與下一步
 
 右搖桿／滑鼠視角、觸控滑動、音訊、震動／自適應扳機、錄製／重播、其他手把中繼、Intel Mac 與較舊 macOS 不是本次首版前提，也不能列入已支援功能。更多遊戲、多螢幕、長時間壓力及更多系統版本可分批驗證，公開說明須保持實際範圍。
 
-建置 9 的封裝與簽章核對已完成；本次公開須固定後續品牌建置與對應附件，明示新機、遊戲及異常情境未驗，並核對最終公開附件。交付包首次開啟、本版遊戲及乾淨環境驗證繼續追蹤，不作為本次公開的前置條件。已完成的設定、原生 helper、翻譯與來源材料保留；完整 App 的中立連接及清理成功也不代替遊戲及安裝驗收。
+最終品牌版的來源、ZIP／DMG、簽章與附件雜湊核對已完成；正式發布、八個附件上傳與匿名下載驗證已完成；Windows 0.1.4 公開下載保留。新機、遊戲及異常情境保持未驗。交付包首次開啟、本版遊戲及乾淨環境驗證繼續追蹤，不作為本次公開的前置條件。已完成的設定、原生 helper、翻譯與來源材料保留；完整 App 的中立連接及清理成功也不代替遊戲及安裝驗收。

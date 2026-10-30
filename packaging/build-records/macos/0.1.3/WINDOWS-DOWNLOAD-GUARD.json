@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "startedAtUTC": "2026-10-30T10:41:44.636555+00:00",
+  "completedAtUTC": "2026-10-30T10:41:45.698594+00:00",
+  "anonymous": true,
+  "credentialsOrBrowserStateRead": false,
+  "releaseURL": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.4",
+  "releaseId": 428848090,
+  "version": "0.1.4",
+  "sourceCommit": "c0de54e964ae85b50c4fb0fdb1d4b89de7fc7699",
+  "tagObjectSHA": "ba834f9772b67dad11358318b37d154641cdc4dc",
+  "tagResolvesToSourceCommit": true,
+  "public": true,
+  "latestReleaseTag": "v0.1.4",
+  "latestReleaseId": 428848090,
+  "assets": [
+    {
+      "name": "PSKeyboard-0.1.4-source.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/PSKeyboard-0.1.4-source.zip",
+      "size": 8458820,
+      "sha256": "d536c6b97cfad99ffea2d397a98f0aff7e880e0aa0ded75b47c3f0a297a46c70",
+      "githubAssetId": 691604941,
+      "sizeMatches": true,
+      "sha256Matches": true,
+      "downloadedAtUTC": "2026-10-30T10:41:09.782890+00:00",
+      "reusedThisSessionDownload": true
+    },
+    {
+      "name": "PSKeyboard-0.1.4-windows-x64.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/PSKeyboard-0.1.4-windows-x64.zip",
+      "size": 5233731,
+      "sha256": "0d3e82133307fcd4d81585a7e10728cdaedf0de91ca0f81068730344cdb07cd3",
+      "githubAssetId": 691604790,
+      "sizeMatches": true,
+      "sha256Matches": true,
+      "downloadedAtUTC": "2026-10-30T10:41:09.484187+00:00",
+      "reusedThisSessionDownload": true
+    },
+    {
+      "name": "RELEASE.json",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/RELEASE.json",
+      "size": 617,
+      "sha256": "957444d8b85fb83ee69c584912d01ee37e144ec2f86de5584b2064649a93a727",
+      "githubAssetId": 691605110,
+      "sizeMatches": true,
+      "sha256Matches": true,
+      "downloadedAtUTC": "2026-10-30T10:41:09.015662+00:00",
+      "reusedThisSessionDownload": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/SHA256SUMS.txt",
+      "size": 275,
+      "sha256": "ffb02cee20d15bbf2a311e1dfdc14051e9e11790e96b9a898e059fb8f2f370a7",
+      "githubAssetId": 691605150,
+      "sizeMatches": true,
+      "sha256Matches": true,
+      "downloadedAtUTC": "2026-10-30T10:41:09.009491+00:00",
+      "reusedThisSessionDownload": true
+    }
+  ],
+  "publicChecksumManifestMatches": true,
+  "publishedManifest": {
+    "version": "0.1.4",
+    "sourceCommit": "c0de54e964ae85b50c4fb0fdb1d4b89de7fc7699",
+    "channel": "public-release",
+    "price": 0,
+    "license": "GPL-3.0-only",
+    "author": "xiunlee",
+    "driversBundled": false,
+    "sonyOperationVerified": false,
+    "files": [
+      {
+        "name": "PSKeyboard-0.1.4-windows-x64.zip",
+        "sha256": "0D3E82133307FCD4D81585A7E10728CDAEDF0DE91CA0F81068730344CDB07CD3",
+        "bytes": 5233731
+      },
+      {
+        "name": "PSKeyboard-0.1.4-source.zip",
+        "sha256": "D536C6B97CFAD99FFEA2D397A98F0AFF7E880E0AA0DED75B47C3F0A297A46C70",
+        "bytes": 8458820
+      }
+    ]
+  },
+  "allPassed": true,
+  "remoteMutationsPerformed": false,
+  "downloadedProgramsExecuted": false
+}
