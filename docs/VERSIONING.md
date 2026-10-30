@@ -2,16 +2,17 @@
 
 ## 版本與來源
 
+- **最新 Windows v0.1.2 已發布（美術優化）**：固定來源 `da12240649df74dc4e2846404317e8a91b231a05`，四附件匿名下載通過，40／40 公開包稽核通過；[發行紀錄](../research/dualsense-preview/RELEASE-0.1.2.md)。本版實機驗收仍待完成。下一個程式變更版本為 **0.1.3**；以下 0.1.1 的 Latest／本機狀態為當時歷史。
 - 根目錄 `VERSION` 是建置版本號的唯一來源。依使用者最新要求，**首個正式發行版 `v0.1.0` 已發布**，固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`；之後使用 `主版.次版.修訂`，不再讓對外版號附帶 alpha 序號。歷史 `主版.次版.修訂-alpha.序號` 標籤與附件保留，不能重新命名或移動。命名調整不等於實機驗收或穩定性改善。
-- **最新 v0.1.1 國際化品牌修正版已正式發布**：固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。中文保留「上班不要玩」，七個非中文語系統一為 **PS Remote Play Keyboard**，包含標題、說明、設定頁、回饋主旨及英文文件；獨立建置、公開封裝、四附件匿名下載核對與本機交付完成，沒有覆寫 v0.1.0。
+- **歷史 v0.1.1 國際化品牌修正版已正式發布**：固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。中文保留「上班不要玩」，七個非中文語系統一為 **PS Remote Play Keyboard**，包含標題、說明、設定頁、回饋主旨及英文文件；獨立建置、公開封裝、四附件匿名下載核對與本機交付完成，沒有覆寫 v0.1.0。
 - **0.1.0-alpha.12 九語介面版保留為歷史公開 alpha**，標籤固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`；當版乾淨建置、公開封裝、四附件匿名下載雜湊核對及本機交付均已完成，沒有代使用者啟動一般模式。其測試結果不取代 0.1.0 的獨立結果。
-- alpha.11 固定來源 `6dbc154a6a887398796d442fd34b73455672aba3` 與附件保持不變；根目錄 README 的現行公開下載已更新至 v0.1.1。發布後的證據與文件可另作提交，不改寫任何已發布版本的建置來源。
+- alpha.11 固定來源 `6dbc154a6a887398796d442fd34b73455672aba3` 與附件保持不變；根目錄 README 的現行公開下載已更新至 v0.1.2。發布後的證據與文件可另作提交，不改寫任何已發布版本的建置來源。
 - alpha.10 來源固定於 `8359c1ded5cf3310ad85ed3b42e0f47fd55da586`；alpha.10／11 標籤均已推送並核對，歷史標籤不變。見 [alpha.10 紀錄](../research/dualsense-preview/ALPHA10-TRIAL.md)與 [alpha.11 紀錄](../research/dualsense-preview/ALPHA11-TRIAL.md)。
 - 每次交付有應用程式碼變更的新版，就依使用者慣例增加版號並更新 [CHANGELOG.md](../CHANGELOG.md)：**V0.1.0 → V0.1.1 → … → V0.1.9 → V0.2.0**，之後不再使用 alpha。根目錄 `VERSION` 保存不含前綴的數字；UI 顯示 **PS Remote Play Keyboard V 0.1.1**，中文語系顯示 **上班不要玩 V 0.1.1**，Git 標籤使用小寫 `v0.1.1`。不要自行改成 `0.1.10`，也不預設尚未指定的更高位進位規則。不能改寫已發布版本的二進位、來源或標籤。
 - 尚未建立版本標籤、交付或公開發布的候選可在同一版號下提交修正，但每次仍建置到全新目錄，保留各自來源提交與雜湊；不得覆寫舊候選產物或把未發布建置說成已交付。
 - `v<版本號>` 為附註 Git 標籤，固定經測試的原始碼提交。禁止強制移動、刪除重建或強制覆寫遠端標籤。
 - 編譯檔的 ProductVersion 包含版本與 Git 短碼；未提交工作區另有 `.dirty`。視窗顯示版本，狀態／啟動紀錄保存來源提交及 dirty 狀態。
-- 驗收文件與建置清單可於交付後另作提交，不因此移動版本標籤。alpha.9 的 PS5 操作成功回報不等於新版每個 session 已獲 Sony 接受。2026-10-29《Final Fantasy Resonance》的使用者正常操作回報未指定工具 build，也不能算作 v0.1.1 逐鍵或連點驗收。下一個程式變更版本為 **0.1.2**。
+- 驗收文件與建置清單可於交付後另作提交，不因此移動版本標籤。alpha.9 的 PS5 操作成功回報不等於新版每個 session 已獲 Sony 接受。2026-10-29《Final Fantasy Resonance》的使用者正常操作回報未指定工具 build，也不能算作 v0.1.1 逐鍵或連點驗收。下一個程式變更版本為 **0.1.3**。
 - `alpha.5` 是事後命名的成功基準，原檔沒有內嵌版本。歷史校驗與來源保留；本機副本可依清理授權移除，事後重建不能宣稱就是當初原檔。
 
 ## 建置與驗證
@@ -59,7 +60,7 @@
 - [alpha.12 已發布頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0-alpha.12)：Release ID `427756025`，固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`；Windows ZIP、完整對應原始碼 ZIP、RELEASE.json 與 SHA256SUMS.txt 四附件匿名下載後雜湊全數吻合。
 - [v0.1.0 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.0)：Release ID `427775269`，`prerelease=false`，發布時以 `make_latest=true` 設為最新；當時 GitHub latest API 與四附件匿名下載的 bytes／SHA-256 已核對。本機程式、封存及桌面入口已交付，沒有啟動一般模式。固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`，執行包 6,283,796 bytes、SHA-256 `9C28E917B8343C18591BB4A37142EBA32ACA5EEC57F2914A31889DB147F1552F`；完整來源包 12,416,180 bytes、SHA-256 `B29C57B0C7628ADAE8B9DBCB149D788C9D4BE2489CC7A07BCD293742ECD2F939`。公開附件雜湊另見[清單](../packaging/build-records/0.1.0-archives.json)。
 
-- [v0.1.1 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)：Release ID `427807747`，`prerelease=false`，已核對為 GitHub latest。四個公開附件匿名下載的 bytes／SHA-256 全部通過，本機獨立程式、封存與桌面入口已交付；固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。本版附件雜湊見[清單](../packaging/build-records/0.1.1-archives.json)。
+- [v0.1.1 正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)：Release ID `427807747`，`prerelease=false`，發布時核對為 GitHub latest。四個公開附件匿名下載的 bytes／SHA-256 全部通過，本機獨立程式、封存與桌面入口已交付；固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`。本版附件雜湊見[清單](../packaging/build-records/0.1.1-archives.json)。
 
 ## 更新、本機清理與回退
 

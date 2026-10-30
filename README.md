@@ -10,17 +10,17 @@
 
 ## 下載與目前狀態
 
-**v0.1.1 國際化品牌修正版已正式發布。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.1/PSKeyboard-0.1.1-windows-x64.zip)，或前往 [v0.1.1 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)取得完整對應原始碼與 SHA-256 清單。GitHub latest 與四附件匿名下載雜湊均已核對；v0.1.0 及歷史 alpha 的標籤與附件保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
+**v0.1.2 已正式發布：美術優化。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip)，或前往 [v0.1.2 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對，歷史標籤與附件保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
 
 中文介面保留「上班不要玩」；英文、日文、韓文、德文、法文、西班牙文與巴西葡語統一使用 **PS Remote Play Keyboard**，包含主畫面、設定頁、說明及回饋主旨。
 
-三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.1.md)。Mac 版尚未提供；已完成[首輪 Mac 環境與離線研究](research/macos-handoff/README.md)，虛擬裝置與官方 Remote Play 相容性仍待驗證。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
+三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.2.md)。Mac 版尚未提供；[Mac 研究](research/macos-native/README.md)仍在進行，官方 Remote Play 相容性尚未通過。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
 
 alpha.9 的四種 DualSense 方案已有使用者透過官方 Remote Play 操作 PS5 的[成功回報](research/dualsense-preview/ALPHA9-TRIAL.md)。目前固定其中第二種「一般 DualSense／純手把」模式；alpha.10 已完成設定與連點整合、本機交付，alpha.11 接續加入免費開源說明、回饋與公開封裝。上述結果不代表所有電腦、遊戲或新版本均已驗收。
 
-**介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。v0.1.1 已完成國際品牌及離線語系檢查；母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.1/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.1/editor-zh-Hant.png)（均為離線示意）。
+**介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.2/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.2/editor-zh-Hant.png)（均為離線示意）。
 
-**使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 v0.1.1 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
+**使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 v0.1.2 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
 
 ## 使用需求
 

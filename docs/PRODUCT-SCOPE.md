@@ -1,5 +1,7 @@
 # 功能與支援範圍
 
+**最新 Windows 狀態（2026-10-30）：v0.1.2 已發布，更新說明「美術優化」；[驗證紀錄](../research/dualsense-preview/RELEASE-0.1.2.md)。** 四附件下載核對與本機清理完成，個人設定保留；本版逐項實機仍待驗。下方 v0.1.1 的 Latest 與當時本機狀態為歷史。Mac 研究已有進展，詳見 [最新紀錄](../research/macos-native/README.md)，尚未證實遊戲操作成功。
+
 更新：2026-10-29。使用者已決定維持公開儲存庫，以 **GPL-3.0-only 免費開源**，作者 **xiunlee**；所有功能免費，原收費規劃不再適用。alpha.9 四種 DualSense 候選均取得使用者透過官方 Remote Play 操作 PS5 的成功回報，選定第二種 `dualsensegamepadv5`；早期版本與 v0.1.0 保留歷史。**最新 v0.1.1 國際化品牌修正版已正式發布、設為 GitHub latest、本機交付並完成四附件匿名下載核對及舊版清理**。中文保留「上班不要玩」，非中文統一 **PS Remote Play Keyboard**；本版沒有新增逐項實機驗收證據。
 
 ## 目前產品方向
@@ -68,4 +70,4 @@ v0.1.1 固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629` 通過 6912 項 C
 
 Mac 暫不列為免手把首版前提。未來研究應先在實體 Mac 上確認可建立相容的手把輸出，並讓 Sony 官方程式接受輸入；通過後再移植鍵盤擷取與介面。按鍵設定概念與部分輸出邏輯可以沿用，但現有 Windows 虛擬 USB 後端不可直接沿用。若需 DriverKit，還要核對 Apple 的驅動權限與發行要求；這是工程評估，尚不是可行性實證。[Apple DriverKit 權限說明](https://developer.apple.com/documentation/driverkit/requesting-entitlements-for-driverkit-development)
 
-**Windows v0.1.1 已正式發布、交付並完成清舊**，可依使用者安排到實體 Mac 接手。已準備 [Mac 交接文件](MAC-HANDOFF.md)，尚未進行 Mac 開發或建立相容性證據。已知可用的實體 DS4 中繼保留歷史備援，不將其他手把或 macOS 列為既有功能。
+**Windows v0.1.2 已正式發布、交付並完成清舊。** [Mac 交接文件](MAC-HANDOFF.md)與[最新研究](../research/macos-native/README.md)保留已完成的原生研究和使用者試驗；Mac 免實體手把操作尚未成功，不列為既有功能。已知可用的實體 DS4 中繼保留歷史備援。
