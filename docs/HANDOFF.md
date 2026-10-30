@@ -4,8 +4,9 @@
 
 ## 1. 目前結論與接續目標
 
+- **發行頁格式：**每版沿用[中英文發布說明範本](RELEASE-NOTES-TEMPLATE.md)的功能、注意事項與系統需求；更新「此版本更新」的內容和發布時間。0.1.2 更新內容僅寫「美術優化」／「Visual improvements」，不提採用的工具或設計標準。固定內容只有在功能或需求實際變動時才修正，避免資訊過時。
 - **2026-10-30 最新 Windows 版本：v0.1.2，更新說明為「美術優化」。** [正式發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)，來源 `da12240649df74dc4e2846404317e8a91b231a05`，四附件匿名下載核對完成。6912 項 C#、5743 項 native、ABI 與 40／40 公開包稽核通過；九語主畫面已目視，本版逐項 PS5 實機仍待驗。Windows 原始碼包排除不相關 Mac 研究；Mac 工作仍依 [最新研究](../research/macos-native/README.md)接續。九語畫面及實際細節見 [v0.1.2 紀錄](../research/dualsense-preview/RELEASE-0.1.2.md)。
-- 本輪移除 11 項舊版及建置暫存，共 848,558,583 logical bytes、失敗 0；`versions` 與 `versioned-archives` 僅保留 0.1.2，個人設定／備份、驅動、Sony 與舊標籤前後核對一致。下文的 0.1.1 交付與清理數據屬當時歷史。使用者要求對外版本更新只寫「美術優化」，不標示採用的工具或設計標準。
+- 本輪移除 11 項舊版及建置暫存，共 848,558,583 logical bytes、失敗 0；`versions` 與 `versioned-archives` 僅保留 0.1.2，個人設定／備份、驅動、Sony 與舊標籤前後核對一致。下文的 0.1.1 交付與清理數據屬當時歷史。本版「此版本更新」只寫「美術優化」；以後依該版實際變動更新此段，不標示採用的工具或設計標準。
 - 產品主線是 **Windows、免實體手把、鍵盤映射、Sony 官方 PS Remote Play**。中文名稱是「上班不要玩」，非中文語系統一為 **PS Remote Play Keyboard**。定位 2D 遊戲，尤其選單與方向操作為主的 JRPG；不適合需要靈活視角或精細類比控制的 3D 遊戲，不保證所有 JRPG 都適合。
 - **最新發布方向：維持公開、免費 GPL-3.0-only 開源，作者 xiunlee。** 所有功能免費，原商售、付費解鎖與 DRM 規劃已被此指示取代；根目錄 [LICENSE](../LICENSE)與 [COPYRIGHT.md](../COPYRIGHT.md)已新增。
 - **模擬 PS4 DUALSHOCK 4 已能控制 PS5**：alpha.5 有拔除實體手把與一次 Windows 重開機後的使用者成功回報；alpha.6 PS4 模式亦由使用者確認正常。不是只能操控 PS4 主機。
