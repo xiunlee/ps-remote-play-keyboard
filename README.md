@@ -10,15 +10,15 @@
 
 ## 下載與目前狀態
 
-**v0.1.2 已正式發布：美術優化。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.2/PSKeyboard-0.1.2-windows-x64.zip)，或前往 [v0.1.2 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載保留最新版本及[上一版 v0.1.1](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1)；更早的發行版轉為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
+**v0.1.3 已正式發布：名稱與圖示更新。** [下載 Windows x64 程式包](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.3/PSKeyboard-0.1.3-windows-x64.zip)，或前往 [v0.1.3 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.3)取得對應 Windows 原始碼與 SHA-256 清單。四附件匿名下載雜湊均已核對。公開下載保留最新版本及[上一版 v0.1.2](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.2)；更早的發行版轉為草稿，版本標籤與原始碼歷史仍保留。本版逐項實機、長時間及新電腦安裝仍待驗收。
 
-目前已發布版本的中文介面使用「上班不要玩」，其他語系使用原有名稱；新版名稱與圖示調整正在準備中。
+中文介面使用「上班不要玩」，其他語系使用 **Three Cats Keybridge**。
 
-三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.2.md)。Mac 版尚未提供；[Mac 研究](research/macos-native/README.md)仍在進行，官方 Remote Play 相容性尚未通過。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
+三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.3.md)。Mac 版尚未提供；[Mac 研究](research/macos-native/README.md)仍在進行，官方 Remote Play 相容性尚未通過。後續接手見 [Mac 交接文件](docs/MAC-HANDOFF.md)。
 
-**介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.2/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.2/editor-zh-Hant.png)（均為離線示意）。
+**介面語言：** 支援繁中、簡中、英文、日文、韓文、德文、法文、西班牙文與巴西葡語，依 Windows 介面語言選擇，未支援語言回退英文。母語校閱、實際高 DPI、多螢幕及逐項實機仍待驗。[主畫面預覽](assets/previews/0.1.3/main-zh-Hant.png) · [按鍵設定預覽](assets/previews/0.1.3/editor-zh-Hant.png)（均為離線示意）。
 
-**使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 v0.1.2 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
+**使用者遊戲回報：**2026-10-29，使用者回報《Final Fantasy Resonance》可正常操作。回報未指定本工具的建置版本，不視為 v0.1.3 逐鍵或連點驗收，也不延伸為所有 JRPG 的相容性保證。
 
 ## 使用需求
 

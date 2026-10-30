@@ -1,6 +1,6 @@
 # Mac 接手交接
 
-**Windows 最新狀態（2026-10-30）：v0.1.2 已發布，更新說明「美術優化」。** [Windows 發行與驗證紀錄](../research/dualsense-preview/RELEASE-0.1.2.md)；四附件下載雜湊通過，個人設定保留，本版 PS5 逐項實機仍待驗。以下 0.1.1 的發行、Latest 及本機保留狀態均為歷史；目前最新是 0.1.2。Mac 研究進度以本文件後續段落及 [最新研究](../research/macos-native/README.md)為準，不因 Windows 更新改變。
+**Windows 最新狀態（2026-10-30）：v0.1.3 已發布，更新說明「名稱與圖示更新」。** [Windows 發行與驗證紀錄](../research/dualsense-preview/RELEASE-0.1.3.md)；中文名稱「上班不要玩」，其他語系使用 Three Cats Keybridge，四附件下載雜湊通過，個人設定保留，本版 PS5 逐項實機仍待驗。以下較早版本的發行、Latest 及本機保留狀態均為歷史；目前最新是 0.1.3。Mac 研究進度以本文件後續段落及 [最新研究](../research/macos-native/README.md)為準，不因 Windows 更新改變。
 
 更新日期：2026-10-30（Asia/Taipei）。**Windows 0.1.1 已正式公開發布及本機交付；本文件交接下一串的 Mac 研究，不是 Mac 成品或可行性結論。** 標籤 `v0.1.1` 固定來源 `3eab9678afe6ea1eddcd35080f2c7e15c1051629`，[GitHub Release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.1) ID `427807747`，API 已核對 `prerelease=false` 且為 Latest。四個公開附件已匿名下載並通過大小及 SHA-256 核對；本機版本、封存與捷徑均另建 `0.1.1`，代理未啟動交付版。0.1.0 與歷史 alpha 標籤、公開附件保留原樣。
 
@@ -17,7 +17,7 @@
 接手先讀文件，再按所處驗證階段讀原始碼：
 
 1. [HANDOFF.md](HANDOFF.md) → [CHANGELOG.md](../CHANGELOG.md) → [VERSIONING.md](VERSIONING.md) → 本文件。以最新已提交證據更新版本認知，不以聊天中的「最新版」字樣代替來源提交。
-2. [0.1.1 發布及收尾紀錄](../research/dualsense-preview/RELEASE-0.1.1.md)、[BUILD](../packaging/build-records/0.1.1.json)、[公開附件清單](../packaging/build-records/0.1.1-archives.json)及 [九語離線畫面](../assets/previews/0.1.1)，再依需要讀 [0.1.0 發布紀錄](../research/dualsense-preview/RELEASE-0.1.0.md)與 [alpha.11 發布紀錄](../research/dualsense-preview/ALPHA11-TRIAL.md)理解歷史界線。固定版本的原始碼取對應 tag；文件補記可以超前 tag，不移動 tag 追齊文件。
+2. [0.1.3 發布及驗證紀錄](../research/dualsense-preview/RELEASE-0.1.3.md)、[BUILD](../packaging/build-records/0.1.3.json)、[公開附件清單](../packaging/build-records/0.1.3-archives.json)及 [九語離線畫面](../assets/previews/0.1.3)，再依需要讀 [0.1.1](../research/dualsense-preview/RELEASE-0.1.1.md)、[0.1.0](../research/dualsense-preview/RELEASE-0.1.0.md)與 [alpha.11](../research/dualsense-preview/ALPHA11-TRIAL.md) 紀錄理解歷史界線。固定版本的原始碼取對應 tag；文件補記可以超前 tag，不移動 tag 追齊文件。
 3. [alpha.9 使用者操作回報](../research/dualsense-preview/ALPHA9-TRIAL.md) → [alpha.10 功能整合](../research/dualsense-preview/ALPHA10-TRIAL.md) → [現行功能說明](../research/dualsense-preview/README.md) → [預設鍵位](DEFAULT-KEYS.md)。
 4. [V5 隔離結果](../research/dualsense-v5-test/RESULTS-20261029.md) → [Windows 0.9.8.1 四方案測試](../research/dualsense-driver-test/RESULTS-20261029.md)與 [fixture 限制](../research/dualsense-driver-test/README.md) → [候選來源研究](../research/dualsense-usb-test/UPSTREAM-CANDIDATES-20261029.md)。這些是 Windows／協定證據，不是 Mac 驅動方案。
 5. 原始碼先讀 [V5Protocol.cs](../research/dualsense-v5-test/V5Protocol.cs)、[CandidateTransport.cs](../research/dualsense-preview/CandidateTransport.cs)、[backend/main.go](../research/dualsense-preview/backend/main.go)及其測試，再讀 [DualSensePreview.cs](../research/dualsense-preview/DualSensePreview.cs)的 Windows 平台依賴與生命週期。
