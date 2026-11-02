@@ -8,7 +8,7 @@ Mac 0.1.4／build 1 縮小主畫面與按鍵設定視窗，把完整鍵位、使
 
 0.1.4 發行來源為 `0f6743b341ceec526ed93ee579fb626d15a5e303`。[封裝收據](../packaging/build-records/macos/0.1.4/PACKAGE.json)與[獨立稽核](../packaging/build-records/macos/0.1.4/PACKAGE-AUDIT.json)記錄 ZIP 重新解壓、DMG 唯讀掛載、簽章、117 個 App 檔、70 個來源及八個附件；663 項獨立檢查通過，仍不代替遊戲或新機測試。
 
-0.1.4 的 GitHub 發行與匿名下載是否完成，以實際發行頁、附件及各版新收據為準；不得移動已發布的 Mac 0.1.3 或 Windows 標籤、覆寫其附件或改變 Windows 0.1.4 的公開下載。
+0.1.4 已於 **2026-11-02 11:23:04 (UTC+8)** 發布，Release ID `431025947`；[Mac 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.4)的獨立標籤 `mac-v0.1.4` 固定於來源 `0f6743b341ceec526ed93ee579fb626d15a5e303`。八個公開附件已匿名重新下載，大小與 SHA-256 均符合 GitHub 與封裝收據；ZIP 內七份文件的校驗也通過；[下載驗證收據](../packaging/build-records/macos/0.1.4/PUBLIC-DOWNLOADS.json)。不得移動已發布的 Mac 0.1.3 或 Windows 標籤、覆寫其附件或改變 Windows 0.1.4 的公開下載。
 
 ## 以下為 Mac 0.1.3 歷史發行與驗證紀錄
 
@@ -20,7 +20,7 @@ Mac 0.1.4／build 1 縮小主畫面與按鍵設定視窗，把完整鍵位、使
 
 當時 Mac manifest 為 **0.1.3／build 4**，根目錄 Windows `VERSION` 為 **0.1.4**；兩平台版本獨立。Mac 保持 **Esc**，Windows 保持 **F8**。最終主程式、貓咪 `.icns`、九語資源、兩個原生 helper 與 runtime 材料已重新建置並驗簽；[FINAL-BUILD](../packaging/build-records/macos/0.1.3/FINAL-BUILD.json) 與舊 [BRANDING-BUILD](../packaging/build-records/macos/0.1.3/BRANDING-BUILD.json)、[PACKAGE](../packaging/build-records/macos/0.1.3/PACKAGE.json) 分開保留。
 
-[FINAL-VERIFICATION](../packaging/build-records/macos/0.1.3/FINAL-VERIFICATION.json) 記錄本輪實際重跑：控制核心 459、profile 79、V5 22958、relay socket 57、runtime 231 項全部通過；另通過依賴修復／回復／取消／自有程序清理檢查，以及平台版號 3 個測試方法、9 種情境。九語共 197 keys、94 個介面字串引用、各語品牌及非官方聲明均通過。來源白名單由 69 檔增為 70 檔，新增的是平台版本隔離測試；所有建置輸入雜湊與目前來源一致。Windows 端先前回報的 20 項研究檢查保持為外部既有證據，未計入本輪重跑。
+[FINAL-VERIFICATION](../packaging/build-records/macos/0.1.3/FINAL-VERIFICATION.json) 記錄本輪實際重跑：控制核心 459、profile 79、V5 22958、relay socket 57、runtime 231 項全部通過；另通過依賴修復／回復／取消／自有程序清理檢查，以及平台版號 3 個測試方法、9 種情境。九語共 197 keys、94 個介面字串引用、各語品牌及非官方聲明均通過。來源白名單由 69 檔增為 70 檔，新增的是平台版本隔離測試；所有建置輸入雜湊與當版來源一致。Windows 端先前回報的 20 項研究檢查保持為外部既有證據，未計入本輪重跑。
 
 本輪未安裝或啟動 App，未建立虛擬裝置、擷取按鍵、修改個人設定或操作 Sony。最終 ZIP／DMG 已依這份新建置重新產生並驗證，來源固定為 `28084359384b11d43272ad17f4207ae58b27f933`；[FINAL-PACKAGE](../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)記錄 ZIP 重解、DMG 唯讀掛載與全部 App 檔案雜湊及簽章核對。[FINAL-PACKAGE-AUDIT](../packaging/build-records/macos/0.1.3/FINAL-PACKAGE-AUDIT.json)另有 151／151 項獨立核對通過，涵蓋八個附件、70 檔來源、117 檔 App、版本、授權及 Finder 可見性。建置 9 的 PACKAGE 保留為歷史。已於 **2026-10-30 18:52（台灣時間）**發布 [mac-v0.1.3](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`；八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。
 

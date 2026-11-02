@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "startedAtUTC": "2026-11-02T03:01:42.011790+00:00",
+  "checkedAtUTC": "2026-11-02T03:01:44.837022+00:00",
+  "anonymousDownload": true,
+  "credentialsOrBrowserStateRead": false,
+  "releaseURL": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/v0.1.4",
+  "releaseID": 428848090,
+  "version": "0.1.4",
+  "sourceCommit": "c0de54e964ae85b50c4fb0fdb1d4b89de7fc7699",
+  "latestReleaseAtMetadataCheck": "v0.1.4",
+  "allFourAssetBytesAndSHA256Match": true,
+  "publishedManifestAndChecksumsMatch": true,
+  "macReleaseAtMetadataCheck": {
+    "tag": "mac-v0.1.4",
+    "releaseID": 431025947,
+    "draft": true,
+    "publicTagExists": false
+  },
+  "assets": [
+    {
+      "name": "PSKeyboard-0.1.4-source.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/PSKeyboard-0.1.4-source.zip",
+      "size": 8458820,
+      "sha256": "d536c6b97cfad99ffea2d397a98f0aff7e880e0aa0ded75b47c3f0a297a46c70",
+      "httpStatus": 200,
+      "matchesGitHubMetadata": true
+    },
+    {
+      "name": "PSKeyboard-0.1.4-windows-x64.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/PSKeyboard-0.1.4-windows-x64.zip",
+      "size": 5233731,
+      "sha256": "0d3e82133307fcd4d81585a7e10728cdaedf0de91ca0f81068730344cdb07cd3",
+      "httpStatus": 200,
+      "matchesGitHubMetadata": true
+    },
+    {
+      "name": "RELEASE.json",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/RELEASE.json",
+      "size": 617,
+      "sha256": "957444d8b85fb83ee69c584912d01ee37e144ec2f86de5584b2064649a93a727",
+      "httpStatus": 200,
+      "matchesGitHubMetadata": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/v0.1.4/SHA256SUMS.txt",
+      "size": 275,
+      "sha256": "ffb02cee20d15bbf2a311e1dfdc14051e9e11790e96b9a898e059fb8f2f370a7",
+      "httpStatus": 200,
+      "matchesGitHubMetadata": true
+    }
+  ],
+  "remoteMutationsPerformed": false,
+  "downloadedProgramsExecuted": false
+}

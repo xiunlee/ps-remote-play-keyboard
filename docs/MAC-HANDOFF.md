@@ -4,7 +4,7 @@
 
 歷史首發版 **0.1.0** 固定來源 `ca1d24fd96aa8b327650b1bd82bff08f2e08a7fe`，Release ID `427775269`；歷史 **0.1.0-alpha.12** 固定來源 `f2c0b1759610e27da0d3bf835b4faeef07030d7a`，Release ID `427756025`。兩版當時的交付與四附件下載核對均通過；此段為歷史紀錄；目前 Windows 下載以 0.1.4 為準，不能把歷史 Latest 狀態當成現況。
 
-**2026-11-02 Mac 0.1.4 候選進度：** 主畫面縮為 620×370，完整鍵位、操作說明、贊助／回饋與診斷移至內頁；按鍵設定視窗亦縮小。內頁說明 macOS 控制器快速鍵衝突並提供系統設定入口，由使用者自行決定是否更改，影響範圍包括其他手把。候選版沿用固定 App 身分及路徑，已在本機更新並啟動，當次 Accessibility 仍允許、個人設定與備份保留；使用者已查看介面並同意發布。先前 0.1.3 的使用者回報包含一般操作正常與調整 macOS 控制器快速鍵後 P／PS 正常；這些不代替 0.1.4 遊戲、改鍵／連點、新機、睡眠或崩潰驗收。本機候選的隔離測試與離屏畫面記錄在未公開的 `.local`；公開狀態必須以實際 GitHub 發行頁和下載核對結果更新。Windows 仍為 0.1.4，Mac 依自己的 manifest 管理。
+**2026-11-02 Mac 0.1.4 發行進度：** 主畫面縮為 620×370，完整鍵位、操作說明、贊助／回饋與診斷移至內頁；按鍵設定視窗亦縮小。內頁說明 macOS 控制器快速鍵衝突並提供系統設定入口，由使用者自行決定是否更改，影響範圍包括其他手把。候選版沿用固定 App 身分及路徑，已在本機更新並啟動，當次 Accessibility 仍允許、個人設定與備份保留；使用者已查看介面並同意發布。先前 0.1.3 的使用者回報包含一般操作正常與調整 macOS 控制器快速鍵後 P／PS 正常；這些不代替 0.1.4 遊戲、改鍵／連點、新機、睡眠或崩潰驗收。0.1.4 於 **2026-11-02 11:23:04 (UTC+8)** 發布，Release ID `431025947`，獨立標籤 `mac-v0.1.4` 固定來源 `0f6743b341ceec526ed93ee579fb626d15a5e303`；[發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.4)。八個公開附件已匿名重新下載，大小與 SHA-256 均符合 GitHub 與封裝收據；[下載驗證收據](../packaging/build-records/macos/0.1.4/PUBLIC-DOWNLOADS.json)。Windows 仍為 0.1.4，Mac 依自己的 manifest 管理。
 
 **2026-10-30 Mac 0.1.3 發行歷史：Mac 0.1.3／build 4 沿用同一 App、安裝路徑與固定簽章憑證；中文名稱「上班不要玩」、非中文名稱 Three Cats Keybridge。** 這是鍵盤控制與模擬手把工具，實際支援環境仍為 Apple Silicon／macOS 15+ 與 Sony 官方 PS Remote Play。 已接回 Windows 的改鍵、連點、持久化、九語、贊助與回饋。原生 supervisor／relay、自動官方元件取得及開源 runtime 材料已實作；建置 9 已確認完整 App 連接、中斷、再次連接與退出後清理，亦已查看淺／深色主畫面和設定；本版遊戲、新 Mac、睡眠與崩潰仍待驗；最終品牌包的封裝核對另記，不能改寫建置 9 證據。最終品牌版已重新建置，收據為 [FINAL-BUILD](../packaging/build-records/macos/0.1.3/FINAL-BUILD.json)；`e9a9bca` 與建置 9 的封裝保留為歷史。最終包固定來源 `28084359384b11d43272ad17f4207ae58b27f933`，已重解 ZIP、唯讀掛載 DMG 並核對簽章、內容及來源，獨立稽核 151 項通過；[FINAL-PACKAGE](../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)、[FINAL-PACKAGE-AUDIT](../packaging/build-records/macos/0.1.3/FINAL-PACKAGE-AUDIT.json)。已於 **2026-10-30 18:52（台灣時間）**建立獨立 [Mac 發行](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`，輕量標籤 `mac-v0.1.3` 固定於上述來源；八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。既有標籤及 Windows 0.1.4 公開附件保持不變。已測設定取消不寫入、儲存與重新讀回、更新後保留及恢復預設；各次本機更新後輔助使用仍已允許。[功能對齊清單](MAC-PARITY-CHECKLIST.md)、[發佈驗證](MAC-RELEASE-READINESS.md)、[安裝說明](MAC-INSTALL.md)。
 
@@ -18,7 +18,7 @@
 
 ## 來源與閱讀順序
 
-儲存庫：<https://github.com/xiunlee/ps-remote-play-keyboard>。預設／Windows 工作分支為 **`codex/commercial-preview`**；Mac 0.1.3 歷史發行工作分支為 **`codex/mac-0.1.3-release`**，已公開標籤為 `mac-v0.1.3`；0.1.4 預定使用獨立標籤 `mac-v0.1.4`，實際狀態須查驗。分支名稱沿用工作流程，產品免費開源。不要以舊 `main` 覆蓋工作，也不要把 Mac 的新工作目錄猜成 Windows OneDrive 路徑。
+儲存庫：<https://github.com/xiunlee/ps-remote-play-keyboard>。預設／Windows 工作分支為 **`codex/commercial-preview`**；Mac 0.1.3 歷史發行工作分支為 **`codex/mac-0.1.3-release`**，已公開標籤為 `mac-v0.1.3`；0.1.4 已使用獨立標籤 `mac-v0.1.4` 發布。分支名稱沿用工作流程，產品免費開源。不要以舊 `main` 覆蓋工作，也不要把 Mac 的新工作目錄猜成 Windows OneDrive 路徑。
 
 接手先讀文件，再按所處驗證階段讀原始碼：
 
@@ -99,7 +99,7 @@
 - 保留使用者按鍵設定與備份，只有按儲存且成功才套用。不得將 Windows 整數鍵碼不加轉換地當成 Mac 鍵碼，也不得為遷移直接覆寫唯一原檔。
 - 只清理本程式建立且完整核對過的裝置／bus／port；不全域 detach、不停止其他軟體裝置或程序。未確認清理成功時先停止新接入。
 - 新版採新目錄、新版本與新證據；不覆寫已公開附件或移動舊 tag。使用者授權本機只留最新完成版，但清理必須在建置／交付驗證完成後逐項核查，保留個人設定、備份與 GitHub 歷史。
-- Windows 產品後續版號依使用者已指定的 **0.1.0 → 0.1.1 → … → 0.1.9 → 0.2.0**，不再加 alpha 標記；歷史 tag 與附件照原樣保留。Mac 的 alpha.1 留作歷史試驗，目前 Mac 候選獨立依 `packaging/macos/version.json` 為 **0.1.4**；根目錄 `VERSION` 維持 Windows **0.1.4**，預定獨立標籤 **`mac-v0.1.4`**；Windows `v0.1.4` 是另一平台目前公開的版本，不重用或移動其標籤。Mac 首發不取代 Windows 0.1.4 的公開下載。版號命名不取代每版的實機與相容性驗收。
+- Windows 產品後續版號依使用者已指定的 **0.1.0 → 0.1.1 → … → 0.1.9 → 0.2.0**，不再加 alpha 標記；歷史 tag 與附件照原樣保留。Mac 的 alpha.1 留作歷史試驗，目前 Mac 版本獨立依 `packaging/macos/version.json` 為 **0.1.4**；根目錄 `VERSION` 維持 Windows **0.1.4**，獨立標籤 **`mac-v0.1.4`**；Windows `v0.1.4` 是另一平台目前公開的版本，不重用或移動其標籤。Mac 首發不取代 Windows 0.1.4 的公開下載。版號命名不取代每版的實機與相容性驗收。
 
 唯一現行贊助連結為 [PayPal 自願 US$1](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW)，回饋 `xiun1019@gmail.com`。只由點擊開啟瀏覽器或郵件草稿，不自動付款／寄信。收款身分、金融與稅務資料由本人處理，不使用任何已撤回的連結。
 

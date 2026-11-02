@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUTC": "2026-11-02T03:24:21.556529+00:00",
+  "version": "0.1.4",
+  "buildNumber": "1",
+  "tag": "mac-v0.1.4",
+  "sourceCommit": "0f6743b341ceec526ed93ee579fb626d15a5e303",
+  "releaseID": 431025947,
+  "releaseURL": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.4",
+  "publishedAtUTC": "2026-11-02T03:23:04Z",
+  "authenticationUsedForDownloads": false,
+  "tagResolvesToSource": true,
+  "windowsLatestPreserved": "v0.1.4",
+  "releaseManifestAndChecksumsMatch": true,
+  "archivedDocumentationChecksumsVerified": 7,
+  "artifacts": [
+    {
+      "name": "README.txt",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/README.txt",
+      "size": 2343,
+      "sha256": "39f188f3e82dd484d6ab3d86d96228d90be84f77a0d34aab8c94487900864f65",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "RELEASE.json",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/RELEASE.json",
+      "size": 27012,
+      "sha256": "0a56c08397734c74c293c6cce261fc8c0d8a3c006a0342b81528c7d9f766e02f",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/SHA256SUMS",
+      "size": 1350,
+      "sha256": "3c0393c628ab38c0427d58029b6ecb5079b4741e940c457e7fee5599dfd6db82",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.4-arm64.dmg",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/ThreeCatsKeybridge-Mac-0.1.4-arm64.dmg",
+      "size": 26089730,
+      "sha256": "14a33bc89800ff2cc5f32fbe08d401e22349658420c051a3a447b213552a9e62",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.4-arm64.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/ThreeCatsKeybridge-Mac-0.1.4-arm64.zip",
+      "size": 23627879,
+      "sha256": "4f35babfbdb39bf49b88413740d8429a10601b179a2657b29a346b2938c6489e",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz",
+      "size": 115775397,
+      "sha256": "35b81b04bcfee79fe0a0a5b17b1cf3ee03a48b2838d6f1c231c2120bd37cb433",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.4-runtime-sources.tar.gz",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/ThreeCatsKeybridge-Mac-0.1.4-runtime-sources.tar.gz",
+      "size": 450919582,
+      "sha256": "7f15544b93960b4d31bfd42d7413cbae057af3e81d7ee613f11f74bf19403218",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    },
+    {
+      "name": "ThreeCatsKeybridge-Mac-0.1.4-source.zip",
+      "url": "https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.4/ThreeCatsKeybridge-Mac-0.1.4-source.zip",
+      "size": 818338,
+      "sha256": "9a273ca5f0f4542ca86ac525fb13c067a53d5a5c42fd6e70e8f22db36f228a8c",
+      "httpStatus": 200,
+      "anonymousDownloadVerified": true,
+      "githubDigestMatches": true
+    }
+  ],
+  "unverified": [
+    "gameplay/remapping/repeat",
+    "fresh-Mac installation",
+    "sleep/crash cleanup",
+    "controller settings link"
+  ]
+}

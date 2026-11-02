@@ -1,14 +1,14 @@
 # Mac 原生研究：USB DualSense 輸出路線
 
-更新：2026-11-02（Asia/Taipei）。**Mac 0.1.4／build 1 本機候選**已縮小主畫面及設定視窗，完整鍵位、快捷鍵說明、贊助與診斷移至內頁。使用者已查看介面並同意發布；本版遊戲、改鍵／連點、新機、睡眠及崩潰仍待驗。0.1.3 的一般操作與 P／PS 按鍵使用者回報，以及先前中立連線記錄均保留為歷史，不代替 0.1.4 遊戲驗收。實際發布及附件核對以 GitHub 發行頁及新收據為準；Windows 最新仍為 0.1.4。
+更新：2026-11-02（Asia/Taipei）。**Mac 0.1.4／build 1** 已縮小主畫面及設定視窗，完整鍵位、快捷鍵說明、贊助與診斷移至內頁。使用者已查看介面並同意發布；本版遊戲、改鍵／連點、新機、睡眠及崩潰仍待驗。0.1.3 的一般操作與 P／PS 按鍵使用者回報，以及先前中立連線記錄均保留為歷史，不代替 0.1.4 遊戲驗收。已於 **2026-11-02 11:23:04 (UTC+8)** 發布，Release ID `431025947`，標籤 `mac-v0.1.4` 固定來源 `0f6743b341ceec526ed93ee579fb626d15a5e303`；[發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.4)。八個公開附件已匿名重新下載，大小與 SHA-256 均符合 GitHub 與封裝收據；[下載驗證收據](../../packaging/build-records/macos/0.1.4/PUBLIC-DOWNLOADS.json)。Windows 最新仍為 0.1.4。
 
 **以下為 2026-10-30 的 Mac 0.1.3／build 4 發行與研究紀錄**，中文名稱「上班不要玩」、非中文名稱 **Three Cats Keybridge**；定位為鍵盤控制與模擬手把工具，實際支援 Sony 官方 PS Remote Play。同一 App 已加入 Windows 對應的改鍵、連點、持久化、九語與支持功能，並將 guest／relay 管理移入原生 helper。先前固定 App／路徑／簽章的本機更新曾保留設定與輔助使用權限；最終交付包仍未做這項更新實測。建置 9 已確認 App 中立連接、中斷、再次連接與退出清理，並檢視淺／深色主畫面及設定；本版遊戲、新機、睡眠／崩潰仍待驗；最終品牌包已重解 ZIP、唯讀掛載 DMG 核對簽章與內容，並通過 151 項獨立封裝稽核；[收據](../../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)固定來源為 `28084359384b11d43272ad17f4207ae58b27f933`。不將建置 9 的畫面當成最終品牌版視覺驗收。Mac 使用獨立標籤 `mac-v0.1.3`，Windows 最新仍為 `v0.1.4`；已於 **2026-10-30 18:52（台灣時間）**公開 [mac-v0.1.3](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`，八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。請以 [功能對齊清單](../../docs/MAC-PARITY-CHECKLIST.md)及[發佈驗證](../../docs/MAC-RELEASE-READINESS.md)區分實作、離線檢查與實機結果。
 
 本程式是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。以下歷史名稱、協定識別與試驗記錄保留原樣。
 
-0.1.2 介面與該次權限更新證據保留於 [建置收據](../../packaging/build-records/macos/0.1.2.json)及 [UI 紀錄](inspection/MAC-0.1.2-UI.json)。最近的使用者遊戲證據仍屬 **0.1.0-alpha.1 的 [trial 2](DUALSENSE-TRIAL-2.json)**：遊戲可操作、W 放開停止、Enter／Options 有效，結束後裝置與相關程序已清理。這不是新版原生 supervisor 的遊戲驗收。
+0.1.2 介面與該次權限更新證據保留於 [建置收據](../../packaging/build-records/macos/0.1.2.json)及 [UI 紀錄](inspection/MAC-0.1.2-UI.json)。早期有詳細記錄的使用者遊戲證據屬 **0.1.0-alpha.1 的 [trial 2](DUALSENSE-TRIAL-2.json)**：遊戲可操作、W 放開停止、Enter／Options 有效，結束後裝置與相關程序已清理。這不是新版原生 supervisor 的遊戲驗收。
 
-## 最新使用者試驗：trial 2 確認可操作
+## 早期詳細試驗：alpha.1 的 trial 2 確認可操作
 
 [DualSense trial 2](DUALSENSE-TRIAL-2.json)使用當時固定簽章的 **0.1.0-alpha.1**，不是後續 0.1.2 的遊戲驗收。首個 owner 等待前端超過 600 秒，以 `frontend_wait_timeout` 結束；收到 0 幀輸入，`cleanup=removed`，另行確認 Mac HID `[]`。這一段沒有實際遊戲輸入，不能當作遊戲失敗。
 
