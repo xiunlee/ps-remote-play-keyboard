@@ -1,6 +1,6 @@
 # Mac 預設鍵位
 
-「上班不要玩／Three Cats Keybridge」Mac **0.1.3**使用下列預設鍵位，亦可在「按鍵與連點設定」改綁；主畫面會顯示儲存後的實際設定。預設適合 Mac 精簡鍵盤，不需要 Fn、功能鍵、Home、End、Insert 或 Page Up／Down。
+「上班不要玩／Three Cats Keybridge」Mac **0.1.4** 使用下列預設鍵位，亦可在「按鍵與連點設定」改綁；主畫面顯示常用鍵位摘要，「查看鍵位與說明」內頁會顯示儲存後的完整設定。預設適合 Mac 精簡鍵盤，不需要 Fn、功能鍵、Home、End、Insert 或 Page Up／Down。
 
 在 App 按「連接並啟用控制」，等待元件準備與手把連接完成，再切回 PS Remote Play。整合流程的驗證進度與首次安裝方式見 [Mac 安裝說明](MAC-INSTALL.md)。
 

@@ -100,6 +100,25 @@ MAC_ROWS = {
     ),
     "Usage instructions": ("Usage instructions", "操作說明", "操作说明", "使い方", "사용 방법", "Bedienung", "Mode d’emploi", "Instrucciones", "Instruções"),
     "Hide instructions": ("Hide instructions", "收起說明", "收起说明", "説明を閉じる", "설명 닫기", "Hinweise ausblenden", "Masquer les instructions", "Ocultar instrucciones", "Ocultar instruções"),
+    "View controls and help": (
+        "View controls and help", "查看鍵位與說明", "查看按键与说明", "キー配置と説明を見る", "키 설정 및 도움말 보기",
+        "Tasten und Hilfe anzeigen", "Voir les touches et l’aide", "Ver teclas y ayuda", "Ver teclas e ajuda"),
+    "Open Game Controller Settings": (
+        "Open Game Controller Settings", "開啟遊戲控制器設定", "打开游戏控制器设置", "ゲームコントローラ設定を開く", "게임 컨트롤러 설정 열기",
+        "Gamecontroller-Einstellungen öffnen", "Ouvrir les réglages des manettes", "Abrir ajustes de mandos", "Abrir ajustes de controles"),
+    "ControllerShortcutTitle": (
+        "PS button opens Games on Mac", "按 PS 鍵開啟 Mac 遊戲", "按 PS 键打开 Mac 游戏", "PS ボタンで Mac のゲームが開く", "PS 버튼을 누르면 Mac 게임이 열림",
+        "PS-Taste öffnet Spiele auf dem Mac", "Le bouton PS ouvre Jeux sur Mac", "El botón PS abre Juegos en Mac", "O botão PS abre Jogos no Mac"),
+    "ControllerShortcutHelp": (
+        "If the PS action (P by default) opens Games on your Mac, open System Settings → Game Controllers → Controller Shortcuts and turn off Enable Controller Shortcuts. This affects other controllers too; choose whether to change it.",
+        "如果按 PS 鍵（預設為 P）時開啟 Mac「遊戲」，可到「系統設定 → 遊戲控制器 → 控制器快速鍵」，自行關閉「啟用控制器快速鍵」。這也會影響其他手把，請自行決定是否更改。",
+        "如果按 PS 键（默认为 P）时打开 Mac“游戏”，可前往“系统设置 → 游戏控制器 → 控制器快捷键”，自行关闭“启用控制器快捷键”。这也会影响其他手柄，请自行决定是否更改。",
+        "PS 操作（初期設定は P）で Mac の「ゲーム」が開く場合は、「システム設定 → ゲームコントローラ → コントローラショートカット」でショートカットをオフにできます。他のコントローラにも影響するため、変更するかご自身で選んでください。",
+        "PS 동작(기본값 P)을 눌러 Mac에서 게임이 열리면 ‘시스템 설정 → 게임 컨트롤러 → 컨트롤러 단축키’에서 단축키를 끌 수 있습니다. 다른 컨트롤러에도 영향을 주므로 변경 여부를 직접 선택하세요.",
+        "Wenn die PS-Aktion (standardmäßig P) auf dem Mac Spiele öffnet, kannst du unter Systemeinstellungen → Gamecontroller → Controller-Kurzbefehle die Kurzbefehle ausschalten. Dies betrifft auch andere Controller; entscheide selbst über die Änderung.",
+        "Si l’action PS (P par défaut) ouvre Jeux sur votre Mac, vous pouvez désactiver les raccourcis dans Réglages Système → Manettes de jeu → Raccourcis de manette. Ce réglage touche aussi les autres manettes ; choisissez si vous souhaitez le modifier.",
+        "Si la acción PS (P por defecto) abre Juegos en tu Mac, puedes desactivar los atajos en Ajustes del Sistema → Mandos de juego → Atajos del mando. Esto también afecta a otros mandos; decide si quieres cambiarlo.",
+        "Se a ação PS (P por padrão) abrir Jogos no Mac, você pode desativar os atalhos em Ajustes do Sistema → Controles de Jogo → Atalhos do Controle. Isso também afeta outros controles; escolha se deseja alterar."),
     "Appearance": ("Appearance", "外觀", "外观", "外観", "모양", "Darstellung", "Apparence", "Apariencia", "Aparência"),
     "System appearance": ("Follow system", "跟隨系統", "跟随系统", "システムに従う", "시스템 설정", "Systemeinstellung", "Suivre le système", "Seguir el sistema", "Seguir o sistema"),
     "Light": ("Light", "淺色", "浅色", "ライト", "라이트", "Hell", "Clair", "Claro", "Claro"),

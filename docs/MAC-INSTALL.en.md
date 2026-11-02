@@ -1,14 +1,14 @@
 # Mac installation, use, and updates
 
-Applies to **Three Cats Keybridge Mac 0.1.3**. Updated: 2026-10-30 (Asia/Taipei). [繁體中文](MAC-INSTALL.md)
+Applies to **Three Cats Keybridge Mac 0.1.4**. Updated: 2026-11-02 (Asia/Taipei). [繁體中文](MAC-INSTALL.md)
 
 Three Cats Keybridge (“上班不要玩” in Chinese) is a keyboard-control and virtual-controller tool for the Sony remote-play environment specified below. It does not claim support for every game or application.
 
 This is an independent project, not an official Sony product. It is not affiliated with or endorsed by Sony.
 
-This version brings key bindings, repeat controls, nine interface languages, and controller component preparation into one App, with visual improvements. **The native helper and complete App have passed neutral connection, disconnection, reconnection, and cleanup on quit. The main window and settings have been reviewed in Light and Dark modes. Gameplay, installation on a fresh Mac or new user account, sleep, and crash scenarios remain unverified for this version.** The version is provided with these known limits; public distribution does not establish compatibility with every system and game. Check the [Mac 0.1.3 release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3) for availability, attachments, and the publication time. The completed interface and neutral-connection checks below apply to build 9. Later name and cat-icon changes are verified separately and do not establish new gameplay results.
+This version brings key bindings, repeat controls, nine interface languages, and controller component preparation into one App, with a smaller main window and a separate help view. **Version 0.1.4 gameplay, remapping/repeat, installation on a fresh Mac or new user account, sleep, and crash scenarios remain unverified.** Earlier 0.1.3 build 9 neutral connection, disconnection, reconnection and cleanup, and its Light/Dark UI review are historical results and do not establish 0.1.4 acceptance. The user has reviewed the local 0.1.4 interface; compatibility with individual systems and games still needs testing. Check the [Mac 0.1.4 release](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.4) for availability, attachments and the publication time.
 
-In alpha.1, the user confirmed game control, stopping when W was released, and Enter opening Options. Version 0.1.2 verified a local interface update and retention of Accessibility permission for that update. Those results do not establish integrated installation or gameplay acceptance for 0.1.3.
+In alpha.1, the user confirmed game control, stopping when W was released, and Enter opening Options. Version 0.1.2 verified a local interface update and retention of Accessibility permission for that update. Those results do not establish integrated installation or gameplay acceptance for 0.1.4.
 
 ## Before you start
 
@@ -41,13 +41,13 @@ You do not need the author's private certificate, keychain, or signing setup scr
 4. Once the controller has connected, switch to Remote Play. A preparation status does not mean that the controller is ready.
 5. When finished, disconnect and wait for cleanup. Connect again when you want to continue. Quitting the App normally also stops its output and cleans up its own processes first.
 
-**Components and licenses** describes the dependencies and links to their official licenses. If downloading or verification fails, preparation stops with an error. Retrying checks the components again. If a component in this App's own directory is damaged, the replacement is verified before replacing it. Other VirtualHere installations are not modified.
+Choose **View controls and help** on the main window, then **Components and licenses** in that view to see the dependencies and their official licenses. If downloading or verification fails, preparation stops with an error. Retrying checks the components again. If a component in this App's own directory is damaged, the replacement is verified before replacing it. Other VirtualHere installations are not modified.
 
-**This version has locally completed connection, disconnection, reconnection, and quit through the App, with removal of its controller and owned processes independently confirmed after each stop. This does not establish gameplay or fresh-Mac installation acceptance for this version.** If cleanup cannot be confirmed, retain the error and version when reporting it. Do not repeatedly connect or delete state files to bypass that condition.
+**The earlier 0.1.3 build 9 locally completed connection, disconnection, reconnection, and quit through the App with controller and owned-process cleanup confirmed. This does not establish connection, gameplay, or fresh-Mac installation acceptance for 0.1.4.** If cleanup cannot be confirmed, retain the error and version when reporting it. Do not repeatedly connect or delete state files to bypass that condition.
 
 ## Keys and repeat controls
 
-The defaults do not require Fn or function keys. The main window shows your current bindings; use that display after changing them.
+The defaults do not require Fn or function keys. The main window shows a summary; choose **View controls and help** for your complete current bindings after changing them.
 
 | PS5 action | Mac default |
 | --- | --- |
@@ -63,13 +63,15 @@ The defaults do not require Fn or function keys. The main window shows your curr
 
 **I is above, J is left, K is below, and L is right, matching the controller's face-button diamond.** Each of the 22 game actions can be assigned a single key, cleared, or restored. Esc remains reserved for enabling and pausing control and cannot be assigned to a game action.
 
+If pressing the key assigned to PS (P by default) opens the Games App on your Mac, a macOS controller shortcut may be responsible. You can turn off **Enable Controller Shortcuts** under **System Settings → Game Controllers → Controller Shortcuts**. This system setting also affects other controllers, so choose whether to change it; the App does not change it for you. Names and locations may vary with the macOS version.
+
 In the key and repeat settings, each action can use Off, Hold, or Toggle repeat with an interval of **20–5000 milliseconds**. Defaults are Off and 100 milliseconds. Very short pulses may not be recognized by every game. Changes apply only after you save successfully. Canceling, closing the editor, or a save failure retains the previous settings. Opening the editor pauses control, which remains paused after you leave it.
 
 Keyboard control only operates while the official Remote Play window is in front. Switching to another window or holding Command, Control, Option, or Shift clears held actions and repeat states. Press the desired keys again after returning; an earlier Toggle repeat does not resume. **Esc retains its normal purpose in other Apps.** You can also use the enable or pause button in this App.
 
 The interface follows the preferred macOS language and supports Traditional Chinese, Simplified Chinese, English, Japanese, Korean, German, French, Spanish, and Brazilian Portuguese. Unsupported languages fall back to English. See [Mac default bindings](MAC-DEFAULT-KEYS.md) for more details (Traditional Chinese). The intended scope is 2D, directional, and menu-based control; mouse look, right-stick directions, and touchpad swipes are not provided.
 
-The updated interface offers **Appearance** in the App menu, with System appearance, Light, and Dark choices. This affects only this App, not the macOS appearance. The main window and settings have been reviewed locally in Light and Dark modes. Other language layouts and display configurations remain subject to further review.
+The updated interface offers **Appearance** in the App menu, with System appearance, Light, and Dark choices. This affects only this App, not the macOS appearance. The previous 0.1.3 build 9 main window and settings were reviewed locally in Light and Dark modes. A detailed 0.1.4 Light/Dark review, other language layouts and display configurations remain subject to further review.
 
 ## Updates and retained data
 
@@ -102,9 +104,9 @@ All features are free. The feedback button opens a mail draft with [xiun1019@gma
 
 The optional [US$1 PayPal donation](https://www.paypal.com/ncp/payment/HAW9YBJXNEMFW) helps buy food for three cats. It opens a browser only when clicked. There is no paid unlock or subscription, and the App does not process payment details.
 
-Original project code is GPL-3.0-only; third-party components retain their respective licenses. The [source repository](https://github.com/xiunlee/ps-remote-play-keyboard/tree/mac-v0.1.3) and [GitHub Releases](https://github.com/xiunlee/ps-remote-play-keyboard/releases) show what has actually been delivered. Choose attachments marked Mac/arm64; the Windows application package does not run on macOS.
+Original project code is GPL-3.0-only; third-party components retain their respective licenses. The [source repository](https://github.com/xiunlee/ps-remote-play-keyboard/tree/mac-v0.1.4) and [GitHub Releases](https://github.com/xiunlee/ps-remote-play-keyboard/releases) show what has actually been delivered. Choose attachments marked Mac/arm64; the Windows application package does not run on macOS.
 
-The Mac 0.1.3 installation assets are `ThreeCatsKeybridge-Mac-0.1.3-arm64.dmg` and `ThreeCatsKeybridge-Mac-0.1.3-arm64.zip`. They contain the same App; choose one. The optional `ThreeCatsKeybridge-Mac-0.1.3-build-inputs.tar.gz` is for rebuilding, not normal installation.
+The Mac 0.1.4 installation assets are `ThreeCatsKeybridge-Mac-0.1.4-arm64.dmg` and `ThreeCatsKeybridge-Mac-0.1.4-arm64.zip`. They contain the same App; choose one. The optional `ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz` is for rebuilding, not normal installation.
 
 A Mac delivery includes the App in a DMG or ZIP, SHA-256 checksums, its matching project source package, and the runtime corresponding-source package. The source packages use names such as `ThreeCatsKeybridge-Mac-<version>-source.zip` and `ThreeCatsKeybridge-Mac-<version>-runtime-sources.tar.gz`; **the actual attachment manifest determines names and availability**. Runtime source includes the versions, modifications, licenses, and build and installation materials used by the guest and backend. Proprietary VirtualHere binaries are obtained separately from their publisher. Users do not need source packages or a compiler to install the App.
 

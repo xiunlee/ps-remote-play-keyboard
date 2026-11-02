@@ -6,8 +6,10 @@ import Foundation
 import Darwin
 
 @MainActor
-final class DualSensePreview: NSObject, NSApplicationDelegate {
+final class DualSensePreview: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var window: NSWindow!
+    var helpWindow: NSPanel!
+    let quickKeys = NSTextField(wrappingLabelWithString: "")
     let status = NSTextField(wrappingLabelWithString: "尚未連接；鍵盤控制暫停。")
     let connect = MacPillButton(title: "連接並啟用控制", target: nil, action: nil, style: .cta)
     let toggle = MacPillButton(title: "暫停（Esc）", target: nil, action: nil, style: .primary)
@@ -68,13 +70,14 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         appMenu.addItem(NSMenuItem.separator())
         appMenu.addItem(withTitle: MacText.format("Quit %@", brand), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         item.submenu = appMenu; NSApp.mainMenu = menu
-        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 880, height: 780),
+        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 620, height: 370),
                           styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: false)
-        window.contentMinSize = NSSize(width: 780, height: 600)
+        window.contentMinSize = NSSize(width: 560, height: 330)
         window.title = brand + " · Mac " + version
         window.titlebarAppearsTransparent = true
         window.backgroundColor = MacTheme.surface
         window.isReleasedWhenClosed = false
+        window.delegate = self
         window.contentView = MacSurfaceView(background: .surface)
         let title = text(brand, size: 24, weight: .medium)
         let versionLabel = text("Mac " + version, size: 12, secondary: true)
@@ -99,7 +102,7 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         statusRow.heightAnchor.constraint(greaterThanOrEqualToConstant: 24).isActive = true
         let controlSection = column([controls, statusRow], spacing: 12)
         guide = MacControlGuideView(profile: core.profile)
-        let guideHeader = row([text(MacText.t("BindingsHeading"), size: 16, weight: .medium), spacer(), configure], spacing: 16)
+        let guideHeader = row([text(MacText.t("BindingsHeading"), size: 16, weight: .medium), spacer()], spacing: 16)
         let guideSection = column([guideHeader, guide], spacing: 12)
         let hints = text(MacText.t("ControlsHelp") + "\n" + MacText.t("GameSuitability"), size: 13, secondary: true)
         let notice = text(profileNotice.isEmpty ? MacText.t("ProfilePreserved") : profileNotice, size: 12, secondary: true)
@@ -113,7 +116,7 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         let details = MacPillButton(title: MacText.t("Show diagnostics"), target: self, action: #selector(toggleDiagnostics(_:)), style: .quiet)
         let permissionRow = row([permissionStatus, access, spacer()], spacing: 8)
         let disclosureRow = row([instructions, details, spacer()], spacing: 8)
-        let utilities = column([permissionRow, disclosureRow], spacing: 4)
+        let utilities = column([disclosureRow], spacing: 4)
         diagnostics.isHidden = true
         diagnostics.font = MacTheme.font(12); diagnostics.textColor = MacTheme.textSecondary
         diagnostics.stringValue = MacText.format("Received: %@ · Accepted: %@ · Output: %@", "0", "0", "0")
@@ -125,33 +128,38 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         let licenses = MacPillButton(title: MacText.t("Components and licenses"), target: self, action: #selector(showComponents), style: .quiet)
         let supportActions = row([sponsor, feedback, licenses, spacer()], spacing: 8)
         let support = column([free, cats, independent, supportActions], spacing: 8)
-        let firstLine = MacTheme.hairline(); let lastLine = MacTheme.hairline()
-        let stack = column([header, controlSection, firstLine, guideSection, lastLine, support, utilities, usageDetails, diagnostics], spacing: 16)
-        let scroll = NSScrollView()
-        scroll.hasVerticalScroller = true; scroll.autohidesScrollers = true; scroll.drawsBackground = false
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        let document = MacFlippedDocumentView()
-        document.translatesAutoresizingMaskIntoConstraints = false
-        scroll.documentView = document
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        document.addSubview(stack); window.contentView!.addSubview(scroll)
-        NSLayoutConstraint.activate([
-            scroll.leadingAnchor.constraint(equalTo: window.contentView!.leadingAnchor),
-            scroll.trailingAnchor.constraint(equalTo: window.contentView!.trailingAnchor),
-            scroll.topAnchor.constraint(equalTo: window.contentView!.topAnchor),
-            scroll.bottomAnchor.constraint(equalTo: window.contentView!.bottomAnchor),
-            document.widthAnchor.constraint(equalTo: scroll.contentView.widthAnchor),
-            stack.leadingAnchor.constraint(equalTo: document.leadingAnchor, constant: 24),
-            stack.trailingAnchor.constraint(equalTo: document.trailingAnchor, constant: -24),
-            stack.topAnchor.constraint(equalTo: document.topAnchor, constant: 24),
-            stack.bottomAnchor.constraint(equalTo: document.bottomAnchor, constant: -24)
-        ])
-        for view in [header, controlSection, firstLine, guideSection, lastLine, support, utilities, usageDetails, diagnostics] {
-            view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+        let shortcutTitle = text(MacText.t("ControllerShortcutTitle"), size: 13, weight: .medium)
+        let shortcutHelp = text(MacText.t("ControllerShortcutHelp"), size: 12, secondary: true)
+        let shortcutSettings = MacPillButton(title: MacText.t("Open Game Controller Settings"), target: self, action: #selector(openControllerSettings), style: .quiet)
+        let shortcutActions = row([shortcutSettings, spacer()], spacing: 8)
+        let shortcuts = column([shortcutTitle, shortcutHelp, shortcutActions], spacing: 6)
+        for child in [shortcutTitle, shortcutHelp, shortcutActions] { child.widthAnchor.constraint(equalTo: shortcuts.widthAnchor).isActive = true }
+        let helpStack = column([guideSection, MacTheme.hairline(), shortcuts, MacTheme.hairline(), support, utilities, usageDetails, diagnostics], spacing: 16)
+        helpWindow = NSPanel(contentRect: NSRect(x: 0, y: 0, width: 760, height: 650),
+                             styleMask: [.titled, .closable, .resizable], backing: .buffered, defer: false)
+        helpWindow.title = MacText.t("View controls and help")
+        helpWindow.contentMinSize = NSSize(width: 700, height: 420)
+        helpWindow.isReleasedWhenClosed = false
+        helpWindow.contentView = MacSurfaceView(background: .surface)
+        installScrollable(helpStack, in: helpWindow)
+        for child in helpStack.arrangedSubviews { child.widthAnchor.constraint(equalTo: helpStack.widthAnchor).isActive = true }
+        for (container, children) in [(guideSection, [guideHeader, guide!] as [NSView]),
+                                      (support, [free, cats, independent, supportActions]),
+                                      (utilities, [disclosureRow]), (usageDetails, [hints, notice])] {
+            for child in children { child.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true }
         }
+        quickKeys.font = MacTheme.font(12); quickKeys.textColor = MacTheme.textSecondary
+        quickKeys.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        updateQuickKeys()
+        let help = MacPillButton(title: MacText.t("View controls and help"), target: self, action: #selector(showHelp), style: .secondary)
+        let shortcutsRow = row([configure, help, spacer()], spacing: 8)
+        let warning = text(profileNotice, size: 12, secondary: true)
+        warning.isHidden = profileNotice.isEmpty
+        let stack = column([header, controlSection, MacTheme.hairline(), quickKeys, shortcutsRow, warning, permissionRow], spacing: 14)
+        installScrollable(stack, in: window)
+        for child in stack.arrangedSubviews { child.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true }
         for (container, children) in [(header, [headingRow, explanation] as [NSView]),
-                                      (controlSection, [controls, statusRow]), (guideSection, [guideHeader, guide!]),
-                                      (support, [free, cats, independent, supportActions]), (utilities, [permissionRow, disclosureRow]), (usageDetails, [hints, notice])] {
+                                      (controlSection, [controls, statusRow])] {
             for child in children { child.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true }
         }
         toggle.isEnabled = false; stop.isEnabled = false
@@ -170,6 +178,35 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         refreshPermissionState()
         permissionTimer = Timer.scheduledTimer(timeInterval: 1, target: self,
             selector: #selector(refreshPermissionState), userInfo: nil, repeats: true)
+    }
+    private func installScrollable(_ stack: NSStackView, in target: NSWindow) {
+        let scroll = NSScrollView()
+        scroll.hasVerticalScroller = true; scroll.autohidesScrollers = true; scroll.drawsBackground = false
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        let document = MacFlippedDocumentView(); document.translatesAutoresizingMaskIntoConstraints = false
+        scroll.documentView = document
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        document.addSubview(stack); target.contentView!.addSubview(scroll)
+        NSLayoutConstraint.activate([
+            scroll.leadingAnchor.constraint(equalTo: target.contentView!.leadingAnchor),
+            scroll.trailingAnchor.constraint(equalTo: target.contentView!.trailingAnchor),
+            scroll.topAnchor.constraint(equalTo: target.contentView!.topAnchor),
+            scroll.bottomAnchor.constraint(equalTo: target.contentView!.bottomAnchor),
+            document.widthAnchor.constraint(equalTo: scroll.contentView.widthAnchor),
+            stack.leadingAnchor.constraint(equalTo: document.leadingAnchor, constant: 24),
+            stack.trailingAnchor.constraint(equalTo: document.trailingAnchor, constant: -24),
+            stack.topAnchor.constraint(equalTo: document.topAnchor, constant: 24),
+            stack.bottomAnchor.constraint(equalTo: document.bottomAnchor, constant: -24)
+        ])
+    }
+    private func updateQuickKeys() {
+        quickKeys.stringValue = MacText.format("Circle: %@ · Options: %@ · Pause / enable: Esc",
+                                              MacKeyNames.display(core.profile[.circle].keyCode),
+                                              MacKeyNames.display(core.profile[.options].keyCode))
+    }
+    @objc private func showHelp() {
+        core.setEnabled(false); showState()
+        helpWindow.center(); helpWindow.makeKeyAndOrderFront(nil)
     }
     private func text(_ value: String, size: CGFloat, weight: NSFont.Weight = .regular, secondary: Bool = false) -> NSTextField {
         let label = NSTextField(wrappingLabelWithString: value)
@@ -202,6 +239,9 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         usageDetails.isHidden.toggle()
         sender.title = MacText.t(usageDetails.isHidden ? "Usage instructions" : "Hide instructions")
     }
+    func windowWillClose(_ notification: Notification) {
+        if let closing = notification.object as? NSWindow, closing === window { helpWindow.close() }
+    }
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         guard !terminating else { return .terminateLater }
@@ -226,6 +266,12 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
         sender.title = diagnostics.isHidden ? MacText.t("Show diagnostics") : MacText.t("Hide diagnostics")
         if !diagnostics.isHidden {
             diagnostics.stringValue = MacText.format("Received: %@ · Accepted: %@ · Output: %@", String(observedGamePresses), String(acceptedGamePresses), String(nonneutralFrames))
+        }
+    }
+    @objc private func openControllerSettings() {
+        core.setEnabled(false); showState()
+        if let url = URL(string: "x-apple.systempreferences:com.apple.Game-Controller-Settings.extension") {
+            NSWorkspace.shared.open(url)
         }
     }
     @objc func openPermissions() {
@@ -412,6 +458,7 @@ final class DualSensePreview: NSObject, NSApplicationDelegate {
             try self.profileStore.save(profile: profile)
             self.core.applyProfile(profile)
             self.guide.update(profile: profile)
+            self.updateQuickKeys()
         }, onClose: { [weak self] in
             guard let self else { return }
             self.editor = nil; self.updateEnvironment(); self.showState()

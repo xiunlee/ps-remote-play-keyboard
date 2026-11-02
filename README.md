@@ -16,11 +16,13 @@
 
 Windows 的三個執行元件目前**沒有數位簽章**；雜湊只供核對檔案完整性，不代表簽章或通用相容性。詳見[發布與驗證紀錄](research/dualsense-preview/RELEASE-0.1.4.md)。
 
-Mac 版「**上班不要玩／Three Cats Keybridge**」是鍵盤控制與模擬手把工具，目前支援 Apple Silicon／macOS 15+ 與 **Sony 官方 PS Remote Play** 連線 PS5 的環境，不宣稱所有遊戲或程式通用。0.1.3 整合改鍵、連點、設定保存、九語、贊助與回饋，以及原生執行管理與官方元件取得；固定 App 檔名與安裝身分不變。Mac 0.1.3 由獨立 manifest 管理，目前為 build 4；Mac 使用 **Esc** 啟用／暫停，Windows 維持 **F8**。最終品牌版已重新封裝、解壓 ZIP 及唯讀掛載 DMG 驗證簽章與內容；獨立稽核 151 項通過，來源 70 檔對應固定提交 `2808435`。收據見 [Mac 驗證紀錄](docs/MAC-RELEASE-READINESS.md)。
+**Mac 0.1.4 本機候選：**主畫面與按鍵設定視窗已縮小，完整鍵位、使用說明及贊助／回饋移至內頁；內頁提供 macOS 控制器快速鍵的說明與系統設定入口，不自動更改系統設定。使用者已查看本機介面並同意發布；本版遊戲、改鍵／連點、新機、睡眠與崩潰情境仍待驗。**目前公開的 Mac 下載仍為下列 0.1.3**，0.1.4 的發布與附件驗證以實際發行頁為準。
+
+Mac 版「**上班不要玩／Three Cats Keybridge**」是鍵盤控制與模擬手把工具，目前支援 Apple Silicon／macOS 15+ 與 **Sony 官方 PS Remote Play** 連線 PS5 的環境，不宣稱所有遊戲或程式通用。0.1.3 整合改鍵、連點、設定保存、九語、贊助與回饋，以及原生執行管理與官方元件取得；固定 App 檔名與安裝身分不變。Mac 版本由獨立 manifest 管理；已公開的 0.1.3 為 build 4，本機 0.1.4 候選為 build 1；Mac 使用 **Esc** 啟用／暫停，Windows 維持 **F8**。最終品牌版已重新封裝、解壓 ZIP 及唯讀掛載 DMG 驗證簽章與內容；獨立稽核 151 項通過，來源 70 檔對應固定提交 `2808435`。收據見 [Mac 驗證紀錄](docs/MAC-RELEASE-READINESS.md)。
 
 **Mac 0.1.3 已正式發布：美術優化。** [下載 Mac DMG](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-arm64.dmg) · [下載 Mac ZIP](https://github.com/xiunlee/ps-remote-play-keyboard/releases/download/mac-v0.1.3/ThreeCatsKeybridge-Mac-0.1.3-arm64.zip) · [Mac 發行頁與對應來源](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)。發布時間：2026-10-30 18:52（台灣時間）。八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)；Windows 0.1.4 下載保持可用。
 
-Mac alpha.1 的 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json) 已由使用者確認遊戲可操作、W 放開停止與 Enter／Options 有效。0.1.3 建置 9 已核對完整 App 中立連接、中斷、重連與退出清理，以及淺／深色主畫面和設定；最終品牌包的封裝核對另記，不能當作本版遊戲成功。本版遊戲、全新 Mac 與睡眠／崩潰仍未驗證，且採自簽而非 Apple Developer ID／公證；詳見 [Mac 安裝說明](docs/MAC-INSTALL.md)、[發布準備清單](docs/MAC-RELEASE-READINESS.md)及 [交接文件](docs/MAC-HANDOFF.md)。
+Mac alpha.1 的 [trial 2](research/macos-native/DUALSENSE-TRIAL-2.json) 已由使用者確認遊戲可操作、W 放開停止與 Enter／Options 有效。0.1.3 建置 9 已核對完整 App 中立連接、中斷、重連與退出清理，以及淺／深色主畫面和設定；最終品牌包的封裝核對另記，不能當作本版遊戲成功。0.1.4 遊戲、全新 Mac 與睡眠／崩潰仍未驗證，且採自簽而非 Apple Developer ID／公證；詳見 [Mac 安裝說明](docs/MAC-INSTALL.md)、[發布準備清單](docs/MAC-RELEASE-READINESS.md)及 [交接文件](docs/MAC-HANDOFF.md)。
 
 Mac 版是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。
 

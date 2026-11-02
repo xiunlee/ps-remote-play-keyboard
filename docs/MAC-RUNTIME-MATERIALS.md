@@ -65,7 +65,7 @@ initrd.gz  1356a076d56df8d0596e5a7ccebaba12d6d139a4e373536667c2777f2eeda97f
 
 ## 發佈時的組合
 
-Mac 0.1.3 的公開材料使用 `ThreeCatsKeybridge-Mac-0.1.3-source.zip`、`ThreeCatsKeybridge-Mac-0.1.3-runtime-sources.tar.gz` 與 `ThreeCatsKeybridge-Mac-0.1.3-build-inputs.tar.gz`；專案來源 ZIP 根目錄為 `ThreeCatsKeybridge-Mac-0.1.3-source/`。發行標籤為 `mac-v0.1.3`，與 Windows 標籤分開。這是公開附件的品牌名稱；以下既有 cache、內部資料夾、來源套件名稱及固定雜湊不變。
+Mac 0.1.4 的材料命名為 `ThreeCatsKeybridge-Mac-0.1.4-source.zip`、`ThreeCatsKeybridge-Mac-0.1.4-runtime-sources.tar.gz` 與 `ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz`；專案來源 ZIP 根目錄為 `ThreeCatsKeybridge-Mac-0.1.4-source/`。發行使用獨立標籤 `mac-v0.1.4`，實際發布狀態及附件以 GitHub 發行頁為準。這是公開附件的品牌名稱；以下既有 cache、內部資料夾、來源套件名稱及固定雜湊不變。
 
 Runtime source archive 與整合 App 的當版 source snapshot、build/install scripts 一起提供；來源包內 README 指明 APKBUILD 重建方式、backend source 佈局與原始 runtime bytes 重現指令。App 內 notices 由來源包的 `notices/` 複製。這份材料不包含 VirtualHere 客戶端/伺服器再散布授權；它們維持由整合安裝流程向官方取得的獨立依賴。
 

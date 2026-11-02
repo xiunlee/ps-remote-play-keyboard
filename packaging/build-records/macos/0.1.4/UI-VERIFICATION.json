@@ -1,0 +1,32 @@
+{
+  "version": "0.1.4",
+  "buildNumber": "1",
+  "createdAtUTC": "2026-10-30T11:38:13.855095+00:00",
+  "installed": false,
+  "published": false,
+  "coreChecks": 459,
+  "profileChecks": 79,
+  "platformVersionTests": 3,
+  "textKeys": 201,
+  "languages": 9,
+  "literalReferencesResolved": true,
+  "offscreenViewsReviewed": [
+    "zh-Hant",
+    "en",
+    "de",
+    "ja"
+  ],
+  "screenshotsUseSyntheticDefaultProfile": true,
+  "realGameplayVerified": false,
+  "gameControllerSettingsLinkOpenedForTest": false,
+  "archiveSHA256": "a190a939e89ad04eef61154ab182f34756805db7ddda4f04ed5bf2a294da1eaf",
+  "checkedAtUTC": "2026-11-02T02:54:27.194150+00:00",
+  "userReviewedInstalledInterface": true,
+  "userReviewScope": "User approved the installed interface for release; no gameplay, remapping or repeat acceptance was reported.",
+  "coreChecksRerun": 459,
+  "profileChecksRerun": 79,
+  "platformVersionTestsRerun": 3,
+  "fullGameplayRemappingRepeatVerified": false,
+  "accessibilityAllowedAtInstall": true,
+  "signingAndAppHashesIndependentlyChecked": true
+}

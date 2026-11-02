@@ -32,7 +32,7 @@ final class MacBindingEditor: NSObject, NSTableViewDataSource, NSTableViewDelega
         draft = profile
         self.onSave = onSave
         self.onClose = onClose
-        sheet = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 960, height: 760),
+        sheet = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 800, height: 650),
                          styleMask: [.titled, .closable, .resizable], backing: .buffered, defer: false)
         super.init()
         buildInterface()
@@ -56,7 +56,7 @@ final class MacBindingEditor: NSObject, NSTableViewDataSource, NSTableViewDelega
 
     private func buildInterface() {
         sheet.title = MacText.t("BindingsTitle")
-        sheet.minSize = NSSize(width: 900, height: 720)
+        sheet.minSize = NSSize(width: 740, height: 580)
         sheet.isReleasedWhenClosed = false
         sheet.delegate = self
         sheet.backgroundColor = MacTheme.surface
@@ -118,7 +118,7 @@ final class MacBindingEditor: NSObject, NSTableViewDataSource, NSTableViewDelega
         scroll.borderType = .noBorder
         scroll.setContentHuggingPriority(.defaultLow, for: .horizontal)
         scroll.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        scroll.widthAnchor.constraint(greaterThanOrEqualToConstant: 500).isActive = true
+        scroll.widthAnchor.constraint(greaterThanOrEqualToConstant: 380).isActive = true
 
         let details = NSStackView()
         details.orientation = .vertical
@@ -195,7 +195,7 @@ final class MacBindingEditor: NSObject, NSTableViewDataSource, NSTableViewDelega
         detailScroll.documentView = detailDocument
         detailDocument.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            detailScroll.widthAnchor.constraint(equalToConstant: 300),
+            detailScroll.widthAnchor.constraint(equalToConstant: 260),
             detailDocument.widthAnchor.constraint(equalTo: detailScroll.contentView.widthAnchor),
             detailDocument.topAnchor.constraint(equalTo: detailScroll.contentView.topAnchor),
             detailDocument.leadingAnchor.constraint(equalTo: detailScroll.contentView.leadingAnchor),
@@ -209,13 +209,13 @@ final class MacBindingEditor: NSObject, NSTableViewDataSource, NSTableViewDelega
         verticalRule.widthAnchor.constraint(equalToConstant: 1).isActive = true
         let body = horizontal([scroll, verticalRule, detailScroll])
         body.alignment = .top
-        body.spacing = 20
+        body.spacing = 12
         addFullWidth(body, to: root)
         NSLayoutConstraint.activate([
             scroll.heightAnchor.constraint(equalTo: body.heightAnchor),
             detailScroll.heightAnchor.constraint(equalTo: body.heightAnchor),
             verticalRule.heightAnchor.constraint(equalTo: body.heightAnchor),
-            body.heightAnchor.constraint(greaterThanOrEqualToConstant: 420)
+            body.heightAnchor.constraint(greaterThanOrEqualToConstant: 300)
         ])
         body.setContentHuggingPriority(.defaultLow, for: .vertical)
         body.setContentCompressionResistancePriority(.defaultLow, for: .vertical)

@@ -1,12 +1,22 @@
 # Mac 發佈準備清單
 
+## Mac 0.1.4（2026-11-02）
+
+Mac 0.1.4／build 1 縮小主畫面與按鍵設定視窗，把完整鍵位、使用說明、贊助／回饋及診斷移至內頁；主畫面仍顯示狀態、常用動作、輔助使用與設定入口。內頁提示 PS 按鍵可能觸發 macOS 控制器快捷動作，說明變更會影響其他手把，並提供遊戲控制器設定入口；不自動修改系統偏好。Mac 使用 Esc，Windows 使用 F8。
+
+使用者已在本機查看 0.1.4 介面並同意發布，這是視覺審閱意見，不等於所有介面操作或遊戲驗收。本機從同一路徑更新並啟動時，程式回報輔助使用已允許、尚未連接；當次設定與備份核對保留。新包的遊戲、改鍵、連點、切窗／暫停、新機安裝、睡眠與崩潰仍待逐項實測。先前 0.1.3 的一般操作及 P／PS 修正回報，與 alpha.1 的遊戲成功和建置 9 的中立連線證據分開記錄，不能當作 0.1.4 驗收。
+
+0.1.4 的 GitHub 發行與匿名下載是否完成，以實際發行頁、附件及各版新收據為準；不得移動已發布的 Mac 0.1.3 或 Windows 標籤、覆寫其附件或改變 Windows 0.1.4 的公開下載。
+
+## 以下為 Mac 0.1.3 歷史發行與驗證紀錄
+
 更新：2026-10-30（Asia/Taipei）。**本文件記錄「上班不要玩／Three Cats Keybridge」Mac 0.1.3 的公開交付範圍：原生 helper 及完整 App 建置 9 的連接、停止、再次連接與退出清理已通過，淺深色主畫面／設定已實際查看；本版遊戲、全新 Mac、睡眠及崩潰情境仍未驗證。** 本次公開保留這些已知限制，不以發布取代驗收。實際發布狀態與時間以 [GitHub 發行頁](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)為準；Windows 既有產物不覆寫。
 
 本文件的勾選表示該列明確範圍內的完成狀態；程式存在、離線測試通過、既有研究流程的遊戲成功，不代表最終整合包已通過驗收。Windows 功能逐項對照見 [功能對齊清單](MAC-PARITY-CHECKLIST.md)；建置 9 的固定證據見 [BUILD](../packaging/build-records/macos/0.1.3/BUILD.json)及 [INTEGRATION](../packaging/build-records/macos/0.1.3/INTEGRATION.json)。
 
 ## 最終品牌建置的離線覆核
 
-Mac manifest 為 **0.1.3／build 4**，根目錄 Windows `VERSION` 維持 **0.1.4**；兩平台版本獨立。Mac 保持 **Esc**，Windows 保持 **F8**。最終主程式、貓咪 `.icns`、九語資源、兩個原生 helper 與 runtime 材料已重新建置並驗簽；[FINAL-BUILD](../packaging/build-records/macos/0.1.3/FINAL-BUILD.json) 與舊 [BRANDING-BUILD](../packaging/build-records/macos/0.1.3/BRANDING-BUILD.json)、[PACKAGE](../packaging/build-records/macos/0.1.3/PACKAGE.json) 分開保留。
+當時 Mac manifest 為 **0.1.3／build 4**，根目錄 Windows `VERSION` 為 **0.1.4**；兩平台版本獨立。Mac 保持 **Esc**，Windows 保持 **F8**。最終主程式、貓咪 `.icns`、九語資源、兩個原生 helper 與 runtime 材料已重新建置並驗簽；[FINAL-BUILD](../packaging/build-records/macos/0.1.3/FINAL-BUILD.json) 與舊 [BRANDING-BUILD](../packaging/build-records/macos/0.1.3/BRANDING-BUILD.json)、[PACKAGE](../packaging/build-records/macos/0.1.3/PACKAGE.json) 分開保留。
 
 [FINAL-VERIFICATION](../packaging/build-records/macos/0.1.3/FINAL-VERIFICATION.json) 記錄本輪實際重跑：控制核心 459、profile 79、V5 22958、relay socket 57、runtime 231 項全部通過；另通過依賴修復／回復／取消／自有程序清理檢查，以及平台版號 3 個測試方法、9 種情境。九語共 197 keys、94 個介面字串引用、各語品牌及非官方聲明均通過。來源白名單由 69 檔增為 70 檔，新增的是平台版本隔離測試；所有建置輸入雜湊與目前來源一致。Windows 端先前回報的 20 項研究檢查保持為外部既有證據，未計入本輪重跑。
 

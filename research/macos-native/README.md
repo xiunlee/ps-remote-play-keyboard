@@ -1,6 +1,8 @@
 # Mac 原生研究：USB DualSense 輸出路線
 
-更新：2026-10-30（Asia/Taipei）。目前版本為 **Mac 0.1.3／build 4**，中文名稱「上班不要玩」、非中文名稱 **Three Cats Keybridge**；定位為鍵盤控制與模擬手把工具，實際支援 Sony 官方 PS Remote Play。同一 App 已加入 Windows 對應的改鍵、連點、持久化、九語與支持功能，並將 guest／relay 管理移入原生 helper。先前固定 App／路徑／簽章的本機更新曾保留設定與輔助使用權限；最終交付包仍未做這項更新實測。建置 9 已確認 App 中立連接、中斷、再次連接與退出清理，並檢視淺／深色主畫面及設定；本版遊戲、新機、睡眠／崩潰仍待驗；最終品牌包已重解 ZIP、唯讀掛載 DMG 核對簽章與內容，並通過 151 項獨立封裝稽核；[收據](../../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)固定來源為 `28084359384b11d43272ad17f4207ae58b27f933`。不將建置 9 的畫面當成最終品牌版視覺驗收。Mac 使用獨立標籤 `mac-v0.1.3`，Windows 最新仍為 `v0.1.4`；已於 **2026-10-30 18:52（台灣時間）**公開 [mac-v0.1.3](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`，八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。請以 [功能對齊清單](../../docs/MAC-PARITY-CHECKLIST.md)及[發佈驗證](../../docs/MAC-RELEASE-READINESS.md)區分實作、離線檢查與實機結果。
+更新：2026-11-02（Asia/Taipei）。**Mac 0.1.4／build 1 本機候選**已縮小主畫面及設定視窗，完整鍵位、快捷鍵說明、贊助與診斷移至內頁。使用者已查看介面並同意發布；本版遊戲、改鍵／連點、新機、睡眠及崩潰仍待驗。0.1.3 的一般操作與 P／PS 按鍵使用者回報，以及先前中立連線記錄均保留為歷史，不代替 0.1.4 遊戲驗收。實際發布及附件核對以 GitHub 發行頁及新收據為準；Windows 最新仍為 0.1.4。
+
+**以下為 2026-10-30 的 Mac 0.1.3／build 4 發行與研究紀錄**，中文名稱「上班不要玩」、非中文名稱 **Three Cats Keybridge**；定位為鍵盤控制與模擬手把工具，實際支援 Sony 官方 PS Remote Play。同一 App 已加入 Windows 對應的改鍵、連點、持久化、九語與支持功能，並將 guest／relay 管理移入原生 helper。先前固定 App／路徑／簽章的本機更新曾保留設定與輔助使用權限；最終交付包仍未做這項更新實測。建置 9 已確認 App 中立連接、中斷、再次連接與退出清理，並檢視淺／深色主畫面及設定；本版遊戲、新機、睡眠／崩潰仍待驗；最終品牌包已重解 ZIP、唯讀掛載 DMG 核對簽章與內容，並通過 151 項獨立封裝稽核；[收據](../../packaging/build-records/macos/0.1.3/FINAL-PACKAGE.json)固定來源為 `28084359384b11d43272ad17f4207ae58b27f933`。不將建置 9 的畫面當成最終品牌版視覺驗收。Mac 使用獨立標籤 `mac-v0.1.3`，Windows 最新仍為 `v0.1.4`；已於 **2026-10-30 18:52（台灣時間）**公開 [mac-v0.1.3](https://github.com/xiunlee/ps-remote-play-keyboard/releases/tag/mac-v0.1.3)，Release ID `428908748`，八個公開附件已匿名重新下載，大小與 SHA-256 均符合最終包及 GitHub digest；[下載驗證收據](../../packaging/build-records/macos/0.1.3/PUBLIC-DOWNLOADS.json)。請以 [功能對齊清單](../../docs/MAC-PARITY-CHECKLIST.md)及[發佈驗證](../../docs/MAC-RELEASE-READINESS.md)區分實作、離線檢查與實機結果。
 
 本程式是獨立專案，非 Sony 官方產品，與 Sony 無隸屬或背書關係。以下歷史名稱、協定識別與試驗記錄保留原樣。
 
@@ -36,7 +38,7 @@
 
 ## 固定版本、部署與授權
 
-使用者要求有固定版本、保留同一個 App、避免每次重做輔助使用授權，並適用 Mac 精簡鍵盤。[版本 manifest](../../packaging/macos/version.json)目前顯示版本 **0.1.3**、bundle version **0.1.3 / build 4**，沿用 bundle identifier `com.xiunlee.pskeyboard.mac-dualsense`；安裝位置固定為 **`~/Applications/PSKeyboardMacDualSense.app`**。這是與 Windows 分平台的 Mac 版本；顯示品牌更新不改此固定路徑或 identifier，亦不取代 Windows 已公開版本。
+使用者要求有固定版本、保留同一個 App、避免每次重做輔助使用授權，並適用 Mac 精簡鍵盤。[版本 manifest](../../packaging/macos/version.json)目前顯示版本 **0.1.4**、bundle version **0.1.4 / build 1**，沿用 bundle identifier `com.xiunlee.pskeyboard.mac-dualsense`；安裝位置固定為 **`~/Applications/PSKeyboardMacDualSense.app`**。這是與 Windows 分平台的 Mac 版本；顯示品牌更新不改此固定路徑或 identifier，亦不取代 Windows 已公開版本。
 
 使用者已明確授權精確的 **PSKeyboard Local Development** 專案憑證加入 **user domain／CodeSigning policy** 信任，並親自完成兩次系統確認。初始設定曾額外限定 `codesign` application／sign key usage，預查回報 `no identity found`；移除額外 `-a`／`-u` 限制後，export 核對該憑證最終只有一個 `CodeSigning` entry，沒有 AllTrust、SSL 或 System-domain 信任。見 [首次信任與失敗](inspection/LOCAL-SIGNING-TRUST.json)及 [最終 policy](inspection/LOCAL-SIGNING-TRUST-POLICY.json)。
 
@@ -144,7 +146,7 @@ Mac 鍵盤／前景限制
 
 1. 先讀本文件、[trial 2](DUALSENSE-TRIAL-2.json)及歷史 [trial 1](DUALSENSE-TRIAL-1.json)、[Mac 版本 manifest](../../packaging/macos/version.json)、[Mac 鍵位](../../docs/MAC-DEFAULT-KEYS.md)，再讀 [USB neutral](inspection/MAC-USB-DUALSENSE-NEUTRAL.json)、[relay smoke](inspection/DUALSENSE-RELAY-SMOKE.json)、[guest 實驗](VIRTUALHERE-GUEST-SPIKE.md)及 [ControlCore 契約](CONTROL-CORE.md)。核對本機最新 build／trial 收據和未提交變更；`.local` 不隨 GitHub 同步，沒有檔案時不可推測試驗結果以外的細節。
 2. 核對 Sony 原連線及本輪裝置狀態；不要為測試重啟 Sony。trial 2 成功回報時實體 USB 手把已拔除、只有本輪自有 entry；先區分實體與自有虛擬裝置，不沿用歷史 GameController neutral 的實體接回狀態。
-3. trial 1 已回報無反應並清理；alpha.1 已完成舊 Accessibility 項目遷移，trial 2 已取得真人操作成功回報；歷史 0.1.2 原位更新未重授權且 AX=true；目前為 0.1.3，建置 9 已驗中立接入、停止、重連及退出清理，仍無本版遊戲驗收。接手仍核對實際執行版本及當下權限，不以舊版 hash／授權代替。保留同一安裝路徑，不新增多份使用者 App。Generic 已回報無反應且移除，不再安排 Generic／Xbox。
+3. trial 1 已回報無反應並清理；alpha.1 已完成舊 Accessibility 項目遷移，trial 2 已取得真人操作成功回報；歷史 0.1.2 原位更新未重授權且 AX=true；0.1.3 建置 9 已驗中立接入、停止、重連及退出清理；0.1.4 的遊戲驗收仍待完成。接手仍核對實際執行版本及當下權限，不以舊版 hash／授權代替。保留同一安裝路徑，不新增多份使用者 App。Generic 已回報無反應且移除，不再安排 Generic／Xbox。
 4. 使用已驗證的 guest 啟動順序、預設 host TCP 7575、固定 guest 識別及保留設定；只處理本 session 的裝置，維持單裝置免費限制。以新「連接並啟用」／Esc 流程測按下／放開與失焦，記錄彙總計數及使用者反應；STOP USING 後仍須獨立確認 guest UNBOUND 及 Mac entry 消失。
 5. 本次遊戲操作成功不等於完整驗收或獨立封裝；本次停止移除已確認；0.1.3 的完整 App 中立重連已有獨立證據，其餘操作、長時間及重開機仍待驗。本次已授權依已揭露限制公開 Mac；使用 `mac-v0.1.3`，不改 Windows 版本／歷史 tags，也不把本機結果推廣成所有遊戲或機器的保證。
 
