@@ -1,0 +1,2721 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUTC": "2026-11-02T02:57:36.551618+00:00",
+  "version": "0.1.4",
+  "buildNumber": "1",
+  "sourceCommit": "0f6743b341ceec526ed93ee579fb626d15a5e303",
+  "allPassed": true,
+  "checkCount": 663,
+  "passedCount": 663,
+  "sourceFilesVerified": 70,
+  "appFilesExpected": 117,
+  "topLevelArtifacts": {
+    "README.txt": {
+      "size": 2343,
+      "sha256": "39f188f3e82dd484d6ab3d86d96228d90be84f77a0d34aab8c94487900864f65"
+    },
+    "RELEASE.json": {
+      "size": 27012,
+      "sha256": "0a56c08397734c74c293c6cce261fc8c0d8a3c006a0342b81528c7d9f766e02f"
+    },
+    "SHA256SUMS": {
+      "size": 1350,
+      "sha256": "3c0393c628ab38c0427d58029b6ecb5079b4741e940c457e7fee5599dfd6db82"
+    },
+    "ThreeCatsKeybridge-Mac-0.1.4-arm64.dmg": {
+      "size": 26089730,
+      "sha256": "14a33bc89800ff2cc5f32fbe08d401e22349658420c051a3a447b213552a9e62"
+    },
+    "ThreeCatsKeybridge-Mac-0.1.4-arm64.zip": {
+      "size": 23627879,
+      "sha256": "4f35babfbdb39bf49b88413740d8429a10601b179a2657b29a346b2938c6489e"
+    },
+    "ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz": {
+      "size": 115775397,
+      "sha256": "35b81b04bcfee79fe0a0a5b17b1cf3ee03a48b2838d6f1c231c2120bd37cb433"
+    },
+    "ThreeCatsKeybridge-Mac-0.1.4-runtime-sources.tar.gz": {
+      "size": 450919582,
+      "sha256": "7f15544b93960b4d31bfd42d7413cbae057af3e81d7ee613f11f74bf19403218"
+    },
+    "ThreeCatsKeybridge-Mac-0.1.4-source.zip": {
+      "size": 818338,
+      "sha256": "9a273ca5f0f4542ca86ac525fb13c067a53d5a5c42fd6e70e8f22db36f228a8c"
+    }
+  },
+  "checks": [
+    {
+      "check": "source fixed",
+      "passed": true
+    },
+    {
+      "check": "version",
+      "passed": true
+    },
+    {
+      "check": "release material scope",
+      "passed": true
+    },
+    {
+      "check": "build receipt hash",
+      "passed": true
+    },
+    {
+      "check": "eight top-level assets",
+      "passed": true
+    },
+    {
+      "check": "checksum list completeness",
+      "passed": true
+    },
+    {
+      "check": "artifact size README.txt",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA README.txt",
+      "passed": true
+    },
+    {
+      "check": "artifact size ThreeCatsKeybridge-Mac-0.1.4-arm64.dmg",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA ThreeCatsKeybridge-Mac-0.1.4-arm64.dmg",
+      "passed": true
+    },
+    {
+      "check": "artifact size ThreeCatsKeybridge-Mac-0.1.4-arm64.zip",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA ThreeCatsKeybridge-Mac-0.1.4-arm64.zip",
+      "passed": true
+    },
+    {
+      "check": "artifact size ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA ThreeCatsKeybridge-Mac-0.1.4-build-inputs.tar.gz",
+      "passed": true
+    },
+    {
+      "check": "artifact size ThreeCatsKeybridge-Mac-0.1.4-runtime-sources.tar.gz",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA ThreeCatsKeybridge-Mac-0.1.4-runtime-sources.tar.gz",
+      "passed": true
+    },
+    {
+      "check": "artifact size ThreeCatsKeybridge-Mac-0.1.4-source.zip",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA ThreeCatsKeybridge-Mac-0.1.4-source.zip",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-DEFAULT-KEYS.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-DEFAULT-KEYS.md",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-INSTALL.en.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-INSTALL.en.md",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-INSTALL.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-INSTALL.md",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-PARITY-CHECKLIST.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-PARITY-CHECKLIST.md",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-RELEASE-NOTES.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-RELEASE-NOTES.md",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-RELEASE-READINESS.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-RELEASE-READINESS.md",
+      "passed": true
+    },
+    {
+      "check": "artifact size docs/MAC-RUNTIME-MATERIALS.md",
+      "passed": true
+    },
+    {
+      "check": "artifact SHA docs/MAC-RUNTIME-MATERIALS.md",
+      "passed": true
+    },
+    {
+      "check": "RELEASE.json SHA",
+      "passed": true
+    },
+    {
+      "check": "70 source files",
+      "passed": true
+    },
+    {
+      "check": "source archive integrity",
+      "passed": true
+    },
+    {
+      "check": "source whitelist exact",
+      "passed": true
+    },
+    {
+      "check": "source manifest matches release",
+      "passed": true
+    },
+    {
+      "check": "source matches Git CHANGELOG.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git COPYRIGHT.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git LICENSE",
+      "passed": true
+    },
+    {
+      "check": "source matches Git VERSION",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/branding/Build-ThreeCatsMark.ps1",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/branding/three-cats-mark.png",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/branding/three-cats.ico",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/macos/fonts/InterVariable.ttf",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/macos/fonts/OFL-Inter.txt",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/macos/fonts/SOURCES.json",
+      "passed": true
+    },
+    {
+      "check": "source matches Git assets/macos/strings.json",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-DEFAULT-KEYS.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-INSTALL.en.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-INSTALL.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-PARITY-CHECKLIST.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-RELEASE-NOTES.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-RELEASE-READINESS.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git docs/MAC-RUNTIME-MATERIALS.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/build_icon.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/build_strings.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/collect_sources.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/fetch_runtime_materials.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/package_release.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/prepare_runtime.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/test_versioning.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git packaging/macos/version.json",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/dualsense-preview/PreviewText.cs",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/dualsense-v5-test/V5Protocol.cs",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/dualsense-v5-test/V5ProtocolTests.cs",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/build_preview.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/guest-backend/README.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/guest-backend/autoattach_darwin.go.overlay",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/guest-backend/build.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/guest-backend/main.go",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/guest-backend/main_test.go",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/guest/prepare_guest.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/macos-native/local_signing.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/native-merge/keyboard_merge.c",
+      "passed": true
+    },
+    {
+      "check": "source matches Git research/native-merge/keyboard_merge.h",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/keyboard-pad/KeyboardMapping.cs",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/keyboard-pad/ViiperTransport.cs",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/ControlCore.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/ControlCoreTests.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/DualSensePreviewApp.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/DualSenseRelaySocket.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/DualSenseRelaySocketTests.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/DualSenseV5Protocol.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/DualSenseV5ProtocolTests.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacBindingEditor.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacControlGuideView.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacDependencyInstaller.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacDependencyInstallerTests.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacKeyNames.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacProfileStore.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacProfileStoreTests.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacRuntimeController.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacSupportLinks.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacText.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/MacTheme.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/GuestRunner.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/NativeRelay.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/README.md",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/RuntimeMain.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/RuntimeOwner.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/RuntimeProcess.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/RuntimeProtocol.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/RuntimeTests.swift",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/runtime/run-tests.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/macos/test-dualsense-v5.py",
+      "passed": true
+    },
+    {
+      "check": "source matches Git src/physical-keyboard/UiText.cs",
+      "passed": true
+    },
+    {
+      "check": "obsolete/private files excluded",
+      "passed": true
+    },
+    {
+      "check": "GPL source license included",
+      "passed": true
+    },
+    {
+      "check": "App ZIP integrity",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-RUNTIME-MATERIALS.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-INSTALL.en.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-PARITY-CHECKLIST.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-INSTALL.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-DEFAULT-KEYS.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-RELEASE-READINESS.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/docs/._MAC-RELEASE-NOTES.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/._docs",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/_CodeSignature/._CodeResources",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/.__CodeSignature",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/MacOS/._PSKeyboardMacDualSense",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/._MacOS",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/de.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._de.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/zh-Hans.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._zh-Hans.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/ja.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._ja.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/en.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._en.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/es.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._es.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Runtime/._GuestDualSenseBackend-linux-arm64",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Runtime/._af_packet.ko",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Runtime/._dummy.ko",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Runtime/._Image",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Runtime/._initrd.gz",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._Runtime",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/ko.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._ko.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/zh-Hant.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._zh-Hant.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/hwdata/._LICENSE",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/hwdata/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/hwdata/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._hwdata",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/pax-utils/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/pax-utils/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._pax-utils",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/musl/._COPYRIGHT",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/musl/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._musl",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/ncurses/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/ncurses/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._ncurses",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/alpine-keys/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._alpine-keys",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/readline/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/readline/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._readline",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/alpine-base/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._alpine-base",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/alpine-baselayout/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._alpine-baselayout",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/zlib/._LICENSE",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/zlib/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._zlib",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._BSD-3-Clause-Clear",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._GPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._BSD-2-Clause",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._LGPL-2.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._LGPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._MIT",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/._BSD-3-Clause",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/._preferred",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions/._Linux-syscall-note",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions/._GCC-exception-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/._exceptions",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/._copyleft-next-0.3.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/._CC-BY-4.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/._Apache-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/._MPL-1.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/._CDDL-1.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/._dual",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._GFDL-1.2",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._Linux-OpenIB",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._GPL-1.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._Zlib",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._0BSD",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._GFDL-1.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._ISC",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/._X11",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/LICENSES/._deprecated",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/._LICENSES",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-lts/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._linux-lts",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/LICENSES/._GPL-2.0-or-later.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/LICENSES/._CC0-1.0.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/LICENSES/._GPL-2.0-only.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/LICENSES/._MIT.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/LICENSES/._LGPL-2.1-or-later.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/LICENSES/._GPL-3.0-only.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/._LICENSES",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/usbutils/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._usbutils",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/busybox/._LICENSE",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/busybox/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._busybox",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/apk-tools/._LICENSE",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/apk-tools/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._apk-tools",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/ca-certificates/._certdata-LICENSE-NOTICE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/ca-certificates/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._ca-certificates",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/eudev/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/eudev/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._eudev",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/socat/._COPYING.OpenSSL",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/socat/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/socat/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._socat",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/openssl/._LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/openssl/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._openssl",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/libusb/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/libusb/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._libusb",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._BSD-3-Clause-Clear",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._GPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._BSD-2-Clause",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._LGPL-2.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._LGPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._MIT",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/._BSD-3-Clause",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/._preferred",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions/._Linux-syscall-note",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions/._GCC-exception-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/._exceptions",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/._copyleft-next-0.3.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/._CC-BY-4.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/._Apache-2.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/._MPL-1.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/._CDDL-1.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/._dual",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._GFDL-1.2",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._Linux-OpenIB",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._GPL-1.0",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._Zlib",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._0BSD",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._GFDL-1.1",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._ISC",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/._X11",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/LICENSES/._deprecated",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/._LICENSES",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/._COPYING",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/linux-tools/._APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/alpine/._linux-tools",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/._alpine",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/backend/._golang.org_x_exp-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/backend/._github.com_Alia5_VIIPER-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/backend/._golang.org_x_crypto-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/backend/._Go-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/._backend",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Notices/._README.md",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._Notices",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._app.icns",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/pt-BR.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._pt-BR.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._strings.json",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._ps-mark.png",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._THIRD-PARTY-NOTICES.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/fr.lproj/._InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._fr.lproj",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Fonts/._InterVariable.ttf",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/Fonts/._OFL-Inter.txt",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Resources/._Fonts",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/._Resources",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Helpers/._PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/Helpers/._PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/._Helpers",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/Contents/._Info.plist",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/PSKeyboardMacDualSense.app/._Contents",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/._PSKeyboardMacDualSense.app",
+      "passed": true
+    },
+    {
+      "check": "AppleDouble header ThreeCatsKeybridge-Mac-0.1.4/._README.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP Finder metadata visible",
+      "passed": true,
+      "detail": {
+        "appleDoubleEntries": 176,
+        "hiddenEntries": []
+      }
+    },
+    {
+      "check": "ZIP Finder extracted flags",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/_CodeSignature",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/MacOS",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Helpers",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Info.plist",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/_CodeSignature/CodeResources",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/MacOS/PSKeyboardMacDualSense",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/de.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/zh-Hans.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/ja.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/en.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/es.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Runtime",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/ko.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/zh-Hant.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/app.icns",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/pt-BR.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/strings.json",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/ps-mark.png",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/THIRD-PARTY-NOTICES.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/fr.lproj",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Fonts",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/de.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/zh-Hans.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/ja.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/en.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/es.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Runtime/GuestDualSenseBackend-linux-arm64",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Runtime/af_packet.ko",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Runtime/dummy.ko",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Runtime/Image",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Runtime/initrd.gz",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/ko.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/zh-Hant.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/backend",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/README.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/hwdata",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/pax-utils",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/musl",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/ncurses",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/alpine-keys",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/readline",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/alpine-base",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/alpine-baselayout",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/zlib",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/busybox",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/apk-tools",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/ca-certificates",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/eudev",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/socat",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/openssl",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/libusb",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/hwdata/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/hwdata/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/hwdata/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/pax-utils/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/pax-utils/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/musl/COPYRIGHT",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/musl/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/ncurses/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/ncurses/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/alpine-keys/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/readline/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/readline/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/alpine-base/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/alpine-baselayout/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/zlib/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/zlib/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/BSD-3-Clause-Clear",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/GPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/BSD-2-Clause",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/LGPL-2.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/LGPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/MIT",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/BSD-3-Clause",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions/Linux-syscall-note",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions/GCC-exception-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/copyleft-next-0.3.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/CC-BY-4.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/Apache-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/MPL-1.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/CDDL-1.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/GFDL-1.2",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/Linux-OpenIB",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/GPL-1.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/Zlib",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/0BSD",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/GFDL-1.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/ISC",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/X11",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/GPL-2.0-or-later.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/CC0-1.0.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/GPL-2.0-only.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/MIT.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/LGPL-2.1-or-later.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/GPL-3.0-only.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/busybox/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/busybox/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/apk-tools/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/apk-tools/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/ca-certificates/certdata-LICENSE-NOTICE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/ca-certificates/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/eudev/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/eudev/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/socat/COPYING.OpenSSL",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/socat/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/socat/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/openssl/LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/openssl/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/libusb/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/libusb/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/COPYING",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/BSD-3-Clause-Clear",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/GPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/BSD-2-Clause",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/LGPL-2.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/LGPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/MIT",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/BSD-3-Clause",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions/Linux-syscall-note",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions/GCC-exception-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/copyleft-next-0.3.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/CC-BY-4.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/Apache-2.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/MPL-1.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/CDDL-1.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/GFDL-1.2",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/Linux-OpenIB",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/GPL-1.0",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/Zlib",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/0BSD",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/GFDL-1.1",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/ISC",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/X11",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/backend/golang.org_x_exp-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/backend/github.com_Alia5_VIIPER-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/backend/golang.org_x_crypto-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Notices/backend/Go-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/pt-BR.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/fr.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Fonts/InterVariable.ttf",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Resources/Fonts/OFL-Inter.txt",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Helpers/PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "ZIP no symlink Contents/Helpers/PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "ZIP app file list",
+      "passed": true,
+      "detail": {
+        "files": 117
+      }
+    },
+    {
+      "check": "ZIP all app file hashes",
+      "passed": true
+    },
+    {
+      "check": "ZIP version and bundle",
+      "passed": true
+    },
+    {
+      "check": "ZIP binary hash",
+      "passed": true
+    },
+    {
+      "check": "ZIP icon hash",
+      "passed": true
+    },
+    {
+      "check": "ZIP cat mark hash",
+      "passed": true
+    },
+    {
+      "check": "ZIP strict signature PSKeyboardMacDualSense.app",
+      "passed": true
+    },
+    {
+      "check": "ZIP project signing certificate PSKeyboardMacDualSense.app",
+      "passed": true
+    },
+    {
+      "check": "ZIP strict signature PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "ZIP project signing certificate PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "ZIP strict signature PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "ZIP project signing certificate PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-DEFAULT-KEYS.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-INSTALL.en.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-INSTALL.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-PARITY-CHECKLIST.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-RELEASE-NOTES.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-RELEASE-READINESS.md",
+      "passed": true
+    },
+    {
+      "check": "ZIP bundled docs/MAC-RUNTIME-MATERIALS.md",
+      "passed": true
+    },
+    {
+      "check": "DMG hdiutil verify",
+      "passed": true
+    },
+    {
+      "check": "DMG mounted read-only",
+      "passed": true
+    },
+    {
+      "check": "DMG Finder visible",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/_CodeSignature",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Helpers",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Info.plist",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/MacOS",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/_CodeSignature/CodeResources",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Helpers/PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Helpers/PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/MacOS/PSKeyboardMacDualSense",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/app.icns",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/de.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/en.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/es.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Fonts",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/fr.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/ja.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/ko.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/ps-mark.png",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/pt-BR.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Runtime",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/strings.json",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/THIRD-PARTY-NOTICES.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/zh-Hans.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/zh-Hant.lproj",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/de.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/en.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/es.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Fonts/InterVariable.ttf",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Fonts/OFL-Inter.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/fr.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/ja.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/ko.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/backend",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/README.md",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/alpine-base",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/alpine-baselayout",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/alpine-keys",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/apk-tools",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/busybox",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/ca-certificates",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/eudev",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/hwdata",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/libusb",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/musl",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/ncurses",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/openssl",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/pax-utils",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/readline",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/socat",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/zlib",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/alpine-base/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/alpine-baselayout/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/alpine-keys/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/apk-tools/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/apk-tools/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/busybox/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/busybox/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/ca-certificates/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/ca-certificates/certdata-LICENSE-NOTICE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/eudev/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/eudev/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/hwdata/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/hwdata/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/hwdata/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/libusb/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/libusb/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/0BSD",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/GFDL-1.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/GFDL-1.2",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/GPL-1.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/ISC",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/Linux-OpenIB",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/X11",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/deprecated/Zlib",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/Apache-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/CC-BY-4.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/CDDL-1.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/copyleft-next-0.3.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/dual/MPL-1.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions/GCC-exception-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/exceptions/Linux-syscall-note",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/BSD-2-Clause",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/BSD-3-Clause",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/BSD-3-Clause-Clear",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/GPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/LGPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/LGPL-2.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-lts/LICENSES/preferred/MIT",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/0BSD",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/GFDL-1.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/GFDL-1.2",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/GPL-1.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/ISC",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/Linux-OpenIB",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/X11",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/deprecated/Zlib",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/Apache-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/CC-BY-4.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/CDDL-1.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/copyleft-next-0.3.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/dual/MPL-1.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions/GCC-exception-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/exceptions/Linux-syscall-note",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/BSD-2-Clause",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/BSD-3-Clause",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/BSD-3-Clause-Clear",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/GPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/LGPL-2.0",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/LGPL-2.1",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/linux-tools/LICENSES/preferred/MIT",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/musl/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/musl/COPYRIGHT",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/ncurses/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/ncurses/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/openssl/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/openssl/LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/pax-utils/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/pax-utils/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/readline/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/readline/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/socat/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/socat/COPYING",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/socat/COPYING.OpenSSL",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/CC0-1.0.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/GPL-2.0-only.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/GPL-2.0-or-later.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/GPL-3.0-only.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/LGPL-2.1-or-later.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/usbutils/LICENSES/MIT.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/zlib/APKBUILD.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/alpine/zlib/LICENSE",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/backend/github.com_Alia5_VIIPER-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/backend/Go-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/backend/golang.org_x_crypto-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Notices/backend/golang.org_x_exp-LICENSE.txt",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/pt-BR.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Runtime/af_packet.ko",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Runtime/dummy.ko",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Runtime/GuestDualSenseBackend-linux-arm64",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Runtime/Image",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/Runtime/initrd.gz",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/zh-Hans.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG no symlink Contents/Resources/zh-Hant.lproj/InfoPlist.strings",
+      "passed": true
+    },
+    {
+      "check": "DMG app file list",
+      "passed": true,
+      "detail": {
+        "files": 117
+      }
+    },
+    {
+      "check": "DMG all app file hashes",
+      "passed": true
+    },
+    {
+      "check": "DMG version and bundle",
+      "passed": true
+    },
+    {
+      "check": "DMG binary hash",
+      "passed": true
+    },
+    {
+      "check": "DMG icon hash",
+      "passed": true
+    },
+    {
+      "check": "DMG cat mark hash",
+      "passed": true
+    },
+    {
+      "check": "DMG strict signature PSKeyboardMacDualSense.app",
+      "passed": true
+    },
+    {
+      "check": "DMG project signing certificate PSKeyboardMacDualSense.app",
+      "passed": true
+    },
+    {
+      "check": "DMG strict signature PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "DMG project signing certificate PSKeyboardRuntime",
+      "passed": true
+    },
+    {
+      "check": "DMG strict signature PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "DMG project signing certificate PSKeyboardGuest",
+      "passed": true
+    },
+    {
+      "check": "DMG and ZIP App exact",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-DEFAULT-KEYS.md",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-INSTALL.en.md",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-INSTALL.md",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-PARITY-CHECKLIST.md",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-RELEASE-NOTES.md",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-RELEASE-READINESS.md",
+      "passed": true
+    },
+    {
+      "check": "DMG bundled docs/MAC-RUNTIME-MATERIALS.md",
+      "passed": true
+    },
+    {
+      "check": "DMG unmounted successfully",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "didNotPerform": [
+    "launch App",
+    "capture keyboard",
+    "connect virtual device",
+    "operate Sony Remote Play",
+    "write personal profile",
+    "public download"
+  ],
+  "signatureScope": "Locally trusted project self-signed; not Apple Developer ID and not notarized",
+  "licenseArchiveScope": "Runtime source and build-input archives hash verified against fixed pinned artifacts; not individually rebuilt"
+}
